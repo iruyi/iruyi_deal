@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+       default-lazy-init="true">u
+
+    <description>Spring公共配置</description>
+
+    <!-- 定义aspectj -->
+    <!--<aop:aspectj-autoproxy />-->
+
+    <!-- 使用annotation 自动注册bean, 并保证@Required、@Autowired的属性被注入 -->
+    <context:component-scan base-package="com.faxintong.iruyi">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation" expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+
+    <!-- 开启注解配置 -->
+    <context:annotation-config/>
+    <aop:aspectj-autoproxy proxy-target-class="false"/>
+
+    <!-- 使用annotation定义事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- MyBatis配置 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
+        <property name="typeAliasesPackage" value="com.faxintong.iruyi.model.mybatis"/>
+        <!-- 显式指定Mapper文件位置 -->
+        <property name="mapperLocations" value="classpath*:/mybatis/**/*Mapper.xml"/>
+    </bean>
+    <!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.faxintong.iruyi"/>
+        <property name="annotationClass" value="com.faxintong.iruyi.operate.OperateMyBatis"/>
+    </bean>
+
+    <!-- hibernate validator -->
+    <!--<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>-->
+
+    <beans profile="PROD">
+        <context:property-placeholder ignore-resource-not-found="true" />
+        <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+            <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+            <property name="jdbcUrl" value="jdbc:mysql://192.168.1.118:3306/iruyi?useUnicode=true"/>
+            <property name="user" value="root"/>
+            <property name="password" value=""/>
+            <property name="testConnectionOnCheckin" value="true"/>
+            <!--<property name="automaticTestTable" value="true"/>-->
+            <property name="checkoutTimeout" value="3000"/>
+            <property name="idleConnectionTestPeriod" value="150"/>
+            <property name="initialPoolSize" value="10"/>
+            <property name="maxIdleTime" value="300"/>
+            <property name="maxPoolSize" value="25"/>
+            <property name="minPoolSize" value="10"/>
+            <property name="maxStatements" value="0"/>
+            <property name="testConnectionOnCheckout" value="true"/>
+        </bean>
+
+    </beans>
+
+    <beans profile="TEST">
+        <context:property-placeholder ignore-resource-not-found="true" />
+        <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+            <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+            <property name="jdbcUrl" value="jdbc:mysql://192.168.1.118:3306/iruyi?useUnicode=true"/>
+            <property name="user" value="root"/>
+            <!--<property name="password" value="nothing"/>-->
+            <property name="testConnectionOnCheckin" value="true"/>
+            <property name="automaticTestTable" value="true"/>
+            <property name="checkoutTimeout" value="3000"/>
+            <property name="idleConnectionTestPeriod" value="30"/>
+            <property name="initialPoolSize" value="10"/>
+            <property name="maxIdleTime" value="30"/>
+            <property name="maxPoolSize" value="25"/>
+            <property name="minPoolSize" value="10"/>
+            <property name="maxStatements" value="0"/>
+            <property name="testConnectionOnCheckout" value="true"/>
+        </bean>
+
+    </beans>
+
+</beans>

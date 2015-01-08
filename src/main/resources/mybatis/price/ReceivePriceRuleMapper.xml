@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.faxintong.iruyi.dao.mybatis.price.ReceivePriceRuleMapper" >
+  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.price.ReceivePriceRule" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="lawyer_id" property="lawyerId" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="start_price" property="startPrice" jdbcType="REAL" />
+    <result column="end_price" property="endPrice" jdbcType="REAL" />
+    <result column="fixed_percent_figure" property="fixedPercentFigure" jdbcType="REAL" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, lawyer_id, order_id, type, start_price, end_price, fixed_percent_figure, description
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.price.ReceivePriceRuleExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from receive_price_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from receive_price_rule
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
+    delete from receive_price_rule
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.price.ReceivePriceRuleExample" >
+    delete from receive_price_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.price.ReceivePriceRule" >
+    insert into receive_price_rule (id, lawyer_id, order_id, 
+      type, start_price, end_price, 
+      fixed_percent_figure, description)
+    values (#{id,jdbcType=BIGINT}, #{lawyerId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, 
+      #{type,jdbcType=TINYINT}, #{startPrice,jdbcType=REAL}, #{endPrice,jdbcType=REAL}, 
+      #{fixedPercentFigure,jdbcType=REAL}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.price.ReceivePriceRule" >
+    insert into receive_price_rule
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="lawyerId != null" >
+        lawyer_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="startPrice != null" >
+        start_price,
+      </if>
+      <if test="endPrice != null" >
+        end_price,
+      </if>
+      <if test="fixedPercentFigure != null" >
+        fixed_percent_figure,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="lawyerId != null" >
+        #{lawyerId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="startPrice != null" >
+        #{startPrice,jdbcType=REAL},
+      </if>
+      <if test="endPrice != null" >
+        #{endPrice,jdbcType=REAL},
+      </if>
+      <if test="fixedPercentFigure != null" >
+        #{fixedPercentFigure,jdbcType=REAL},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.price.ReceivePriceRuleExample" resultType="java.lang.Integer" >
+    select count(*) from receive_price_rule
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update receive_price_rule
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.lawyerId != null" >
+        lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=TINYINT},
+      </if>
+      <if test="record.startPrice != null" >
+        start_price = #{record.startPrice,jdbcType=REAL},
+      </if>
+      <if test="record.endPrice != null" >
+        end_price = #{record.endPrice,jdbcType=REAL},
+      </if>
+      <if test="record.fixedPercentFigure != null" >
+        fixed_percent_figure = #{record.fixedPercentFigure,jdbcType=REAL},
+      </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update receive_price_rule
+    set id = #{record.id,jdbcType=BIGINT},
+      lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
+      order_id = #{record.orderId,jdbcType=BIGINT},
+      type = #{record.type,jdbcType=TINYINT},
+      start_price = #{record.startPrice,jdbcType=REAL},
+      end_price = #{record.endPrice,jdbcType=REAL},
+      fixed_percent_figure = #{record.fixedPercentFigure,jdbcType=REAL},
+      description = #{record.description,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.price.ReceivePriceRule" >
+    update receive_price_rule
+    <set >
+      <if test="lawyerId != null" >
+        lawyer_id = #{lawyerId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="startPrice != null" >
+        start_price = #{startPrice,jdbcType=REAL},
+      </if>
+      <if test="endPrice != null" >
+        end_price = #{endPrice,jdbcType=REAL},
+      </if>
+      <if test="fixedPercentFigure != null" >
+        fixed_percent_figure = #{fixedPercentFigure,jdbcType=REAL},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.price.ReceivePriceRule" >
+    update receive_price_rule
+    set lawyer_id = #{lawyerId,jdbcType=BIGINT},
+      order_id = #{orderId,jdbcType=BIGINT},
+      type = #{type,jdbcType=TINYINT},
+      start_price = #{startPrice,jdbcType=REAL},
+      end_price = #{endPrice,jdbcType=REAL},
+      fixed_percent_figure = #{fixedPercentFigure,jdbcType=REAL},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

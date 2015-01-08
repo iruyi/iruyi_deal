@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+
+<generatorConfiguration>
+
+    <!--数据库驱动-->
+    <classPathEntry  location="E:\maven\repostitory\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar"/>
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <!--关闭注解信息 -->
+
+        <!--<plugin type="org.leef.db.operate.plugin.PaginationPlugin" />-->
+        <!--<plugin type="com.general.plugin.MysqlPaginationPlugin"/>-->
+
+        <!--<plugin type="com.baidu.nuomi.operate.operate.PaginationPlugin"/>-->
+
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                connectionURL="jdbc:mysql://192.168.1.118:3306/iruyi?generateSimpleParameterMetadata=true"
+                userId="root"
+                >
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- generate Model -->
+        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.comment"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="false"/>
+        </javaModelGenerator>
+
+        <!-- generate xml -->
+        <sqlMapGenerator targetPackage="mybatis.comment"
+                         targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- generate Mapper -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.comment"
+                             targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="comment" domainObjectName="Comment">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="order_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="type" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="comment" javaType="String" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>
+
+         <!--<table tableName="q_deal" domainObjectName="QDeal">
+            <columnOverride column="copy_flag" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="payment" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+        </table>-->
+    </context>
+</generatorConfiguration>
