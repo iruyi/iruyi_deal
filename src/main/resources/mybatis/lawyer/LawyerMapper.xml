@@ -13,6 +13,8 @@
     <result column="age" property="age" jdbcType="TINYINT" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -73,7 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, sex, address, city_id, city_name, phone, rule_id, age, create_date, update_date
+    id, name, sex, address, city_id, city_name, phone, rule_id, age, create_date, update_date, 
+    password, email
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.lawyer.LawyerExample" >
     select
@@ -109,11 +112,13 @@
     insert into lawyer (id, name, sex, 
       address, city_id, city_name, 
       phone, rule_id, age, 
-      create_date, update_date)
+      create_date, update_date, password, 
+      email)
     values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, 
       #{address,jdbcType=VARCHAR}, #{cityId,jdbcType=BIGINT}, #{cityName,jdbcType=VARCHAR}, 
       #{phone,jdbcType=VARCHAR}, #{ruleId,jdbcType=BIGINT}, #{age,jdbcType=TINYINT}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{password,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.lawyer.Lawyer" >
     insert into lawyer
@@ -151,6 +156,12 @@
       <if test="updateDate != null" >
         update_date,
       </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -185,6 +196,12 @@
       </if>
       <if test="updateDate != null" >
         #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -230,6 +247,12 @@
       <if test="record.updateDate != null" >
         update_date = #{record.updateDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.password != null" >
+        password = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        email = #{record.email,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -247,7 +270,9 @@
       rule_id = #{record.ruleId,jdbcType=BIGINT},
       age = #{record.age,jdbcType=TINYINT},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
-      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      password = #{record.password,jdbcType=VARCHAR},
+      email = #{record.email,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -285,6 +310,12 @@
       <if test="updateDate != null" >
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -299,7 +330,9 @@
       rule_id = #{ruleId,jdbcType=BIGINT},
       age = #{age,jdbcType=TINYINT},
       create_date = #{createDate,jdbcType=TIMESTAMP},
-      update_date = #{updateDate,jdbcType=TIMESTAMP}
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

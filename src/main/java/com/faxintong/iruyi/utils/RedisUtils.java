@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.utils;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -15,10 +16,111 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * RedisUtils 提供了一个template方法，负责对Jedis连接的获取与归还。
- * JedisAction<T> 和 JedisActionNoResult两种回调接口，适用于有无返回值两种情况。
- * 同时提供一些最常用函数的封装, 如get/set/zadd等。
+ *
  */
 public class RedisUtils {
+
+    private static final Logger logger = LoggerFactory.getLogger(RedisUtils.class);
+
+    private static JedisPool pool;
+    private static int expireTime = 120;
+
+    static {
+        try {
+            pool = RedisConfiguration.configuration();
+            String expireTimeObj = RedisConfiguration.props.getProperty("EXPIRE_TIME");
+            expireTime = StringUtils.isBlank(expireTimeObj) ? expireTime : Integer.valueOf(expireTimeObj);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static Jedis getJedisInstance() throws IOException {
+        if (null == pool) {
+            pool = RedisConfiguration.configuration();
+        }
+        Jedis jedis = pool.getResource();
+        if (RedisConfiguration.props.containsKey("DATABASE_ID")) {
+            String database = RedisConfiguration.props
+                    .getProperty("DATABASE_ID");
+            if (database.matches("[0-9]+")) {
+                jedis.select(Integer.parseInt(database));
+            }
+        }
+        return jedis;
+    }
+
+    public static void closeJedis(Jedis jedis) {
+        logger.info("关闭jedis对象"+jedis);
+        if (null != jedis) {
+            pool.returnResource(jedis);
+            logger.info("closeJedis 返回后jedis 对象="+jedis);
+        }
+    }
+
+    public static void destroyPool() {
+        if (null != pool) {
+            pool.destroy();
+        }
+    }
+
+    /**
+     * 获取Jedis 实例
+     *
+     * @return
+     */
+    public static Jedis getJedis(){
+        Jedis jedis = null;
+        try {
+            jedis = getJedisInstance();
+            return jedis;
+        } catch (IOException e) {
+            e.printStackTrace();
+            logger.info("从缓存中得到Jedis实例时出错,e="+e.getMessage());
+            RedisUtils.closeJedis(jedis);
+            return null;
+        }
+    }
+
+    /**
+     * Jedis set 方法
+     * @param key
+     * @param value
+     */
+    public static void set(String key,String value) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.set(key, value);
+            jedis.expire(key, expireTime);
+            logger.info("向缓存中写入数据,key="+key+",value="+value);
+        } catch (Exception e) {
+            e.printStackTrace();
+            RedisUtils.closeJedis(jedis);
+            logger.info("将对象放入缓存时发生异常,key=" + key + ",value=" + value + ",e=" + e.getMessage());
+        } finally {
+            RedisUtils.closeJedis(jedis);
+        }
+    }
+
+    /**
+     * Jedis get 方法
+     * @param key
+     * @return
+     */
+    public static String get(String key) {
+        Jedis jedis = getJedis();
+        String value = null;
+        try {
+            value = jedis.get(key);
+            logger.info("从缓存中获得数据nameKey="+key+",cacheValue="+value);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.info("从缓存中获取对象发生异常,key="+key+",e="+e.getMessage());
+            RedisUtils.closeJedis(jedis);
+        } finally {
+            RedisUtils.closeJedis(jedis);
+        }
+        return value;
+    } 
 
 }

@@ -30,31 +30,47 @@
         </javaTypeResolver>
 
         <!-- generate Model -->
-        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.order"
+        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.lawyer"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!-- generate xml -->
-        <sqlMapGenerator targetPackage="mybatis.order"
+        <sqlMapGenerator targetPackage="mybatis.lawyer"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- generate Mapper -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.order"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.lawyer"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="order_rule" domainObjectName="OrderRule">
+        <!--<table tableName="order_rule" domainObjectName="OrderRule">
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="rule_name" javaType="String" ></columnOverride>
             <columnOverride column="city_id" javaType="Long" ></columnOverride>
             <columnOverride column="category_id" javaType="Long" ></columnOverride>
             <columnOverride column="description" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
+
+        <table tableName="lawyer" domainObjectName="Lawyer">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="name" javaType="String" ></columnOverride>
+            <columnOverride column="password" javaType="String" ></columnOverride>
+            <columnOverride column="email" javaType="String" ></columnOverride>
+            <columnOverride column="sex" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="address" javaType="String" ></columnOverride>
+            <columnOverride column="city_id" javaType="Long" ></columnOverride>
+            <columnOverride column="city_name" javaType="String" ></columnOverride>
+            <columnOverride column="phone" javaType="String" ></columnOverride>
+            <columnOverride column="rule_id" javaType="Long" ></columnOverride>
+            <columnOverride column="age" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+            <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
         </table>
 
          <!--<table tableName="q_deal" domainObjectName="QDeal">
