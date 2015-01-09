@@ -1,10 +1,15 @@
 package com.faxintong.iruyi.model.mybatis.lawyer;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
 import java.util.Date;
 
 public class Lawyer {
+    @Null
     private Long id;
-
+    @NotBlank
     private String name;
 
     private Integer sex;

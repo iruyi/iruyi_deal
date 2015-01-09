@@ -52,6 +52,15 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    /**
+     * 注册
+     * @param lawyer
+     * @param bindingResult
+     * @param validCode
+     * @param request
+     * @param response
+     * @return
+     */
     @RequestMapping(value = "reg")
     public Map<String, Object> registor(@Valid Lawyer lawyer, BindingResult bindingResult, String validCode,
                                         HttpServletRequest request, HttpServletResponse response){
@@ -82,6 +91,13 @@ public class UserController {
     }
 
 
+    /**
+     * 登录
+     * @param loginName
+     * @param password
+     * @param response
+     * @return
+     */
     @RequestMapping("login")
     public Map<String, Object> login(String loginName, String password, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
