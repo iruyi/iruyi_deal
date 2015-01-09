@@ -1,32 +1,32 @@
 package com.faxintong.iruyi.dao.mybatis.friendcircle;
 
-import com.faxintong.iruyi.model.mybatis.friendcircle.LayerFriend;
-import com.faxintong.iruyi.model.mybatis.friendcircle.LayerFriendExample;
+import com.faxintong.iruyi.model.mybatis.friendcircle.LawyerFriend;
+import com.faxintong.iruyi.model.mybatis.friendcircle.LawyerFriendExample;
 import java.util.List;
 
 import com.faxintong.iruyi.operate.OperateMyBatis;
 import org.apache.ibatis.annotations.Param;
 @OperateMyBatis
 public interface LawyerFriendMapper {
-    int countByExample(LayerFriendExample example);
+    int countByExample(LawyerFriendExample example);
 
-    int deleteByExample(LayerFriendExample example);
+    int deleteByExample(LawyerFriendExample example);
 
     int deleteByPrimaryKey(Long id);
 
-    int insert(LayerFriend record);
+    int insert(LawyerFriend record);
 
-    int insertSelective(LayerFriend record);
+    int insertSelective(LawyerFriend record);
 
-    List<LayerFriend> selectByExample(LayerFriendExample example);
+    List<LawyerFriend> selectByExample(LawyerFriendExample example);
 
-    LayerFriend selectByPrimaryKey(Long id);
+    LawyerFriend selectByPrimaryKey(Long id);
 
-    int updateByExampleSelective(@Param("record") LayerFriend record, @Param("example") LayerFriendExample example);
+    int updateByExampleSelective(@Param("record") LawyerFriend record, @Param("example") LawyerFriendExample example);
 
-    int updateByExample(@Param("record") LayerFriend record, @Param("example") LayerFriendExample example);
+    int updateByExample(@Param("record") LawyerFriend record, @Param("example") LawyerFriendExample example);
 
-    int updateByPrimaryKeySelective(LayerFriend record);
+    int updateByPrimaryKeySelective(LawyerFriend record);
 
-    int updateByPrimaryKey(LayerFriend record);
+    int updateByPrimaryKey(LawyerFriend record);
 }
