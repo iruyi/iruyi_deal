@@ -13,7 +13,7 @@ public class OrderRule {
 
     private String description;
 
-    private Date createTime;
+    private Date createDate;
 
     public Long getId() {
         return id;
@@ -55,11 +55,11 @@ public class OrderRule {
         this.description = description;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

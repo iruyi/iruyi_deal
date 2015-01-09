@@ -30,30 +30,30 @@
         </javaTypeResolver>
 
         <!-- generate Model -->
-        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.comment"
+        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.order"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!-- generate xml -->
-        <sqlMapGenerator targetPackage="mybatis.comment"
+        <sqlMapGenerator targetPackage="mybatis.order"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- generate Mapper -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.comment"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.order"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="comment" domainObjectName="Comment">
+        <table tableName="order_rule" domainObjectName="OrderRule">
             <columnOverride column="id" javaType="Long" ></columnOverride>
-            <columnOverride column="order_id" javaType="Long" ></columnOverride>
-            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
-            <columnOverride column="type" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
-            <columnOverride column="comment" javaType="String" ></columnOverride>
+            <columnOverride column="rule_name" javaType="String" ></columnOverride>
+            <columnOverride column="city_id" javaType="Long" ></columnOverride>
+            <columnOverride column="category_id" javaType="Long" ></columnOverride>
+            <columnOverride column="description" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
         </table>
 
