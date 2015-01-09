@@ -2,6 +2,7 @@ package com.faxintong.iruyi.controller.lawyer;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.lawyer.UserService;
+import com.faxintong.iruyi.service.lawyer.impl.UserServiceImpl;
 import com.faxintong.iruyi.utils.RedisUtils;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
@@ -55,42 +56,43 @@ public class UserController {
     public Map<String, Object> registor(@Valid Lawyer lawyer, BindingResult bindingResult, String validCode,
                                         HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
-        if(bindingResult.hasErrors()){
-            result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
-        }else{
-            String code = request.getParameter("code");
-            if (!code.equals(validCode))
-                result.put(ERR_MSG, "验证码填写错误");
-            else if (true)
-                result.put(ERR_MSG ,"该手机号已经注册");
-            else {
-                Date date = new Date();
-                lawyer.setCreateDate(date);
-                lawyer.setUpdateDate(date);
-                try {
-                    userService.registerLawyer(lawyer);
-                } catch (Exception e) {
-                    logger.error(e.getMessage());
-                    result.put(ERR_MSG, "注册出错!");
-                }
-            }
-        }
+        result.put("hello", "helloworld");
+//        if(bindingResult.hasErrors()){
+//            result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
+//        }else{
+//            String code = request.getParameter("code");
+//            if (!code.equals(validCode))
+//                result.put(ERR_MSG, "验证码填写错误");
+//            else if (true)
+//                result.put(ERR_MSG ,"该手机号已经注册");
+//            else {
+//                Date date = new Date();
+//                lawyer.setCreateDate(date);
+//                lawyer.setUpdateDate(date);
+//                try {
+//                    userService.registerLawyer(lawyer);
+//                } catch (Exception e) {
+//                    logger.error(e.getMessage());
+//                    result.put(ERR_MSG, "注册出错!");
+//                }
+//            }
+//        }
         return result;
     }
 
-    @RequestMapping("login")
-    public Map<String, Object> login(String loginName, String password, HttpServletResponse response){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(RESULT, false);
-        try {
-            if (!userService.loginValidate(loginName, password))
-                result.put(ERR_MSG, "帐号密码不匹配");
-        } catch (Exception e) {
-            logger.error("登陆出错");
-            logger.error(e.getMessage());
-        }
-        return result;
-    }
+//    @RequestMapping("login")
+//    public Map<String, Object> login(String loginName, String password, HttpServletResponse response){
+//        Map<String, Object> result = Maps.newHashMap();
+//        result.put(RESULT, false);
+//        try {
+//            if (!userService.loginValidate(loginName, password))
+//                result.put(ERR_MSG, "帐号密码不匹配");
+//        } catch (Exception e) {
+//            logger.error("登陆出错");
+//            logger.error(e.getMessage());
+//        }
+//        return result;
+//    }
 
     private final int height = 30;
 
