@@ -1,7 +1,6 @@
 package com.faxintong.iruyi.service.lawyer;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
-import org.springframework.stereotype.Service;
 
 /**
  * Created by hehj on 15-1-3.
