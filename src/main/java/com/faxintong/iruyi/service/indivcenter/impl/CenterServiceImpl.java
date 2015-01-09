@@ -3,9 +3,12 @@ package com.faxintong.iruyi.service.indivcenter.impl;
 import com.faxintong.iruyi.dao.mybatis.lawyer.LawyerMapper;
 import com.faxintong.iruyi.model.general.Statistic;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
+import com.faxintong.iruyi.model.mybatis.lawyer.LawyerExample;
 import com.faxintong.iruyi.service.indivcenter.CenterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * Created by hehj on 15-1-3.
@@ -18,9 +21,6 @@ public class CenterServiceImpl implements CenterService {
 
     @Override
     public Lawyer findLawyerById(Long lawyerId) throws Exception {
-        if(lawyerId == null){
-            return null;
-        }
         return lawyerMapper.selectByPrimaryKey(lawyerId);
     }
 

@@ -32,4 +32,5 @@ public class Constants {
     public static final String REVIEW_SCORE = "reviewScore";
     public static final String VIEWED_COUNT = "view";
     public static final String AUTOINCREMENT = "autoincrement";
+    public static final String DATA = "data";
 }

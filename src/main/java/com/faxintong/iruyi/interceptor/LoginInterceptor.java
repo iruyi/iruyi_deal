@@ -14,6 +14,12 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
+        String currentUserId = request.getParameter("currentUserId");
+        if(currentUserId != null && !"".equals(currentUserId)){
+            request.setAttribute("currentUserId", currentUserId);
+            return true;
+        }
+
         final Cookie[] cookies = request.getCookies();
         if (cookies != null) {
             for (Cookie cookie : cookies) {
@@ -26,10 +32,6 @@ public class LoginInterceptor implements HandlerInterceptor {
             }
         }
 
-        String currentUserId = request.getParameter("currentUserId");
-        if(currentUserId != null && !"".equals(currentUserId)){
-            //request.setAttribute("currentUserId", );
-        }
         return true;
     }
 
