@@ -2,7 +2,7 @@ package com.faxintong.iruyi.model.mybatis.friendcircle;
 
 import java.util.Date;
 
-public class LayerFriend {
+public class LawyerFriend {
     private Long id;
 
     private Long layerId;

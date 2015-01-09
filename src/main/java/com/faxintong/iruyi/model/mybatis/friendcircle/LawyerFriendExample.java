@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class LayerFriendExample {
+public class LawyerFriendExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public LayerFriendExample() {
+    public LawyerFriendExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 

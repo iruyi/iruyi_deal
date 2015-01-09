@@ -7,7 +7,7 @@ import java.util.List;
 import com.faxintong.iruyi.operate.OperateMyBatis;
 import org.apache.ibatis.annotations.Param;
 @OperateMyBatis
-public interface LayerFriendMapper {
+public interface LawyerFriendMapper {
     int countByExample(LayerFriendExample example);
 
     int deleteByExample(LayerFriendExample example);
