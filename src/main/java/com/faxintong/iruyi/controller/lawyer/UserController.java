@@ -23,20 +23,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import redis.clients.jedis.Jedis;
 
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
 
 import static com.faxintong.iruyi.utils.Constants.*;
 
@@ -99,7 +89,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("login")
-    public Map<String, Object> login(String loginName, String password, HttpServletResponse response){
+    public Map<String, Object> login(String loginName, String password, HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         if(StringUtils.isEmpty(loginName)) {
             result.put(ERR_MSG, "帐号不能为空");
@@ -112,6 +102,8 @@ public class UserController {
             if (!userService.loginValidate(loginName, password))
                 result.put(ERR_MSG, "帐号密码不匹配");
             else{
+                String sessionId = request.getSession().getId();
+
                 result.put(RESULT, true);
             }
         } catch (Exception e) {
