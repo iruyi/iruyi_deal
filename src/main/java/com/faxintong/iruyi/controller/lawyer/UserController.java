@@ -55,6 +55,7 @@ public class UserController {
     public Map<String, Object> registor(@Valid Lawyer lawyer, BindingResult bindingResult, String validCode,
                                         HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
+        result.put(RESULT, false);
         try {
             if(bindingResult.hasErrors()){
                 logger.info(bindingResult.getFieldError().getDefaultMessage());
@@ -69,6 +70,7 @@ public class UserController {
                     Date date = new Date();
                     lawyer.setCreateDate(date);
                     lawyer.setUpdateDate(date);
+                    result.put(RESULT, true);
                 }
             }
         }catch (Exception e){
@@ -91,6 +93,7 @@ public class UserController {
     @RequestMapping("login")
     public Map<String, Object> login(String loginName, String password, HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
+        result.put(RESULT, false);
         if(StringUtils.isEmpty(loginName)) {
             result.put(ERR_MSG, "帐号不能为空");
             return result;
@@ -103,7 +106,7 @@ public class UserController {
                 result.put(ERR_MSG, "帐号密码不匹配");
             else{
                 String sessionId = request.getSession().getId();
-
+                RedisUtils.getJedis().set(sessionId, loginName);
                 result.put(RESULT, true);
             }
         } catch (Exception e) {
