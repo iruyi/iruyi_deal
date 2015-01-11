@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.faxintong.iruyi.dao.mybatis.friendcircle.LayerFriendMapper" >
-  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.friendcircle.LayerFriend" >
+<mapper namespace="com.faxintong.iruyi.dao.mybatis.friendcircle.LawyerFriendMapper" >
+  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.friendcircle.LawyerFriend" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="layer_id" property="layerId" jdbcType="BIGINT" />
     <result column="friend_id" property="friendId" jdbcType="BIGINT" />
@@ -69,7 +69,7 @@
   <sql id="Base_Column_List" >
     id, layer_id, friend_id, status, add_time
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.friendcircle.LayerFriendExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.friendcircle.LawyerFriendExample" >
     select
     <if test="distinct" >
       distinct
@@ -93,19 +93,19 @@
     delete from layer_friend
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.friendcircle.LayerFriendExample" >
+  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.friendcircle.LawyerFriendExample" >
     delete from layer_friend
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.friendcircle.LayerFriend" >
+  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.friendcircle.LawyerFriend" >
     insert into layer_friend (id, layer_id, friend_id, 
       status, add_time)
     values (#{id,jdbcType=BIGINT}, #{layerId,jdbcType=BIGINT}, #{friendId,jdbcType=BIGINT}, 
       #{status,jdbcType=TINYINT}, #{addTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.friendcircle.LayerFriend" >
+  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.friendcircle.LawyerFriend" >
     insert into layer_friend
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -142,7 +142,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.friendcircle.LayerFriendExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.friendcircle.LawyerFriendExample" resultType="java.lang.Integer" >
     select count(*) from layer_friend
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
@@ -182,7 +182,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.friendcircle.LayerFriend" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.friendcircle.LawyerFriend" >
     update layer_friend
     <set >
       <if test="layerId != null" >
@@ -200,7 +200,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.friendcircle.LayerFriend" >
+  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.friendcircle.LawyerFriend" >
     update layer_friend
     set layer_id = #{layerId,jdbcType=BIGINT},
       friend_id = #{friendId,jdbcType=BIGINT},
