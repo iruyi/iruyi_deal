@@ -16,21 +16,21 @@ public interface FriendsService {
      * @return
      * @throws Exception
      */
-    public Lawyer searchLawyer(String name, String phone) throws Exception;
+    public List<Lawyer> searchLawyer(String name, String phone) throws Exception;
 
     /**
      * 添加搜索出的好友
-     * @param layerId
+     * @param lawyerId
      * @throws Exception
      */
-    public void addSearchFriends(Long layerId) throws Exception;
+    public void addSearchFriends(Long lawyerId, Long friendId) throws Exception;
 
     /**
      * 添加好友确认
-     * @param layerId
+     * @param id
      * @throws Exception
      */
-    public void friendConfirm(Long layerId) throws Exception;
+    public void friendConfirm(Long id) throws Exception;
 
     /**
      * 获取好友列表
