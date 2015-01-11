@@ -23,7 +23,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        String appSessionId = request.getParameter("sessionId");
+        final String appSessionId = request.getParameter("sessionId");
         if(!StringUtils.isEmpty(appSessionId)){
             final String currentUserId = RedisUtils.get(Constants.SESSION_PREFIX + appSessionId);
             request.setAttribute("currentUserId", currentUserId);
