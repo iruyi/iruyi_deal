@@ -2,7 +2,7 @@ package com.faxintong.iruyi.controller.indivcenter;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.indivcenter.CenterService;
-import com.faxintong.iruyi.utils.Constants;
+import static com.faxintong.iruyi.utils.Constants.*;
 import com.faxintong.iruyi.utils.RedisUtils;
 import com.google.common.collect.Maps;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -30,6 +30,7 @@ public class CenterController {
     @Autowired
     private CenterService centerService;
 
+/*
     private String getSessionId() {
         return DigestUtils.md5Hex(System.currentTimeMillis() + RandomStringUtils.randomNumeric(6));
     }
@@ -37,63 +38,64 @@ public class CenterController {
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public Map<String, Object> login(HttpServletRequest request, String currentUserId) {
         Map<String, Object> result = Maps.newHashMap();
-        result.put(Constants.RESULT, false);
+        result.put(RESULT, false);
         try{
-            result.put(Constants.RESULT, true);
+            result.put(RESULT, true);
             String sessionId = getSessionId();
-            RedisUtils.set(Constants.SESSION_PREFIX + sessionId, currentUserId);
+            RedisUtils.set(SESSION_PREFIX + sessionId, currentUserId);
             logger.info("sessionId=" + sessionId);
         }catch (Exception e){
             logger.error(e.getMessage(), e);
-            result.put(Constants.ERR_MSG, "未知异常");
+            result.put(ERR_MSG, "未知异常");
         }
         return result;
     }
+*/
 
-    @RequestMapping(value = "lawyerInfo", method = RequestMethod.POST)
+    @RequestMapping(value = "lawyerInfo", method = RequestMethod.GET)
     public Map<String, Object> getLawyerInfo(HttpServletRequest request, String lawyerId) {
         Map<String, Object> result = Maps.newHashMap();
-        result.put(Constants.RESULT, false);
+        result.put(RESULT, false);
         String currentUserId = (String) request.getAttribute("currentUserId");
         try{
             if (StringUtils.isEmpty(currentUserId)) {
-                result.put(Constants.ERR_MSG, "请登录后再操作");
+                result.put(ERR_MSG, "请登录后再操作");
                 return  result;
             }
             if(StringUtils.isEmpty(lawyerId)){
-                result.put(Constants.ERR_MSG, "律师id为空");
+                result.put(ERR_MSG, "律师id为空");
                 return result;
             }
             Lawyer lawyer = centerService.findLawyerById(Long.parseLong(lawyerId));
-            result.put(Constants.RESULT, true);
-            result.put(Constants.DATA, lawyer);
+            result.put(RESULT, true);
+            result.put(DATA, lawyer);
         }catch (Exception e){
             logger.error(e.getMessage(), e);
-            result.put(Constants.ERR_MSG, "未知异常");
+            result.put(ERR_MSG, "未知异常");
         }
         return result;
     }
 
-    @RequestMapping(value = "modifyLawyer", method = RequestMethod.GET)
+    @RequestMapping(value = "modifyLawyer", method = RequestMethod.POST)
     public Map<String, Object> modifyLawyer(HttpServletRequest request, Lawyer lawyer){
         Map<String, Object> result = Maps.newHashMap();
-        result.put(Constants.RESULT, false);
+        result.put(RESULT, false);
         String currentUserId = (String) request.getAttribute("currentUserId");
         try{
             if (StringUtils.isEmpty(currentUserId)) {
-                result.put(Constants.ERR_MSG, "请登录后再操作");
+                result.put(ERR_MSG, "请登录后再操作");
                 return  result;
             }
             if(lawyer == null){
-                result.put(Constants.ERR_MSG, "律师为空");
+                result.put(ERR_MSG, "律师为空");
                 return result;
             }
             centerService.modifyLawyer(lawyer);
-            result.put(Constants.RESULT, true);
-            result.put(Constants.ERR_MSG, "律师更新成功");
+            result.put(RESULT, true);
+            result.put(ERR_MSG, "律师更新成功");
         }catch (Exception e){
             logger.error(e.getMessage(), e);
-            result.put(Constants.ERR_MSG, "未知异常");
+            result.put(ERR_MSG, "未知异常");
         }
         return result;
     }
