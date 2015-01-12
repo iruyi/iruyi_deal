@@ -1,11 +1,14 @@
 package com.faxintong.iruyi.service.friendcircle.impl;
 
-import com.faxintong.iruyi.model.mybatis.friendcircle.Paper;
-import com.faxintong.iruyi.model.mybatis.friendcircle.PaperComment;
-import com.faxintong.iruyi.model.mybatis.friendcircle.PaperPraise;
+import com.faxintong.iruyi.dao.mybatis.friendcircle.PaperCommentMapper;
+import com.faxintong.iruyi.dao.mybatis.friendcircle.PaperMapper;
+import com.faxintong.iruyi.dao.mybatis.friendcircle.PaperPraiseMapper;
+import com.faxintong.iruyi.model.mybatis.friendcircle.*;
 import com.faxintong.iruyi.service.friendcircle.PaperService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,43 +16,80 @@ import java.util.List;
  */
 @Service
 public class PaperServiceImpl implements PaperService {
+
+    @Autowired
+    private PaperMapper paperMapper;
+    @Autowired
+    private PaperCommentMapper paperCommentMapper;
+    @Autowired
+    private PaperPraiseMapper paperPraiseMapper;
+
     @Override
     public void reportPaper(Long lawyerId, Paper paper) throws Exception {
-
+        paperMapper.insertSelective(paper);
     }
 
+    /**
+     * 删除文章 文章评论 文章赞同
+     * @param paperId
+     * @throws Exception
+     */
     @Override
     public void deletePaperById(Long paperId) throws Exception {
-
+        PaperExample paperExample = new PaperExample();
+        paperExample.createCriteria().andIdEqualTo(paperId);
+        paperMapper.deleteByExample(paperExample);
+        PaperPraiseExample paperPraiseExample = new PaperPraiseExample();
+        paperPraiseExample.createCriteria().andPaperIdEqualTo(paperId);
+        paperPraiseMapper.deleteByExample(paperPraiseExample);
+        PaperCommentExample paperCommentExample = new PaperCommentExample();
+        paperCommentExample.createCriteria().andPaperIdEqualTo(paperId);
+        paperCommentMapper.deleteByExample(paperCommentExample);
     }
 
     @Override
     public List<Paper> findPaperByLawyerId(List<Long> lawyerId) throws Exception {
-        return null;
+        PaperExample paperExample = new PaperExample();
+        paperExample.createCriteria().andLawyerIdIn(lawyerId);
+        return paperMapper.selectByExample(paperExample);
     }
 
     @Override
     public Paper findPaperById(Long paperId) throws Exception {
-        return null;
+        return paperMapper.selectByPrimaryKey(paperId);
     }
 
     @Override
     public void reportPaperComment(Long lawyerId, Long paperId, String comment) throws Exception {
-
+        PaperComment paperComment = new PaperComment();
+        paperComment.setLawyerId(lawyerId);
+        paperComment.setPaperId(paperId);
+        paperComment.setComment(comment);
+        paperComment.setCreateTime(new Date());
+        paperCommentMapper.insertSelective(paperComment);
     }
 
     @Override
-    public void praisePaper(Long lawyerId, Long paperId) throws Exception {
-
+    public void praisePaper(Long lawyerId, String lawyerName, Long paperId) throws Exception {
+        PaperPraise paperPraise = new PaperPraise();
+        paperPraise.setLawyerId(lawyerId);
+        paperPraise.setPaperId(paperId);
+        paperPraise.setCreateTime(new Date());
+        paperPraise.setLawyerName(lawyerName);
+        paperPraiseMapper.insertSelective(paperPraise);
     }
 
     @Override
     public List<PaperComment> findPaperComments(Long paperId) throws Exception {
-        return null;
+        PaperCommentExample paperCommentExample = new PaperCommentExample();
+        paperCommentExample.createCriteria().andPaperIdEqualTo(paperId);
+        return paperCommentMapper.selectByExample(paperCommentExample);
     }
 
     @Override
     public List<PaperPraise> findPaperPraises(Long paperId) throws Exception {
-        return null;
+        PaperPraiseExample paperPraiseExample = new PaperPraiseExample();
+        paperPraiseExample.createCriteria().andPaperIdEqualTo(paperId);
+        return paperPraiseMapper.selectByExample(paperPraiseExample);
     }
 }

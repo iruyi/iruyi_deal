@@ -57,7 +57,7 @@ public interface PaperService {
      * @param paperId
      * @throws Exception
      */
-    public void praisePaper(Long lawyerId,Long paperId) throws Exception;
+    public void praisePaper(Long lawyerId, String lawyerName, Long paperId) throws Exception;
 
     /**
      * 获取文章评论列表

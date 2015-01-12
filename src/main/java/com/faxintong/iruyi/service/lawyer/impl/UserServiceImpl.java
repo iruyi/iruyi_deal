@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean loginValidate(String loginName, String password) throws Exception {
         LawyerExample lawyerExample = new LawyerExample();
-        lawyerExample.createCriteria().andNameEqualTo(loginName);
+        lawyerExample.createCriteria().andNameEqualTo(loginName).andPasswordEqualTo(password);
         return lawyerMapper.selectByExample(lawyerExample).size() == 1;
     }
 
