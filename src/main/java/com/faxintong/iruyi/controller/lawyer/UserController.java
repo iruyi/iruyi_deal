@@ -70,6 +70,7 @@ public class UserController {
                     Date date = new Date();
                     lawyer.setCreateDate(date);
                     lawyer.setUpdateDate(date);
+                    userService.registerLawyer(lawyer);
                     result.put(RESULT, true);
                 }
             }

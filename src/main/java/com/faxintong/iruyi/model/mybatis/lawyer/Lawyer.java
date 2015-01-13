@@ -7,8 +7,10 @@ import javax.validation.constraints.Null;
 import java.util.Date;
 
 public class Lawyer {
+
     @Null
     private Long id;
+
     @NotBlank
     private String name;
 
@@ -20,6 +22,7 @@ public class Lawyer {
 
     private String cityName;
 
+    @NotBlank
     private String phone;
 
     private Long ruleId;
@@ -30,6 +33,7 @@ public class Lawyer {
 
     private Date updateDate;
 
+    @NotBlank
     private String password;
 
     private String email;
