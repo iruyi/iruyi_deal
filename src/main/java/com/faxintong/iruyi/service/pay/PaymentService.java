@@ -1,6 +1,6 @@
 package com.faxintong.iruyi.service.pay;
 
-import com.faxintong.iruyi.model.mybatis.pay.PayRecord;
+import com.faxintong.iruyi.model.mybatis.pay.PaymentRecord;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ public interface PaymentService {
      * @param payRecords
      * @throws Exception
      */
-    public void paymentRecords(PayRecord payRecords) throws Exception;
+    public void paymentRecords(PaymentRecord payRecords) throws Exception;
 
     /**
      * 查询支付记录
@@ -22,7 +22,7 @@ public interface PaymentService {
      * @return
      * @throws Exception
      */
-    public List<PayRecord> findPayRecordByOrderId(Long orderId) throws Exception;
+    public List<PaymentRecord> findPayRecordByOrderId(Long orderId) throws Exception;
 
 
 }

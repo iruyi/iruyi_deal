@@ -1,17 +1,17 @@
-package com.faxintong.iruyi.model.mybatis.price;
+package com.faxintong.iruyi.model.mybatis.pay;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ReportPriceExample {
+public class PaymentModeExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ReportPriceExample() {
+    public PaymentModeExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -165,243 +165,243 @@ public class ReportPriceExample {
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdIsNull() {
-            addCriterion("order_id is null");
+        public Criteria andPriceIdIsNull() {
+            addCriterion("price_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdIsNotNull() {
-            addCriterion("order_id is not null");
+        public Criteria andPriceIdIsNotNull() {
+            addCriterion("price_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdEqualTo(Long value) {
-            addCriterion("order_id =", value, "orderId");
+        public Criteria andPriceIdEqualTo(Long value) {
+            addCriterion("price_id =", value, "priceId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotEqualTo(Long value) {
-            addCriterion("order_id <>", value, "orderId");
+        public Criteria andPriceIdNotEqualTo(Long value) {
+            addCriterion("price_id <>", value, "priceId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdGreaterThan(Long value) {
-            addCriterion("order_id >", value, "orderId");
+        public Criteria andPriceIdGreaterThan(Long value) {
+            addCriterion("price_id >", value, "priceId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("order_id >=", value, "orderId");
+        public Criteria andPriceIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("price_id >=", value, "priceId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdLessThan(Long value) {
-            addCriterion("order_id <", value, "orderId");
+        public Criteria andPriceIdLessThan(Long value) {
+            addCriterion("price_id <", value, "priceId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdLessThanOrEqualTo(Long value) {
-            addCriterion("order_id <=", value, "orderId");
+        public Criteria andPriceIdLessThanOrEqualTo(Long value) {
+            addCriterion("price_id <=", value, "priceId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdIn(List<Long> values) {
-            addCriterion("order_id in", values, "orderId");
+        public Criteria andPriceIdIn(List<Long> values) {
+            addCriterion("price_id in", values, "priceId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotIn(List<Long> values) {
-            addCriterion("order_id not in", values, "orderId");
+        public Criteria andPriceIdNotIn(List<Long> values) {
+            addCriterion("price_id not in", values, "priceId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdBetween(Long value1, Long value2) {
-            addCriterion("order_id between", value1, value2, "orderId");
+        public Criteria andPriceIdBetween(Long value1, Long value2) {
+            addCriterion("price_id between", value1, value2, "priceId");
             return (Criteria) this;
         }
 
-        public Criteria andOrderIdNotBetween(Long value1, Long value2) {
-            addCriterion("order_id not between", value1, value2, "orderId");
+        public Criteria andPriceIdNotBetween(Long value1, Long value2) {
+            addCriterion("price_id not between", value1, value2, "priceId");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerIdIsNull() {
-            addCriterion("lawyer_id is null");
+        public Criteria andPeriodNumIsNull() {
+            addCriterion("period_num is null");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerIdIsNotNull() {
-            addCriterion("lawyer_id is not null");
+        public Criteria andPeriodNumIsNotNull() {
+            addCriterion("period_num is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerIdEqualTo(Long value) {
-            addCriterion("lawyer_id =", value, "lawyerId");
+        public Criteria andPeriodNumEqualTo(Integer value) {
+            addCriterion("period_num =", value, "periodNum");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerIdNotEqualTo(Long value) {
-            addCriterion("lawyer_id <>", value, "lawyerId");
+        public Criteria andPeriodNumNotEqualTo(Integer value) {
+            addCriterion("period_num <>", value, "periodNum");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerIdGreaterThan(Long value) {
-            addCriterion("lawyer_id >", value, "lawyerId");
+        public Criteria andPeriodNumGreaterThan(Integer value) {
+            addCriterion("period_num >", value, "periodNum");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("lawyer_id >=", value, "lawyerId");
+        public Criteria andPeriodNumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("period_num >=", value, "periodNum");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerIdLessThan(Long value) {
-            addCriterion("lawyer_id <", value, "lawyerId");
+        public Criteria andPeriodNumLessThan(Integer value) {
+            addCriterion("period_num <", value, "periodNum");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerIdLessThanOrEqualTo(Long value) {
-            addCriterion("lawyer_id <=", value, "lawyerId");
+        public Criteria andPeriodNumLessThanOrEqualTo(Integer value) {
+            addCriterion("period_num <=", value, "periodNum");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerIdIn(List<Long> values) {
-            addCriterion("lawyer_id in", values, "lawyerId");
+        public Criteria andPeriodNumIn(List<Integer> values) {
+            addCriterion("period_num in", values, "periodNum");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerIdNotIn(List<Long> values) {
-            addCriterion("lawyer_id not in", values, "lawyerId");
+        public Criteria andPeriodNumNotIn(List<Integer> values) {
+            addCriterion("period_num not in", values, "periodNum");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerIdBetween(Long value1, Long value2) {
-            addCriterion("lawyer_id between", value1, value2, "lawyerId");
+        public Criteria andPeriodNumBetween(Integer value1, Integer value2) {
+            addCriterion("period_num between", value1, value2, "periodNum");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerIdNotBetween(Long value1, Long value2) {
-            addCriterion("lawyer_id not between", value1, value2, "lawyerId");
+        public Criteria andPeriodNumNotBetween(Integer value1, Integer value2) {
+            addCriterion("period_num not between", value1, value2, "periodNum");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerTypeIsNull() {
-            addCriterion("lawyer_type is null");
+        public Criteria andFigureIsNull() {
+            addCriterion("figure is null");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerTypeIsNotNull() {
-            addCriterion("lawyer_type is not null");
+        public Criteria andFigureIsNotNull() {
+            addCriterion("figure is not null");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerTypeEqualTo(Integer value) {
-            addCriterion("lawyer_type =", value, "lawyerType");
+        public Criteria andFigureEqualTo(Float value) {
+            addCriterion("figure =", value, "figure");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerTypeNotEqualTo(Integer value) {
-            addCriterion("lawyer_type <>", value, "lawyerType");
+        public Criteria andFigureNotEqualTo(Float value) {
+            addCriterion("figure <>", value, "figure");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerTypeGreaterThan(Integer value) {
-            addCriterion("lawyer_type >", value, "lawyerType");
+        public Criteria andFigureGreaterThan(Float value) {
+            addCriterion("figure >", value, "figure");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("lawyer_type >=", value, "lawyerType");
+        public Criteria andFigureGreaterThanOrEqualTo(Float value) {
+            addCriterion("figure >=", value, "figure");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerTypeLessThan(Integer value) {
-            addCriterion("lawyer_type <", value, "lawyerType");
+        public Criteria andFigureLessThan(Float value) {
+            addCriterion("figure <", value, "figure");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("lawyer_type <=", value, "lawyerType");
+        public Criteria andFigureLessThanOrEqualTo(Float value) {
+            addCriterion("figure <=", value, "figure");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerTypeIn(List<Integer> values) {
-            addCriterion("lawyer_type in", values, "lawyerType");
+        public Criteria andFigureIn(List<Float> values) {
+            addCriterion("figure in", values, "figure");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerTypeNotIn(List<Integer> values) {
-            addCriterion("lawyer_type not in", values, "lawyerType");
+        public Criteria andFigureNotIn(List<Float> values) {
+            addCriterion("figure not in", values, "figure");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerTypeBetween(Integer value1, Integer value2) {
-            addCriterion("lawyer_type between", value1, value2, "lawyerType");
+        public Criteria andFigureBetween(Float value1, Float value2) {
+            addCriterion("figure between", value1, value2, "figure");
             return (Criteria) this;
         }
 
-        public Criteria andLawyerTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("lawyer_type not between", value1, value2, "lawyerType");
+        public Criteria andFigureNotBetween(Float value1, Float value2) {
+            addCriterion("figure not between", value1, value2, "figure");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIsNull() {
-            addCriterion("price is null");
+        public Criteria andPayDateIsNull() {
+            addCriterion("pay_date is null");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIsNotNull() {
-            addCriterion("price is not null");
+        public Criteria andPayDateIsNotNull() {
+            addCriterion("pay_date is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPriceEqualTo(Float value) {
-            addCriterion("price =", value, "price");
+        public Criteria andPayDateEqualTo(Date value) {
+            addCriterion("pay_date =", value, "payDate");
             return (Criteria) this;
         }
 
-        public Criteria andPriceNotEqualTo(Float value) {
-            addCriterion("price <>", value, "price");
+        public Criteria andPayDateNotEqualTo(Date value) {
+            addCriterion("pay_date <>", value, "payDate");
             return (Criteria) this;
         }
 
-        public Criteria andPriceGreaterThan(Float value) {
-            addCriterion("price >", value, "price");
+        public Criteria andPayDateGreaterThan(Date value) {
+            addCriterion("pay_date >", value, "payDate");
             return (Criteria) this;
         }
 
-        public Criteria andPriceGreaterThanOrEqualTo(Float value) {
-            addCriterion("price >=", value, "price");
+        public Criteria andPayDateGreaterThanOrEqualTo(Date value) {
+            addCriterion("pay_date >=", value, "payDate");
             return (Criteria) this;
         }
 
-        public Criteria andPriceLessThan(Float value) {
-            addCriterion("price <", value, "price");
+        public Criteria andPayDateLessThan(Date value) {
+            addCriterion("pay_date <", value, "payDate");
             return (Criteria) this;
         }
 
-        public Criteria andPriceLessThanOrEqualTo(Float value) {
-            addCriterion("price <=", value, "price");
+        public Criteria andPayDateLessThanOrEqualTo(Date value) {
+            addCriterion("pay_date <=", value, "payDate");
             return (Criteria) this;
         }
 
-        public Criteria andPriceIn(List<Float> values) {
-            addCriterion("price in", values, "price");
+        public Criteria andPayDateIn(List<Date> values) {
+            addCriterion("pay_date in", values, "payDate");
             return (Criteria) this;
         }
 
-        public Criteria andPriceNotIn(List<Float> values) {
-            addCriterion("price not in", values, "price");
+        public Criteria andPayDateNotIn(List<Date> values) {
+            addCriterion("pay_date not in", values, "payDate");
             return (Criteria) this;
         }
 
-        public Criteria andPriceBetween(Float value1, Float value2) {
-            addCriterion("price between", value1, value2, "price");
+        public Criteria andPayDateBetween(Date value1, Date value2) {
+            addCriterion("pay_date between", value1, value2, "payDate");
             return (Criteria) this;
         }
 
-        public Criteria andPriceNotBetween(Float value1, Float value2) {
-            addCriterion("price not between", value1, value2, "price");
+        public Criteria andPayDateNotBetween(Date value1, Date value2) {
+            addCriterion("pay_date not between", value1, value2, "payDate");
             return (Criteria) this;
         }
 

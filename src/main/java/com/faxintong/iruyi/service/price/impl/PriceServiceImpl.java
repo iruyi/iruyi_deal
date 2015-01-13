@@ -1,8 +1,8 @@
 package com.faxintong.iruyi.service.price.impl;
 
-import com.faxintong.iruyi.model.mybatis.price.ReceivePriceRule;
-import com.faxintong.iruyi.model.mybatis.price.RejectPriceRule;
-import com.faxintong.iruyi.model.mybatis.price.ReportPrice;
+import com.faxintong.iruyi.model.mybatis.price.Price;
+import com.faxintong.iruyi.model.mybatis.price.ReceiveOrderPrice;
+import com.faxintong.iruyi.model.mybatis.price.RejectOrderPrice;
 import com.faxintong.iruyi.service.price.PriceService;
 import org.springframework.stereotype.Service;
 
@@ -14,22 +14,22 @@ import java.util.List;
 @Service
 public class PriceServiceImpl implements PriceService {
     @Override
-    public void rejectReportPrice(List<RejectPriceRule> reprotPrice) throws Exception {
+    public void rejectReportPrice(List<RejectOrderPrice> reprotPrice) throws Exception {
 
     }
 
     @Override
-    public void receiveReportPrice(List<ReceivePriceRule> reportPrice) throws Exception {
+    public void receiveReportPrice(List<ReceiveOrderPrice> reportPrice) throws Exception {
 
     }
 
     @Override
-    public List<RejectPriceRule> findRejectReportPrice(Long orderId) throws Exception {
+    public List<RejectOrderPrice> findRejectReportPrice(Long orderId) throws Exception {
         return null;
     }
 
     @Override
-    public List<ReceivePriceRule> findReceiveReportPrice(Long lawyerId, Long orderId) throws Exception {
+    public List<ReceiveOrderPrice> findReceiveReportPrice(Long lawyerId, Long orderId) throws Exception {
         return null;
     }
 
@@ -39,7 +39,7 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public ReportPrice findReportPriceByOrderId(Long orderId) throws Exception {
+    public Price findReportPriceByOrderId(Long orderId) throws Exception {
         return null;
     }
 }

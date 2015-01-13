@@ -2,16 +2,16 @@ package com.faxintong.iruyi.model.mybatis.price;
 
 import java.util.Date;
 
-public class ReportPrice {
+public class RejectOrderPrice {
     private Long id;
 
     private Long orderId;
 
-    private Long lawyerId;
+    private Float startPrice;
 
-    private Integer lawyerType;
+    private Float endPrice;
 
-    private Float price;
+    private Float percentFigure;
 
     private Date createDate;
 
@@ -31,28 +31,28 @@ public class ReportPrice {
         this.orderId = orderId;
     }
 
-    public Long getLawyerId() {
-        return lawyerId;
+    public Float getStartPrice() {
+        return startPrice;
     }
 
-    public void setLawyerId(Long lawyerId) {
-        this.lawyerId = lawyerId;
+    public void setStartPrice(Float startPrice) {
+        this.startPrice = startPrice;
     }
 
-    public Integer getLawyerType() {
-        return lawyerType;
+    public Float getEndPrice() {
+        return endPrice;
     }
 
-    public void setLawyerType(Integer lawyerType) {
-        this.lawyerType = lawyerType;
+    public void setEndPrice(Float endPrice) {
+        this.endPrice = endPrice;
     }
 
-    public Float getPrice() {
-        return price;
+    public Float getPercentFigure() {
+        return percentFigure;
     }
 
-    public void setPrice(Float price) {
-        this.price = price;
+    public void setPercentFigure(Float percentFigure) {
+        this.percentFigure = percentFigure;
     }
 
     public Date getCreateDate() {

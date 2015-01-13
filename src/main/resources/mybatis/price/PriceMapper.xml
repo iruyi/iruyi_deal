@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.faxintong.iruyi.dao.mybatis.pay.PayRecordMapper" >
-  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.pay.PayRecord" >
+<mapper namespace="com.faxintong.iruyi.dao.mybatis.price.PriceMapper" >
+  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.price.Price" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="order_id" property="orderId" jdbcType="BIGINT" />
-    <result column="pay_layer_id" property="payLayerId" jdbcType="BIGINT" />
-    <result column="receive_layer_id" property="receiveLayerId" jdbcType="BIGINT" />
-    <result column="figure" property="figure" jdbcType="REAL" />
+    <result column="lawyer_id" property="lawyerId" jdbcType="BIGINT" />
+    <result column="lawyer_type" property="lawyerType" jdbcType="TINYINT" />
+    <result column="price" property="price" jdbcType="REAL" />
+    <result column="pay_style" property="payStyle" jdbcType="TINYINT" />
     <result column="status" property="status" jdbcType="TINYINT" />
-    <result column="layer_type" property="layerType" jdbcType="TINYINT" />
-    <result column="pay_date" property="payDate" jdbcType="TIMESTAMP" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,15 +70,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, order_id, pay_layer_id, receive_layer_id, figure, status, layer_type, pay_date
+    id, order_id, lawyer_id, lawyer_type, price, pay_style, status, create_date
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.pay.PayRecordExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.price.PriceExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from pay
+    from price
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,29 +89,29 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
     select 
     <include refid="Base_Column_List" />
-    from pay
+    from price
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="Long" >
-    delete from pay
+    delete from price
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.pay.PayRecordExample" >
-    delete from pay
+  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.price.PriceExample" >
+    delete from price
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.pay.PayRecord" >
-    insert into pay (id, order_id, pay_layer_id, 
-      receive_layer_id, figure, status, 
-      layer_type, pay_date)
-    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{payLayerId,jdbcType=BIGINT}, 
-      #{receiveLayerId,jdbcType=BIGINT}, #{figure,jdbcType=REAL}, #{status,jdbcType=TINYINT}, 
-      #{layerType,jdbcType=TINYINT}, #{payDate,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.price.Price" >
+    insert into price (id, order_id, lawyer_id, 
+      lawyer_type, price, pay_style, 
+      status, create_date)
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{lawyerId,jdbcType=BIGINT}, 
+      #{lawyerType,jdbcType=TINYINT}, #{price,jdbcType=REAL}, #{payStyle,jdbcType=TINYINT}, 
+      #{status,jdbcType=TINYINT}, #{createDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.pay.PayRecord" >
-    insert into pay
+  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.price.Price" >
+    insert into price
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -119,23 +119,23 @@
       <if test="orderId != null" >
         order_id,
       </if>
-      <if test="payLayerId != null" >
-        pay_layer_id,
+      <if test="lawyerId != null" >
+        lawyer_id,
       </if>
-      <if test="receiveLayerId != null" >
-        receive_layer_id,
+      <if test="lawyerType != null" >
+        lawyer_type,
       </if>
-      <if test="figure != null" >
-        figure,
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="payStyle != null" >
+        pay_style,
       </if>
       <if test="status != null" >
         status,
       </if>
-      <if test="layerType != null" >
-        layer_type,
-      </if>
-      <if test="payDate != null" >
-        pay_date,
+      <if test="createDate != null" >
+        create_date,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -145,34 +145,34 @@
       <if test="orderId != null" >
         #{orderId,jdbcType=BIGINT},
       </if>
-      <if test="payLayerId != null" >
-        #{payLayerId,jdbcType=BIGINT},
+      <if test="lawyerId != null" >
+        #{lawyerId,jdbcType=BIGINT},
       </if>
-      <if test="receiveLayerId != null" >
-        #{receiveLayerId,jdbcType=BIGINT},
+      <if test="lawyerType != null" >
+        #{lawyerType,jdbcType=TINYINT},
       </if>
-      <if test="figure != null" >
-        #{figure,jdbcType=REAL},
+      <if test="price != null" >
+        #{price,jdbcType=REAL},
+      </if>
+      <if test="payStyle != null" >
+        #{payStyle,jdbcType=TINYINT},
       </if>
       <if test="status != null" >
         #{status,jdbcType=TINYINT},
       </if>
-      <if test="layerType != null" >
-        #{layerType,jdbcType=TINYINT},
-      </if>
-      <if test="payDate != null" >
-        #{payDate,jdbcType=TIMESTAMP},
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.pay.PayRecordExample" resultType="java.lang.Integer" >
-    select count(*) from pay
+  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.price.PriceExample" resultType="java.lang.Integer" >
+    select count(*) from price
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update pay
+    update price
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
@@ -180,23 +180,23 @@
       <if test="record.orderId != null" >
         order_id = #{record.orderId,jdbcType=BIGINT},
       </if>
-      <if test="record.payLayerId != null" >
-        pay_layer_id = #{record.payLayerId,jdbcType=BIGINT},
+      <if test="record.lawyerId != null" >
+        lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
       </if>
-      <if test="record.receiveLayerId != null" >
-        receive_layer_id = #{record.receiveLayerId,jdbcType=BIGINT},
+      <if test="record.lawyerType != null" >
+        lawyer_type = #{record.lawyerType,jdbcType=TINYINT},
       </if>
-      <if test="record.figure != null" >
-        figure = #{record.figure,jdbcType=REAL},
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=REAL},
+      </if>
+      <if test="record.payStyle != null" >
+        pay_style = #{record.payStyle,jdbcType=TINYINT},
       </if>
       <if test="record.status != null" >
         status = #{record.status,jdbcType=TINYINT},
       </if>
-      <if test="record.layerType != null" >
-        layer_type = #{record.layerType,jdbcType=TINYINT},
-      </if>
-      <if test="record.payDate != null" >
-        pay_date = #{record.payDate,jdbcType=TIMESTAMP},
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -204,55 +204,55 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update pay
+    update price
     set id = #{record.id,jdbcType=BIGINT},
       order_id = #{record.orderId,jdbcType=BIGINT},
-      pay_layer_id = #{record.payLayerId,jdbcType=BIGINT},
-      receive_layer_id = #{record.receiveLayerId,jdbcType=BIGINT},
-      figure = #{record.figure,jdbcType=REAL},
+      lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
+      lawyer_type = #{record.lawyerType,jdbcType=TINYINT},
+      price = #{record.price,jdbcType=REAL},
+      pay_style = #{record.payStyle,jdbcType=TINYINT},
       status = #{record.status,jdbcType=TINYINT},
-      layer_type = #{record.layerType,jdbcType=TINYINT},
-      pay_date = #{record.payDate,jdbcType=TIMESTAMP}
+      create_date = #{record.createDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.pay.PayRecord" >
-    update pay
+  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.price.Price" >
+    update price
     <set >
       <if test="orderId != null" >
         order_id = #{orderId,jdbcType=BIGINT},
       </if>
-      <if test="payLayerId != null" >
-        pay_layer_id = #{payLayerId,jdbcType=BIGINT},
+      <if test="lawyerId != null" >
+        lawyer_id = #{lawyerId,jdbcType=BIGINT},
       </if>
-      <if test="receiveLayerId != null" >
-        receive_layer_id = #{receiveLayerId,jdbcType=BIGINT},
+      <if test="lawyerType != null" >
+        lawyer_type = #{lawyerType,jdbcType=TINYINT},
       </if>
-      <if test="figure != null" >
-        figure = #{figure,jdbcType=REAL},
+      <if test="price != null" >
+        price = #{price,jdbcType=REAL},
+      </if>
+      <if test="payStyle != null" >
+        pay_style = #{payStyle,jdbcType=TINYINT},
       </if>
       <if test="status != null" >
         status = #{status,jdbcType=TINYINT},
       </if>
-      <if test="layerType != null" >
-        layer_type = #{layerType,jdbcType=TINYINT},
-      </if>
-      <if test="payDate != null" >
-        pay_date = #{payDate,jdbcType=TIMESTAMP},
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.pay.PayRecord" >
-    update pay
+  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.price.Price" >
+    update price
     set order_id = #{orderId,jdbcType=BIGINT},
-      pay_layer_id = #{payLayerId,jdbcType=BIGINT},
-      receive_layer_id = #{receiveLayerId,jdbcType=BIGINT},
-      figure = #{figure,jdbcType=REAL},
+      lawyer_id = #{lawyerId,jdbcType=BIGINT},
+      lawyer_type = #{lawyerType,jdbcType=TINYINT},
+      price = #{price,jdbcType=REAL},
+      pay_style = #{payStyle,jdbcType=TINYINT},
       status = #{status,jdbcType=TINYINT},
-      layer_type = #{layerType,jdbcType=TINYINT},
-      pay_date = #{payDate,jdbcType=TIMESTAMP}
+      create_date = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

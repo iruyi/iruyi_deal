@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class PayRecordExample {
+public class PaymentRecordExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public PayRecordExample() {
+    public PaymentRecordExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -225,123 +225,123 @@ public class PayRecordExample {
             return (Criteria) this;
         }
 
-        public Criteria andPayLayerIdIsNull() {
-            addCriterion("pay_layer_id is null");
+        public Criteria andPayLawyerIdIsNull() {
+            addCriterion("pay_lawyer_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andPayLayerIdIsNotNull() {
-            addCriterion("pay_layer_id is not null");
+        public Criteria andPayLawyerIdIsNotNull() {
+            addCriterion("pay_lawyer_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andPayLayerIdEqualTo(Long value) {
-            addCriterion("pay_layer_id =", value, "payLayerId");
+        public Criteria andPayLawyerIdEqualTo(Long value) {
+            addCriterion("pay_lawyer_id =", value, "payLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andPayLayerIdNotEqualTo(Long value) {
-            addCriterion("pay_layer_id <>", value, "payLayerId");
+        public Criteria andPayLawyerIdNotEqualTo(Long value) {
+            addCriterion("pay_lawyer_id <>", value, "payLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andPayLayerIdGreaterThan(Long value) {
-            addCriterion("pay_layer_id >", value, "payLayerId");
+        public Criteria andPayLawyerIdGreaterThan(Long value) {
+            addCriterion("pay_lawyer_id >", value, "payLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andPayLayerIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("pay_layer_id >=", value, "payLayerId");
+        public Criteria andPayLawyerIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("pay_lawyer_id >=", value, "payLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andPayLayerIdLessThan(Long value) {
-            addCriterion("pay_layer_id <", value, "payLayerId");
+        public Criteria andPayLawyerIdLessThan(Long value) {
+            addCriterion("pay_lawyer_id <", value, "payLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andPayLayerIdLessThanOrEqualTo(Long value) {
-            addCriterion("pay_layer_id <=", value, "payLayerId");
+        public Criteria andPayLawyerIdLessThanOrEqualTo(Long value) {
+            addCriterion("pay_lawyer_id <=", value, "payLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andPayLayerIdIn(List<Long> values) {
-            addCriterion("pay_layer_id in", values, "payLayerId");
+        public Criteria andPayLawyerIdIn(List<Long> values) {
+            addCriterion("pay_lawyer_id in", values, "payLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andPayLayerIdNotIn(List<Long> values) {
-            addCriterion("pay_layer_id not in", values, "payLayerId");
+        public Criteria andPayLawyerIdNotIn(List<Long> values) {
+            addCriterion("pay_lawyer_id not in", values, "payLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andPayLayerIdBetween(Long value1, Long value2) {
-            addCriterion("pay_layer_id between", value1, value2, "payLayerId");
+        public Criteria andPayLawyerIdBetween(Long value1, Long value2) {
+            addCriterion("pay_lawyer_id between", value1, value2, "payLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andPayLayerIdNotBetween(Long value1, Long value2) {
-            addCriterion("pay_layer_id not between", value1, value2, "payLayerId");
+        public Criteria andPayLawyerIdNotBetween(Long value1, Long value2) {
+            addCriterion("pay_lawyer_id not between", value1, value2, "payLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andReceiveLayerIdIsNull() {
-            addCriterion("receive_layer_id is null");
+        public Criteria andReceiveLawyerIdIsNull() {
+            addCriterion("receive_lawyer_id is null");
             return (Criteria) this;
         }
 
-        public Criteria andReceiveLayerIdIsNotNull() {
-            addCriterion("receive_layer_id is not null");
+        public Criteria andReceiveLawyerIdIsNotNull() {
+            addCriterion("receive_lawyer_id is not null");
             return (Criteria) this;
         }
 
-        public Criteria andReceiveLayerIdEqualTo(Long value) {
-            addCriterion("receive_layer_id =", value, "receiveLayerId");
+        public Criteria andReceiveLawyerIdEqualTo(Long value) {
+            addCriterion("receive_lawyer_id =", value, "receiveLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andReceiveLayerIdNotEqualTo(Long value) {
-            addCriterion("receive_layer_id <>", value, "receiveLayerId");
+        public Criteria andReceiveLawyerIdNotEqualTo(Long value) {
+            addCriterion("receive_lawyer_id <>", value, "receiveLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andReceiveLayerIdGreaterThan(Long value) {
-            addCriterion("receive_layer_id >", value, "receiveLayerId");
+        public Criteria andReceiveLawyerIdGreaterThan(Long value) {
+            addCriterion("receive_lawyer_id >", value, "receiveLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andReceiveLayerIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("receive_layer_id >=", value, "receiveLayerId");
+        public Criteria andReceiveLawyerIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("receive_lawyer_id >=", value, "receiveLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andReceiveLayerIdLessThan(Long value) {
-            addCriterion("receive_layer_id <", value, "receiveLayerId");
+        public Criteria andReceiveLawyerIdLessThan(Long value) {
+            addCriterion("receive_lawyer_id <", value, "receiveLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andReceiveLayerIdLessThanOrEqualTo(Long value) {
-            addCriterion("receive_layer_id <=", value, "receiveLayerId");
+        public Criteria andReceiveLawyerIdLessThanOrEqualTo(Long value) {
+            addCriterion("receive_lawyer_id <=", value, "receiveLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andReceiveLayerIdIn(List<Long> values) {
-            addCriterion("receive_layer_id in", values, "receiveLayerId");
+        public Criteria andReceiveLawyerIdIn(List<Long> values) {
+            addCriterion("receive_lawyer_id in", values, "receiveLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andReceiveLayerIdNotIn(List<Long> values) {
-            addCriterion("receive_layer_id not in", values, "receiveLayerId");
+        public Criteria andReceiveLawyerIdNotIn(List<Long> values) {
+            addCriterion("receive_lawyer_id not in", values, "receiveLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andReceiveLayerIdBetween(Long value1, Long value2) {
-            addCriterion("receive_layer_id between", value1, value2, "receiveLayerId");
+        public Criteria andReceiveLawyerIdBetween(Long value1, Long value2) {
+            addCriterion("receive_lawyer_id between", value1, value2, "receiveLawyerId");
             return (Criteria) this;
         }
 
-        public Criteria andReceiveLayerIdNotBetween(Long value1, Long value2) {
-            addCriterion("receive_layer_id not between", value1, value2, "receiveLayerId");
+        public Criteria andReceiveLawyerIdNotBetween(Long value1, Long value2) {
+            addCriterion("receive_lawyer_id not between", value1, value2, "receiveLawyerId");
             return (Criteria) this;
         }
 
@@ -402,126 +402,6 @@ public class PayRecordExample {
 
         public Criteria andFigureNotBetween(Float value1, Float value2) {
             addCriterion("figure not between", value1, value2, "figure");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIsNull() {
-            addCriterion("status is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIsNotNull() {
-            addCriterion("status is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusEqualTo(Integer value) {
-            addCriterion("status =", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotEqualTo(Integer value) {
-            addCriterion("status <>", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusGreaterThan(Integer value) {
-            addCriterion("status >", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("status >=", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusLessThan(Integer value) {
-            addCriterion("status <", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("status <=", value, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusIn(List<Integer> values) {
-            addCriterion("status in", values, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotIn(List<Integer> values) {
-            addCriterion("status not in", values, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusBetween(Integer value1, Integer value2) {
-            addCriterion("status between", value1, value2, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("status not between", value1, value2, "status");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayerTypeIsNull() {
-            addCriterion("layer_type is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayerTypeIsNotNull() {
-            addCriterion("layer_type is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayerTypeEqualTo(Integer value) {
-            addCriterion("layer_type =", value, "layerType");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayerTypeNotEqualTo(Integer value) {
-            addCriterion("layer_type <>", value, "layerType");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayerTypeGreaterThan(Integer value) {
-            addCriterion("layer_type >", value, "layerType");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayerTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("layer_type >=", value, "layerType");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayerTypeLessThan(Integer value) {
-            addCriterion("layer_type <", value, "layerType");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayerTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("layer_type <=", value, "layerType");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayerTypeIn(List<Integer> values) {
-            addCriterion("layer_type in", values, "layerType");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayerTypeNotIn(List<Integer> values) {
-            addCriterion("layer_type not in", values, "layerType");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayerTypeBetween(Integer value1, Integer value2) {
-            addCriterion("layer_type between", value1, value2, "layerType");
-            return (Criteria) this;
-        }
-
-        public Criteria andLayerTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("layer_type not between", value1, value2, "layerType");
             return (Criteria) this;
         }
 

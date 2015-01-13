@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.faxintong.iruyi.dao.mybatis.price.ReportPriceMapper" >
-  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.price.ReportPrice" >
+<mapper namespace="com.faxintong.iruyi.dao.mybatis.pay.PaymentModeMapper" >
+  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.pay.PaymentMode" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="order_id" property="orderId" jdbcType="BIGINT" />
-    <result column="lawyer_id" property="lawyerId" jdbcType="BIGINT" />
-    <result column="lawyer_type" property="lawyerType" jdbcType="TINYINT" />
-    <result column="price" property="price" jdbcType="REAL" />
+    <result column="price_id" property="priceId" jdbcType="BIGINT" />
+    <result column="period_num" property="periodNum" jdbcType="INTEGER" />
+    <result column="figure" property="figure" jdbcType="REAL" />
+    <result column="pay_date" property="payDate" jdbcType="TIMESTAMP" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -68,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, order_id, lawyer_id, lawyer_type, price, create_date
+    id, price_id, period_num, figure, pay_date, create_date
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.price.ReportPriceExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.pay.PaymentModeExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from price
+    from payment_mode
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,44 +87,44 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
     select 
     <include refid="Base_Column_List" />
-    from price
+    from payment_mode
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="Long" >
-    delete from price
+    delete from payment_mode
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.price.ReportPriceExample" >
-    delete from price
+  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.pay.PaymentModeExample" >
+    delete from payment_mode
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.price.ReportPrice" >
-    insert into price (id, order_id, lawyer_id, 
-      lawyer_type, price, create_date
+  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.pay.PaymentMode" >
+    insert into payment_mode (id, price_id, period_num, 
+      figure, pay_date, create_date
       )
-    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{lawyerId,jdbcType=BIGINT}, 
-      #{lawyerType,jdbcType=TINYINT}, #{price,jdbcType=REAL}, #{createDate,jdbcType=TIMESTAMP}
+    values (#{id,jdbcType=BIGINT}, #{priceId,jdbcType=BIGINT}, #{periodNum,jdbcType=INTEGER}, 
+      #{figure,jdbcType=REAL}, #{payDate,jdbcType=TIMESTAMP}, #{createDate,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.price.ReportPrice" >
-    insert into price
+  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.pay.PaymentMode" >
+    insert into payment_mode
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="orderId != null" >
-        order_id,
+      <if test="priceId != null" >
+        price_id,
       </if>
-      <if test="lawyerId != null" >
-        lawyer_id,
+      <if test="periodNum != null" >
+        period_num,
       </if>
-      <if test="lawyerType != null" >
-        lawyer_type,
+      <if test="figure != null" >
+        figure,
       </if>
-      <if test="price != null" >
-        price,
+      <if test="payDate != null" >
+        pay_date,
       </if>
       <if test="createDate != null" >
         create_date,
@@ -134,46 +134,46 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="orderId != null" >
-        #{orderId,jdbcType=BIGINT},
+      <if test="priceId != null" >
+        #{priceId,jdbcType=BIGINT},
       </if>
-      <if test="lawyerId != null" >
-        #{lawyerId,jdbcType=BIGINT},
+      <if test="periodNum != null" >
+        #{periodNum,jdbcType=INTEGER},
       </if>
-      <if test="lawyerType != null" >
-        #{lawyerType,jdbcType=TINYINT},
+      <if test="figure != null" >
+        #{figure,jdbcType=REAL},
       </if>
-      <if test="price != null" >
-        #{price,jdbcType=REAL},
+      <if test="payDate != null" >
+        #{payDate,jdbcType=TIMESTAMP},
       </if>
       <if test="createDate != null" >
         #{createDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.price.ReportPriceExample" resultType="java.lang.Integer" >
-    select count(*) from price
+  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.pay.PaymentModeExample" resultType="java.lang.Integer" >
+    select count(*) from payment_mode
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update price
+    update payment_mode
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.orderId != null" >
-        order_id = #{record.orderId,jdbcType=BIGINT},
+      <if test="record.priceId != null" >
+        price_id = #{record.priceId,jdbcType=BIGINT},
       </if>
-      <if test="record.lawyerId != null" >
-        lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
+      <if test="record.periodNum != null" >
+        period_num = #{record.periodNum,jdbcType=INTEGER},
       </if>
-      <if test="record.lawyerType != null" >
-        lawyer_type = #{record.lawyerType,jdbcType=TINYINT},
+      <if test="record.figure != null" >
+        figure = #{record.figure,jdbcType=REAL},
       </if>
-      <if test="record.price != null" >
-        price = #{record.price,jdbcType=REAL},
+      <if test="record.payDate != null" >
+        pay_date = #{record.payDate,jdbcType=TIMESTAMP},
       </if>
       <if test="record.createDate != null" >
         create_date = #{record.createDate,jdbcType=TIMESTAMP},
@@ -184,31 +184,31 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update price
+    update payment_mode
     set id = #{record.id,jdbcType=BIGINT},
-      order_id = #{record.orderId,jdbcType=BIGINT},
-      lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
-      lawyer_type = #{record.lawyerType,jdbcType=TINYINT},
-      price = #{record.price,jdbcType=REAL},
+      price_id = #{record.priceId,jdbcType=BIGINT},
+      period_num = #{record.periodNum,jdbcType=INTEGER},
+      figure = #{record.figure,jdbcType=REAL},
+      pay_date = #{record.payDate,jdbcType=TIMESTAMP},
       create_date = #{record.createDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.price.ReportPrice" >
-    update price
+  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.pay.PaymentMode" >
+    update payment_mode
     <set >
-      <if test="orderId != null" >
-        order_id = #{orderId,jdbcType=BIGINT},
+      <if test="priceId != null" >
+        price_id = #{priceId,jdbcType=BIGINT},
       </if>
-      <if test="lawyerId != null" >
-        lawyer_id = #{lawyerId,jdbcType=BIGINT},
+      <if test="periodNum != null" >
+        period_num = #{periodNum,jdbcType=INTEGER},
       </if>
-      <if test="lawyerType != null" >
-        lawyer_type = #{lawyerType,jdbcType=TINYINT},
+      <if test="figure != null" >
+        figure = #{figure,jdbcType=REAL},
       </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=REAL},
+      <if test="payDate != null" >
+        pay_date = #{payDate,jdbcType=TIMESTAMP},
       </if>
       <if test="createDate != null" >
         create_date = #{createDate,jdbcType=TIMESTAMP},
@@ -216,12 +216,12 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.price.ReportPrice" >
-    update price
-    set order_id = #{orderId,jdbcType=BIGINT},
-      lawyer_id = #{lawyerId,jdbcType=BIGINT},
-      lawyer_type = #{lawyerType,jdbcType=TINYINT},
-      price = #{price,jdbcType=REAL},
+  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.pay.PaymentMode" >
+    update payment_mode
+    set price_id = #{priceId,jdbcType=BIGINT},
+      period_num = #{periodNum,jdbcType=INTEGER},
+      figure = #{figure,jdbcType=REAL},
+      pay_date = #{payDate,jdbcType=TIMESTAMP},
       create_date = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

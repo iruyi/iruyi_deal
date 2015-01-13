@@ -4,10 +4,9 @@
   <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.contract.Contract" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="reject_layer_id" property="rejectLayerId" jdbcType="BIGINT" />
-    <result column="receive_layer_id" property="receiveLayerId" jdbcType="BIGINT" />
     <result column="order_id" property="orderId" jdbcType="BIGINT" />
-    <result column="contract_type" property="contractType" jdbcType="TINYINT" />
+    <result column="reject_lawyer_id" property="rejectLawyerId" jdbcType="BIGINT" />
+    <result column="receive_lawyer_id" property="receiveLawyerId" jdbcType="BIGINT" />
     <result column="contract_figure" property="contractFigure" jdbcType="REAL" />
     <result column="status" property="status" jdbcType="TINYINT" />
     <result column="contract_url" property="contractUrl" jdbcType="VARCHAR" />
@@ -73,8 +72,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, reject_layer_id, receive_layer_id, order_id, contract_type, contract_figure, 
-    status, contract_url, create_date, update_date
+    id, name, order_id, reject_lawyer_id, receive_lawyer_id, contract_figure, status, 
+    contract_url, create_date, update_date
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.contract.ContractExample" >
     select
@@ -107,14 +106,14 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.contract.Contract" >
-    insert into contract (id, name, reject_layer_id, 
-      receive_layer_id, order_id, contract_type, 
-      contract_figure, status, contract_url, 
-      create_date, update_date)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{rejectLayerId,jdbcType=BIGINT}, 
-      #{receiveLayerId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{contractType,jdbcType=TINYINT}, 
-      #{contractFigure,jdbcType=REAL}, #{status,jdbcType=TINYINT}, #{contractUrl,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+    insert into contract (id, name, order_id, 
+      reject_lawyer_id, receive_lawyer_id, contract_figure, 
+      status, contract_url, create_date, 
+      update_date)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{orderId,jdbcType=BIGINT}, 
+      #{rejectLawyerId,jdbcType=BIGINT}, #{receiveLawyerId,jdbcType=BIGINT}, #{contractFigure,jdbcType=REAL}, 
+      #{status,jdbcType=TINYINT}, #{contractUrl,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{updateDate,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.contract.Contract" >
     insert into contract
@@ -125,17 +124,14 @@
       <if test="name != null" >
         name,
       </if>
-      <if test="rejectLayerId != null" >
-        reject_layer_id,
-      </if>
-      <if test="receiveLayerId != null" >
-        receive_layer_id,
-      </if>
       <if test="orderId != null" >
         order_id,
       </if>
-      <if test="contractType != null" >
-        contract_type,
+      <if test="rejectLawyerId != null" >
+        reject_lawyer_id,
+      </if>
+      <if test="receiveLawyerId != null" >
+        receive_lawyer_id,
       </if>
       <if test="contractFigure != null" >
         contract_figure,
@@ -160,17 +156,14 @@
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="rejectLayerId != null" >
-        #{rejectLayerId,jdbcType=BIGINT},
-      </if>
-      <if test="receiveLayerId != null" >
-        #{receiveLayerId,jdbcType=BIGINT},
-      </if>
       <if test="orderId != null" >
         #{orderId,jdbcType=BIGINT},
       </if>
-      <if test="contractType != null" >
-        #{contractType,jdbcType=TINYINT},
+      <if test="rejectLawyerId != null" >
+        #{rejectLawyerId,jdbcType=BIGINT},
+      </if>
+      <if test="receiveLawyerId != null" >
+        #{receiveLawyerId,jdbcType=BIGINT},
       </if>
       <if test="contractFigure != null" >
         #{contractFigure,jdbcType=REAL},
@@ -204,17 +197,14 @@
       <if test="record.name != null" >
         name = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.rejectLayerId != null" >
-        reject_layer_id = #{record.rejectLayerId,jdbcType=BIGINT},
-      </if>
-      <if test="record.receiveLayerId != null" >
-        receive_layer_id = #{record.receiveLayerId,jdbcType=BIGINT},
-      </if>
       <if test="record.orderId != null" >
         order_id = #{record.orderId,jdbcType=BIGINT},
       </if>
-      <if test="record.contractType != null" >
-        contract_type = #{record.contractType,jdbcType=TINYINT},
+      <if test="record.rejectLawyerId != null" >
+        reject_lawyer_id = #{record.rejectLawyerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.receiveLawyerId != null" >
+        receive_lawyer_id = #{record.receiveLawyerId,jdbcType=BIGINT},
       </if>
       <if test="record.contractFigure != null" >
         contract_figure = #{record.contractFigure,jdbcType=REAL},
@@ -240,10 +230,9 @@
     update contract
     set id = #{record.id,jdbcType=BIGINT},
       name = #{record.name,jdbcType=VARCHAR},
-      reject_layer_id = #{record.rejectLayerId,jdbcType=BIGINT},
-      receive_layer_id = #{record.receiveLayerId,jdbcType=BIGINT},
       order_id = #{record.orderId,jdbcType=BIGINT},
-      contract_type = #{record.contractType,jdbcType=TINYINT},
+      reject_lawyer_id = #{record.rejectLawyerId,jdbcType=BIGINT},
+      receive_lawyer_id = #{record.receiveLawyerId,jdbcType=BIGINT},
       contract_figure = #{record.contractFigure,jdbcType=REAL},
       status = #{record.status,jdbcType=TINYINT},
       contract_url = #{record.contractUrl,jdbcType=VARCHAR},
@@ -259,17 +248,14 @@
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="rejectLayerId != null" >
-        reject_layer_id = #{rejectLayerId,jdbcType=BIGINT},
-      </if>
-      <if test="receiveLayerId != null" >
-        receive_layer_id = #{receiveLayerId,jdbcType=BIGINT},
-      </if>
       <if test="orderId != null" >
         order_id = #{orderId,jdbcType=BIGINT},
       </if>
-      <if test="contractType != null" >
-        contract_type = #{contractType,jdbcType=TINYINT},
+      <if test="rejectLawyerId != null" >
+        reject_lawyer_id = #{rejectLawyerId,jdbcType=BIGINT},
+      </if>
+      <if test="receiveLawyerId != null" >
+        receive_lawyer_id = #{receiveLawyerId,jdbcType=BIGINT},
       </if>
       <if test="contractFigure != null" >
         contract_figure = #{contractFigure,jdbcType=REAL},
@@ -292,10 +278,9 @@
   <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.contract.Contract" >
     update contract
     set name = #{name,jdbcType=VARCHAR},
-      reject_layer_id = #{rejectLayerId,jdbcType=BIGINT},
-      receive_layer_id = #{receiveLayerId,jdbcType=BIGINT},
       order_id = #{orderId,jdbcType=BIGINT},
-      contract_type = #{contractType,jdbcType=TINYINT},
+      reject_lawyer_id = #{rejectLawyerId,jdbcType=BIGINT},
+      receive_lawyer_id = #{receiveLawyerId,jdbcType=BIGINT},
       contract_figure = #{contractFigure,jdbcType=REAL},
       status = #{status,jdbcType=TINYINT},
       contract_url = #{contractUrl,jdbcType=VARCHAR},

@@ -30,20 +30,20 @@
         </javaTypeResolver>
 
         <!-- generate Model -->
-        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.lawyer"
+        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.price"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!-- generate xml -->
-        <sqlMapGenerator targetPackage="mybatis.lawyer"
+        <sqlMapGenerator targetPackage="mybatis.price"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- generate Mapper -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.lawyer"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.price"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -57,7 +57,7 @@
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
         </table>-->
 
-        <table tableName="lawyer" domainObjectName="Lawyer">
+        <!--<table tableName="lawyer" domainObjectName="Lawyer">
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="name" javaType="String" ></columnOverride>
             <columnOverride column="password" javaType="String" ></columnOverride>
@@ -71,6 +71,98 @@
             <columnOverride column="age" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
             <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
+            <columnOverride column="photo" javaType="String" ></columnOverride>
+            <columnOverride column="law_office" javaType="String" ></columnOverride>
+            <columnOverride column="business_license" javaType="String" ></columnOverride>
+            <columnOverride column="introduction" javaType="String" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="receive_order_price" domainObjectName="ReceiveOrderPrice">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="order_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="fixed_figure" javaType="Float" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>
+
+        <table tableName="reject_order_price" domainObjectName="RejectOrderPrice">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="order_id" javaType="Long" ></columnOverride>
+            <columnOverride column="start_price" javaType="Float" ></columnOverride>
+            <columnOverride column="end_price" javaType="Float" ></columnOverride>
+            <columnOverride column="percent_figure" javaType="Float" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>
+
+        <table tableName="price" domainObjectName="Price">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="order_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_type" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="price" javaType="Float" ></columnOverride>
+            <columnOverride column="pay_style" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="status" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="payment_mode" domainObjectName="PaymentMode">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="price_id" javaType="Long" ></columnOverride>
+            <columnOverride column="period_num" javaType="Integer" ></columnOverride>
+            <columnOverride column="figure" javaType="Float" ></columnOverride>
+            <columnOverride column="pay_date" javaType="java.util.Date" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="contract" domainObjectName="Contract">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="name" javaType="String" ></columnOverride>
+            <columnOverride column="order_id" javaType="Long" ></columnOverride>
+            <columnOverride column="reject_lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="receive_lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="contract_figure" javaType="Float" ></columnOverride>
+            <columnOverride column="status" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="contract_url" javaType="String" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+            <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="order" domainObjectName="Order">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="rule_id" javaType="Long" ></columnOverride>
+            <columnOverride column="status" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="type" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="is_delay" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="end_flag" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="deadline_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="order" domainObjectName="Order">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="rule_id" javaType="Long" ></columnOverride>
+            <columnOverride column="status" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="type" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="is_delay" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="end_flag" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="deadline_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="receiver_price" domainObjectName="ReceiverPrice">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="fixed_figure" javaType="Float" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
+
+        <table tableName="rejecter_price" domainObjectName="RejecterPrice">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="start_price" javaType="Float" ></columnOverride>
+            <columnOverride column="end_price" javaType="Float" ></columnOverride>
+            <columnOverride column="percent_figure" javaType="Float" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
         </table>
 
          <!--<table tableName="q_deal" domainObjectName="QDeal">

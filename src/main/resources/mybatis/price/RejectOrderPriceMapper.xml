@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.faxintong.iruyi.dao.mybatis.price.RejectPriceRuleMapper" >
-  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.price.RejectPriceRule" >
+<mapper namespace="com.faxintong.iruyi.dao.mybatis.price.RejectOrderPriceMapper" >
+  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.price.RejectOrderPrice" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="order_id" property="orderId" jdbcType="BIGINT" />
-    <result column="type" property="type" jdbcType="TINYINT" />
     <result column="start_price" property="startPrice" jdbcType="REAL" />
     <result column="end_price" property="endPrice" jdbcType="REAL" />
-    <result column="fixed_percent_figure" property="fixedPercentFigure" jdbcType="REAL" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="percent_figure" property="percentFigure" jdbcType="REAL" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,15 +68,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, order_id, type, start_price, end_price, fixed_percent_figure, description
+    id, order_id, start_price, end_price, percent_figure, create_date
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.price.RejectPriceRuleExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.price.RejectOrderPriceExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from reject_price_rule
+    from reject_order_price
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,29 +87,29 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
     select 
     <include refid="Base_Column_List" />
-    from reject_price_rule
+    from reject_order_price
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="Long" >
-    delete from reject_price_rule
+    delete from reject_order_price
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.price.RejectPriceRuleExample" >
-    delete from reject_price_rule
+  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.price.RejectOrderPriceExample" >
+    delete from reject_order_price
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.price.RejectPriceRule" >
-    insert into reject_price_rule (id, order_id, type, 
-      start_price, end_price, fixed_percent_figure, 
-      description)
-    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{type,jdbcType=TINYINT}, 
-      #{startPrice,jdbcType=REAL}, #{endPrice,jdbcType=REAL}, #{fixedPercentFigure,jdbcType=REAL}, 
-      #{description,jdbcType=VARCHAR})
+  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.price.RejectOrderPrice" >
+    insert into reject_order_price (id, order_id, start_price, 
+      end_price, percent_figure, create_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{startPrice,jdbcType=REAL}, 
+      #{endPrice,jdbcType=REAL}, #{percentFigure,jdbcType=REAL}, #{createDate,jdbcType=TIMESTAMP}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.price.RejectPriceRule" >
-    insert into reject_price_rule
+  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.price.RejectOrderPrice" >
+    insert into reject_order_price
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -118,20 +117,17 @@
       <if test="orderId != null" >
         order_id,
       </if>
-      <if test="type != null" >
-        type,
-      </if>
       <if test="startPrice != null" >
         start_price,
       </if>
       <if test="endPrice != null" >
         end_price,
       </if>
-      <if test="fixedPercentFigure != null" >
-        fixed_percent_figure,
+      <if test="percentFigure != null" >
+        percent_figure,
       </if>
-      <if test="description != null" >
-        description,
+      <if test="createDate != null" >
+        create_date,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -141,31 +137,28 @@
       <if test="orderId != null" >
         #{orderId,jdbcType=BIGINT},
       </if>
-      <if test="type != null" >
-        #{type,jdbcType=TINYINT},
-      </if>
       <if test="startPrice != null" >
         #{startPrice,jdbcType=REAL},
       </if>
       <if test="endPrice != null" >
         #{endPrice,jdbcType=REAL},
       </if>
-      <if test="fixedPercentFigure != null" >
-        #{fixedPercentFigure,jdbcType=REAL},
+      <if test="percentFigure != null" >
+        #{percentFigure,jdbcType=REAL},
       </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.price.RejectPriceRuleExample" resultType="java.lang.Integer" >
-    select count(*) from reject_price_rule
+  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.price.RejectOrderPriceExample" resultType="java.lang.Integer" >
+    select count(*) from reject_order_price
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update reject_price_rule
+    update reject_order_price
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
@@ -173,20 +166,17 @@
       <if test="record.orderId != null" >
         order_id = #{record.orderId,jdbcType=BIGINT},
       </if>
-      <if test="record.type != null" >
-        type = #{record.type,jdbcType=TINYINT},
-      </if>
       <if test="record.startPrice != null" >
         start_price = #{record.startPrice,jdbcType=REAL},
       </if>
       <if test="record.endPrice != null" >
         end_price = #{record.endPrice,jdbcType=REAL},
       </if>
-      <if test="record.fixedPercentFigure != null" >
-        fixed_percent_figure = #{record.fixedPercentFigure,jdbcType=REAL},
+      <if test="record.percentFigure != null" >
+        percent_figure = #{record.percentFigure,jdbcType=REAL},
       </if>
-      <if test="record.description != null" >
-        description = #{record.description,jdbcType=VARCHAR},
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -194,26 +184,22 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update reject_price_rule
+    update reject_order_price
     set id = #{record.id,jdbcType=BIGINT},
       order_id = #{record.orderId,jdbcType=BIGINT},
-      type = #{record.type,jdbcType=TINYINT},
       start_price = #{record.startPrice,jdbcType=REAL},
       end_price = #{record.endPrice,jdbcType=REAL},
-      fixed_percent_figure = #{record.fixedPercentFigure,jdbcType=REAL},
-      description = #{record.description,jdbcType=VARCHAR}
+      percent_figure = #{record.percentFigure,jdbcType=REAL},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.price.RejectPriceRule" >
-    update reject_price_rule
+  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.price.RejectOrderPrice" >
+    update reject_order_price
     <set >
       <if test="orderId != null" >
         order_id = #{orderId,jdbcType=BIGINT},
-      </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=TINYINT},
       </if>
       <if test="startPrice != null" >
         start_price = #{startPrice,jdbcType=REAL},
@@ -221,23 +207,22 @@
       <if test="endPrice != null" >
         end_price = #{endPrice,jdbcType=REAL},
       </if>
-      <if test="fixedPercentFigure != null" >
-        fixed_percent_figure = #{fixedPercentFigure,jdbcType=REAL},
+      <if test="percentFigure != null" >
+        percent_figure = #{percentFigure,jdbcType=REAL},
       </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.price.RejectPriceRule" >
-    update reject_price_rule
+  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.price.RejectOrderPrice" >
+    update reject_order_price
     set order_id = #{orderId,jdbcType=BIGINT},
-      type = #{type,jdbcType=TINYINT},
       start_price = #{startPrice,jdbcType=REAL},
       end_price = #{endPrice,jdbcType=REAL},
-      fixed_percent_figure = #{fixedPercentFigure,jdbcType=REAL},
-      description = #{description,jdbcType=VARCHAR}
+      percent_figure = #{percentFigure,jdbcType=REAL},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

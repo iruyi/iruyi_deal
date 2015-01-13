@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.faxintong.iruyi.dao.mybatis.order.OrderMapper" >
-  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.order.Order" >
+<mapper namespace="com.faxintong.iruyi.dao.mybatis.price.ReceiverPriceMapper" >
+  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.price.ReceiverPrice" >
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="lawyer_id" property="lawyerId" jdbcType="BIGINT" />
-    <result column="rule_id" property="ruleId" jdbcType="BIGINT" />
-    <result column="status" property="status" jdbcType="TINYINT" />
-    <result column="type" property="type" jdbcType="TINYINT" />
-    <result column="is_delay" property="isDelay" jdbcType="TINYINT" />
-    <result column="end_flag" property="endFlag" jdbcType="TINYINT" />
-    <result column="deadline_date" property="deadlineDate" jdbcType="TIMESTAMP" />
+    <result column="fixed_figure" property="fixedFigure" jdbcType="REAL" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,15 +66,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, lawyer_id, rule_id, status, type, is_delay, end_flag, deadline_date
+    id, lawyer_id, fixed_figure, create_date
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.price.ReceiverPriceExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from order
+    from receiver_price
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,29 +85,27 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
     select 
     <include refid="Base_Column_List" />
-    from order
+    from receiver_price
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="Long" >
-    delete from order
+    delete from receiver_price
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderExample" >
-    delete from order
+  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.price.ReceiverPriceExample" >
+    delete from receiver_price
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.order.Order" >
-    insert into order (id, lawyer_id, rule_id, 
-      status, type, is_delay, 
-      end_flag, deadline_date)
-    values (#{id,jdbcType=BIGINT}, #{lawyerId,jdbcType=BIGINT}, #{ruleId,jdbcType=BIGINT}, 
-      #{status,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, #{isDelay,jdbcType=TINYINT}, 
-      #{endFlag,jdbcType=TINYINT}, #{deadlineDate,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.price.ReceiverPrice" >
+    insert into receiver_price (id, lawyer_id, fixed_figure, 
+      create_date)
+    values (#{id,jdbcType=BIGINT}, #{lawyerId,jdbcType=BIGINT}, #{fixedFigure,jdbcType=REAL}, 
+      #{createDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.order.Order" >
-    insert into order
+  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.price.ReceiverPrice" >
+    insert into receiver_price
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -119,23 +113,11 @@
       <if test="lawyerId != null" >
         lawyer_id,
       </if>
-      <if test="ruleId != null" >
-        rule_id,
+      <if test="fixedFigure != null" >
+        fixed_figure,
       </if>
-      <if test="status != null" >
-        status,
-      </if>
-      <if test="type != null" >
-        type,
-      </if>
-      <if test="isDelay != null" >
-        is_delay,
-      </if>
-      <if test="endFlag != null" >
-        end_flag,
-      </if>
-      <if test="deadlineDate != null" >
-        deadline_date,
+      <if test="createDate != null" >
+        create_date,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
@@ -145,34 +127,22 @@
       <if test="lawyerId != null" >
         #{lawyerId,jdbcType=BIGINT},
       </if>
-      <if test="ruleId != null" >
-        #{ruleId,jdbcType=BIGINT},
+      <if test="fixedFigure != null" >
+        #{fixedFigure,jdbcType=REAL},
       </if>
-      <if test="status != null" >
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="type != null" >
-        #{type,jdbcType=TINYINT},
-      </if>
-      <if test="isDelay != null" >
-        #{isDelay,jdbcType=TINYINT},
-      </if>
-      <if test="endFlag != null" >
-        #{endFlag,jdbcType=TINYINT},
-      </if>
-      <if test="deadlineDate != null" >
-        #{deadlineDate,jdbcType=TIMESTAMP},
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderExample" resultType="java.lang.Integer" >
-    select count(*) from order
+  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.price.ReceiverPriceExample" resultType="java.lang.Integer" >
+    select count(*) from receiver_price
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update order
+    update receiver_price
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
@@ -180,23 +150,11 @@
       <if test="record.lawyerId != null" >
         lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
       </if>
-      <if test="record.ruleId != null" >
-        rule_id = #{record.ruleId,jdbcType=BIGINT},
+      <if test="record.fixedFigure != null" >
+        fixed_figure = #{record.fixedFigure,jdbcType=REAL},
       </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=TINYINT},
-      </if>
-      <if test="record.type != null" >
-        type = #{record.type,jdbcType=TINYINT},
-      </if>
-      <if test="record.isDelay != null" >
-        is_delay = #{record.isDelay,jdbcType=TINYINT},
-      </if>
-      <if test="record.endFlag != null" >
-        end_flag = #{record.endFlag,jdbcType=TINYINT},
-      </if>
-      <if test="record.deadlineDate != null" >
-        deadline_date = #{record.deadlineDate,jdbcType=TIMESTAMP},
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -204,55 +162,35 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update order
+    update receiver_price
     set id = #{record.id,jdbcType=BIGINT},
       lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
-      rule_id = #{record.ruleId,jdbcType=BIGINT},
-      status = #{record.status,jdbcType=TINYINT},
-      type = #{record.type,jdbcType=TINYINT},
-      is_delay = #{record.isDelay,jdbcType=TINYINT},
-      end_flag = #{record.endFlag,jdbcType=TINYINT},
-      deadline_date = #{record.deadlineDate,jdbcType=TIMESTAMP}
+      fixed_figure = #{record.fixedFigure,jdbcType=REAL},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.order.Order" >
-    update order
+  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.price.ReceiverPrice" >
+    update receiver_price
     <set >
       <if test="lawyerId != null" >
         lawyer_id = #{lawyerId,jdbcType=BIGINT},
       </if>
-      <if test="ruleId != null" >
-        rule_id = #{ruleId,jdbcType=BIGINT},
+      <if test="fixedFigure != null" >
+        fixed_figure = #{fixedFigure,jdbcType=REAL},
       </if>
-      <if test="status != null" >
-        status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="type != null" >
-        type = #{type,jdbcType=TINYINT},
-      </if>
-      <if test="isDelay != null" >
-        is_delay = #{isDelay,jdbcType=TINYINT},
-      </if>
-      <if test="endFlag != null" >
-        end_flag = #{endFlag,jdbcType=TINYINT},
-      </if>
-      <if test="deadlineDate != null" >
-        deadline_date = #{deadlineDate,jdbcType=TIMESTAMP},
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.order.Order" >
-    update order
+  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.price.ReceiverPrice" >
+    update receiver_price
     set lawyer_id = #{lawyerId,jdbcType=BIGINT},
-      rule_id = #{ruleId,jdbcType=BIGINT},
-      status = #{status,jdbcType=TINYINT},
-      type = #{type,jdbcType=TINYINT},
-      is_delay = #{isDelay,jdbcType=TINYINT},
-      end_flag = #{endFlag,jdbcType=TINYINT},
-      deadline_date = #{deadlineDate,jdbcType=TIMESTAMP}
+      fixed_figure = #{fixedFigure,jdbcType=REAL},
+      create_date = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

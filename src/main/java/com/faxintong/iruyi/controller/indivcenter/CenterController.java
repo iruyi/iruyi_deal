@@ -3,10 +3,8 @@ package com.faxintong.iruyi.controller.indivcenter;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.indivcenter.CenterService;
 import static com.faxintong.iruyi.utils.Constants.*;
-import com.faxintong.iruyi.utils.RedisUtils;
+
 import com.google.common.collect.Maps;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

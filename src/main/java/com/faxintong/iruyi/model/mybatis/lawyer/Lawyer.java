@@ -1,19 +1,18 @@
 package com.faxintong.iruyi.model.mybatis.lawyer;
 
-import org.hibernate.validator.constraints.NotBlank;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 import java.io.Serializable;
 import java.util.Date;
 
 public class Lawyer implements Serializable{
-
-    @Null
     private Long id;
 
-    @NotBlank
     private String name;
+
+    private String password;
+
+    private String email;
+
+    private Byte status;
 
     private Integer sex;
 
@@ -23,7 +22,6 @@ public class Lawyer implements Serializable{
 
     private String cityName;
 
-    @NotBlank
     private String phone;
 
     private Long ruleId;
@@ -34,10 +32,13 @@ public class Lawyer implements Serializable{
 
     private Date updateDate;
 
-    @NotBlank
-    private transient String password;
+    private String photo;
 
-    private String email;
+    private String lawOffice;
+
+    private String businessLicense;
+
+    private String introduction;
 
     public Long getId() {
         return id;
@@ -53,6 +54,30 @@ public class Lawyer implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Byte getStatus() {
+        return status;
+    }
+
+    public void setStatus(Byte status) {
+        this.status = status;
     }
 
     public Integer getSex() {
@@ -127,19 +152,35 @@ public class Lawyer implements Serializable{
         this.updateDate = updateDate;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLawOffice() {
+        return lawOffice;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLawOffice(String lawOffice) {
+        this.lawOffice = lawOffice;
+    }
+
+    public String getBusinessLicense() {
+        return businessLicense;
+    }
+
+    public void setBusinessLicense(String businessLicense) {
+        this.businessLicense = businessLicense;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 }

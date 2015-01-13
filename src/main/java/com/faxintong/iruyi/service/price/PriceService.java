@@ -1,8 +1,8 @@
 package com.faxintong.iruyi.service.price;
 
-import com.faxintong.iruyi.model.mybatis.price.ReceivePriceRule;
-import com.faxintong.iruyi.model.mybatis.price.RejectPriceRule;
-import com.faxintong.iruyi.model.mybatis.price.ReportPrice;
+import com.faxintong.iruyi.model.mybatis.price.Price;
+import com.faxintong.iruyi.model.mybatis.price.ReceiveOrderPrice;
+import com.faxintong.iruyi.model.mybatis.price.RejectOrderPrice;
 
 import java.util.List;
 
@@ -16,14 +16,14 @@ public interface PriceService {
      * @param reprotPrice
      * @throws Exception
      */
-    public void rejectReportPrice(List<RejectPriceRule> reprotPrice) throws Exception;
+    public void rejectReportPrice(List<RejectOrderPrice> reprotPrice) throws Exception;
 
     /**
      * 接单律师创建报价规则
      * @param reportPrice
      * @throws Exception
      */
-    public void receiveReportPrice(List<ReceivePriceRule> reportPrice) throws Exception;
+    public void receiveReportPrice(List<ReceiveOrderPrice> reportPrice) throws Exception;
 
     /**
      * 甩单律师查询报价规则
@@ -31,7 +31,7 @@ public interface PriceService {
      * @return
      * @throws Exception
      */
-    public List<RejectPriceRule> findRejectReportPrice(Long orderId) throws Exception;
+    public List<RejectOrderPrice> findRejectReportPrice(Long orderId) throws Exception;
 
     /**
      * 接单律师查询报价规则
@@ -40,7 +40,7 @@ public interface PriceService {
      * @return
      * @throws Exception
      */
-    public List<ReceivePriceRule> findReceiveReportPrice(Long lawyerId,Long orderId)throws Exception;
+    public List<ReceiveOrderPrice> findReceiveReportPrice(Long lawyerId,Long orderId)throws Exception;
 
     /**
      * 计算甩/接单律师报价金额
@@ -57,5 +57,5 @@ public interface PriceService {
      * @return
      * @throws Exception
      */
-    public ReportPrice findReportPriceByOrderId(Long orderId) throws Exception;
+    public Price findReportPriceByOrderId(Long orderId) throws Exception;
 }

@@ -285,66 +285,6 @@ public class OrderExample {
             return (Criteria) this;
         }
 
-        public Criteria andQuotePriceTypeIsNull() {
-            addCriterion("quote_price_type is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuotePriceTypeIsNotNull() {
-            addCriterion("quote_price_type is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuotePriceTypeEqualTo(Integer value) {
-            addCriterion("quote_price_type =", value, "quotePriceType");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuotePriceTypeNotEqualTo(Integer value) {
-            addCriterion("quote_price_type <>", value, "quotePriceType");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuotePriceTypeGreaterThan(Integer value) {
-            addCriterion("quote_price_type >", value, "quotePriceType");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuotePriceTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("quote_price_type >=", value, "quotePriceType");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuotePriceTypeLessThan(Integer value) {
-            addCriterion("quote_price_type <", value, "quotePriceType");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuotePriceTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("quote_price_type <=", value, "quotePriceType");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuotePriceTypeIn(List<Integer> values) {
-            addCriterion("quote_price_type in", values, "quotePriceType");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuotePriceTypeNotIn(List<Integer> values) {
-            addCriterion("quote_price_type not in", values, "quotePriceType");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuotePriceTypeBetween(Integer value1, Integer value2) {
-            addCriterion("quote_price_type between", value1, value2, "quotePriceType");
-            return (Criteria) this;
-        }
-
-        public Criteria andQuotePriceTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("quote_price_type not between", value1, value2, "quotePriceType");
-            return (Criteria) this;
-        }
-
         public Criteria andStatusIsNull() {
             addCriterion("status is null");
             return (Criteria) this;
