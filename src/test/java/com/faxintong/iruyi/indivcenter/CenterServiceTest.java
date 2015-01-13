@@ -19,7 +19,7 @@ public class CenterServiceTest extends BaseTest {
         Long lawyerId = 2l;
         try {
             Lawyer lawyer = centerService.findLawyerById(lawyerId);
-
+            System.out.print(lawyer.getId());
         } catch (Exception e) {
             e.printStackTrace();
         }

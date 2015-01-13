@@ -9,8 +9,6 @@ public class Order {
 
     private Long ruleId;
 
-    private Integer quotePriceType;
-
     private Integer status;
 
     private Integer type;
@@ -43,14 +41,6 @@ public class Order {
 
     public void setRuleId(Long ruleId) {
         this.ruleId = ruleId;
-    }
-
-    public Integer getQuotePriceType() {
-        return quotePriceType;
-    }
-
-    public void setQuotePriceType(Integer quotePriceType) {
-        this.quotePriceType = quotePriceType;
     }
 
     public Integer getStatus() {

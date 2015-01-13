@@ -7,13 +7,11 @@ public class Contract {
 
     private String name;
 
-    private Long rejectLayerId;
-
-    private Long receiveLayerId;
-
     private Long orderId;
 
-    private Integer contractType;
+    private Long rejectLawyerId;
+
+    private Long receiveLawyerId;
 
     private Float contractFigure;
 
@@ -41,22 +39,6 @@ public class Contract {
         this.name = name;
     }
 
-    public Long getRejectLayerId() {
-        return rejectLayerId;
-    }
-
-    public void setRejectLayerId(Long rejectLayerId) {
-        this.rejectLayerId = rejectLayerId;
-    }
-
-    public Long getReceiveLayerId() {
-        return receiveLayerId;
-    }
-
-    public void setReceiveLayerId(Long receiveLayerId) {
-        this.receiveLayerId = receiveLayerId;
-    }
-
     public Long getOrderId() {
         return orderId;
     }
@@ -65,12 +47,20 @@ public class Contract {
         this.orderId = orderId;
     }
 
-    public Integer getContractType() {
-        return contractType;
+    public Long getRejectLawyerId() {
+        return rejectLawyerId;
     }
 
-    public void setContractType(Integer contractType) {
-        this.contractType = contractType;
+    public void setRejectLawyerId(Long rejectLawyerId) {
+        this.rejectLawyerId = rejectLawyerId;
+    }
+
+    public Long getReceiveLawyerId() {
+        return receiveLawyerId;
+    }
+
+    public void setReceiveLawyerId(Long receiveLawyerId) {
+        this.receiveLawyerId = receiveLawyerId;
     }
 
     public Float getContractFigure() {
