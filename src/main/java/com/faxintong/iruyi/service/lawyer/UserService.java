@@ -44,4 +44,11 @@ public interface UserService {
      * @return
      */
     public Lawyer getLawyer(String phone);
+
+    /**
+     * 通过id获取律师
+     * @param key
+     * @return
+     */
+    public Lawyer getLawyerByPrimaryKey(Long key);
 }

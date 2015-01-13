@@ -49,5 +49,10 @@ public class UserServiceImpl implements UserService {
         return lawyerList.size() == 1 ? lawyerList.get(0) : null;
     }
 
+    @Override
+    public Lawyer getLawyerByPrimaryKey(Long key) {
+        return lawyerMapper.selectByPrimaryKey(key);
+    }
+
 
 }
