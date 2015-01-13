@@ -12,7 +12,7 @@ import redis.clients.jedis.exceptions.JedisConnectionException;
 import redis.clients.jedis.exceptions.JedisException;
 import redis.clients.util.Pool;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 
 /**
@@ -123,4 +123,33 @@ public class RedisUtils {
         return value;
     } 
 
+    public static void setSerializable(String key, Serializable serializable){
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        try {
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
+            objectOutputStream.writeObject(serializable);
+            getJedis().set(key.getBytes(), byteArrayOutputStream.toByteArray());
+            objectOutputStream.close();
+            byteArrayOutputStream.close();
+        } catch (IOException e) {
+            logger.debug("序列化失败");
+            e.printStackTrace();
+        }
+    }
+
+    public static Object getSerializable(String key){
+        byte[] bytes = getJedis().get(key.getBytes());
+        ByteArrayInputStream bas = new ByteArrayInputStream(bytes);
+        try {
+            ObjectInputStream ois = new ObjectInputStream(bas);
+            Object object = ois.readObject();
+            bas.close();
+            ois.close();
+            return object;
+        } catch (Exception e) {
+            logger.debug("反序列化失败");
+            e.printStackTrace();
+        }
+        return (Object)getJedis().get(key);
+    }
 }

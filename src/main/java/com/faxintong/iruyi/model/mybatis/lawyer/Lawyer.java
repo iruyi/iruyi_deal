@@ -4,9 +4,10 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
+import java.io.Serializable;
 import java.util.Date;
 
-public class Lawyer {
+public class Lawyer implements Serializable{
 
     @Null
     private Long id;
@@ -34,7 +35,7 @@ public class Lawyer {
     private Date updateDate;
 
     @NotBlank
-    private String password;
+    private transient String password;
 
     private String email;
 
