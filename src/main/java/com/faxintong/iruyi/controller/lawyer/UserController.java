@@ -1,13 +1,12 @@
 package com.faxintong.iruyi.controller.lawyer;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
-import com.faxintong.iruyi.service.lawyer.UserService;
+import com.faxintong.iruyi.utils.Config;
 import com.faxintong.iruyi.utils.RedisUtils;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.*;
+import java.io.IOException;
+import java.util.Date;
+import java.util.Map;
 
 import static com.faxintong.iruyi.utils.Constants.*;
 
@@ -24,12 +25,10 @@ import static com.faxintong.iruyi.utils.Constants.*;
  */
 @RestController
 @RequestMapping("user")
-public class UserController {
+public class UserController extends BaseController{
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
-    private UserService userService;
 
     /**
      * 注册
@@ -41,7 +40,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "reg")
-    public Map<String, Object> registor(@Valid Lawyer lawyer, BindingResult bindingResult, String validCode,
+    public Map<String, Object> register(@Valid Lawyer lawyer, BindingResult bindingResult, String validCode,
                                         HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
@@ -85,7 +84,7 @@ public class UserController {
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
         String sessionId = request.getSession().getId();
-            if (RedisUtils.getJedis().exists(sessionId)){
+            if (RedisUtils.getJedis().exists(SESSION_PREFIX+sessionId)){
                 result.put(RESULT, true);
                 return result;
         }
@@ -99,7 +98,7 @@ public class UserController {
                     result.put(ERR_MSG, "帐号密码不匹配");
                 else {
                     Lawyer lawyer = userService.getLawyer(phone);
-                    RedisUtils.setSerializable(sessionId, lawyer);
+                    RedisUtils.set(SESSION_PREFIX+sessionId, "" + lawyer.getId());
                     result.put(RESULT, true);
                 }
             } catch (Exception e) {
@@ -118,7 +117,45 @@ public class UserController {
     @RequestMapping("logout")
     public void logOut(HttpServletRequest request, HttpServletResponse response){
         String sessionId = request.getSession().getId();
-        RedisUtils.getJedis().del(sessionId);
+        RedisUtils.getJedis().del(SESSION_PREFIX + sessionId);
         request.getSession().invalidate();
+    }
+
+    /**
+     * 上传头像
+     * @param request
+     * @param response
+     */
+    @RequestMapping("head/upload")
+    public void headImageUpload(HttpServletRequest request, HttpServletResponse response){
+        String sessionId = request.getSession().getId();
+        String lawyerId = RedisUtils.get(SESSION_PREFIX+sessionId);
+        if(lawyerId != null){
+            try {
+                uploadFile(request, Config.HEAD_DIR + sessionId);
+            } catch (IOException e) {
+                logger.debug(lawyerId + ":上传头像失败");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * 上传执照信息
+     * @param request
+     * @param response
+     */
+    @RequestMapping(value = "certificate/upload")
+    public void jobInfoUpload(HttpServletRequest request, HttpServletResponse response){
+        String sessionId = request.getSession().getId();
+        String lawyerId = RedisUtils.get(SESSION_PREFIX+sessionId);
+        if(lawyerId != null){
+            try {
+                uploadFile(request, Config.HEAD_DIR + sessionId);
+            } catch (IOException e) {
+                logger.debug(lawyerId + ":上传执照信息失败");
+                e.printStackTrace();
+            }
+        }
     }
 }
