@@ -2,6 +2,8 @@ package com.faxintong.iruyi.service.lawyer;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 
+import java.util.List;
+
 /**
  * Created by hehj on 15-1-3.
  */
@@ -51,4 +53,11 @@ public interface UserService {
      * @return
      */
     public Lawyer getLawyerByPrimaryKey(Long key);
+
+    /**
+     *
+     * @param phone
+     * @return
+     */
+    public List<Lawyer> getLawyersByPhone(List<String> phone);
 }
