@@ -23,12 +23,12 @@ public interface UserService {
 
     /**
      * 登录验证
-     * @param loginName
+     * @param phone
      * @param password
      * @return
      * @throws Exception
      */
-    public boolean loginValidate(String loginName, String password) throws Exception;
+    public boolean loginValidate(String phone, String password) throws Exception;
 
     /**
      * 判断手机号是否已经注册
@@ -37,4 +37,11 @@ public interface UserService {
      * @throws Exception
      */
     public boolean containsPhone(String phone) throws Exception;
+
+    /**
+     * 获取律师
+     * @param phone
+     * @return
+     */
+    public Lawyer getLawyer(String phone);
 }

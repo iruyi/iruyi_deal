@@ -7,6 +7,8 @@ import com.faxintong.iruyi.service.lawyer.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by hehj on 15-1-3.
  */
@@ -26,10 +28,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean loginValidate(String loginName, String password) throws Exception {
+    public boolean loginValidate(String phone, String password) throws Exception {
         LawyerExample lawyerExample = new LawyerExample();
-        lawyerExample.createCriteria().andNameEqualTo(loginName).andPasswordEqualTo(password);
-        return lawyerMapper.selectByExample(lawyerExample).size() == 1;
+        lawyerExample.createCriteria().andPhoneEqualTo(phone).andPasswordEqualTo(password);
+        return lawyerMapper.countByExample(lawyerExample) == 1;
     }
 
     @Override
@@ -38,4 +40,14 @@ public class UserServiceImpl implements UserService {
         lawyerExample.createCriteria().andPhoneEqualTo(phone);
         return lawyerMapper.selectByExample(lawyerExample).size() == 1;
     }
+
+    @Override
+    public Lawyer getLawyer(String phone) {
+        LawyerExample lawyerExample = new LawyerExample();
+        lawyerExample.createCriteria().andPhoneEqualTo(phone);
+        List<Lawyer> lawyerList = lawyerMapper.selectByExample(lawyerExample);
+        return lawyerList.size() == 1 ? lawyerList.get(0) : null;
+    }
+
+
 }

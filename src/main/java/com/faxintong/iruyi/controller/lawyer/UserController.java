@@ -2,26 +2,15 @@ package com.faxintong.iruyi.controller.lawyer;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.lawyer.UserService;
-import com.faxintong.iruyi.service.lawyer.impl.UserServiceImpl;
 import com.faxintong.iruyi.utils.RedisUtils;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.velocity.app.VelocityEngine;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import redis.clients.jedis.Jedis;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -86,39 +75,46 @@ public class UserController {
 
     /**
      * 登录
-     * @param loginName
+     * @param phone
      * @param password
      * @param response
      * @return
      */
     @RequestMapping("login")
-    public Map<String, Object> login(String loginName, String password, HttpServletRequest request, HttpServletResponse response){
+    public Map<String, Object> login(String phone, String password, HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
-        if(StringUtils.isEmpty(loginName)) {
+        String sessionId = request.getSession().getId();
+            if (RedisUtils.getJedis().exists(sessionId)){
+                result.put(RESULT, true);
+                return result;
+        }
+        if(StringUtils.isEmpty(phone)) {
             result.put(ERR_MSG, "帐号不能为空");
-            return result;
         }else if(StringUtils.isEmpty(password)){
             result.put(ERR_MSG, "密码不能为空");
-            return result;
-        }
-        try {
-            if (!userService.loginValidate(loginName, password))
-                result.put(ERR_MSG, "帐号密码不匹配");
-            else{
-                String sessionId = request.getSession().getId();
-                Lawyer lawyer = new Lawyer();
-                lawyer.setName("bigwater");
-                RedisUtils.getJedis().set(sessionId, loginName);
-                result.put(RESULT, true);
+        }else {
+            try {
+                if (!userService.loginValidate(phone, password))
+                    result.put(ERR_MSG, "帐号密码不匹配");
+                else {
+                    Lawyer lawyer = userService.getLawyer(phone);
+                    RedisUtils.setSerializable(sessionId, lawyer);
+                    result.put(RESULT, true);
+                }
+            } catch (Exception e) {
+                logger.error("登陆出错");
+                logger.error(e.getMessage());
             }
-        } catch (Exception e) {
-            logger.error("登陆出错");
-            logger.error(e.getMessage());
         }
         return result;
     }
 
+    /**
+     * 退出登录
+     * @param request
+     * @param response
+     */
     @RequestMapping("logout")
     public void logOut(HttpServletRequest request, HttpServletResponse response){
         String sessionId = request.getSession().getId();
