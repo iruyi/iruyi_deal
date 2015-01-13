@@ -107,6 +107,8 @@ public class UserController {
                 result.put(ERR_MSG, "帐号密码不匹配");
             else{
                 String sessionId = request.getSession().getId();
+                Lawyer lawyer = new Lawyer();
+                lawyer.setName("bigwater");
                 RedisUtils.getJedis().set(sessionId, loginName);
                 result.put(RESULT, true);
             }
@@ -115,5 +117,12 @@ public class UserController {
             logger.error(e.getMessage());
         }
         return result;
+    }
+
+    @RequestMapping("logout")
+    public void logOut(HttpServletRequest request, HttpServletResponse response){
+        String sessionId = request.getSession().getId();
+        RedisUtils.getJedis().del(sessionId);
+        request.getSession().invalidate();
     }
 }
