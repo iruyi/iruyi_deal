@@ -54,5 +54,12 @@ public class UserServiceImpl implements UserService {
         return lawyerMapper.selectByPrimaryKey(key);
     }
 
+    @Override
+    public List<Lawyer> getLawyersByPhone(List<String> phones) {
+        LawyerExample lawyerExample = new LawyerExample();
+        lawyerExample.createCriteria().andPhoneIn(phones);
+        return lawyerMapper.selectByExample(lawyerExample);
+    }
+
 
 }
