@@ -61,5 +61,10 @@ public class UserServiceImpl implements UserService {
         return lawyerMapper.selectByExample(lawyerExample);
     }
 
+    @Override
+    public void updateLawyerInfo(Lawyer lawyer) {
+        lawyerMapper.updateByPrimaryKey(lawyer);
+    }
+
 
 }

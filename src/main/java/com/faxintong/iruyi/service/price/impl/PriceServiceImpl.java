@@ -1,9 +1,11 @@
 package com.faxintong.iruyi.service.price.impl;
 
-import com.faxintong.iruyi.model.mybatis.price.Price;
-import com.faxintong.iruyi.model.mybatis.price.ReceiveOrderPrice;
-import com.faxintong.iruyi.model.mybatis.price.RejectOrderPrice;
+import com.faxintong.iruyi.dao.mybatis.price.ReceiveOrderPriceMapper;
+import com.faxintong.iruyi.dao.mybatis.price.RejectOrderPriceMapper;
+import com.faxintong.iruyi.model.mybatis.order.ReceiveOrderExample;
+import com.faxintong.iruyi.model.mybatis.price.*;
 import com.faxintong.iruyi.service.price.PriceService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,24 +15,38 @@ import java.util.List;
  */
 @Service
 public class PriceServiceImpl implements PriceService {
-    @Override
-    public void rejectReportPrice(List<RejectOrderPrice> reprotPrice) throws Exception {
 
+    @Autowired
+    private RejectOrderPriceMapper rejectOrderPriceMapper;
+    @Autowired
+    private ReceiveOrderPriceMapper receiveOrderPriceMapper;
+
+    @Override
+    public void rejectReportPrice(List<RejectOrderPrice> reportPrice) throws Exception {
+        for(RejectOrderPrice r: reportPrice){
+            rejectOrderPriceMapper.insertSelective(r);
+        }
     }
 
     @Override
     public void receiveReportPrice(List<ReceiveOrderPrice> reportPrice) throws Exception {
-
+        for(ReceiveOrderPrice r: reportPrice){
+            receiveOrderPriceMapper.insertSelective(r);
+        }
     }
 
     @Override
     public List<RejectOrderPrice> findRejectReportPrice(Long orderId) throws Exception {
-        return null;
+        RejectOrderPriceExample rejectOrderPriceExample = new RejectOrderPriceExample();
+        rejectOrderPriceExample.createCriteria().andIdEqualTo(orderId);
+        return rejectOrderPriceMapper.selectByExample(rejectOrderPriceExample);
     }
 
     @Override
     public List<ReceiveOrderPrice> findReceiveReportPrice(Long lawyerId, Long orderId) throws Exception {
-        return null;
+        ReceiveOrderPriceExample receiveOrderPriceExample = new ReceiveOrderPriceExample();
+        receiveOrderPriceExample.createCriteria().andLawyerIdEqualTo(lawyerId).andOrderIdEqualTo(orderId);
+        return receiveOrderPriceMapper.selectByExample(receiveOrderPriceExample);
     }
 
     @Override
