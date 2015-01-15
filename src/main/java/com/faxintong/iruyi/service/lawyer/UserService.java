@@ -60,4 +60,9 @@ public interface UserService {
      * @return
      */
     public List<Lawyer> getLawyersByPhone(List<String> phone);
+
+    /**
+     *
+     */
+    public void updateLawyerInfo(Lawyer lawyer);
 }
