@@ -13,10 +13,10 @@ public interface PriceService {
 
     /**
      * 甩单律师创建报价规则
-     * @param reprotPrice
+     * @param reportPrice
      * @throws Exception
      */
-    public void rejectReportPrice(List<RejectOrderPrice> reprotPrice) throws Exception;
+    public void rejectReportPrice(List<RejectOrderPrice> reportPrice) throws Exception;
 
     /**
      * 接单律师创建报价规则
