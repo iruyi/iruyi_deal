@@ -3,6 +3,7 @@
 <mapper namespace="com.faxintong.iruyi.dao.mybatis.order.OrderMapper" >
   <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.order.Order" >
     <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
     <result column="lawyer_id" property="lawyerId" jdbcType="BIGINT" />
     <result column="rule_id" property="ruleId" jdbcType="BIGINT" />
     <result column="status" property="status" jdbcType="TINYINT" />
@@ -10,6 +11,9 @@
     <result column="is_delay" property="isDelay" jdbcType="TINYINT" />
     <result column="end_flag" property="endFlag" jdbcType="TINYINT" />
     <result column="deadline_date" property="deadlineDate" jdbcType="TIMESTAMP" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -70,7 +74,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, lawyer_id, rule_id, status, type, is_delay, end_flag, deadline_date
+    id, title, lawyer_id, rule_id, status, type, is_delay, end_flag, deadline_date, description, 
+    create_date, update_date
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderExample" >
     select
@@ -103,18 +108,25 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.order.Order" >
-    insert into order (id, lawyer_id, rule_id, 
-      status, type, is_delay, 
-      end_flag, deadline_date)
-    values (#{id,jdbcType=BIGINT}, #{lawyerId,jdbcType=BIGINT}, #{ruleId,jdbcType=BIGINT}, 
-      #{status,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, #{isDelay,jdbcType=TINYINT}, 
-      #{endFlag,jdbcType=TINYINT}, #{deadlineDate,jdbcType=TIMESTAMP})
+    insert into order (id, title, lawyer_id, 
+      rule_id, status, type, 
+      is_delay, end_flag, deadline_date, 
+      description, create_date, update_date
+      )
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{lawyerId,jdbcType=BIGINT}, 
+      #{ruleId,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, 
+      #{isDelay,jdbcType=TINYINT}, #{endFlag,jdbcType=TINYINT}, #{deadlineDate,jdbcType=TIMESTAMP}, 
+      #{description,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.order.Order" >
     insert into order
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
+      </if>
+      <if test="title != null" >
+        title,
       </if>
       <if test="lawyerId != null" >
         lawyer_id,
@@ -137,10 +149,22 @@
       <if test="deadlineDate != null" >
         deadline_date,
       </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
       </if>
       <if test="lawyerId != null" >
         #{lawyerId,jdbcType=BIGINT},
@@ -163,6 +187,15 @@
       <if test="deadlineDate != null" >
         #{deadlineDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderExample" resultType="java.lang.Integer" >
@@ -176,6 +209,9 @@
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=VARCHAR},
       </if>
       <if test="record.lawyerId != null" >
         lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
@@ -198,6 +234,15 @@
       <if test="record.deadlineDate != null" >
         deadline_date = #{record.deadlineDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.description != null" >
+        description = #{record.description,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -206,13 +251,17 @@
   <update id="updateByExample" parameterType="map" >
     update order
     set id = #{record.id,jdbcType=BIGINT},
+      title = #{record.title,jdbcType=VARCHAR},
       lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
       rule_id = #{record.ruleId,jdbcType=BIGINT},
       status = #{record.status,jdbcType=TINYINT},
       type = #{record.type,jdbcType=TINYINT},
       is_delay = #{record.isDelay,jdbcType=TINYINT},
       end_flag = #{record.endFlag,jdbcType=TINYINT},
-      deadline_date = #{record.deadlineDate,jdbcType=TIMESTAMP}
+      deadline_date = #{record.deadlineDate,jdbcType=TIMESTAMP},
+      description = #{record.description,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -220,6 +269,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.order.Order" >
     update order
     <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
       <if test="lawyerId != null" >
         lawyer_id = #{lawyerId,jdbcType=BIGINT},
       </if>
@@ -241,18 +293,31 @@
       <if test="deadlineDate != null" >
         deadline_date = #{deadlineDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.order.Order" >
     update order
-    set lawyer_id = #{lawyerId,jdbcType=BIGINT},
+    set title = #{title,jdbcType=VARCHAR},
+      lawyer_id = #{lawyerId,jdbcType=BIGINT},
       rule_id = #{ruleId,jdbcType=BIGINT},
       status = #{status,jdbcType=TINYINT},
       type = #{type,jdbcType=TINYINT},
       is_delay = #{isDelay,jdbcType=TINYINT},
       end_flag = #{endFlag,jdbcType=TINYINT},
-      deadline_date = #{deadlineDate,jdbcType=TIMESTAMP}
+      deadline_date = #{deadlineDate,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

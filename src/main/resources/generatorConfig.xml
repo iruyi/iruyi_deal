@@ -30,20 +30,20 @@
         </javaTypeResolver>
 
         <!-- generate Model -->
-        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.price"
+        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.order"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!-- generate xml -->
-        <sqlMapGenerator targetPackage="mybatis.price"
+        <sqlMapGenerator targetPackage="mybatis.order"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- generate Mapper -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.price"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.order"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -127,8 +127,9 @@
             <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
         </table>-->
 
-        <!--<table tableName="order" domainObjectName="Order">
+        <table tableName="order" domainObjectName="Order">
             <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="title" javaType="String" ></columnOverride>
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
             <columnOverride column="rule_id" javaType="Long" ></columnOverride>
             <columnOverride column="status" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
@@ -136,7 +137,10 @@
             <columnOverride column="is_delay" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
             <columnOverride column="end_flag" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
             <columnOverride column="deadline_date" javaType="java.util.Date" ></columnOverride>
-        </table>-->
+            <columnOverride column="description" javaType="String" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+            <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
+        </table>
 
         <!--<table tableName="order" domainObjectName="Order">
             <columnOverride column="id" javaType="Long" ></columnOverride>

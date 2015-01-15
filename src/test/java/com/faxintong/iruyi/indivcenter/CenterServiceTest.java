@@ -16,7 +16,7 @@ public class CenterServiceTest extends BaseTest {
 
     @Test
     public void testFindLawyerById(){
-        Long lawyerId = 2l;
+        Long lawyerId = 5l;
         try {
             Lawyer lawyer = centerService.findLawyerById(lawyerId);
             System.out.print(lawyer.getId());
