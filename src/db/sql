@@ -1,0 +1,496 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : iruyi
+Source Server Version : 50621
+Source Host           : 192.168.1.118:3306
+Source Database       : iruyi
+
+Target Server Type    : MYSQL
+Target Server Version : 50621
+File Encoding         : 65001
+
+Date: 2015-01-15 16:37:52
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `blacklist`
+-- ----------------------------
+DROP TABLE IF EXISTS `blacklist`;
+CREATE TABLE `blacklist` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(18) DEFAULT NULL,
+  `lawyer_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of blacklist
+-- ----------------------------
+INSERT INTO `blacklist` VALUES ('1', '2', '4');
+
+-- ----------------------------
+-- Table structure for `city`
+-- ----------------------------
+DROP TABLE IF EXISTS `city`;
+CREATE TABLE `city` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `parent_id` bigint(18) DEFAULT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `status` tinyint(2) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  `update_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of city
+-- ----------------------------
+INSERT INTO `city` VALUES ('1', '0', '北京', '1', null, null);
+
+-- ----------------------------
+-- Table structure for `comment`
+-- ----------------------------
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(18) DEFAULT NULL,
+  `lawyer_id` bigint(18) DEFAULT NULL,
+  `type` tinyint(2) DEFAULT NULL,
+  `comment` varchar(200) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of comment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `contract`
+-- ----------------------------
+DROP TABLE IF EXISTS `contract`;
+CREATE TABLE `contract` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) DEFAULT NULL,
+  `order_id` bigint(18) DEFAULT NULL,
+  `reject_lawyer_id` bigint(18) DEFAULT NULL,
+  `receive_lawyer_id` bigint(18) DEFAULT NULL,
+  `contract_figure` float(18,6) DEFAULT NULL,
+  `status` tinyint(2) DEFAULT NULL,
+  `contract_url` varchar(100) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of contract
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `lawyer`
+-- ----------------------------
+DROP TABLE IF EXISTS `lawyer`;
+CREATE TABLE `lawyer` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL,
+  `password` varchar(18) DEFAULT NULL,
+  `email` varchar(20) DEFAULT NULL,
+  `status` tinyint(3) DEFAULT NULL,
+  `sex` tinyint(2) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `city_id` bigint(18) DEFAULT NULL,
+  `city_name` varchar(20) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `rule_id` bigint(18) DEFAULT NULL,
+  `age` tinyint(3) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `photo` varchar(50) DEFAULT NULL,
+  `law_office` varchar(50) DEFAULT NULL,
+  `business_license` varchar(50) DEFAULT NULL,
+  `introduction` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lawyer
+-- ----------------------------
+INSERT INTO `lawyer` VALUES ('5', 'bigwater', '123456', null, null, null, null, '1', null, '15216666666', null, null, '2015-01-13 13:29:57', '2015-01-13 13:29:57', null, null, null, null);
+
+-- ----------------------------
+-- Table structure for `lawyer_category`
+-- ----------------------------
+DROP TABLE IF EXISTS `lawyer_category`;
+CREATE TABLE `lawyer_category` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `code` varchar(15) DEFAULT NULL,
+  `parent_id` bigint(18) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lawyer_category
+-- ----------------------------
+INSERT INTO `lawyer_category` VALUES ('1', '离婚', 'divorce', null);
+INSERT INTO `lawyer_category` VALUES ('2', '房产', 'house', null);
+
+-- ----------------------------
+-- Table structure for `lawyer_category_rela`
+-- ----------------------------
+DROP TABLE IF EXISTS `lawyer_category_rela`;
+CREATE TABLE `lawyer_category_rela` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `lawyer_id` bigint(18) DEFAULT NULL,
+  `category_id` bigint(18) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lawyer_category_rela
+-- ----------------------------
+INSERT INTO `lawyer_category_rela` VALUES ('1', '5', '1');
+INSERT INTO `lawyer_category_rela` VALUES ('2', '5', '2');
+
+-- ----------------------------
+-- Table structure for `lawyer_skill`
+-- ----------------------------
+DROP TABLE IF EXISTS `lawyer_skill`;
+CREATE TABLE `lawyer_skill` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `lawyer_id` bigint(18) DEFAULT NULL,
+  `skill_id` bigint(18) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of lawyer_skill
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `layer_friend`
+-- ----------------------------
+DROP TABLE IF EXISTS `layer_friend`;
+CREATE TABLE `layer_friend` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `layer_id` bigint(18) DEFAULT NULL,
+  `friend_id` bigint(18) DEFAULT NULL,
+  `status` tinyint(2) DEFAULT NULL,
+  `add_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of layer_friend
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `modify_lawyer`
+-- ----------------------------
+DROP TABLE IF EXISTS `modify_lawyer`;
+CREATE TABLE `modify_lawyer` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) DEFAULT NULL,
+  `sex` tinyint(2) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `city_id` bigint(18) DEFAULT NULL,
+  `city_name` varchar(20) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `rule_id` bigint(18) DEFAULT NULL,
+  `age` int(3) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  `version` int(3) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of modify_lawyer
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `order`
+-- ----------------------------
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `title` varchar(50) DEFAULT NULL,
+  `lawyer_id` bigint(18) DEFAULT NULL,
+  `rule_id` bigint(18) DEFAULT NULL,
+  `status` tinyint(3) DEFAULT NULL,
+  `type` tinyint(2) DEFAULT NULL,
+  `is_delay` tinyint(2) DEFAULT NULL,
+  `end_flag` tinyint(2) DEFAULT NULL,
+  `deadline_date` datetime DEFAULT NULL,
+  `description` varchar(1000) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of order
+-- ----------------------------
+INSERT INTO `order` VALUES ('1', '一个关于西藏的离婚官司', '1', '1', '2', '1', '1', '1', '2015-01-30 11:49:49', '一个关于西藏的离婚官司', '2015-01-15 11:50:25', null);
+INSERT INTO `order` VALUES ('2', '一个关于北京的房产官司', '2', '1', '1', '2', '1', '1', '2015-01-31 11:49:57', '一个关于北京的房产官司', '2015-01-15 11:50:30', null);
+
+-- ----------------------------
+-- Table structure for `order_rule`
+-- ----------------------------
+DROP TABLE IF EXISTS `order_rule`;
+CREATE TABLE `order_rule` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `rule_name` varchar(30) DEFAULT NULL,
+  `city_id` bigint(18) DEFAULT NULL,
+  `category_id` bigint(18) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of order_rule
+-- ----------------------------
+INSERT INTO `order_rule` VALUES ('1', '房产产权', '1', '2', null, null);
+
+-- ----------------------------
+-- Table structure for `paper`
+-- ----------------------------
+DROP TABLE IF EXISTS `paper`;
+CREATE TABLE `paper` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `lawyer_id` bigint(18) DEFAULT NULL,
+  `title` varchar(20) DEFAULT NULL,
+  `paper_content` blob,
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of paper
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `paper_comment`
+-- ----------------------------
+DROP TABLE IF EXISTS `paper_comment`;
+CREATE TABLE `paper_comment` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `paper_id` bigint(18) DEFAULT NULL,
+  `lawyer_id` bigint(18) DEFAULT NULL,
+  `comment` varchar(500) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of paper_comment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `paper_praise`
+-- ----------------------------
+DROP TABLE IF EXISTS `paper_praise`;
+CREATE TABLE `paper_praise` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `paper_id` bigint(18) DEFAULT NULL,
+  `lawyer_id` bigint(18) DEFAULT NULL,
+  `lawyer_name` varchar(20) DEFAULT NULL,
+  `create_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of paper_praise
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `payment_mode`
+-- ----------------------------
+DROP TABLE IF EXISTS `payment_mode`;
+CREATE TABLE `payment_mode` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `price_id` bigint(18) DEFAULT NULL,
+  `period_num` int(11) DEFAULT NULL,
+  `figure` float(18,6) DEFAULT NULL,
+  `pay_date` datetime DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of payment_mode
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `payment_record`
+-- ----------------------------
+DROP TABLE IF EXISTS `payment_record`;
+CREATE TABLE `payment_record` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(18) DEFAULT NULL,
+  `pay_lawyer_id` bigint(18) DEFAULT NULL,
+  `receive_lawyer_id` bigint(18) DEFAULT NULL,
+  `figure` float(18,6) DEFAULT NULL,
+  `pay_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of payment_record
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `price`
+-- ----------------------------
+DROP TABLE IF EXISTS `price`;
+CREATE TABLE `price` (
+  `id` bigint(18) NOT NULL,
+  `order_id` bigint(18) DEFAULT NULL,
+  `lawyer_id` bigint(18) DEFAULT NULL,
+  `lawyer_type` tinyint(2) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `pay_style` tinyint(2) DEFAULT NULL,
+  `status` tinyint(2) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of price
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `receive_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `receive_order`;
+CREATE TABLE `receive_order` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(18) DEFAULT NULL,
+  `lawyer_id` bigint(18) DEFAULT NULL,
+  `status` tinyint(3) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  `update_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of receive_order
+-- ----------------------------
+INSERT INTO `receive_order` VALUES ('1', '2', '3', '1', null, null);
+
+-- ----------------------------
+-- Table structure for `receive_order_price`
+-- ----------------------------
+DROP TABLE IF EXISTS `receive_order_price`;
+CREATE TABLE `receive_order_price` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(18) DEFAULT NULL,
+  `lawyer_id` bigint(18) DEFAULT NULL,
+  `fixed_figure` float(18,6) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of receive_order_price
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `receiver_price`
+-- ----------------------------
+DROP TABLE IF EXISTS `receiver_price`;
+CREATE TABLE `receiver_price` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `lawyer_id` bigint(18) DEFAULT NULL,
+  `fixed_figure` float(18,6) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of receiver_price
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `reject_order_price`
+-- ----------------------------
+DROP TABLE IF EXISTS `reject_order_price`;
+CREATE TABLE `reject_order_price` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(18) DEFAULT NULL,
+  `start_price` float(18,6) DEFAULT NULL,
+  `end_price` float(18,6) DEFAULT NULL,
+  `percent_figure` float(18,6) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of reject_order_price
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rejecter_price`
+-- ----------------------------
+DROP TABLE IF EXISTS `rejecter_price`;
+CREATE TABLE `rejecter_price` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `lawyer_id` bigint(18) DEFAULT NULL,
+  `start_price` float(18,6) DEFAULT NULL,
+  `end_price` float(18,6) DEFAULT NULL,
+  `percent_figure` float(18,6) DEFAULT NULL,
+  `create_date` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rejecter_price
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `skill`
+-- ----------------------------
+DROP TABLE IF EXISTS `skill`;
+CREATE TABLE `skill` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `code` varchar(20) DEFAULT NULL,
+  `description` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of skill
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `true`
+-- ----------------------------
+DROP TABLE IF EXISTS `true`;
+CREATE TABLE `true` (
+  `a` char(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of true
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `whitelist`
+-- ----------------------------
+DROP TABLE IF EXISTS `whitelist`;
+CREATE TABLE `whitelist` (
+  `id` bigint(18) NOT NULL AUTO_INCREMENT,
+  `order_id` bigint(18) DEFAULT NULL,
+  `lawyer_id` bigint(18) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of whitelist
+-- ----------------------------
