@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.controller.lawyer;
 
+import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.utils.Config;
 import com.faxintong.iruyi.utils.RedisUtils;
@@ -25,7 +26,7 @@ import static com.faxintong.iruyi.utils.Constants.*;
  */
 @RestController
 @RequestMapping("user")
-public class UserController extends BaseController{
+public class UserController extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 

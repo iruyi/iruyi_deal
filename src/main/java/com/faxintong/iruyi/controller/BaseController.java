@@ -1,4 +1,4 @@
-package com.faxintong.iruyi.controller.lawyer;
+package com.faxintong.iruyi.controller;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.lawyer.UserService;

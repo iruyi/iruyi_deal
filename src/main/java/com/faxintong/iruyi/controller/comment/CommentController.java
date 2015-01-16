@@ -6,6 +6,8 @@ import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,12 +18,14 @@ import static com.faxintong.iruyi.utils.Constants.*;
 /**
  * Created by ron on 2015/1/14.
  */
+@RestController(value = "comment")
 public class CommentController {
 
     private static final Logger logger = LoggerFactory.getLogger(CommentController.class);
     @Autowired
     private CommentService commentService;
 
+    @RequestMapping(value = "report")
     public Map<String, Object> reportComment(@Valid Comment comment,
                                              HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
@@ -36,6 +40,7 @@ public class CommentController {
         return result;
     }
 
+    @RequestMapping(value = "find")
     public Map<String, Object> findOrderComment(Long orderId,HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
