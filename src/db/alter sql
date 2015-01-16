@@ -1,0 +1,1 @@
+alter TABLE `order` add COLUMN roster_type tinyint(3) DEFAULT 0
