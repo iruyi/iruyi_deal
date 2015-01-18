@@ -1,4 +1,4 @@
-package com.faxintong.iruyi.controller.lawyer;
+package com.faxintong.iruyi.controller;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.lawyer.UserService;
@@ -28,7 +28,8 @@ public class BaseController {
      * @param filePath 需要.以前的绝对路径
      * @throws IOException
      */
-    protected void uploadFile(HttpServletRequest request, String filePath) throws IOException {
+    protected String uploadFile(HttpServletRequest request, String filePath) throws IOException {
+        String fileName = null;
         CommonsMultipartResolver cmr =  new CommonsMultipartResolver(request.getSession().getServletContext());
 
         if(cmr.isMultipart(request)){
@@ -38,13 +39,14 @@ public class BaseController {
             while(iterator.hasNext()){
                 MultipartFile mf = mhr.getFile(iterator.next());
                 if(mf != null){
-                    String fileName = mhr.getLocalName();
+                    fileName = mhr.getLocalName();
                     String ext = fileName.substring(fileName.lastIndexOf("."));
                     File file = new File(filePath + fileName);
                     mf.transferTo(file);
                 }
             }
         }
+        return filePath + fileName;
     }
 
     /**

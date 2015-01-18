@@ -1,6 +1,6 @@
 package com.faxintong.iruyi.controller.friendcircle;
 
-import com.faxintong.iruyi.controller.lawyer.BaseController;
+import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.friendcircle.Paper;
 import com.faxintong.iruyi.service.friendcircle.PaperService;
 import com.google.common.collect.Maps;

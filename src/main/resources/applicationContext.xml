@@ -88,7 +88,7 @@
         </bean>
 
     </beans>
-
+    
     <beans profile="LOCAL">
         <context:property-placeholder ignore-resource-not-found="true" />
         <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
@@ -107,6 +107,6 @@
             <property name="maxStatements" value="0"/>
             <property name="testConnectionOnCheckout" value="true"/>
         </bean>
-
     </beans>
+    
 </beans>
