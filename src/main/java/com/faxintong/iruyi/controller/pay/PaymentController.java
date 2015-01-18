@@ -13,7 +13,8 @@ import static com.faxintong.iruyi.utils.Constants.*;
 /**
  * Created by ron on 2015/1/14.
  */
-@RestController(value = "pay")
+@RestController
+@RequestMapping("pay")
 public class PaymentController {
     private static final Logger logger = LoggerFactory.getLogger(PaymentController.class);
 

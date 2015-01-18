@@ -21,7 +21,7 @@ import static com.faxintong.iruyi.utils.Constants.*;
  * Created by ron on 2015/1/12.
  */
 @RestController
-@RequestMapping(value = "paper")
+@RequestMapping("paper")
 public class PaperController extends BaseController{
 
     private static final Logger logger = LoggerFactory.getLogger(PaperController.class);

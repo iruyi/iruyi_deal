@@ -20,7 +20,7 @@ import static com.faxintong.iruyi.utils.Constants.*;
  * Created by ron on 2015/1/12.
  */
 @RestController
-@RequestMapping(value = "friend")
+@RequestMapping("friend")
 public class LawyerFriendController {
 
     private static final Logger logger = LoggerFactory.getLogger(LawyerFriendController.class);
