@@ -20,6 +20,8 @@ public interface FriendsService {
 
     /**
      * 添加搜索出的好友
+     * 1. 黑名单为你
+     * 2. 重复添加问题
      * @param lawyerId
      * @throws Exception
      */

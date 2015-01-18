@@ -44,6 +44,7 @@ public class FriendsServiceImpl implements FriendsService {
     public void addSearchFriends(Long lawyerId, Long friendId) throws Exception {
         LawyerFriendExample lawyerFriendExample = new LawyerFriendExample();
         lawyerFriendExample.createCriteria().andLayerIdEqualTo(lawyerId).andFriendIdEqualTo(friendId);
+
         if(lawyerFriendMapper.selectByExample(lawyerFriendExample).size() != 0) {
             logger.info(lawyerId + "" + friendId + "添加失败, 重复添加");
             return;
@@ -60,7 +61,7 @@ public class FriendsServiceImpl implements FriendsService {
     public void friendConfirm(Long id) throws Exception {
         LawyerFriend lawyerFriend = lawyerFriendMapper.selectByPrimaryKey(id);
         if(lawyerFriend == null){
-            logger.debug("确认出错,不存在的关系");
+            logger.debug("确认出错, 不存在的关系");
             return;
         }
         lawyerFriend.setStatus(1);

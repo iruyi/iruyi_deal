@@ -5,4 +5,5 @@ package com.faxintong.iruyi.utils;
  */
 public class Config {
     public static final String HEAD_DIR = "D:\\head\\images";
+    public static final String CERTIFICATE_INFO = "D:\\certificate\\images";
 }

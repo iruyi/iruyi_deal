@@ -47,14 +47,17 @@ public class UserController extends BaseController {
         result.put(RESULT, false);
         try {
             if(bindingResult.hasErrors()){
-                logger.info(bindingResult.getFieldError().getDefaultMessage());
                 result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
             }else{
                 String code = request.getParameter("code");
-                if (!code.equals(validCode))
+                if (!code.equals(validCode)) {
                     result.put(ERR_MSG, "验证码填写错误");
-                else if (userService.containsPhone(lawyer.getPhone()))
-                    result.put(ERR_MSG ,"该手机号已经注册");
+                }
+                else if (userService.containsPhone(lawyer.getPhone())) {
+                    result.put(ERR_MSG, "该手机号已经注册");
+                }else if (!userService.regisValidate(lawyer.getPhone())){
+                    result.put(ERR_MSG, "该手机号格式错误");
+                }
                 else {
                     Date date = new Date();
                     lawyer.setCreateDate(date);
@@ -64,8 +67,7 @@ public class UserController extends BaseController {
                 }
             }
         }catch (Exception e){
-            logger.error("注册失败");
-            logger.error(e.getMessage());
+            logger.error("注册失败:" + e.getMessage());
             result.put(ERR_MSG, "注册出错!");
         }
 
@@ -133,7 +135,10 @@ public class UserController extends BaseController {
         String lawyerId = RedisUtils.get(SESSION_PREFIX+sessionId);
         if(lawyerId != null){
             try {
-                uploadFile(request, Config.HEAD_DIR + sessionId);
+                String fileName = uploadFile(request, Config.HEAD_DIR + sessionId);
+                Lawyer lawyer = getLawyer(request);
+                lawyer.setPhoto(fileName);
+                userService.updateLawyerInfo(lawyer);
             } catch (IOException e) {
                 logger.debug(lawyerId + ":上传头像失败");
                 e.printStackTrace();
@@ -152,7 +157,10 @@ public class UserController extends BaseController {
         String lawyerId = RedisUtils.get(SESSION_PREFIX+sessionId);
         if(lawyerId != null){
             try {
-                uploadFile(request, Config.HEAD_DIR + sessionId);
+                String fileName =  uploadFile(request, Config.CERTIFICATE_INFO + sessionId);
+                Lawyer lawyer = getLawyer(request);
+                lawyer.setBusinessLicense(fileName);
+                userService.updateLawyerInfo(lawyer);
             } catch (IOException e) {
                 logger.debug(lawyerId + ":上传执照信息失败");
                 e.printStackTrace();

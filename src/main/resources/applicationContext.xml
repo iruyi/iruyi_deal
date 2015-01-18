@@ -89,4 +89,25 @@
 
     </beans>
 
+    <beans profile="LOCAL">
+        <context:property-placeholder ignore-resource-not-found="true" />
+        <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+            <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+            <property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/iruyi?useUnicode=true"/>
+            <property name="user" value="root"/>
+            <property name="password" value="123456"/>
+            <property name="testConnectionOnCheckin" value="true"/>
+            <property name="automaticTestTable" value="true"/>
+            <property name="checkoutTimeout" value="3000"/>
+            <property name="idleConnectionTestPeriod" value="30"/>
+            <property name="initialPoolSize" value="10"/>
+            <property name="maxIdleTime" value="30"/>
+            <property name="maxPoolSize" value="25"/>
+            <property name="minPoolSize" value="10"/>
+            <property name="maxStatements" value="0"/>
+            <property name="testConnectionOnCheckout" value="true"/>
+        </bean>
+
+    </beans>
+
 </beans>

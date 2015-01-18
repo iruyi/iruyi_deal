@@ -1,13 +1,19 @@
 package com.faxintong.iruyi.model.mybatis.lawyer;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.Null;
 import java.io.Serializable;
 import java.util.Date;
 
 public class Lawyer implements Serializable{
+    @Null
     private Long id;
 
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String password;
 
     private String email;
@@ -22,6 +28,7 @@ public class Lawyer implements Serializable{
 
     private String cityName;
 
+    @NotBlank
     private String phone;
 
     private Long ruleId;
