@@ -10,15 +10,15 @@ import java.util.List;
 public interface ReceiveService {
 
     /**
-     * 查询可接单子
+     * 查询可接单子（状态：竞标中）
      * @param lawyerId
      * @return
      * @throws Exception
      */
-    public List<Order> findAvailableOrders(Long lawyerId) throws Exception;
+    public List<Order> findAvailReceiveOrders(Long lawyerId) throws Exception;
 
     /**
-     * 查询已接但还未审核单子
+     * 查询已接但还未审核单子(状态：待审核)
      * @param lawyerId
      * @return
      * @throws Exception
@@ -47,15 +47,15 @@ public interface ReceiveService {
      * @param orderId
      * @throws Exception
      */
-    public void confirmOrder(Long lawyerId,Long orderId) throws Exception;
+    public void confirmOrder(Long orderId, Long lawyerId) throws Exception;
 
     /**
-     * 接单人再确认单子时撤销单子
+     * 接单人在确认单子时撤销单子（放弃接单）
      * @param lawyerId
      * @param orderId
      * @throws Exception
      */
-    public void revokeOrder(Long lawyerId,Long orderId) throws Exception;
+    public void revokeOrder(Long orderId, Long lawyerId) throws Exception;
 
     /**
      * 接单人接单成功后作废单子
@@ -63,7 +63,6 @@ public interface ReceiveService {
      * @param orderId
      * @throws Exception
      */
-    public void invalidOrder(Long lawyerId,Long orderId) throws Exception;
-
+    public void cancelOrder(Long orderId, Long lawyerId) throws Exception;
 
 }

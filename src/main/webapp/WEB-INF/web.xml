@@ -16,7 +16,7 @@
         <param-name>spring.profiles.default</param-name>
         <!-- 非生产环境配置 -->
         <!-- <param-name>spring.profiles.active</param-name> -->
-        <param-value>TEST</param-value>
+        <param-value>LOCAL</param-value>
     </context-param>
 
     <listener>
