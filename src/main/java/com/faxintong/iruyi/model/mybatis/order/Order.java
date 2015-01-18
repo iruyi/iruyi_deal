@@ -27,6 +27,8 @@ public class Order {
 
     private Date updateDate;
 
+    private Integer rosterType;
+
     public Long getId() {
         return id;
     }
@@ -121,5 +123,13 @@ public class Order {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public Integer getRosterType() {
+        return rosterType;
+    }
+
+    public void setRosterType(Integer rosterType) {
+        this.rosterType = rosterType;
     }
 }

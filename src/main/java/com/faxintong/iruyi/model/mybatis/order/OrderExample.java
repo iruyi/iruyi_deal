@@ -844,6 +844,66 @@ public class OrderExample {
             addCriterion("update_date not between", value1, value2, "updateDate");
             return (Criteria) this;
         }
+
+        public Criteria andRosterTypeIsNull() {
+            addCriterion("roster_type is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRosterTypeIsNotNull() {
+            addCriterion("roster_type is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRosterTypeEqualTo(Integer value) {
+            addCriterion("roster_type =", value, "rosterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRosterTypeNotEqualTo(Integer value) {
+            addCriterion("roster_type <>", value, "rosterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRosterTypeGreaterThan(Integer value) {
+            addCriterion("roster_type >", value, "rosterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRosterTypeGreaterThanOrEqualTo(Integer value) {
+            addCriterion("roster_type >=", value, "rosterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRosterTypeLessThan(Integer value) {
+            addCriterion("roster_type <", value, "rosterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRosterTypeLessThanOrEqualTo(Integer value) {
+            addCriterion("roster_type <=", value, "rosterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRosterTypeIn(List<Integer> values) {
+            addCriterion("roster_type in", values, "rosterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRosterTypeNotIn(List<Integer> values) {
+            addCriterion("roster_type not in", values, "rosterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRosterTypeBetween(Integer value1, Integer value2) {
+            addCriterion("roster_type between", value1, value2, "rosterType");
+            return (Criteria) this;
+        }
+
+        public Criteria andRosterTypeNotBetween(Integer value1, Integer value2) {
+            addCriterion("roster_type not between", value1, value2, "rosterType");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

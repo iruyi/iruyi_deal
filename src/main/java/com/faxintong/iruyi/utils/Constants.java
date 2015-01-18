@@ -33,4 +33,17 @@ public class Constants {
     public static final String VIEWED_COUNT = "view";
     public static final String AUTOINCREMENT = "autoincrement";
     public static final String DATA = "data";
+
+    /**********************甩单、接单状态*******************/
+    public static final Integer RECEIVING = 1;//竞标中
+    public static final Integer RECEIVED = 2;//已接单，待确认
+    public static final Integer FORGO = 3;//放弃接单，待确认
+    public static final Integer FAIL = 4;//接单失败
+    public static final Integer SUCCESS = 5;//接单成功
+    public static final Integer CANCEL = 6;//单子作废
+    public static final Integer CONTRACT_SIGNED = 7;//合同已签待确认
+    public static final Integer PAYING = 8;//合同已确认待支付（支付中）
+    public static final Integer COMMENTING = 9;//已支付待互评（互评中）
+    public static final Integer COMMENTED = 10;//已互评
+
 }
