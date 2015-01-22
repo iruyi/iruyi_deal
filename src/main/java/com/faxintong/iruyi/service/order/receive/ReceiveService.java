@@ -31,7 +31,7 @@ public interface ReceiveService {
      * @return
      * @throws Exception
      */
-    public List<Order> findFinalOrders(Long lawyerId) throws Exception;
+    public List<Order> findOrdersByStatus(Long lawyerId, Integer status) throws Exception;
 
     /**
      * 律师接单
@@ -39,7 +39,7 @@ public interface ReceiveService {
      * @param orderId
      * @throws Exception
      */
-    public void receiveOrder(Long lawyerId,Long orderId) throws Exception;
+    public void receiveOrder(Long orderId, Long lawyerId) throws Exception;
 
     /**
      * 接单人确认接单

@@ -41,17 +41,17 @@ public class ReceiveServiceImpl implements ReceiveService {
 
     @Override
     public List<Order> findReceivingOrders(Long lawyerId) throws Exception {
-        return null;
+        return receiveGeneralMapper.findReceivingOrders(lawyerId);//获取竞标中的和待确认的单子
     }
 
     @Override
-    public List<Order> findFinalOrders(Long lawyerId) throws Exception {
-        return null;
+    public List<Order> findOrdersByStatus(Long lawyerId, Integer status) throws Exception {
+        return receiveGeneralMapper.findOrdersByStatus(lawyerId, status);
     }
 
-    @Override
-    public void receiveOrder(Long lawyerId, Long orderId) throws Exception {
-
+    @Transactional
+    public void receiveOrder(Long orderId, Long lawyerId) throws Exception {
+        receiveGeneralMapper.receiveOrder(orderId, lawyerId);
     }
 
     @Transactional

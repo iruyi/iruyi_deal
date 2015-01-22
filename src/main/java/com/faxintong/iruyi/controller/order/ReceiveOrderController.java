@@ -49,6 +49,70 @@ public class ReceiveOrderController {
         return result;
     }
 
+    @RequestMapping(value = "receiveOrder")
+    public Map<String, Object> receiveOrder(HttpServletRequest request, String orderId, String lawyerId) {
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(RESULT, false);
+        try{
+            if(StringUtils.isEmpty(orderId)){
+                result.put(ERR_MSG, "单子id为空");
+                return result;
+            }
+            if(StringUtils.isEmpty(lawyerId)){
+                result.put(ERR_MSG, "律师id为空");
+                return result;
+            }
+            receiveService.receiveOrder(Long.parseLong(orderId), Long.parseLong(lawyerId));
+            result.put(RESULT, true);
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+            result.put(ERR_MSG, "接单出现未知异常");
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "findReceivingOrders")
+    public Map<String, Object> findReceivingOrders(HttpServletRequest request, String lawyerId) {
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(RESULT, false);
+        try{
+            if(StringUtils.isEmpty(lawyerId)){
+                result.put(ERR_MSG, "律师id为空");
+                return result;
+            }
+            List<Order> orderList = receiveService.findReceivingOrders(Long.parseLong(lawyerId));
+            result.put(RESULT, true);
+            result.put(DATA, orderList);
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+            result.put(ERR_MSG, "未知异常");
+        }
+        return result;
+    }
+
+    @RequestMapping(value = "findOrdersByStatus")
+    public Map<String, Object> findOrdersByStatus(HttpServletRequest request, String lawyerId, String status) {
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(RESULT, false);
+        try{
+            if(StringUtils.isEmpty(lawyerId)){
+                result.put(ERR_MSG, "律师id为空");
+                return result;
+            }
+            if(StringUtils.isEmpty(status)){
+                result.put(ERR_MSG, "状态为空");
+                return result;
+            }
+            List<Order> orderList = receiveService.findOrdersByStatus(Long.parseLong(lawyerId), Integer.parseInt(status));
+            result.put(RESULT, true);
+            result.put(DATA, orderList);
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+            result.put(ERR_MSG, "未知异常");
+        }
+        return result;
+    }
+
     @RequestMapping(value = "confirmOrder")
     public Map<String, Object> confirmOrder(HttpServletRequest request, String orderId, String lawyerId) {
         Map<String, Object> result = Maps.newHashMap();
