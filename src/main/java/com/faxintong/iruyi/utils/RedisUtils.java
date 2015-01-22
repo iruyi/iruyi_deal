@@ -152,4 +152,8 @@ public class RedisUtils {
         }
         return (Object)getJedis().get(key);
     }
+
+    public static boolean exists(String key){
+        return getJedis().exists(key);
+    }
 }
