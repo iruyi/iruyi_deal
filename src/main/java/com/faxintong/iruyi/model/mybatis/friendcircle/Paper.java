@@ -1,16 +1,23 @@
 package com.faxintong.iruyi.model.mybatis.friendcircle;
 
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.Null;
 import java.util.Date;
 
 public class Paper {
+    @Null
     private Long id;
 
+    @NotBlank
     private Long lawyerId;
 
+    @NotBlank
     private String title;
 
     private Date createTime;
 
+    @NotBlank
     private String paperContent;
 
     public Long getId() {

@@ -7,6 +7,7 @@ import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,17 +30,21 @@ public class PaperController extends BaseController{
     @Autowired
     private PaperService paperService;
 
-    @RequestMapping(value = "report/paper")
-    public Map<String, Object> reportPaper(@Valid Paper paper, HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value = "report")
+    public Map<String, Object> reportPaper(@Valid Paper paper, BindingResult bindingResult,
+                                           HttpServletRequest request, HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
         result.put(RESULT, false);
+        if(bindingResult.hasErrors()){
+            result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
+            return result;
+        }
         Long lawyerId = getLawyerId(request);
         try {
             paperService.reportPaper(lawyerId, paper);
             result.put(RESULT, true);
         } catch (Exception e) {
-            logger.debug("发表文章失败");
-            e.printStackTrace();
+            logger.error("发表文章失败:" + e.getMessage());
         }
         return result;
     }
@@ -52,22 +57,20 @@ public class PaperController extends BaseController{
             paperService.deletePaperById(paperId);
             result.put(RESULT, true);
         } catch (Exception e) {
-            logger.debug("删除文章失败");
-            e.printStackTrace();
+            logger.error("删除文章失败:" + e.getMessage());
         }
         return result;
     }
 
-    @RequestMapping(value = "findPapers")
-    public Map<String, Object> findPaperByLawyerId(List<Long> lawyerId, HttpServletResponse response){
+    @RequestMapping(value = "findLawyerPapers")
+    public Map<String, Object> findPaperByLawyerId(List<Long> lawyerId, HttpServletRequest request,HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
         result.put(RESULT, false);
         try {
             result.put("paper", paperService.findPaperByLawyerId(lawyerId));
             result.put(RESULT, true);
         }catch (Exception e){
-            logger.debug("根据律师ID查找文章失败");
-            e.printStackTrace();
+            logger.error("根据律师ID查找文章失败:" + e.getMessage());
         }
         return result;
     }
@@ -79,13 +82,12 @@ public class PaperController extends BaseController{
         try {
             result.put("paper", paperService.findPaperById(paperId));
         }catch (Exception e){
-            logger.debug("根据文章ID查找文章失败");
-            e.printStackTrace();
+            logger.error("根据文章ID查找文章失败:" + e.getMessage());
         }
         return result;
     }
 
-    @RequestMapping(value = "report/comment")
+    @RequestMapping(value = "comment/report")
     public Map<String, Object> reportPaperComment(Long paperId, String comment,
                                                   HttpServletRequest request,HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
@@ -95,13 +97,12 @@ public class PaperController extends BaseController{
             paperService.reportPaperComment(lawyerId, paperId, comment);
             result.put(RESULT, true);
         }catch (Exception e){
-            logger.debug("发表评论失败");
-            e.printStackTrace();
+            logger.error("发表评论失败:" + e.getMessage());
         }
         return result;
     }
 
-    @RequestMapping("praise")
+    @RequestMapping(value = "praise")
     public Map<String , Object> praisePaper(String lawyerName, Long paperId, HttpServletRequest request, HttpServletResponse response) {
         Map<String , Object> result = Maps.newHashMap();
         result.put(RESULT, false);
@@ -110,8 +111,7 @@ public class PaperController extends BaseController{
             paperService.praisePaper(lawyerId, lawyerName, paperId);
             result.put(RESULT, true);
         } catch (Exception e) {
-            logger.debug("赞失败");
-            e.printStackTrace();
+            logger.error("赞失败:" + e.getMessage());
         }
         return result;
     }
@@ -124,8 +124,7 @@ public class PaperController extends BaseController{
             result.put("comments", paperService.findPaperComments(paperId));
             result.put(RESULT, true);
         } catch (Exception e) {
-            logger.debug("查找文章评论失败");
-            e.printStackTrace();
+            logger.error("查找文章评论失败:" + e.getMessage());
         }
         return result;
     }
@@ -138,7 +137,7 @@ public class PaperController extends BaseController{
             result.put("praise", paperService.findPaperPraises(paperId));
             result.put(RESULT, true);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("查找文章赞失败:" + e.getMessage());
         }
         return result;
     }

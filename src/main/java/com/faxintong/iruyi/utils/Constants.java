@@ -46,4 +46,9 @@ public class Constants {
     public static final Integer COMMENTING = 9;//已支付待互评（互评中）
     public static final Integer COMMENTED = 10;//已互评
 
+    /************************好友间关系*********************/
+    public static final Integer UNCONFIRMED_FRIEND = 1;
+    public static final Integer FRIEND = 2;
+    public static final Integer DELETE = 3;
+
 }

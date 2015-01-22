@@ -70,7 +70,6 @@ public class UserController extends BaseController {
             logger.error("注册失败:" + e.getMessage());
             result.put(ERR_MSG, "注册出错!");
         }
-
         return result;
     }
 

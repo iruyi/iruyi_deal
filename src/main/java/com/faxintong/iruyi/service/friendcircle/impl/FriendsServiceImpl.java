@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.List;
 import org.slf4j.Logger;
 
+import static com.faxintong.iruyi.utils.Constants.*;
+
 /**
  * Created by admin on 15-1-3.
  */
@@ -53,18 +55,14 @@ public class FriendsServiceImpl implements FriendsService {
         lawyerFriend.setLayerId(lawyerId);
         lawyerFriend.setFriendId(friendId);
         lawyerFriend.setAddTime(new Date());
-        lawyerFriend.setStatus(0);
+        lawyerFriend.setStatus(UNCONFIRMED_FRIEND);
         lawyerFriendMapper.insert(lawyerFriend);
     }
 
     @Override
     public void friendConfirm(Long id) throws Exception {
         LawyerFriend lawyerFriend = lawyerFriendMapper.selectByPrimaryKey(id);
-        if(lawyerFriend == null){
-            logger.debug("确认出错, 不存在的关系");
-            return;
-        }
-        lawyerFriend.setStatus(1);
+        lawyerFriend.setStatus(FRIEND);
         lawyerFriendMapper.updateByPrimaryKey(lawyerFriend);
     }
 
