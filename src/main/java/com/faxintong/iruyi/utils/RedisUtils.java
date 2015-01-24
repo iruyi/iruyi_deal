@@ -50,7 +50,7 @@ public class RedisUtils {
         return jedis;
     }
 
-    public static void closeJedis(Jedis jedis) {
+    private static void closeJedis(Jedis jedis) {
         logger.info("关闭jedis对象"+jedis);
         if (null != jedis) {
             pool.returnResource(jedis);
@@ -69,7 +69,7 @@ public class RedisUtils {
      *
      * @return
      */
-    public static Jedis getJedis(){
+    private static Jedis getJedis(){
         Jedis jedis = null;
         try {
             jedis = getJedisInstance();
@@ -124,21 +124,27 @@ public class RedisUtils {
     } 
 
     public static void setSerializable(String key, Serializable serializable){
+        Jedis jedis = getJedis();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
             objectOutputStream.writeObject(serializable);
-            getJedis().set(key.getBytes(), byteArrayOutputStream.toByteArray());
+            jedis.set(key.getBytes(), byteArrayOutputStream.toByteArray());
             objectOutputStream.close();
             byteArrayOutputStream.close();
         } catch (IOException e) {
             logger.debug("序列化失败");
+            closeJedis(jedis);
             e.printStackTrace();
+        }finally {
+            closeJedis(jedis);
         }
+
     }
 
     public static Object getSerializable(String key){
-        byte[] bytes = getJedis().get(key.getBytes());
+        Jedis jedis = getJedis();
+        byte[] bytes = jedis.get(key.getBytes());
         ByteArrayInputStream bas = new ByteArrayInputStream(bytes);
         try {
             ObjectInputStream ois = new ObjectInputStream(bas);
@@ -149,11 +155,25 @@ public class RedisUtils {
         } catch (Exception e) {
             logger.debug("反序列化失败");
             e.printStackTrace();
+            closeJedis(jedis);
+        }finally {
+            closeJedis(jedis);
         }
-        return (Object)getJedis().get(key);
+        Object o = jedis.get(key);
+        return o;
     }
 
     public static boolean exists(String key){
-        return getJedis().exists(key);
+        Jedis jedis = getJedis();
+        boolean exists = jedis.exists(key);
+        closeJedis(jedis);
+        return exists;
+    }
+
+    public static Long del(String key){
+        Jedis jedis = getJedis();
+        Long delResult = jedis.del(key);
+        closeJedis(jedis);
+        return delResult;
     }
 }
