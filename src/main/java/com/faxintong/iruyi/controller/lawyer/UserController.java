@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,6 +65,7 @@ public class UserController extends BaseController {
                     lawyer.setUpdateDate(date);
                     userService.registerLawyer(lawyer);
                     result.put(RESULT, true);
+                    result.put(ERR_MSG, "注册成功");
                 }
             }
         }catch (Exception e){
@@ -81,12 +83,12 @@ public class UserController extends BaseController {
      * @param response
      * @return
      */
-    @RequestMapping("login")
+    @RequestMapping(value = "login")
     public Map<String, Object> login(String phone, String password, HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
         String sessionId = request.getSession().getId();
-            if (RedisUtils.getJedis().exists(SESSION_PREFIX+sessionId)){
+        if (RedisUtils.exists(SESSION_PREFIX + sessionId)){
                 result.put(RESULT, true);
                 return result;
         }
@@ -100,12 +102,12 @@ public class UserController extends BaseController {
                     result.put(ERR_MSG, "帐号密码不匹配");
                 else {
                     Lawyer lawyer = userService.getLawyer(phone);
-                    RedisUtils.set(SESSION_PREFIX+sessionId, "" + lawyer.getId());
+                    RedisUtils.set(SESSION_PREFIX + sessionId, "" + lawyer.getId());
                     result.put(RESULT, true);
                 }
             } catch (Exception e) {
-                logger.error("登陆出错");
-                logger.error(e.getMessage());
+                result.put(ERR_MSG, "登录出错");
+                logger.error("登录出错" + e.getMessage());
             }
         }
         return result;
@@ -116,10 +118,10 @@ public class UserController extends BaseController {
      * @param request
      * @param response
      */
-    @RequestMapping("logout")
+    @RequestMapping(value = "logout")
     public void logOut(HttpServletRequest request, HttpServletResponse response){
         String sessionId = request.getSession().getId();
-        RedisUtils.getJedis().del(SESSION_PREFIX + sessionId);
+        RedisUtils.del(SESSION_PREFIX + sessionId);
         request.getSession().invalidate();
     }
 
@@ -128,21 +130,25 @@ public class UserController extends BaseController {
      * @param request
      * @param response
      */
-    @RequestMapping("head/upload")
-    public void headImageUpload(HttpServletRequest request, HttpServletResponse response){
+    @RequestMapping(value = "head/upload")
+    public Map<String, Object> headImageUpload(HttpServletRequest request, HttpServletResponse response){
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(RESULT, false);
         String sessionId = request.getSession().getId();
-        String lawyerId = RedisUtils.get(SESSION_PREFIX+sessionId);
+        String lawyerId = RedisUtils.get(SESSION_PREFIX + sessionId);
         if(lawyerId != null){
             try {
                 String fileName = uploadFile(request, Config.HEAD_DIR + sessionId);
                 Lawyer lawyer = getLawyer(request);
                 lawyer.setPhoto(fileName);
                 userService.updateLawyerInfo(lawyer);
+                result.put(RESULT, true);
             } catch (IOException e) {
-                logger.debug(lawyerId + ":上传头像失败");
-                e.printStackTrace();
+                result.put(ERR_MSG, "上传头像错误");
+                logger.error(lawyerId + ":上传头像失败:" + e.getMessage());
             }
         }
+        return  result;
     }
 
     /**
@@ -161,8 +167,7 @@ public class UserController extends BaseController {
                 lawyer.setBusinessLicense(fileName);
                 userService.updateLawyerInfo(lawyer);
             } catch (IOException e) {
-                logger.debug(lawyerId + ":上传执照信息失败");
-                e.printStackTrace();
+                logger.error(lawyerId + ":上传执照信息失败:" + e.getMessage());
             }
         }
     }
