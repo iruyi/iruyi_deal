@@ -32,7 +32,11 @@ public class CodeController {
      * @param response 上下文response
      */
     @RequestMapping("code")
-    public void getCode(HttpServletRequest request, HttpServletResponse response) {
+    public void getCode(Integer widthParam, Integer heightParam, HttpServletRequest request, HttpServletResponse response) {
+        if(widthParam != null)
+            width = widthParam;
+        if(heightParam != null)
+            height = heightParam;
         String randomCode = RandomStringUtils.randomNumeric(codeLength);
         char codes[] = randomCode.toCharArray();
         Random ran = new Random();
