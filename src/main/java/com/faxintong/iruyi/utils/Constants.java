@@ -51,4 +51,9 @@ public class Constants {
     public static final Integer FRIEND = 2;
     public static final Integer DELETE = 3;
 
+    /*************************律师甩单类型**********************/
+    public static final Integer COOPERATIVE = 1; //协作
+    public static final Integer CASE = 2;        //案例
+
+
 }
