@@ -47,7 +47,7 @@ public class FriendsServiceImpl implements FriendsService {
         LawyerFriendExample lawyerFriendExample = new LawyerFriendExample();
         lawyerFriendExample.createCriteria().andLayerIdEqualTo(lawyerId).andFriendIdEqualTo(friendId);
 
-        if(lawyerFriendMapper.selectByExample(lawyerFriendExample).size() != 0) {
+        if(lawyerFriendMapper.countByExample(lawyerFriendExample) != 0) {
             logger.info(lawyerId + "" + friendId + "添加失败, 重复添加");
             return;
         }

@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.service.price.impl;
 
+import com.faxintong.iruyi.dao.mybatis.price.PriceMapper;
 import com.faxintong.iruyi.dao.mybatis.price.ReceiveOrderPriceMapper;
 import com.faxintong.iruyi.dao.mybatis.price.RejectOrderPriceMapper;
 import com.faxintong.iruyi.model.mybatis.order.ReceiveOrderExample;
@@ -8,7 +9,10 @@ import com.faxintong.iruyi.service.price.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+
+import static com.faxintong.iruyi.utils.Constants.*;
 
 /**
  * Created by admin on 15-1-3.
@@ -20,17 +24,23 @@ public class PriceServiceImpl implements PriceService {
     private RejectOrderPriceMapper rejectOrderPriceMapper;
     @Autowired
     private ReceiveOrderPriceMapper receiveOrderPriceMapper;
+    @Autowired
+    private PriceMapper priceMapper;
 
     @Override
     public void rejectReportPrice(List<RejectOrderPrice> reportPrice) throws Exception {
+        Date date = new Date();
         for(RejectOrderPrice r: reportPrice){
+            r.setCreateDate(date);
             rejectOrderPriceMapper.insertSelective(r);
         }
     }
 
     @Override
     public void receiveReportPrice(List<ReceiveOrderPrice> reportPrice) throws Exception {
+        Date date = new Date();
         for(ReceiveOrderPrice r: reportPrice){
+            r.setCreateDate(date);
             receiveOrderPriceMapper.insertSelective(r);
         }
     }
@@ -50,8 +60,20 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public void calculateRejectPrice(Long lawyerId, Long orderId, Integer lawyerType) throws Exception {
+    public float calculateRejectPrice(Long lawyerId, Long orderId, Integer lawyerType) throws Exception {
+        PriceExample priceExample = new PriceExample();
+        priceExample.createCriteria().andLawyerIdEqualTo(lawyerId).andOrderIdEqualTo(orderId).andLawyerTypeEqualTo(lawyerType);
+        List<Price> priceList = priceMapper.selectByExample(priceExample);
+        if (priceList.size() != 1)
+            return -1;
+        Price price = priceList.get(0);
 
+        if(lawyerType == ORDER_COOPERATIVE){
+            return price.getPrice();
+        }else if (lawyerType == ORDER_CASE){
+            return price.getPrice();
+        }
+        return -1;
     }
 
     @Override

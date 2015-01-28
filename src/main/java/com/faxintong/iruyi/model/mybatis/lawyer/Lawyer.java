@@ -40,7 +40,7 @@ public class Lawyer implements Serializable{
     private Date updateDate;
 
     private String photo;
-
+    @NotBlank
     private String lawOffice;
 
     private String businessLicense;

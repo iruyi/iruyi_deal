@@ -49,7 +49,7 @@ public interface PriceService {
      * @param lawyerType
      * @throws Exception
      */
-    public void calculateRejectPrice(Long lawyerId,Long orderId,Integer lawyerType) throws Exception;
+    public float calculateRejectPrice(Long lawyerId,Long orderId,Integer lawyerType) throws Exception;
 
     /**
      * 查询报价金额
