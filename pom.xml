@@ -274,7 +274,7 @@
             <version>1.8.8</version>
         </dependency>
 
-        <!--test-->
+        <!-- test -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
