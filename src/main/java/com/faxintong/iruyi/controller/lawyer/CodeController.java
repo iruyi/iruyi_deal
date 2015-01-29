@@ -38,6 +38,7 @@ public class CodeController {
         if(heightParam != null)
             height = heightParam;
         String randomCode = RandomStringUtils.randomNumeric(codeLength);
+        request.getSession().setAttribute("code", randomCode);
         char codes[] = randomCode.toCharArray();
         Random ran = new Random();
         // 定义图像buffer
