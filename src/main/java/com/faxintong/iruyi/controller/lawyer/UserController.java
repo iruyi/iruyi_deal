@@ -3,6 +3,7 @@ package com.faxintong.iruyi.controller.lawyer;
 import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.utils.Config;
+import com.faxintong.iruyi.utils.MD5;
 import com.faxintong.iruyi.utils.RedisUtils;
 import com.google.common.collect.Maps;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -12,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sun.security.provider.MD5;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,19 +51,19 @@ public class UserController extends BaseController {
             if(bindingResult.hasErrors()){
                 result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
             }else{
-//                String code = (String) request.getSession().getAttribute("code");
-//                if(code == null)
-//                    return result;
-//                if (!code.equals(validCode)) {
-//                    result.put(ERR_MSG, "验证码填写错误");
-//                }
-               /** else **/if (userService.containsPhone(lawyer.getPhone())) {
+                String code = (String) request.getSession().getAttribute("code");
+                if(code == null) {
+                    result.put(ERR_MSG, "请先填写验证码");
+                }else if (!code.equals(validCode)) {
+                    result.put(ERR_MSG, "验证码填写错误");
+                }
+                else if (userService.containsPhone(lawyer.getPhone())) {
                     result.put(ERR_MSG, "该手机号已经注册");
                 }else if (!userService.regisValidate(lawyer.getPhone())){
                     result.put(ERR_MSG, "该手机号格式错误");
                 }
                 else {
-//                    lawyer.setPassword(DigestUtils.md5(lawyer.getPassword()));
+//                    lawyer.setPassword();
                     Date date = new Date();
                     lawyer.setCreateDate(date);
                     lawyer.setUpdateDate(date);
