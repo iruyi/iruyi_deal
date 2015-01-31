@@ -2,15 +2,11 @@ package com.faxintong.iruyi.firendcircle;
 
 import org.junit.Test; 
 import org.junit.Before; 
-import org.junit.After; 
+import org.junit.After;
 
-/** 
-* PaperServiceImpl Tester. 
-* 
-* @author <Authors name> 
-* @since <pre>һ�� 30, 2015</pre> 
-* @version 1.0 
-*/ 
+/**
+ * Created by ron on 2015/1/29.
+ */
 public class PaperServiceTest {
 
 @Before

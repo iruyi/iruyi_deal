@@ -2,15 +2,11 @@ package com.faxintong.iruyi.comment;
 
 import org.junit.Test; 
 import org.junit.Before; 
-import org.junit.After; 
+import org.junit.After;
 
-/** 
-* CommentServiceImpl Tester. 
-* 
-* @author <Authors name> 
-* @since <pre>һ�� 30, 2015</pre> 
-* @version 1.0 
-*/ 
+/**
+ * Created by ron on 2015/1/29.
+ */
 public class CommentServiceTest {
 
 @Before
