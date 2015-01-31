@@ -51,9 +51,9 @@
         <context:property-placeholder ignore-resource-not-found="true" />
         <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
             <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-            <property name="jdbcUrl" value="jdbc:mysql://192.168.1.118:3306/iruyi?useUnicode=true"/>
+            <property name="jdbcUrl" value="jdbc:mysql://123.57.252.2:3306/iruyi?useUnicode=true"/>
             <property name="user" value="root"/>
-            <property name="password" value=""/>
+            <property name="password" value="lawyer123"/>
             <property name="testConnectionOnCheckin" value="true"/>
             <!--<property name="automaticTestTable" value="true"/>-->
             <property name="checkoutTimeout" value="3000"/>
@@ -72,9 +72,9 @@
         <context:property-placeholder ignore-resource-not-found="true" />
         <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
             <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-            <property name="jdbcUrl" value="jdbc:mysql://192.168.1.118:3306/iruyi?useUnicode=true"/>
+            <property name="jdbcUrl" value="jdbc:mysql://123.57.252.2:3306/iruyi?useUnicode=true"/>
             <property name="user" value="root"/>
-            <property name="password" value=""/>
+            <property name="password" value="lawyer123"/>
             <property name="testConnectionOnCheckin" value="true"/>
             <property name="automaticTestTable" value="true"/>
             <property name="checkoutTimeout" value="3000"/>
