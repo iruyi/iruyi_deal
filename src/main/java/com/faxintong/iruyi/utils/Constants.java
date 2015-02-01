@@ -55,5 +55,8 @@ public class Constants {
     public static final Integer ORDER_COOPERATIVE = 1; //协作
     public static final Integer ORDER_CASE = 2;        //案例
 
+    /*************************合同状态**********************/
+    public static final Integer CONTRACT_COMMENTING = 2;//合同待确认
+    public static final Integer CONTRACT_COMMENTED = 1;//合同已确认
 
 }

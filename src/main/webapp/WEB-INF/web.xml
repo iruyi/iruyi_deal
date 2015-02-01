@@ -16,7 +16,7 @@
         <param-name>spring.profiles.default</param-name>
         <!-- 非生产环境配置 -->
         <!-- <param-name>spring.profiles.active</param-name> -->
-        <param-value>LOCAL</param-value>
+        <param-value>TEST</param-value>
     </context-param>
 
     <listener>
@@ -57,6 +57,29 @@
         <dispatcher>FORWARD</dispatcher>
     </filter-mapping>
 
+    <filter>
+        <filter-name>PreventSqlInject</filter-name>
+        <filter-class>com.faxintong.iruyi.filter.SqlInjectFilter</filter-class>
+        <!-- filter word, split with blank -->
+        <init-param>
+            <param-name>invalidsql</param-name>
+            <param-value>select insert delete from update create destory drop alter and or like exec count chr mid master truncate char declare ; - ' % &lt; &gt; </param-value>
+        </init-param>
+        <!-- error page -->
+        <init-param>
+            <param-name>error</param-name>
+            <param-value>/WEB-INF/views/error/error.jsp</param-value>
+        </init-param>
+        <!-- debug -->
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>PreventSqlInject</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 
     <error-page>
         <exception-type>java.lang.Exception</exception-type>

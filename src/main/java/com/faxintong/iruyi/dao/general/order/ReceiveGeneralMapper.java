@@ -16,7 +16,7 @@ import java.util.List;
 public interface ReceiveGeneralMapper {
 
     String VIEW = "o.id,o.title,o.lawyer_id as lawyerId,o.rule_id as ruleId,o.status,o.type,o.is_delay as isDelay," +
-            "o.deadline_date as deadlineDate,o.description,o.create_date as createDate,o.update_date as updateDate";
+            "o.deadline_date as deadlineDate,o.description,o.create_date as createDate,o.update_date as updateDate,o.roster_type as rosterType,o.keywords";
 
     /*@Select("select " +VIEW+ " from lawyer l,lawyer_category_rela r,order_rule ru,`order` o " +
             "where l.id=#{lawyerId} and l.id=r.lawyer_id and r.category_id=ru.category_id and l.city_id=ru.city_id and ru.id=o.rule_id and o.`status`=1 and o.deadline_date>now() and o.end_flag = 1 " +

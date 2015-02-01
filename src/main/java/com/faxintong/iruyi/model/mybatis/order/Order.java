@@ -29,6 +29,8 @@ public class Order {
 
     private Integer rosterType;
 
+    private String keywords;
+
     public Long getId() {
         return id;
     }
@@ -131,5 +133,13 @@ public class Order {
 
     public void setRosterType(Integer rosterType) {
         this.rosterType = rosterType;
+    }
+
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
     }
 }
