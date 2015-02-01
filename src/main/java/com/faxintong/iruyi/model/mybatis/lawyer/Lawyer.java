@@ -10,7 +10,6 @@ public class Lawyer implements Serializable{
     @Null
     private Long id;
 
-    @NotBlank
     private String name;
 
     @NotBlank
@@ -40,7 +39,7 @@ public class Lawyer implements Serializable{
     private Date updateDate;
 
     private String photo;
-    @NotBlank
+
     private String lawOffice;
 
     private String businessLicense;

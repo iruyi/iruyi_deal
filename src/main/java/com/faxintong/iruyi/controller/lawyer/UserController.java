@@ -3,14 +3,15 @@ package com.faxintong.iruyi.controller.lawyer;
 import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.utils.Config;
+import com.faxintong.iruyi.utils.MD5;
 import com.faxintong.iruyi.utils.RedisUtils;
 import com.google.common.collect.Maps;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,8 +51,10 @@ public class UserController extends BaseController {
             if(bindingResult.hasErrors()){
                 result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
             }else{
-                String code = request.getParameter("code");
-                if (!code.equals(validCode)) {
+                String code = (String) request.getSession().getAttribute("code");
+                if(code == null) {
+                    result.put(ERR_MSG, "请先填写验证码");
+                }else if (!code.equals(validCode)) {
                     result.put(ERR_MSG, "验证码填写错误");
                 }
                 else if (userService.containsPhone(lawyer.getPhone())) {
@@ -60,6 +63,7 @@ public class UserController extends BaseController {
                     result.put(ERR_MSG, "该手机号格式错误");
                 }
                 else {
+//                    lawyer.setPassword();
                     Date date = new Date();
                     lawyer.setCreateDate(date);
                     lawyer.setUpdateDate(date);
@@ -69,6 +73,7 @@ public class UserController extends BaseController {
                 }
             }
         }catch (Exception e){
+            e.printStackTrace();
             logger.error("注册失败:" + e.getMessage());
             result.put(ERR_MSG, "注册出错!");
         }
@@ -98,6 +103,7 @@ public class UserController extends BaseController {
             result.put(ERR_MSG, "密码不能为空");
         }else {
             try {
+//                password = DigestUtils.md5(password).toString();
                 if (!userService.loginValidate(phone, password))
                     result.put(ERR_MSG, "帐号密码不匹配");
                 else {
@@ -107,7 +113,7 @@ public class UserController extends BaseController {
                 }
             } catch (Exception e) {
                 result.put(ERR_MSG, "登录出错");
-                logger.error("登录出错" + e.getMessage());
+                logger.error("登录出错:" + e.getMessage());
             }
         }
         return result;

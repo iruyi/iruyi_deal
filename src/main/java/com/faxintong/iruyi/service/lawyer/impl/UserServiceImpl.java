@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean regisValidate(String phone) throws Exception {
-        return phone.matches("^1[0-9]{10}$");
+        return phone.matches("^[0-9]{11}$");
     }
 
     @Override
@@ -54,6 +54,11 @@ public class UserServiceImpl implements UserService {
         return lawyerMapper.selectByPrimaryKey(key);
     }
 
+    /**
+     * 关于phones是否为空的控制!
+     * @param phones
+     * @return
+     */
     @Override
     public List<Lawyer> getLawyersByPhone(List<String> phones) {
         LawyerExample lawyerExample = new LawyerExample();

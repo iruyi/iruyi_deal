@@ -18,9 +18,11 @@ import java.util.List;
 import java.util.Map;
 
 import static com.faxintong.iruyi.utils.Constants.*;
+
 /**
  * Created by ron on 2015/1/12.
  */
+
 @RestController
 @RequestMapping("paper")
 public class PaperController extends BaseController{
@@ -50,7 +52,8 @@ public class PaperController extends BaseController{
     }
 
     @RequestMapping(value = "delete")
-    public Map<String, Object> deletePaperById(Long paperId, HttpServletResponse response){
+    public Map<String, Object> deletePaperById(Long paperId,
+                                               HttpServletRequest request, HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
         result.put(RESULT, false);
         try {
@@ -63,7 +66,8 @@ public class PaperController extends BaseController{
     }
 
     @RequestMapping(value = "findLawyerPapers")
-    public Map<String, Object> findPaperByLawyerId(List<Long> lawyerId, HttpServletRequest request,HttpServletResponse response){
+    public Map<String, Object> findPaperByLawyerId(List<Long> lawyerId,
+                                                   HttpServletRequest request, HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
         result.put(RESULT, false);
         try {
@@ -103,7 +107,8 @@ public class PaperController extends BaseController{
     }
 
     @RequestMapping(value = "praise")
-    public Map<String , Object> praisePaper(String lawyerName, Long paperId, HttpServletRequest request, HttpServletResponse response) {
+    public Map<String , Object> praisePaper(String lawyerName, Long paperId,
+                                            HttpServletRequest request, HttpServletResponse response) {
         Map<String , Object> result = Maps.newHashMap();
         result.put(RESULT, false);
         Long lawyerId = getLawyerId(request);
@@ -117,7 +122,8 @@ public class PaperController extends BaseController{
     }
 
     @RequestMapping(value = "findPaperComments")
-    public Map<String , Object> findPaperComments(Long paperId, HttpServletRequest request, HttpServletResponse response){
+    public Map<String , Object> findPaperComments(Long paperId,
+                                                  HttpServletRequest request, HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
         result.put(RESULT, false);
         try {
@@ -130,7 +136,8 @@ public class PaperController extends BaseController{
     }
 
     @RequestMapping(value = "findPaperPraises")
-    public Map<String , Object> findPaperPraises(Long paperId, HttpServletRequest request, HttpServletResponse response){
+    public Map<String , Object> findPaperPraises(Long paperId,
+                                                 HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
         try {
