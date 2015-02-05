@@ -36,7 +36,7 @@ public class PaperController extends BaseController{
     @Autowired
     private PaperService paperService;
 
-    @RequestMapping(value = "report", method = RequestMethod.POST)
+    @RequestMapping(value = "report")
     public Map<String, Object> reportPaper(@Valid Paper paper, BindingResult bindingResult,
                                            HttpServletRequest request, HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
@@ -57,7 +57,7 @@ public class PaperController extends BaseController{
         return result;
     }
 
-    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    @RequestMapping(value = "delete")
     public Map<String, Object> deletePaperById(@NotEmpty Long paperId, BindingResult bindingResult,
                                                HttpServletRequest request, HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
@@ -106,7 +106,7 @@ public class PaperController extends BaseController{
         return result;
     }
 
-    @RequestMapping(value = "comment/report", method = RequestMethod.POST)
+    @RequestMapping(value = "comment/report")
     public Map<String, Object> reportPaperComment(@NotEmpty Long paperId, @NotEmpty String comment,BindingResult bindingResult,
                                                   HttpServletRequest request,HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
@@ -125,7 +125,7 @@ public class PaperController extends BaseController{
         return result;
     }
 
-    @RequestMapping(value = "praise", method = RequestMethod.POST)
+    @RequestMapping(value = "praise")
     public Map<String , Object> praisePaper(@NotEmpty Long paperId, BindingResult bindingResult,
                                             HttpServletRequest request, HttpServletResponse response) {
         Map<String , Object> result = Maps.newHashMap();
