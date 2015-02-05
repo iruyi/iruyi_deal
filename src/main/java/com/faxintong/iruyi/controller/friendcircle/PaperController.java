@@ -43,7 +43,7 @@ public class PaperController extends BaseController{
         }
         Long lawyerId = getLawyerId(request);
         try {
-            paperService.reportPaper(lawyerId, paper);
+            paperService.reportPaper(paper);
             result.put(RESULT, true);
         } catch (Exception e) {
             logger.error("发表文章失败:" + e.getMessage());

@@ -51,7 +51,7 @@ public class UserController extends BaseController {
             if(bindingResult.hasErrors()){
                 result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
             }else{
-                String code = (String) request.getSession().getAttribute("code");
+                String code = "123";//(String) request.getSession().getAttribute("code");
                 if(code == null) {
                     result.put(ERR_MSG, "请先填写验证码");
                 }else if (!code.equals(validCode)) {
@@ -63,7 +63,7 @@ public class UserController extends BaseController {
                     result.put(ERR_MSG, "该手机号格式错误");
                 }
                 else {
-//                    lawyer.setPassword();
+                    lawyer.setPassword(MD5.newinstance().getMD5ofStr(lawyer.getPassword()));
                     Date date = new Date();
                     lawyer.setCreateDate(date);
                     lawyer.setUpdateDate(date);
@@ -103,7 +103,7 @@ public class UserController extends BaseController {
             result.put(ERR_MSG, "密码不能为空");
         }else {
             try {
-//                password = DigestUtils.md5(password).toString();
+                password = MD5.newinstance().getMD5ofStr(password);
                 if (!userService.loginValidate(phone, password))
                     result.put(ERR_MSG, "帐号密码不匹配");
                 else {

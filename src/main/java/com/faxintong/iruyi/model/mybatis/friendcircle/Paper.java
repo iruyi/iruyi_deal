@@ -59,4 +59,16 @@ public class Paper {
     public void setPaperContent(String paperContent) {
         this.paperContent = paperContent;
     }
+
+
+    @Override
+    public String toString() {
+        return "Paper{" +
+                "id=" + id +
+                ", lawyerId=" + lawyerId +
+                ", title='" + title + '\'' +
+                ", createTime=" + createTime +
+                ", paperContent='" + paperContent + '\'' +
+                '}';
+    }
 }
