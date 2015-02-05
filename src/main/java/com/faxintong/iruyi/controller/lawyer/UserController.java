@@ -110,6 +110,7 @@ public class UserController extends BaseController {
                     Lawyer lawyer = userService.getLawyer(phone);
                     RedisUtils.set(SESSION_PREFIX + sessionId, "" + lawyer.getId());
                     result.put(RESULT, true);
+                    result.put("sessionId", sessionId);
                 }
             } catch (Exception e) {
                 result.put(ERR_MSG, "登录出错");
