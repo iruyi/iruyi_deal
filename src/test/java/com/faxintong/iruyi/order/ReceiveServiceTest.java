@@ -1,6 +1,7 @@
 package com.faxintong.iruyi.order;
 
 import com.faxintong.iruyi.base.BaseTest;
+import com.faxintong.iruyi.model.general.order.GeneralOrder;
 import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.service.order.receive.ReceiveService;
 import org.junit.Test;
@@ -20,9 +21,9 @@ public class ReceiveServiceTest extends BaseTest {
     public void testFindAvailableOrders(){
         try {
             Long lawyerId = 5l;
-            List<Order> orderList = receiveService.findAvailReceiveOrders(lawyerId);
-            for(Order order : orderList){
-                System.out.println("匹配的单子：" + order.getId() + " " +order.getLawyerId());
+            List<GeneralOrder> orderList = receiveService.findAvailReceiveOrders(lawyerId);
+            for(GeneralOrder order : orderList){
+                System.out.println("匹配的单子：" + order.getTitle() + " " +order.getCityName() + " " + order.getDescription());
             }
         } catch (Exception e) {
             e.printStackTrace();

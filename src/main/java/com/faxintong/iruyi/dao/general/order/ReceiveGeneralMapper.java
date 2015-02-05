@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.dao.general.order;
 
+import com.faxintong.iruyi.model.general.order.GeneralOrder;
 import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.operate.OperateMyBatis;
 import org.apache.ibatis.annotations.Insert;
@@ -15,7 +16,7 @@ import java.util.List;
 @OperateMyBatis
 public interface ReceiveGeneralMapper {
 
-    String VIEW = "o.id,o.title,o.lawyer_id as lawyerId,o.rule_id as ruleId,o.status,o.type,o.is_delay as isDelay," +
+    String VIEW = " o.id,o.title,o.lawyer_id as lawyerId,o.rule_id as ruleId,o.status,o.type,o.is_delay as isDelay," +
             "o.deadline_date as deadlineDate,o.description,o.create_date as createDate,o.update_date as updateDate,o.roster_type as rosterType,o.keywords";
 
     /*@Select("select " +VIEW+ " from lawyer l,lawyer_category_rela r,order_rule ru,`order` o " +
@@ -35,7 +36,7 @@ public interface ReceiveGeneralMapper {
             "and not EXISTS(select 1 from receive_order rr where rr.lawyer_id=l.id and rr.order_id=o.id) limit 0,10")
     public List<Order> findAvailReceiveOrders(@Param("lawyerId") Long lawyerId) throws Exception;*/
 
-    @Select("select " + VIEW + " from lawyer l,lawyer_category_rela r,order_rule ru,`order` o " +
+    /*@Select("select " + VIEW + " from lawyer l,lawyer_category_rela r,order_rule ru,`order` o " +
     "where l.id=#{lawyerId} and l.id=r.lawyer_id and r.category_id=ru.category_id and l.city_id=ru.city_id and ru.id=o.rule_id and o.`status`=1 and o.deadline_date>now() and o.roster_type = 0 " +
     "and not EXISTS(select 1 from receive_order rr where rr.lawyer_id=l.id and rr.order_id=o.id) " +
     "UNION " +
@@ -47,8 +48,75 @@ public interface ReceiveGeneralMapper {
     "select " + VIEW + " from lawyer l,lawyer_category_rela r,order_rule ru,`order` o " +
     "where l.id=#{lawyerId} and l.id=r.lawyer_id and r.category_id=ru.category_id and l.city_id=ru.city_id and ru.id=o.rule_id and o.`status`=1 and o.deadline_date>now() and o.roster_type = 2 " +
     "and not EXISTS(select 1 from blacklist b where b.order_id=o.id and b.lawyer_id=l.id) " +
-    "and not EXISTS(select 1 from receive_order rr where rr.lawyer_id=l.id and rr.order_id=o.id)")
-    public List<Order> findAvailReceiveOrders(@Param("lawyerId") Long lawyerId) throws Exception;
+    "and not EXISTS(select 1 from receive_order rr where rr.lawyer_id=l.id and rr.order_id=o.id)")*/
+    @Select("SELECT " + VIEW + ",c. name AS cityName                       " +
+            "FROM   lawyer l,                                             " +
+            "       lawyer_category_rela r,                               " +
+            "       order_rule ru,                                        " +
+            "       `order` o,                                            " +
+            "       city c                                                " +
+            "WHERE  l.id = 1                                              " +
+            "       AND l.id = r.lawyer_id                                " +
+            "       AND r.category_id = ru.category_id                    " +
+            "       AND l.city_id = ru.city_id                            " +
+            "       AND ru.id = o.rule_id                                 " +
+            "       AND o.`status` = 1                                    " +
+            "       AND o.deadline_date > Now()                           " +
+            "       AND o.roster_type = 0                                 " +
+            "       AND ru.city_id = c.id                                 " +
+            "       AND NOT EXISTS (SELECT 1                              " +
+            "                       FROM   receive_order rr               " +
+            "                       WHERE  rr.lawyer_id = l.id            " +
+            "                              AND rr.order_id = o.id)        " +
+            "UNION                                                        " +
+            "SELECT " + VIEW + ",c. name AS cityName                       " +
+            "FROM   lawyer l,                                             " +
+            "       lawyer_category_rela r,                               " +
+            "       order_rule ru,                                        " +
+            "       `order` o,                                            " +
+            "       city c                                                " +
+            "WHERE  l.id = 1                                              " +
+            "       AND l.id = r.lawyer_id                                " +
+            "       AND r.category_id = ru.category_id                    " +
+            "       AND l.city_id = ru.city_id                            " +
+            "       AND ru.id = o.rule_id                                 " +
+            "       AND o.`status` = 1                                    " +
+            "       AND o.deadline_date > Now()                           " +
+            "       AND o.roster_type = 1                                 " +
+            "       AND ru.city_id = c.id                                 " +
+            "       AND EXISTS (SELECT 1                                  " +
+            "                   FROM   whitelist b                        " +
+            "                   WHERE  b.order_id = o.id                  " +
+            "                          AND b.lawyer_id = l.id)            " +
+            "       AND NOT EXISTS (SELECT 1                              " +
+            "                       FROM   receive_order rr               " +
+            "                       WHERE  rr.lawyer_id = l.id            " +
+            "                              AND rr.order_id = o.id)        " +
+            "UNION                                                        " +
+            "SELECT " + VIEW + ",c. name AS cityName                       " +
+            "FROM   lawyer l,                                             " +
+            "       lawyer_category_rela r,                               " +
+            "       order_rule ru,                                        " +
+            "       `order` o,                                            " +
+            "       city c                                                " +
+            "WHERE  l.id = 1                                              " +
+            "       AND l.id = r.lawyer_id                                " +
+            "       AND r.category_id = ru.category_id                    " +
+            "       AND l.city_id = ru.city_id                            " +
+            "       AND ru.id = o.rule_id                                 " +
+            "       AND o.`status` = 1                                    " +
+            "       AND o.deadline_date > Now()                           " +
+            "       AND o.roster_type = 2                                 " +
+            "       AND ru.city_id = c.id                                 " +
+            "       AND NOT EXISTS (SELECT 1                              " +
+            "                       FROM   blacklist b                    " +
+            "                       WHERE  b.order_id = o.id              " +
+            "                              AND b.lawyer_id = l.id)        " +
+            "       AND NOT EXISTS (SELECT 1                              " +
+            "                       FROM   receive_order rr               " +
+            "                       WHERE  rr.lawyer_id = l.id            " +
+            "                              AND rr.order_id = o.id)        ")
+    public List<GeneralOrder> findAvailReceiveOrders(@Param("lawyerId") Long lawyerId) throws Exception;
 
     @Update("update receive_order set status=#{status},update_date=now() where order_id=#{orderId} and lawyer_id=#{lawyerId}")
     public void confirmOrRevoke(@Param("orderId") Long orderId, @Param("lawyerId") Long lawyerId, @Param("status") Integer status) throws Exception;

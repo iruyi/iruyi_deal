@@ -1,13 +1,14 @@
 package com.faxintong.iruyi.comment;
 
-import org.junit.Test; 
+import com.faxintong.iruyi.base.BaseTest;
+import org.junit.Test;
 import org.junit.Before; 
 import org.junit.After;
 
 /**
  * Created by ron on 2015/1/29.
  */
-public class CommentServiceTest {
+public class CommentServiceTest extends BaseTest {
 
 @Before
 public void before() throws Exception { 

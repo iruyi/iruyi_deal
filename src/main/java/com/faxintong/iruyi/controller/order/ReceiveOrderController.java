@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.controller.order;
 
+import com.faxintong.iruyi.model.general.order.GeneralOrder;
 import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.service.order.receive.ReceiveService;
 import com.google.common.collect.Maps;
@@ -40,7 +41,7 @@ public class ReceiveOrderController {
                 result.put(ERR_MSG, "律师id为空");
                 return result;
             }
-            List<Order> orderList = receiveService.findAvailReceiveOrders(Long.parseLong(lawyerId));
+            List<GeneralOrder> orderList = receiveService.findAvailReceiveOrders(Long.parseLong(lawyerId));
             result.put(RESULT, true);
             result.put(DATA, orderList);
         }catch (Exception e){

@@ -1,13 +1,14 @@
 package com.faxintong.iruyi.firendcircle;
 
-import org.junit.Test; 
+import com.faxintong.iruyi.base.BaseTest;
+import org.junit.Test;
 import org.junit.Before; 
 import org.junit.After;
 
 /**
  * Created by ron on 2015/1/29.
  */
-public class PaperServiceTest {
+public class PaperServiceTest extends BaseTest {
 
 @Before
 public void before() throws Exception { 

@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.service.order.receive;
 
+import com.faxintong.iruyi.model.general.order.GeneralOrder;
 import com.faxintong.iruyi.model.mybatis.order.Order;
 
 import java.util.List;
@@ -15,7 +16,7 @@ public interface ReceiveService {
      * @return
      * @throws Exception
      */
-    public List<Order> findAvailReceiveOrders(Long lawyerId) throws Exception;
+    public List<GeneralOrder> findAvailReceiveOrders(Long lawyerId) throws Exception;
 
     /**
      * 查询已接但还未审核单子(状态：待审核)

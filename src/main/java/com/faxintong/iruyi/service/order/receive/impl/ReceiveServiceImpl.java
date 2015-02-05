@@ -2,6 +2,7 @@ package com.faxintong.iruyi.service.order.receive.impl;
 
 import com.faxintong.iruyi.dao.general.order.OrderGeneralMapper;
 import com.faxintong.iruyi.dao.general.order.ReceiveGeneralMapper;
+import com.faxintong.iruyi.model.general.order.GeneralOrder;
 import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.service.order.receive.ReceiveService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class ReceiveServiceImpl implements ReceiveService {
     private OrderGeneralMapper orderGeneralMapper;
 
     @Override
-    public List<Order> findAvailReceiveOrders(Long lawyerId) throws Exception {
+    public List<GeneralOrder> findAvailReceiveOrders(Long lawyerId) throws Exception {
         /*if(flag.intValue() == 0){//没有限制
             return receiveGeneralMapper.findAvailableOrders(lawyerId);
         }else if(flag.intValue() == 1){//匹配在白名单里的

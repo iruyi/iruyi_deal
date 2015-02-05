@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.lawyer;
 
+import com.faxintong.iruyi.base.BaseTest;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.lawyer.UserService;
 import com.faxintong.iruyi.utils.MD5;
@@ -13,7 +14,7 @@ import java.util.List;
 /**
  * Created by ron on 2015/1/29.
  */
-public class UserServiceTest {
+public class UserServiceTest extends BaseTest {
 
     @Autowired
     private UserService userService;
