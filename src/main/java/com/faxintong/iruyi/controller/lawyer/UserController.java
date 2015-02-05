@@ -92,12 +92,10 @@ public class UserController extends BaseController {
     @RequestMapping(value = "login")
     public Map<String, Object> login(String phone, String password, HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
+        String sessionId = SessionUtil.getSessionId();
         result.put(RESULT, false);
-        /*String sessionId = request.getSession().getId();
-        if (RedisUtils.exists(SESSION_PREFIX + sessionId)){
-                result.put(RESULT, true);
-            return result;
-        }*/
+        result.put("sessionId", sessionId);
+
         if(StringUtils.isEmpty(phone)) {
             result.put(ERR_MSG, "帐号不能为空");
         }else if(StringUtils.isEmpty(password)){
@@ -108,11 +106,9 @@ public class UserController extends BaseController {
                 if (!userService.loginValidate(phone, password))
                     result.put(ERR_MSG, "帐号密码不匹配");
                 else {
-                    String sessionId = SessionUtil.getSessionId();
                     Lawyer lawyer = userService.getLawyer(phone);
                     RedisUtils.set(SESSION_PREFIX + sessionId, "" + lawyer.getId());
                     result.put(RESULT, true);
-                    result.put("sessionId", sessionId);
                 }
             } catch (Exception e) {
                 result.put(ERR_MSG, "登录出错");
@@ -128,10 +124,17 @@ public class UserController extends BaseController {
      * @param response
      */
     @RequestMapping(value = "logout")
-    public void logOut(HttpServletRequest request, HttpServletResponse response){
-        String sessionId = request.getSession().getId();
-        RedisUtils.del(SESSION_PREFIX + sessionId);
-        request.getSession().invalidate();
+    public Map<String, Object> logOut(HttpServletRequest request, HttpServletResponse response){
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(RESULT, false);
+        try {
+            String sessionId = request.getParameter("sessionId");
+            RedisUtils.del(SESSION_PREFIX + sessionId);
+            result.put(RESULT, true);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
     /**
