@@ -6,10 +6,9 @@ import javax.validation.constraints.Null;
 import java.util.Date;
 
 public class Paper {
-    @Null
+
     private Long id;
 
-    @NotBlank
     private Long lawyerId;
 
     @NotBlank

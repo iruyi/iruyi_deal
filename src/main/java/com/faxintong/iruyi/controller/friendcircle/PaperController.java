@@ -5,6 +5,7 @@ import com.faxintong.iruyi.model.mybatis.friendcircle.Paper;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.friendcircle.PaperService;
 import com.google.common.collect.Maps;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,10 +58,14 @@ public class PaperController extends BaseController{
     }
 
     @RequestMapping(value = "delete", method = RequestMethod.POST)
-    public Map<String, Object> deletePaperById(Long paperId,
+    public Map<String, Object> deletePaperById(@NotEmpty Long paperId, BindingResult bindingResult,
                                                HttpServletRequest request, HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
         result.put(RESULT, false);
+        if(bindingResult.hasErrors()){
+            result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
+            return result;
+        }
         try {
             paperService.deletePaperById(paperId);
             result.put(RESULT, true);
@@ -85,10 +90,14 @@ public class PaperController extends BaseController{
     }
 
     @RequestMapping(value = "findPaper",  method = RequestMethod.GET)
-    public Map<String, Object> findPaperById(Long paperId,
+    public Map<String, Object> findPaperById(@NotEmpty Long paperId, BindingResult bindingResult,
                                              HttpServletRequest request, HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
         result.put(RESULT, false);
+        if(bindingResult.hasErrors()){
+            result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
+            return result;
+        }
         try {
             result.put("paper", paperService.findPaperById(paperId));
         }catch (Exception e){
@@ -98,10 +107,14 @@ public class PaperController extends BaseController{
     }
 
     @RequestMapping(value = "comment/report", method = RequestMethod.POST)
-    public Map<String, Object> reportPaperComment(Long paperId, String comment,
+    public Map<String, Object> reportPaperComment(@NotEmpty Long paperId, @NotEmpty String comment,BindingResult bindingResult,
                                                   HttpServletRequest request,HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
         result.put(RESULT, false);
+        if(bindingResult.hasErrors()){
+            result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
+            return result;
+        }
         Long lawyerId = getLawyerId(request);
         try {
             paperService.reportPaperComment(lawyerId, paperId, comment);
@@ -113,10 +126,14 @@ public class PaperController extends BaseController{
     }
 
     @RequestMapping(value = "praise", method = RequestMethod.POST)
-    public Map<String , Object> praisePaper(Long paperId,
+    public Map<String , Object> praisePaper(@NotEmpty Long paperId, BindingResult bindingResult,
                                             HttpServletRequest request, HttpServletResponse response) {
         Map<String , Object> result = Maps.newHashMap();
         result.put(RESULT, false);
+        if(bindingResult.hasErrors()){
+            result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
+            return result;
+        }
         Lawyer lawyer = getLawyer(request);
         try {
             paperService.praisePaper(lawyer.getId(), lawyer.getName(), paperId);
@@ -128,10 +145,14 @@ public class PaperController extends BaseController{
     }
 
     @RequestMapping(value = "findPaperComments", method = RequestMethod.GET)
-    public Map<String , Object> findPaperComments(Long paperId,
+    public Map<String , Object> findPaperComments(@NotEmpty Long paperId, BindingResult bindingResult,
                                                   HttpServletRequest request, HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
         result.put(RESULT, false);
+        if(bindingResult.hasErrors()){
+            result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
+            return result;
+        }
         try {
             result.put("comments", paperService.findPaperComments(paperId));
             result.put(RESULT, true);
@@ -142,10 +163,14 @@ public class PaperController extends BaseController{
     }
 
     @RequestMapping(value = "findPaperPraises",  method = RequestMethod.GET)
-    public Map<String , Object> findPaperPraises(Long paperId,
+    public Map<String , Object> findPaperPraises(@NotEmpty Long paperId, BindingResult bindingResult,
                                                  HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
+        if(bindingResult.hasErrors()){
+            result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
+            return result;
+        }
         try {
             result.put("praise", paperService.findPaperPraises(paperId));
             result.put(RESULT, true);
