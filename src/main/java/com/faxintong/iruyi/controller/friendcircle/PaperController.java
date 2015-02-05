@@ -2,6 +2,7 @@ package com.faxintong.iruyi.controller.friendcircle;
 
 import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.friendcircle.Paper;
+import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.friendcircle.PaperService;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
@@ -9,11 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -32,7 +35,7 @@ public class PaperController extends BaseController{
     @Autowired
     private PaperService paperService;
 
-    @RequestMapping(value = "report")
+    @RequestMapping(value = "report", method = RequestMethod.POST)
     public Map<String, Object> reportPaper(@Valid Paper paper, BindingResult bindingResult,
                                            HttpServletRequest request, HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
@@ -43,7 +46,9 @@ public class PaperController extends BaseController{
         }
         Long lawyerId = getLawyerId(request);
         try {
-            paperService.reportPaper(lawyerId, paper);
+            paper.setLawyerId(lawyerId);
+            paper.setCreateTime(new Date());
+            paperService.reportPaper(paper);
             result.put(RESULT, true);
         } catch (Exception e) {
             logger.error("发表文章失败:" + e.getMessage());
@@ -51,7 +56,7 @@ public class PaperController extends BaseController{
         return result;
     }
 
-    @RequestMapping(value = "delete")
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
     public Map<String, Object> deletePaperById(Long paperId,
                                                HttpServletRequest request, HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
@@ -65,7 +70,7 @@ public class PaperController extends BaseController{
         return result;
     }
 
-    @RequestMapping(value = "findLawyerPapers")
+    @RequestMapping(value = "findLawyerPapers", method = RequestMethod.GET)
     public Map<String, Object> findPaperByLawyerId(List<Long> lawyerId,
                                                    HttpServletRequest request, HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
@@ -79,8 +84,9 @@ public class PaperController extends BaseController{
         return result;
     }
 
-    @RequestMapping(value = "findPaper")
-    public Map<String, Object> findPaperById(Long paperId){
+    @RequestMapping(value = "findPaper",  method = RequestMethod.GET)
+    public Map<String, Object> findPaperById(Long paperId,
+                                             HttpServletRequest request, HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
         result.put(RESULT, false);
         try {
@@ -91,7 +97,7 @@ public class PaperController extends BaseController{
         return result;
     }
 
-    @RequestMapping(value = "comment/report")
+    @RequestMapping(value = "comment/report", method = RequestMethod.POST)
     public Map<String, Object> reportPaperComment(Long paperId, String comment,
                                                   HttpServletRequest request,HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
@@ -106,14 +112,14 @@ public class PaperController extends BaseController{
         return result;
     }
 
-    @RequestMapping(value = "praise")
-    public Map<String , Object> praisePaper(String lawyerName, Long paperId,
+    @RequestMapping(value = "praise", method = RequestMethod.POST)
+    public Map<String , Object> praisePaper(Long paperId,
                                             HttpServletRequest request, HttpServletResponse response) {
         Map<String , Object> result = Maps.newHashMap();
         result.put(RESULT, false);
-        Long lawyerId = getLawyerId(request);
+        Lawyer lawyer = getLawyer(request);
         try {
-            paperService.praisePaper(lawyerId, lawyerName, paperId);
+            paperService.praisePaper(lawyer.getId(), lawyer.getName(), paperId);
             result.put(RESULT, true);
         } catch (Exception e) {
             logger.error("赞失败:" + e.getMessage());
@@ -121,7 +127,7 @@ public class PaperController extends BaseController{
         return result;
     }
 
-    @RequestMapping(value = "findPaperComments")
+    @RequestMapping(value = "findPaperComments", method = RequestMethod.GET)
     public Map<String , Object> findPaperComments(Long paperId,
                                                   HttpServletRequest request, HttpServletResponse response){
         Map<String , Object> result = Maps.newHashMap();
@@ -135,7 +141,7 @@ public class PaperController extends BaseController{
         return result;
     }
 
-    @RequestMapping(value = "findPaperPraises")
+    @RequestMapping(value = "findPaperPraises",  method = RequestMethod.GET)
     public Map<String , Object> findPaperPraises(Long paperId,
                                                  HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();

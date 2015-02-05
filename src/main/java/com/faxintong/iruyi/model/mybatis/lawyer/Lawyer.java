@@ -189,4 +189,28 @@ public class Lawyer implements Serializable{
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
     }
+
+    @Override
+    public String toString() {
+        return "Lawyer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", status=" + status +
+                ", sex=" + sex +
+                ", address='" + address + '\'' +
+                ", cityId=" + cityId +
+                ", cityName='" + cityName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", ruleId=" + ruleId +
+                ", age=" + age +
+                ", createDate=" + createDate +
+                ", updateDate=" + updateDate +
+                ", photo='" + photo + '\'' +
+                ", lawOffice='" + lawOffice + '\'' +
+                ", businessLicense='" + businessLicense + '\'' +
+                ", introduction='" + introduction + '\'' +
+                '}';
+    }
 }

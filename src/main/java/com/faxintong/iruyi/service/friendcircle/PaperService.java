@@ -13,11 +13,10 @@ public interface PaperService {
 
     /**
      * 律师发表文章
-     * @param lawyerId
      * @param paper
      * @throws Exception
      */
-    public void reportPaper(Long lawyerId,Paper paper) throws Exception;
+    public void reportPaper(Paper paper) throws Exception;
 
     /**
      * 删除文章

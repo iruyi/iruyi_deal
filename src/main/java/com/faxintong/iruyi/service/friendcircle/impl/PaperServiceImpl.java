@@ -7,6 +7,7 @@ import com.faxintong.iruyi.model.mybatis.friendcircle.*;
 import com.faxintong.iruyi.service.friendcircle.PaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -25,7 +26,8 @@ public class PaperServiceImpl implements PaperService {
     private PaperPraiseMapper paperPraiseMapper;
 
     @Override
-    public void reportPaper(Long lawyerId, Paper paper) throws Exception {
+    @Transactional
+    public void reportPaper(Paper paper) throws Exception {
         paperMapper.insertSelective(paper);
     }
 
@@ -35,13 +37,17 @@ public class PaperServiceImpl implements PaperService {
      * @throws Exception
      */
     @Override
+    @Transactional
     public void deletePaperById(Long paperId) throws Exception {
+
         PaperExample paperExample = new PaperExample();
         paperExample.createCriteria().andIdEqualTo(paperId);
         paperMapper.deleteByExample(paperExample);
+
         PaperPraiseExample paperPraiseExample = new PaperPraiseExample();
         paperPraiseExample.createCriteria().andPaperIdEqualTo(paperId);
         paperPraiseMapper.deleteByExample(paperPraiseExample);
+
         PaperCommentExample paperCommentExample = new PaperCommentExample();
         paperCommentExample.createCriteria().andPaperIdEqualTo(paperId);
         paperCommentMapper.deleteByExample(paperCommentExample);
@@ -60,6 +66,7 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
+    @Transactional
     public void reportPaperComment(Long lawyerId, Long paperId, String comment) throws Exception {
         PaperComment paperComment = new PaperComment();
         paperComment.setLawyerId(lawyerId);

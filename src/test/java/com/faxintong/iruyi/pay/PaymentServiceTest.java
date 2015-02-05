@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.pay;
 
+import org.junit.Test;
 import com.faxintong.iruyi.base.BaseTest;
 import org.junit.Test;
 import org.junit.Before; 
@@ -10,33 +11,24 @@ import org.junit.After;
  */
 public class PaymentServiceTest extends BaseTest {
 
-@Before
-public void before() throws Exception { 
-} 
+    /**
+    *
+    * Method: paymentRecords(PaymentRecord payRecords)
+    *
+    */
+    @Test
+    public void testPaymentRecords() throws Exception {
+        //TODO: Test goes here...
+    }
 
-@After
-public void after() throws Exception { 
-} 
-
-/** 
-* 
-* Method: paymentRecords(PaymentRecord payRecords) 
-* 
-*/ 
-@Test
-public void testPaymentRecords() throws Exception { 
-//TODO: Test goes here... 
-} 
-
-/** 
-* 
-* Method: findPayRecordByOrderId(Long orderId) 
-* 
-*/ 
-@Test
-public void testFindPayRecordByOrderId() throws Exception { 
-//TODO: Test goes here... 
-} 
-
+    /**
+    *
+    * Method: findPayRecordByOrderId(Long orderId)
+    *
+    */
+    @Test
+    public void testFindPayRecordByOrderId() throws Exception {
+        //TODO: Test goes here...
+    }
 
 } 
