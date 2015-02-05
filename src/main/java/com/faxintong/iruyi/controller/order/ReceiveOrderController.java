@@ -32,6 +32,7 @@ public class ReceiveOrderController {
 
     @RequestMapping(value = "availReceiveOrders")
     public Map<String, Object> availReceiveOrders(HttpServletRequest request, String lawyerId) {
+        logger.info("lawyerId=" + lawyerId);
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
         try{
