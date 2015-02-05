@@ -1,13 +1,14 @@
 package com.faxintong.iruyi.price;
 
-import org.junit.Test; 
+import com.faxintong.iruyi.base.BaseTest;
+import org.junit.Test;
 import org.junit.Before; 
 import org.junit.After;
 
 /**
  * Created by ron on 2015/1/29.
  */
-public class PriceServiceTest {
+public class PriceServiceTest extends BaseTest {
 
     /**
     *

@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.firendcircle;
 
+import com.faxintong.iruyi.base.BaseTest;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.friendcircle.FriendsService;
 import org.junit.Test;
@@ -14,7 +15,7 @@ import java.util.List;
 * @since 01, 30, 2015
 * @version 1.0 
 */ 
-public class FriendsServiceTest {
+public class FriendsServiceTest extends BaseTest {
 
     @Autowired
     private FriendsService friendsService;

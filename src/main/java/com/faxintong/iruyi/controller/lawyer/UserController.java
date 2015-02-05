@@ -5,8 +5,8 @@ import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.utils.Config;
 import com.faxintong.iruyi.utils.MD5;
 import com.faxintong.iruyi.utils.RedisUtils;
+import com.faxintong.iruyi.utils.SessionUtil;
 import com.google.common.collect.Maps;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +51,7 @@ public class UserController extends BaseController {
             if(bindingResult.hasErrors()){
                 result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
             }else{
-                String code = (String) request.getSession().getAttribute("code");
+                String code = "123";//(String) request.getSession().getAttribute("code");
                 if(code == null) {
                     result.put(ERR_MSG, "请先填写验证码");
                 }else if (!code.equals(validCode)) {
@@ -63,7 +63,7 @@ public class UserController extends BaseController {
                     result.put(ERR_MSG, "该手机号格式错误");
                 }
                 else {
-//                    lawyer.setPassword();
+                    lawyer.setPassword(MD5.newinstance().getMD5ofStr(lawyer.getPassword()));
                     Date date = new Date();
                     lawyer.setCreateDate(date);
                     lawyer.setUpdateDate(date);
@@ -92,21 +92,19 @@ public class UserController extends BaseController {
     public Map<String, Object> login(String phone, String password, HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
-        String sessionId = request.getSession().getId();
-        if (RedisUtils.exists(SESSION_PREFIX + sessionId)){
-                result.put(RESULT, true);
-                return result;
-        }
+
         if(StringUtils.isEmpty(phone)) {
             result.put(ERR_MSG, "帐号不能为空");
         }else if(StringUtils.isEmpty(password)){
             result.put(ERR_MSG, "密码不能为空");
         }else {
             try {
-//                password = DigestUtils.md5(password).toString();
+                password = MD5.newinstance().getMD5ofStr(password);
                 if (!userService.loginValidate(phone, password))
                     result.put(ERR_MSG, "帐号密码不匹配");
                 else {
+                    String sessionId = SessionUtil.getSessionId();
+                    result.put("sessionId", sessionId);
                     Lawyer lawyer = userService.getLawyer(phone);
                     RedisUtils.set(SESSION_PREFIX + sessionId, "" + lawyer.getId());
                     result.put(RESULT, true);
@@ -125,10 +123,17 @@ public class UserController extends BaseController {
      * @param response
      */
     @RequestMapping(value = "logout")
-    public void logOut(HttpServletRequest request, HttpServletResponse response){
-        String sessionId = request.getSession().getId();
-        RedisUtils.del(SESSION_PREFIX + sessionId);
-        request.getSession().invalidate();
+    public Map<String, Object> logOut(HttpServletRequest request, HttpServletResponse response){
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(RESULT, false);
+        try {
+            String sessionId = request.getParameter("sessionId");
+            RedisUtils.del(SESSION_PREFIX + sessionId);
+            result.put(RESULT, true);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return result;
     }
 
     /**
