@@ -91,7 +91,7 @@ public class RedisUtils {
         Jedis jedis = getJedis();
         try {
             jedis.set(key, value);
-            jedis.expire(key, expireTime);
+            //jedis.expire(key, expireTime);
             logger.info("向缓存中写入数据,key="+key+",value="+value);
         } catch (Exception e) {
             e.printStackTrace();

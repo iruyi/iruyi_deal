@@ -14,17 +14,12 @@ import java.util.*;
 public class SqlInjectFilter implements Filter {
 
     private static List<String> invalidsql = new ArrayList<String>();
-    private static String error = "/WEB-INF/views/error/error.jsp";
     private static boolean debug = false;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         String sql = filterConfig.getInitParameter("invalidsql");
-        String errorpage = filterConfig.getInitParameter("error");
         String de = filterConfig.getInitParameter("debug");
-        if(errorpage != null){
-            error = errorpage;
-        }
         if(sql != null){
             invalidsql = Arrays.asList(sql.split(" "));
         }
@@ -36,10 +31,6 @@ public class SqlInjectFilter implements Filter {
             for(String s : invalidsql){
                 System.out.print(s+" ");
             }
-            System.out.println();
-            System.out.println("error page as fllows");
-            System.out.println(error);
-            System.out.println();
         }
     }
 
@@ -65,9 +56,6 @@ public class SqlInjectFilter implements Filter {
                     if(value.contains(">")){
                         value = value.replace(">", ">");
                     }
-                    //request.getSession().setAttribute("sqlInjectError", "the request parameter \""+value+"\" contains keyword: \""+word+"\"");
-                    //response.sendRedirect(request.getContextPath()+error);
-                    //return;
                     ServletUtils.sqlInject(response);
                 }
             }

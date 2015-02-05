@@ -19,11 +19,13 @@ public class ReceiveServiceTest extends BaseTest {
     @Test
     public void testFindAvailableOrders(){
         try {
+            Long l1 = System.currentTimeMillis();
             Long lawyerId = 5l;
             List<Order> orderList = receiveService.findAvailReceiveOrders(lawyerId);
             for(Order order : orderList){
                 System.out.println("匹配的单子：" + order.getId() + " " +order.getLawyerId());
             }
+            System.out.println("时间"+(System.currentTimeMillis()-l1));
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -50,4 +50,11 @@ public interface RejectService {
      */
     public List<Order> findOrdersByStatus(Long lawyerId, Integer status) throws Exception;
 
+    /**
+     * 甩单
+     * @param lawyerId
+     * @return
+     * @throws Exception
+     */
+    public  void buildOrder(Long lawyerId, Order order) throws Exception;
 }
