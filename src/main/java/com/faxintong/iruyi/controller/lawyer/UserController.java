@@ -5,6 +5,7 @@ import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.utils.Config;
 import com.faxintong.iruyi.utils.MD5;
 import com.faxintong.iruyi.utils.RedisUtils;
+import com.faxintong.iruyi.utils.SessionUtil;
 import com.google.common.collect.Maps;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -92,11 +93,11 @@ public class UserController extends BaseController {
     public Map<String, Object> login(String phone, String password, HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
-        String sessionId = request.getSession().getId();
+        /*String sessionId = request.getSession().getId();
         if (RedisUtils.exists(SESSION_PREFIX + sessionId)){
                 result.put(RESULT, true);
-                return result;
-        }
+            return result;
+        }*/
         if(StringUtils.isEmpty(phone)) {
             result.put(ERR_MSG, "帐号不能为空");
         }else if(StringUtils.isEmpty(password)){
@@ -107,6 +108,7 @@ public class UserController extends BaseController {
                 if (!userService.loginValidate(phone, password))
                     result.put(ERR_MSG, "帐号密码不匹配");
                 else {
+                    String sessionId = SessionUtil.getSessionId();
                     Lawyer lawyer = userService.getLawyer(phone);
                     RedisUtils.set(SESSION_PREFIX + sessionId, "" + lawyer.getId());
                     result.put(RESULT, true);
