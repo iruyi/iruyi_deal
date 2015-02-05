@@ -20,9 +20,10 @@
             <property name="suppressAllComments" value="true"/>
         </commentGenerator>
         <!--192.168.1.118:3306-->
+        <!--userId="root" password="123456"-->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                connectionURL="jdbc:mysql://127.0.0.1:3306/iruyi?generateSimpleParameterMetadata=true"
-                userId="root" password="123456"
+                connectionURL="jdbc:mysql://123.57.252.2:3306/iruyi?generateSimpleParameterMetadata=true"
+                userId="root" password="lawyer123"
                 >
         </jdbcConnection>
 
@@ -140,6 +141,7 @@
             <columnOverride column="end_flag" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
             <columnOverride column="deadline_date" javaType="java.util.Date" ></columnOverride>
             <columnOverride column="description" javaType="String" ></columnOverride>
+            <columnOverride column="keywords" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
             <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
         </table>

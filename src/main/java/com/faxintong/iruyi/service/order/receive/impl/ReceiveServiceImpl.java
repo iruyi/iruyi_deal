@@ -2,10 +2,7 @@ package com.faxintong.iruyi.service.order.receive.impl;
 
 import com.faxintong.iruyi.dao.general.order.OrderGeneralMapper;
 import com.faxintong.iruyi.dao.general.order.ReceiveGeneralMapper;
-import com.faxintong.iruyi.dao.mybatis.order.ReceiveOrderMapper;
 import com.faxintong.iruyi.model.mybatis.order.Order;
-import com.faxintong.iruyi.model.mybatis.order.ReceiveOrder;
-import com.faxintong.iruyi.model.mybatis.order.ReceiveOrderExample;
 import com.faxintong.iruyi.service.order.receive.ReceiveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

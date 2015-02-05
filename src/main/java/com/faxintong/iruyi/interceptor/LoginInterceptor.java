@@ -31,7 +31,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object o) throws Exception {
-        /*String userId = null;
+        String userId = null;
         final String appSessionId = request.getParameter("sessionId");
         if(!StringUtils.isEmpty(appSessionId)){
             userId = RedisUtils.get(SESSION_PREFIX + appSessionId);
@@ -44,16 +44,14 @@ public class LoginInterceptor implements HandlerInterceptor {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("sessionId")) {
                     final String sessionId = cookie.getValue();
-                    userId = RedisUtils.getJedis().get(SESSION_PREFIX + sessionId);
+                    userId = RedisUtils.get(SESSION_PREFIX + sessionId);
                     request.setAttribute("currentUserId", userId);
                     return ServletUtils.isValidUser(response, userId);
                 }
             }
         }
         logger.info("validate user legality -> userId = " + userId);
-        return ServletUtils.isValidUser(response, userId);*/
-
-        return true;
+        return ServletUtils.isValidUser(response, userId);
     }
 
 

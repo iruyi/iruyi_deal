@@ -8,10 +8,8 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 /**
  * Created by hehj on 15-1-12.
  */
-//@ActiveProfiles("TEST")
-@ActiveProfiles("LOCAL")
+@ActiveProfiles("TEST")
 @ContextConfiguration(locations = {"classpath*:applicationContext.xml"})
-//public class BaseTest extends AbstractTransactionalJUnit4SpringContextTests {
 public class BaseTest extends AbstractJUnit4SpringContextTests {
 
 

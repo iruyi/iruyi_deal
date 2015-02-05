@@ -51,4 +51,11 @@ public class ServletUtils {
         return true;
     }
 
+    public static void sqlInject(HttpServletResponse response){
+            Map<String, Object> result = Maps.newHashMap();
+            result.put(ERR_MSG, "非法操作");
+            result.put(RESULT, false);
+            responseJson(response, result);
+            return;
+    }
 }
