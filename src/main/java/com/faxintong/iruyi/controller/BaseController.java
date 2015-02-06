@@ -55,7 +55,7 @@ public class BaseController {
      * @return
      */
     protected Long getLawyerId(HttpServletRequest request){
-        return Long.valueOf(request.getParameter("currentUserId"));
+        return Long.valueOf((String) request.getAttribute("currentUserId"));
     }
 
     /**
