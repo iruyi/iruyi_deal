@@ -55,7 +55,7 @@ public class BaseController {
      * @return
      */
     protected Long getLawyerId(HttpServletRequest request){
-        return Long.valueOf(request.getParameter("currentUserId"));
+        return Long.valueOf((String) request.getAttribute("currentUserId"));
     }
 
     /**
@@ -64,7 +64,7 @@ public class BaseController {
      * @return
      */
     protected Lawyer getLawyer(HttpServletRequest request){
-        String sessionId = request.getParameter("sessionId");
+        String sessionId = (String) request.getAttribute("sessionId");
         String id = RedisUtils.get(SESSION_PREFIX + sessionId);
         return userService.getLawyerByPrimaryKey(Long.parseLong(id));
     }
