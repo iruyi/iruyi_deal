@@ -76,14 +76,28 @@ public class PaperServiceImpl implements PaperService {
         paperCommentMapper.insertSelective(paperComment);
     }
 
+    /**
+     * 赞的时候是否应该更新一下个人中心呢？
+     * @param lawyerId
+     * @param lawyerName
+     * @param paperId
+     * @throws Exception
+     */
     @Override
     public void praisePaper(Long lawyerId, String lawyerName, Long paperId) throws Exception {
-        PaperPraise paperPraise = new PaperPraise();
-        paperPraise.setLawyerId(lawyerId);
-        paperPraise.setPaperId(paperId);
-        paperPraise.setCreateTime(new Date());
-        paperPraise.setLawyerName(lawyerName);
-        paperPraiseMapper.insertSelective(paperPraise);
+        PaperPraiseExample paperPraiseExample = new PaperPraiseExample();
+        paperPraiseExample.createCriteria().andLawyerIdEqualTo(lawyerId).andPaperIdEqualTo(paperId);
+        if(paperPraiseMapper.countByExample(paperPraiseExample) == 0) {
+            PaperPraise paperPraise = new PaperPraise();
+            paperPraise.setLawyerId(lawyerId);
+            paperPraise.setPaperId(paperId);
+            paperPraise.setCreateTime(new Date());
+            paperPraise.setLawyerName(lawyerName);
+            paperPraiseMapper.insertSelective(paperPraise);
+        }
+        else {
+            paperPraiseMapper.deleteByExample(paperPraiseExample);
+        }
     }
 
     @Override
