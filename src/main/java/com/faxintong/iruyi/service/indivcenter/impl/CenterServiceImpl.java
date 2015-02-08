@@ -32,9 +32,11 @@ public class CenterServiceImpl implements CenterService {
     @Autowired
     private LawyerMapper lawyerMapper;
 
-
+    @Autowired
     private OrderMapper orderMapper;
+    @Autowired
     private ReceiveOrderMapper receiveOrderMapper;
+    @Autowired
     private PaymentRecordMapper payRecordMapper;
     private Long lawyerID;
     private static final Integer receiveSuccessStatus=4;

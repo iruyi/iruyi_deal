@@ -46,6 +46,15 @@ public class Constants {
     public static final Integer COMMENTING = 9;//已支付待互评（互评中）
     public static final Integer COMMENTED = 10;//已互评
 
+    /**********************单子是否延期状态*******************/
+    public static final Integer NO_DELAY = 1;//未延期
+    public static final Integer DELAY = 2;//已延期
+
+    /**********************单子类型*******************/
+    /**
+     * 1-案源 2-协作外包 3-商务信息
+     */
+
     /************************好友间关系*********************/
     public static final Integer UNCONFIRMED_FRIEND = 1;
     public static final Integer FRIEND = 2;
@@ -58,5 +67,10 @@ public class Constants {
     /*************************合同状态**********************/
     public static final Integer CONTRACT_COMMENTING = 2;//合同待确认
     public static final Integer CONTRACT_COMMENTED = 1;//合同已确认
+
+    /*************************黑白名单**********************/
+    public static final Integer ALL_LIST = 0;//所有律师
+    public static final Integer WHITE_LIST = 1;//白名单
+    public static final Integer BLACK_LIST = 2;//白名单
 
 }

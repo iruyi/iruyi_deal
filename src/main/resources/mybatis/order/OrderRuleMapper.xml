@@ -101,6 +101,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderRule" >
+      <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID() AS id
+      </selectKey>
     insert into order_rule (id, rule_name, city_id, 
       category_id, description, create_date
       )
@@ -109,6 +112,10 @@
       )
   </insert>
   <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderRule" >
+      <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID() AS id
+      </selectKey>
+
     insert into order_rule
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
