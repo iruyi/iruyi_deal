@@ -54,6 +54,9 @@ public class Constants {
     /**
      * 1-案源 2-协作外包 3-商务信息
      */
+    public static final Integer ANYUAN = 1;
+    public static final Integer WAIBAO = 2;
+    public static final Integer SHANGWU = 3;
 
     /************************好友间关系*********************/
     public static final Integer UNCONFIRMED_FRIEND = 1;

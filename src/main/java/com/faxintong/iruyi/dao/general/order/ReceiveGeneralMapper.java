@@ -36,6 +36,9 @@ public interface ReceiveGeneralMapper {
             "and not EXISTS(select 1 from receive_order rr where rr.lawyer_id=l.id and rr.order_id=o.id) limit 0,10")
     public List<Order> findAvailReceiveOrders(@Param("lawyerId") Long lawyerId) throws Exception;*/
 
+    @Update("update receive_order set status=#{status},update_date=now() where order_id=#{orderId} and lawyer_id=#{lawyerId}")
+    public void confirmOrRevoke(@Param("orderId") Long orderId, @Param("lawyerId") Long lawyerId, @Param("status") Integer status) throws Exception;
+
     /*@Select("select " + VIEW + " from lawyer l,lawyer_category_rela r,order_rule ru,`order` o " +
     "where l.id=#{lawyerId} and l.id=r.lawyer_id and r.category_id=ru.category_id and l.city_id=ru.city_id and ru.id=o.rule_id and o.`status`=1 and o.deadline_date>now() and o.roster_type = 0 " +
     "and not EXISTS(select 1 from receive_order rr where rr.lawyer_id=l.id and rr.order_id=o.id) " +
@@ -64,6 +67,7 @@ public interface ReceiveGeneralMapper {
             "       AND o.deadline_date > Now()                           " +
             "       AND o.roster_type = 0                                 " +
             "       AND ru.city_id = c.id                                 " +
+            "       AND o.type != 3                                       " +
             "       AND NOT EXISTS (SELECT 1                              " +
             "                       FROM   receive_order rr               " +
             "                       WHERE  rr.lawyer_id = l.id            " +
@@ -84,6 +88,7 @@ public interface ReceiveGeneralMapper {
             "       AND o.deadline_date > Now()                           " +
             "       AND o.roster_type = 1                                 " +
             "       AND ru.city_id = c.id                                 " +
+            "       AND o.type != 3                                       " +
             "       AND EXISTS (SELECT 1                                  " +
             "                   FROM   whitelist b                        " +
             "                   WHERE  b.order_id = o.id                  " +
@@ -108,6 +113,7 @@ public interface ReceiveGeneralMapper {
             "       AND o.deadline_date > Now()                           " +
             "       AND o.roster_type = 2                                 " +
             "       AND ru.city_id = c.id                                 " +
+            "       AND o.type != 3                                       " +
             "       AND NOT EXISTS (SELECT 1                              " +
             "                       FROM   blacklist b                    " +
             "                       WHERE  b.order_id = o.id              " +
@@ -117,9 +123,6 @@ public interface ReceiveGeneralMapper {
             "                       WHERE  rr.lawyer_id = l.id            " +
             "                              AND rr.order_id = o.id)        ")
     public List<GeneralOrder> findAvailReceiveOrders(@Param("lawyerId") Long lawyerId) throws Exception;
-
-    @Update("update receive_order set status=#{status},update_date=now() where order_id=#{orderId} and lawyer_id=#{lawyerId}")
-    public void confirmOrRevoke(@Param("orderId") Long orderId, @Param("lawyerId") Long lawyerId, @Param("status") Integer status) throws Exception;
 
     @Update("update receive_order set status=#{status},update_date=now() where order_id=#{orderId} and status=1")
     public void updateReceiveStatus(@Param("orderId") Long orderId, @Param("status") Integer status) throws Exception;

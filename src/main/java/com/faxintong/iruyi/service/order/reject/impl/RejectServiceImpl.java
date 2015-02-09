@@ -94,20 +94,22 @@ public class RejectServiceImpl implements RejectService {
 
     @Transactional
     public void buildOrder(GeneralOrder generalOrder) throws Exception{
-        Integer ruleId = null;
-        OrderRuleExample orderRuleExample = new OrderRuleExample();
-        orderRuleExample.createCriteria().andCategoryIdEqualTo(generalOrder.getCategoryId()).andCityIdEqualTo(generalOrder.getCityId());
-        List<OrderRule> orderRuleList = orderRuleMapper.selectByExample(orderRuleExample);
-        if(orderRuleList != null && orderRuleList.size() > 0){
-            ruleId = Integer.parseInt(orderRuleList.get(0).getId().toString());
-        }else{
-            OrderRule orderRule = new OrderRule();
-            orderRule.setRuleName(generalOrder.getTitle());
-            orderRule.setCategoryId(generalOrder.getCategoryId());
-            orderRule.setCityId(generalOrder.getCityId());
-            orderRule.setCreateDate(new Date());
-            orderRule.setDescription(generalOrder.getTitle());
-            ruleId = orderRuleMapper.insertSelective(orderRule);
+        Integer ruleId = 0;//默认情况下没有规则（商务单）
+        if(generalOrder.getType() != null && generalOrder.getType().intValue() != SHANGWU){
+            OrderRuleExample orderRuleExample = new OrderRuleExample();
+            orderRuleExample.createCriteria().andCategoryIdEqualTo(generalOrder.getCategoryId()).andCityIdEqualTo(generalOrder.getCityId());
+            List<OrderRule> orderRuleList = orderRuleMapper.selectByExample(orderRuleExample);
+            if(orderRuleList != null && orderRuleList.size() > 0){
+                ruleId = Integer.parseInt(orderRuleList.get(0).getId().toString());
+            }else{
+                OrderRule orderRule = new OrderRule();
+                orderRule.setRuleName(generalOrder.getTitle());
+                orderRule.setCategoryId(generalOrder.getCategoryId());
+                orderRule.setCityId(generalOrder.getCityId());
+                orderRule.setCreateDate(new Date());
+                orderRule.setDescription(generalOrder.getTitle());
+                ruleId = orderRuleMapper.insertSelective(orderRule);
+            }
         }
 
         if(ruleId == null){
