@@ -28,7 +28,7 @@ public class PriceServiceImpl implements PriceService {
     private PriceMapper priceMapper;
 
     @Override
-    public void rejectReportPrice(List<RejectOrderPrice> reportPrice) throws Exception {
+    public void rejectReportPrice(Long lawyerId, List<RejectOrderPrice> reportPrice) throws Exception {
         Date date = new Date();
         for(RejectOrderPrice r: reportPrice){
             r.setCreateDate(date);
@@ -37,10 +37,11 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public void receiveReportPrice(List<ReceiveOrderPrice> reportPrice) throws Exception {
+    public void receiveReportPrice(Long lawyerId, List<ReceiveOrderPrice> reportPrice) throws Exception {
         Date date = new Date();
         for(ReceiveOrderPrice r: reportPrice){
             r.setCreateDate(date);
+            r.setLawyerId(lawyerId);
             receiveOrderPriceMapper.insertSelective(r);
         }
     }
