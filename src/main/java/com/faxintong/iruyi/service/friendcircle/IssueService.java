@@ -1,5 +1,8 @@
 package com.faxintong.iruyi.service.friendcircle;
 
+import com.faxintong.iruyi.model.mybatis.community.Issue;
+import com.faxintong.iruyi.model.mybatis.community.Reply;
+
 import java.util.List;
 
 /**

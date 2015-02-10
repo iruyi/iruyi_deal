@@ -1,13 +1,21 @@
 package com.faxintong.iruyi.service.friendcircle.impl;
 
+import com.faxintong.iruyi.dao.mybatis.community.IssueMapper;
+import com.faxintong.iruyi.dao.mybatis.community.ReplyMapper;
+import com.faxintong.iruyi.model.mybatis.community.Issue;
+import com.faxintong.iruyi.model.mybatis.community.IssueExample;
+import com.faxintong.iruyi.model.mybatis.community.Reply;
+import com.faxintong.iruyi.model.mybatis.community.ReplyExample;
 import com.faxintong.iruyi.service.friendcircle.IssueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by ron on 2015/2/10.
  */
+@Service
 public class IssueServiceImpl implements IssueService{
 
     @Autowired
