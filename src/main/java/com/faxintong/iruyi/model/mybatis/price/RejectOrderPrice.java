@@ -7,11 +7,9 @@ public class RejectOrderPrice {
 
     private Long orderId;
 
-    private Float startPrice;
+    private Long lawyerId;
 
-    private Float endPrice;
-
-    private Float percentFigure;
+    private Float fixedFigure;
 
     private Date createDate;
 
@@ -31,28 +29,20 @@ public class RejectOrderPrice {
         this.orderId = orderId;
     }
 
-    public Float getStartPrice() {
-        return startPrice;
+    public Long getLawyerId() {
+        return lawyerId;
     }
 
-    public void setStartPrice(Float startPrice) {
-        this.startPrice = startPrice;
+    public void setLawyerId(Long lawyerId) {
+        this.lawyerId = lawyerId;
     }
 
-    public Float getEndPrice() {
-        return endPrice;
+    public Float getFixedFigure() {
+        return fixedFigure;
     }
 
-    public void setEndPrice(Float endPrice) {
-        this.endPrice = endPrice;
-    }
-
-    public Float getPercentFigure() {
-        return percentFigure;
-    }
-
-    public void setPercentFigure(Float percentFigure) {
-        this.percentFigure = percentFigure;
+    public void setFixedFigure(Float fixedFigure) {
+        this.fixedFigure = fixedFigure;
     }
 
     public Date getCreateDate() {

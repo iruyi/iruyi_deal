@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.service.order.reject;
 
+import com.faxintong.iruyi.model.general.lawyer.ReceiveLawyer;
 import com.faxintong.iruyi.model.general.order.GeneralOrder;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.order.Order;
@@ -33,7 +34,7 @@ public interface RejectService {
      * @return
      * @throws Exception
      */
-    public List<Lawyer> findReceiveOrderLawyerByOrderId(Long orderId) throws Exception;
+    public List<ReceiveLawyer> findReceiveOrderLawyers(Long orderId) throws Exception;
 
     /**
      * 甩单人选择一位合适的接单人
@@ -41,7 +42,7 @@ public interface RejectService {
      * @param lawyerId
      * @throws Exception
      */
-    public void ChooseOneBestLawyer(Long orderId,Long lawyerId) throws Exception;
+    public void chooseBestLawyer(Long orderId,Long lawyerId) throws Exception;
 
     /**
      * 根据状态获取单子

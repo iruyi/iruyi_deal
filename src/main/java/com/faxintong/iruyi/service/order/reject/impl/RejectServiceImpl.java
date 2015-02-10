@@ -1,7 +1,9 @@
 package com.faxintong.iruyi.service.order.reject.impl;
 
+import com.faxintong.iruyi.dao.general.order.ReceiveGeneralMapper;
 import com.faxintong.iruyi.dao.mybatis.lawyer.LawyerMapper;
 import com.faxintong.iruyi.dao.mybatis.order.*;
+import com.faxintong.iruyi.model.general.lawyer.ReceiveLawyer;
 import com.faxintong.iruyi.model.general.order.GeneralOrder;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.order.*;
@@ -34,6 +36,8 @@ public class RejectServiceImpl implements RejectService {
     private WhitelistMapper whitelistMapper;
     @Autowired
     private BlacklistMapper blacklistMapper;
+    @Autowired
+    private ReceiveGeneralMapper receiveGeneralMapper;
 
     private final Integer orderConfirmStatus=2;
     private final Integer receiveOrderConfirmStatus=2;
@@ -54,34 +58,13 @@ public class RejectServiceImpl implements RejectService {
     }
 
     @Override
-    public List<Lawyer> findReceiveOrderLawyerByOrderId(Long orderId) throws Exception {
-        ReceiveOrderExample example = new ReceiveOrderExample();
-        example.createCriteria().andOrderIdEqualTo(orderId);
-        List<ReceiveOrder> receiveOrderList = receiveOrderMapper.selectByExample(example);
-        List<Lawyer> lawyerList = new ArrayList<Lawyer>();
-        for(ReceiveOrder receiveOrder : receiveOrderList){
-            Long lawyerID = receiveOrder.getLawyerId();
-            Lawyer lawyer = lawyerMapper.selectByPrimaryKey(lawyerID);
-            lawyerList.add(lawyer);
-        }
-        return lawyerList;
+    public List<ReceiveLawyer> findReceiveOrderLawyers(Long orderId) throws Exception {
+        return receiveGeneralMapper.findReceiveOrderLawyers(orderId);
     }
 
-    @Override
-    public void ChooseOneBestLawyer(Long orderId, Long lawyerId) throws Exception {
-        Order order = orderMapper.selectByPrimaryKey(orderId);
-        order.setStatus(orderConfirmStatus);
-        ReceiveOrderExample example = new ReceiveOrderExample();
-        example.createCriteria().andOrderIdEqualTo(orderId);
-        List<ReceiveOrder> receiveOrderList = receiveOrderMapper.selectByExample(example);
-        for(ReceiveOrder receiveOrder : receiveOrderList){
-            if (receiveOrder.getLawyerId()==lawyerId){
-                receiveOrder.setStatus(receiveOrderConfirmStatus);
-            } else {
-                receiveOrder.setStatus(receiveOrderRejectStatus);
-            }
-        }
-
+    @Transactional
+    public void chooseBestLawyer(Long orderId, Long lawyerId) throws Exception {
+        receiveGeneralMapper.chooseBestLawyer(orderId, lawyerId, RECEIVED);
     }
 
     @Override
