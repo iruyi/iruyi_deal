@@ -3,21 +3,23 @@ package com.faxintong.iruyi.controller.price;
 import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.price.ReceiveOrderPrice;
 import com.faxintong.iruyi.model.mybatis.price.RejectOrderPrice;
+import com.faxintong.iruyi.model.mybatis.price.RejecterPrice;
 import com.faxintong.iruyi.service.price.PriceService;
+import com.faxintong.iruyi.utils.ValidateUtil;
 import com.google.common.collect.Maps;
-import org.hibernate.validator.constraints.NotBlank;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import static com.faxintong.iruyi.utils.Constants.DATA;
 import static com.faxintong.iruyi.utils.Constants.ERR_MSG;
 import static com.faxintong.iruyi.utils.Constants.RESULT;
 
@@ -32,16 +34,39 @@ public class PriceController extends BaseController{
     @Autowired
     private PriceService priceService;
 
+    @RequestMapping(value = "reject/defaultPrice")
+    public Map<String, Object> defaultPrice(HttpServletRequest request, String lawyerId){
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(RESULT, false);
+        try {
+            if(lawyerId == null){
+                result.put(ERR_MSG, "律师id为空");
+                return result;
+            }
+            List<RejecterPrice> rejecterPrices = priceService.findRejecterPrice(Long.parseLong(lawyerId.toString()));
+            result.put(RESULT, true);
+            result.put(DATA, rejecterPrices);
+        }catch (Exception e){
+            e.printStackTrace();
+            result.put(ERR_MSG, "甩单律师创建报价规则失败");
+            logger.error("甩单律师创建报价规则失败" + e.getMessage());
+        }
+        return result;
+    }
+
     @RequestMapping(value = "reject/report")
-    public Map<String, Object> rejectReportPrice(List<RejectOrderPrice> reportPrice,
+    public Map<String, Object> rejectReportPrice(RejectOrderPrice reportPrice,
                                                  HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
         try {
             Long lawyerId = getLawyerId(request);
-            priceService.rejectReportPrice(lawyerId, reportPrice);
-            result.put(RESULT, true);
-            result.put(ERR_MSG, "甩单律师创建报价规则成功");
+            reportPrice.setLawyerId(lawyerId);
+            reportPrice.setCreateDate(new Date());
+            if(ValidateUtil.validateRejectReport(reportPrice, result)){
+                priceService.rejectReportPrice(reportPrice);
+                result.put(RESULT, true);
+            }
         }catch (Exception e){
             e.printStackTrace();
             result.put(ERR_MSG, "甩单律师创建报价规则失败");

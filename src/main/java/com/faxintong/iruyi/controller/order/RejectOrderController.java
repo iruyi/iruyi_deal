@@ -41,8 +41,9 @@ public class RejectOrderController extends BaseController{
         if(ValidateUtil.validateGeneralOrder(generalOrder, result)){
             generalOrder.setLawyerId(getLawyerId(request));
             try {
-                rejectService.buildOrder(generalOrder);
+                Integer orderId = rejectService.buildOrder(generalOrder);
                 result.put(RESULT, true);
+                result.put("orderId", orderId);
             } catch (Exception e) {
                 logger.error(e.getMessage(), e);
                 result.put(ERR_MSG, "未知错误");

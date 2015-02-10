@@ -3,6 +3,7 @@ package com.faxintong.iruyi.service.price;
 import com.faxintong.iruyi.model.mybatis.price.Price;
 import com.faxintong.iruyi.model.mybatis.price.ReceiveOrderPrice;
 import com.faxintong.iruyi.model.mybatis.price.RejectOrderPrice;
+import com.faxintong.iruyi.model.mybatis.price.RejecterPrice;
 
 import java.util.List;
 
@@ -13,11 +14,18 @@ public interface PriceService {
 
     /**
      * 甩单律师创建报价规则
-     * @param lawyerId
      * @param reportPrice
      * @throws Exception
      */
-    public void rejectReportPrice(Long lawyerId, List<RejectOrderPrice> reportPrice) throws Exception;
+    public void rejectReportPrice(RejectOrderPrice reportPrice) throws Exception;
+
+    /**
+     * 甩单律师获取默认报价
+     * @param lawyerId
+     * @return
+     * @throws Exception
+     */
+    public List<RejecterPrice> findRejecterPrice(Long lawyerId) throws Exception;
 
     /**
      * 接单律师创建报价规则

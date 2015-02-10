@@ -2,7 +2,6 @@ package com.faxintong.iruyi.service.order.reject;
 
 import com.faxintong.iruyi.model.general.lawyer.ReceiveLawyer;
 import com.faxintong.iruyi.model.general.order.GeneralOrder;
-import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.order.Order;
 
 import java.util.List;
@@ -57,5 +56,5 @@ public interface RejectService {
      * @param generalOrder
      * @throws Exception
      */
-    public  void buildOrder(GeneralOrder generalOrder) throws Exception;
+    public  Integer buildOrder(GeneralOrder generalOrder) throws Exception;
 }

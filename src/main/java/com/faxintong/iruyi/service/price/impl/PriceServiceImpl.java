@@ -3,6 +3,7 @@ package com.faxintong.iruyi.service.price.impl;
 import com.faxintong.iruyi.dao.mybatis.price.PriceMapper;
 import com.faxintong.iruyi.dao.mybatis.price.ReceiveOrderPriceMapper;
 import com.faxintong.iruyi.dao.mybatis.price.RejectOrderPriceMapper;
+import com.faxintong.iruyi.dao.mybatis.price.RejecterPriceMapper;
 import com.faxintong.iruyi.model.mybatis.price.*;
 import com.faxintong.iruyi.service.price.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,16 +26,27 @@ public class PriceServiceImpl implements PriceService {
     private ReceiveOrderPriceMapper receiveOrderPriceMapper;
     @Autowired
     private PriceMapper priceMapper;
+    @Autowired
+    private RejecterPriceMapper rejecterPriceMapper;
 
     @Override
-    public void rejectReportPrice(Long lawyerId, List<RejectOrderPrice> reportPrice) throws Exception {
-        Date date = new Date();
+    public void rejectReportPrice(RejectOrderPrice reportPrice) throws Exception {
+        /*Date date = new Date();
         for(RejectOrderPrice r: reportPrice){
             r.setCreateDate(date);
             r.setLawyerId(lawyerId);
             rejectOrderPriceMapper.insertSelective(r);
-        }
+        }*/
+        rejectOrderPriceMapper.insertSelective(reportPrice);
     }
+
+    @Override
+    public List<RejecterPrice> findRejecterPrice(Long lawyerId) throws Exception {
+        RejecterPriceExample example = new RejecterPriceExample();
+        example.createCriteria().andLawyerIdEqualTo(lawyerId);
+        return rejecterPriceMapper.selectByExample(example);
+    }
+
 
     @Override
     public void receiveReportPrice(List<ReceiveOrderPrice> reportPrice) throws Exception {

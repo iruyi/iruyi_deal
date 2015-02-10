@@ -5,7 +5,6 @@ import com.faxintong.iruyi.dao.mybatis.lawyer.LawyerMapper;
 import com.faxintong.iruyi.dao.mybatis.order.*;
 import com.faxintong.iruyi.model.general.lawyer.ReceiveLawyer;
 import com.faxintong.iruyi.model.general.order.GeneralOrder;
-import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.order.*;
 import com.faxintong.iruyi.service.order.reject.RejectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +75,7 @@ public class RejectServiceImpl implements RejectService {
     }
 
     @Transactional
-    public void buildOrder(GeneralOrder generalOrder) throws Exception{
+    public Integer buildOrder(GeneralOrder generalOrder) throws Exception{
         Integer ruleId = 0;//默认情况下没有规则（商务单）
         if(generalOrder.getType() != null && generalOrder.getType().intValue() != SHANGWU){
             OrderRuleExample orderRuleExample = new OrderRuleExample();
@@ -138,6 +137,7 @@ public class RejectServiceImpl implements RejectService {
                 }
             }
         }
+        return orderId;
     }
 
 }
