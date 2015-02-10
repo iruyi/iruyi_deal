@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.controller.price;
 
+import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.price.ReceiveOrderPrice;
 import com.faxintong.iruyi.model.mybatis.price.RejectOrderPrice;
 import com.faxintong.iruyi.service.price.PriceService;
@@ -25,7 +26,7 @@ import static com.faxintong.iruyi.utils.Constants.RESULT;
  */
 @RestController
 @RequestMapping("price")
-public class PriceController {
+public class PriceController extends BaseController{
     private static final Logger logger = LoggerFactory.getLogger(PriceController.class);
 
     @Autowired
@@ -37,10 +38,12 @@ public class PriceController {
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
         try {
-            priceService.rejectReportPrice(reportPrice);
+            Long lawyerId = getLawyerId(request);
+            priceService.rejectReportPrice(lawyerId, reportPrice);
             result.put(RESULT, true);
             result.put(ERR_MSG, "甩单律师创建报价规则成功");
         }catch (Exception e){
+            e.printStackTrace();
             result.put(ERR_MSG, "甩单律师创建报价规则失败");
             logger.error("甩单律师创建报价规则失败" + e.getMessage());
         }
