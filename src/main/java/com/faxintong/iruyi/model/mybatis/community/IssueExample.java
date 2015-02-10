@@ -225,6 +225,76 @@ public class IssueExample {
             return (Criteria) this;
         }
 
+        public Criteria andLawyerNameIsNull() {
+            addCriterion("lawyer_name is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLawyerNameIsNotNull() {
+            addCriterion("lawyer_name is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLawyerNameEqualTo(String value) {
+            addCriterion("lawyer_name =", value, "lawyerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLawyerNameNotEqualTo(String value) {
+            addCriterion("lawyer_name <>", value, "lawyerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLawyerNameGreaterThan(String value) {
+            addCriterion("lawyer_name >", value, "lawyerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLawyerNameGreaterThanOrEqualTo(String value) {
+            addCriterion("lawyer_name >=", value, "lawyerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLawyerNameLessThan(String value) {
+            addCriterion("lawyer_name <", value, "lawyerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLawyerNameLessThanOrEqualTo(String value) {
+            addCriterion("lawyer_name <=", value, "lawyerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLawyerNameLike(String value) {
+            addCriterion("lawyer_name like", value, "lawyerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLawyerNameNotLike(String value) {
+            addCriterion("lawyer_name not like", value, "lawyerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLawyerNameIn(List<String> values) {
+            addCriterion("lawyer_name in", values, "lawyerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLawyerNameNotIn(List<String> values) {
+            addCriterion("lawyer_name not in", values, "lawyerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLawyerNameBetween(String value1, String value2) {
+            addCriterion("lawyer_name between", value1, value2, "lawyerName");
+            return (Criteria) this;
+        }
+
+        public Criteria andLawyerNameNotBetween(String value1, String value2) {
+            addCriterion("lawyer_name not between", value1, value2, "lawyerName");
+            return (Criteria) this;
+        }
+
         public Criteria andTitleIsNull() {
             addCriterion("title is null");
             return (Criteria) this;
