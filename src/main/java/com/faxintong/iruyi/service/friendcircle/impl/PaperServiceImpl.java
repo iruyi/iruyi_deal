@@ -113,4 +113,15 @@ public class PaperServiceImpl implements PaperService {
         paperPraiseExample.createCriteria().andPaperIdEqualTo(paperId);
         return paperPraiseMapper.selectByExample(paperPraiseExample);
     }
+
+    @Override
+    public List<Paper> findPapers(Integer page) throws Exception {
+        PaperExample paperExample = new PaperExample();
+        return paperMapper.selectByExample(paperExample);
+    }
+
+    @Override
+    public void praiseComment(Long LawyerId, String LawyerName, Long commentId) throws Exception {
+
+    }
 }

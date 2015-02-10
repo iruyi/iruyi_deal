@@ -210,4 +210,51 @@ public class PaperController extends BaseController{
         }
         return result;
     }
+
+    /**
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("findNews")
+    public Map<String, Object> findNewestPapers(HttpServletRequest request, HttpServletResponse response){
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(RESULT, false);
+        try{
+
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("");
+        }
+        return result;
+    }
+
+    /**
+     *
+     * @param request
+     * @param response
+     * @return
+     */
+    @RequestMapping("findAllPapers")
+    public Map<String, Object> findAllPapers(Integer page, HttpServletRequest request, HttpServletResponse response){
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(RESULT, false);
+        try{
+            result.put("papers", paperService.findPapers(0));
+            result.put(RESULT, true);
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("");
+            result.put(ERR_MSG, "查找问题出错");
+        }
+        return result;
+    }
+
+    public Map<String, Object> getCommunityNews(HttpServletRequest request, HttpServletResponse response){
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(RESULT, false);
+
+        return result;
+    }
 }

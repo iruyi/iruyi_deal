@@ -73,4 +73,8 @@ public interface PaperService {
      * @throws Exception
      */
     public List<PaperPraise> findPaperPraises(Long paperId) throws Exception;
+
+    public List<Paper> findPapers(Integer page) throws Exception;
+
+    public void praiseComment(Long LawyerId, String LawyerName, Long commentId) throws Exception;
 }
