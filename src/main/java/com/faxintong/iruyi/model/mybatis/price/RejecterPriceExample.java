@@ -225,183 +225,63 @@ public class RejecterPriceExample {
             return (Criteria) this;
         }
 
-        public Criteria andStartPriceIsNull() {
-            addCriterion("start_price is null");
+        public Criteria andFixedFigureIsNull() {
+            addCriterion("fixed_figure is null");
             return (Criteria) this;
         }
 
-        public Criteria andStartPriceIsNotNull() {
-            addCriterion("start_price is not null");
+        public Criteria andFixedFigureIsNotNull() {
+            addCriterion("fixed_figure is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStartPriceEqualTo(Float value) {
-            addCriterion("start_price =", value, "startPrice");
+        public Criteria andFixedFigureEqualTo(Float value) {
+            addCriterion("fixed_figure =", value, "fixedFigure");
             return (Criteria) this;
         }
 
-        public Criteria andStartPriceNotEqualTo(Float value) {
-            addCriterion("start_price <>", value, "startPrice");
+        public Criteria andFixedFigureNotEqualTo(Float value) {
+            addCriterion("fixed_figure <>", value, "fixedFigure");
             return (Criteria) this;
         }
 
-        public Criteria andStartPriceGreaterThan(Float value) {
-            addCriterion("start_price >", value, "startPrice");
+        public Criteria andFixedFigureGreaterThan(Float value) {
+            addCriterion("fixed_figure >", value, "fixedFigure");
             return (Criteria) this;
         }
 
-        public Criteria andStartPriceGreaterThanOrEqualTo(Float value) {
-            addCriterion("start_price >=", value, "startPrice");
+        public Criteria andFixedFigureGreaterThanOrEqualTo(Float value) {
+            addCriterion("fixed_figure >=", value, "fixedFigure");
             return (Criteria) this;
         }
 
-        public Criteria andStartPriceLessThan(Float value) {
-            addCriterion("start_price <", value, "startPrice");
+        public Criteria andFixedFigureLessThan(Float value) {
+            addCriterion("fixed_figure <", value, "fixedFigure");
             return (Criteria) this;
         }
 
-        public Criteria andStartPriceLessThanOrEqualTo(Float value) {
-            addCriterion("start_price <=", value, "startPrice");
+        public Criteria andFixedFigureLessThanOrEqualTo(Float value) {
+            addCriterion("fixed_figure <=", value, "fixedFigure");
             return (Criteria) this;
         }
 
-        public Criteria andStartPriceIn(List<Float> values) {
-            addCriterion("start_price in", values, "startPrice");
+        public Criteria andFixedFigureIn(List<Float> values) {
+            addCriterion("fixed_figure in", values, "fixedFigure");
             return (Criteria) this;
         }
 
-        public Criteria andStartPriceNotIn(List<Float> values) {
-            addCriterion("start_price not in", values, "startPrice");
+        public Criteria andFixedFigureNotIn(List<Float> values) {
+            addCriterion("fixed_figure not in", values, "fixedFigure");
             return (Criteria) this;
         }
 
-        public Criteria andStartPriceBetween(Float value1, Float value2) {
-            addCriterion("start_price between", value1, value2, "startPrice");
+        public Criteria andFixedFigureBetween(Float value1, Float value2) {
+            addCriterion("fixed_figure between", value1, value2, "fixedFigure");
             return (Criteria) this;
         }
 
-        public Criteria andStartPriceNotBetween(Float value1, Float value2) {
-            addCriterion("start_price not between", value1, value2, "startPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndPriceIsNull() {
-            addCriterion("end_price is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndPriceIsNotNull() {
-            addCriterion("end_price is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndPriceEqualTo(Float value) {
-            addCriterion("end_price =", value, "endPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndPriceNotEqualTo(Float value) {
-            addCriterion("end_price <>", value, "endPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndPriceGreaterThan(Float value) {
-            addCriterion("end_price >", value, "endPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndPriceGreaterThanOrEqualTo(Float value) {
-            addCriterion("end_price >=", value, "endPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndPriceLessThan(Float value) {
-            addCriterion("end_price <", value, "endPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndPriceLessThanOrEqualTo(Float value) {
-            addCriterion("end_price <=", value, "endPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndPriceIn(List<Float> values) {
-            addCriterion("end_price in", values, "endPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndPriceNotIn(List<Float> values) {
-            addCriterion("end_price not in", values, "endPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndPriceBetween(Float value1, Float value2) {
-            addCriterion("end_price between", value1, value2, "endPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andEndPriceNotBetween(Float value1, Float value2) {
-            addCriterion("end_price not between", value1, value2, "endPrice");
-            return (Criteria) this;
-        }
-
-        public Criteria andPercentFigureIsNull() {
-            addCriterion("percent_figure is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPercentFigureIsNotNull() {
-            addCriterion("percent_figure is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andPercentFigureEqualTo(Float value) {
-            addCriterion("percent_figure =", value, "percentFigure");
-            return (Criteria) this;
-        }
-
-        public Criteria andPercentFigureNotEqualTo(Float value) {
-            addCriterion("percent_figure <>", value, "percentFigure");
-            return (Criteria) this;
-        }
-
-        public Criteria andPercentFigureGreaterThan(Float value) {
-            addCriterion("percent_figure >", value, "percentFigure");
-            return (Criteria) this;
-        }
-
-        public Criteria andPercentFigureGreaterThanOrEqualTo(Float value) {
-            addCriterion("percent_figure >=", value, "percentFigure");
-            return (Criteria) this;
-        }
-
-        public Criteria andPercentFigureLessThan(Float value) {
-            addCriterion("percent_figure <", value, "percentFigure");
-            return (Criteria) this;
-        }
-
-        public Criteria andPercentFigureLessThanOrEqualTo(Float value) {
-            addCriterion("percent_figure <=", value, "percentFigure");
-            return (Criteria) this;
-        }
-
-        public Criteria andPercentFigureIn(List<Float> values) {
-            addCriterion("percent_figure in", values, "percentFigure");
-            return (Criteria) this;
-        }
-
-        public Criteria andPercentFigureNotIn(List<Float> values) {
-            addCriterion("percent_figure not in", values, "percentFigure");
-            return (Criteria) this;
-        }
-
-        public Criteria andPercentFigureBetween(Float value1, Float value2) {
-            addCriterion("percent_figure between", value1, value2, "percentFigure");
-            return (Criteria) this;
-        }
-
-        public Criteria andPercentFigureNotBetween(Float value1, Float value2) {
-            addCriterion("percent_figure not between", value1, value2, "percentFigure");
+        public Criteria andFixedFigureNotBetween(Float value1, Float value2) {
+            addCriterion("fixed_figure not between", value1, value2, "fixedFigure");
             return (Criteria) this;
         }
 

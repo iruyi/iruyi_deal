@@ -105,12 +105,14 @@ public class UserServiceTest extends BaseTest {
     @Test
     public void testUpdateLawyerInfo() throws Exception {
         Lawyer lawyer = userService.getLawyerByPrimaryKey(1L);
-        lawyer.setName("heyhey");
-        try {
-            userService.updateLawyerInfo(lawyer);
-            System.out.println("更新律师信息测试成功:\n" + lawyer);
-        }catch (Exception e){
-            e.printStackTrace();
+        if(lawyer != null){
+            lawyer.setName("heyhey");
+            try {
+                userService.updateLawyerInfo(lawyer);
+                System.out.println("更新律师信息测试成功:\n" + lawyer);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
 

@@ -7,7 +7,11 @@ public class ReceiverPrice {
 
     private Long lawyerId;
 
-    private Float fixedFigure;
+    private Float startPrice;
+
+    private Float endPrice;
+
+    private Float percentFigure;
 
     private Date createDate;
 
@@ -27,12 +31,28 @@ public class ReceiverPrice {
         this.lawyerId = lawyerId;
     }
 
-    public Float getFixedFigure() {
-        return fixedFigure;
+    public Float getStartPrice() {
+        return startPrice;
     }
 
-    public void setFixedFigure(Float fixedFigure) {
-        this.fixedFigure = fixedFigure;
+    public void setStartPrice(Float startPrice) {
+        this.startPrice = startPrice;
+    }
+
+    public Float getEndPrice() {
+        return endPrice;
+    }
+
+    public void setEndPrice(Float endPrice) {
+        this.endPrice = endPrice;
+    }
+
+    public Float getPercentFigure() {
+        return percentFigure;
+    }
+
+    public void setPercentFigure(Float percentFigure) {
+        this.percentFigure = percentFigure;
     }
 
     public Date getCreateDate() {

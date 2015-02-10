@@ -3,7 +3,6 @@ package com.faxintong.iruyi.service.price.impl;
 import com.faxintong.iruyi.dao.mybatis.price.PriceMapper;
 import com.faxintong.iruyi.dao.mybatis.price.ReceiveOrderPriceMapper;
 import com.faxintong.iruyi.dao.mybatis.price.RejectOrderPriceMapper;
-import com.faxintong.iruyi.model.mybatis.order.ReceiveOrderExample;
 import com.faxintong.iruyi.model.mybatis.price.*;
 import com.faxintong.iruyi.service.price.PriceService;
 import org.springframework.beans.factory.annotation.Autowired;

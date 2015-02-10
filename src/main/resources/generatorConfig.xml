@@ -7,7 +7,7 @@
 <generatorConfiguration>
 
     <!--数据库驱动-->
-    <classPathEntry  location="E:\maven\repostitory\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar"/>
+    <classPathEntry  location="C:\Users\hehongju\.m2\repository\mysql\mysql-connector-java\5.1.30\mysql-connector-java-5.1.30.jar"/>
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <!--关闭注解信息 -->
 
@@ -32,23 +32,56 @@
         </javaTypeResolver>
 
         <!-- generate Model -->
-        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.community"
+        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.price"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!-- generate xml -->
-        <sqlMapGenerator targetPackage="mybatis.community"
+        <sqlMapGenerator targetPackage="mybatis.price"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- generate Mapper -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.community"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.price"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
+
+        <table tableName="reject_order_price" domainObjectName="RejectOrderPrice">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="order_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="fixed_figure" javaType="Float" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>
+
+        <table tableName="receive_order_price" domainObjectName="ReceiveOrderPrice">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="order_id" javaType="Long" ></columnOverride>
+            <columnOverride column="start_price" javaType="Float" ></columnOverride>
+            <columnOverride column="end_price" javaType="Float" ></columnOverride>
+            <columnOverride column="percent_figure" javaType="Float" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>
+
+        <table tableName="rejecter_price" domainObjectName="RejecterPrice">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="fixed_figure" javaType="Float" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>
+
+        <table tableName="receiver_price" domainObjectName="ReceiverPrice">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="start_price" javaType="Float" ></columnOverride>
+            <columnOverride column="end_price" javaType="Float" ></columnOverride>
+            <columnOverride column="percent_figure" javaType="Float" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>
 
         <!--<table tableName="order_rule" domainObjectName="OrderRule">
             <columnOverride column="id" javaType="Long" ></columnOverride>
@@ -186,14 +219,21 @@
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
         </table>-->
 
-        <table tableName="reply" domainObjectName="Reply">
+        <!--<table tableName="reply" domainObjectName="Reply">
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="issue_id" javaType="Long" ></columnOverride>
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
             <columnOverride column="reply_content" javaType="String" ></columnOverride>
             <columnOverride column="praise_count" javaType="Integer" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
-        </table>
+        </table>-->
+
+        <!--<table tableName="reply_praise" domainObjectName="ReplyPraise">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="reply_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
 
     </context>
 </generatorConfiguration>
