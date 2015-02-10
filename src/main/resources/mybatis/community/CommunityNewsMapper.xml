@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.faxintong.iruyi.dao.mybatis.community.CommunityNewsMapper" >
+    <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.community.CommunityNews" >
+        <result column="issue_id" property="issueId" jdbcType="BIGINT" />
+        <result column="reply_id" property="replyId" jdbcType="BIGINT" />
+        <result column="issue_lawyer_id" property="issueLawyerId" jdbcType="BIGINT" />
+        <result column="reply_lawyer_id" property="replyLawyerId" jdbcType="BIGINT" />
+        <result column="issue_lawyer_name" property="issueLawyerName" jdbcType="VARCHAR" />
+        <result column="reply_lawyer_name" property="replyLawyerName" jdbcType="VARCHAR" />
+        <result column="issue_title" property="issueTitle" jdbcType="VARCHAR" />
+        <result column="issue_content" property="issueContent" jdbcType="VARCHAR" />
+        <result column="reply_content" property="replyContent" jdbcType="VARCHAR" />
+        <result column="praise_count" property="praiseCount" jdbcType="BIGINT" />
+        <result column="issue_create_date" property="issueCreateDate" jdbcType="TIMESTAMP" />
+        <result column="reply_create_date" property="replyCreateDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <select id="getCommunityNews" resultMap="BaseResultMap" >
+        SELECT issue.id AS issue_id, issue.lawyer_id AS issue_laywer_id, issue.lawyer_name AS issue_lawyer_name,
+        title as issue_title, content as issue_content,
+         issue.create_date AS issue_create_date, reply.id AS reply_id, reply.lawyer_id AS reply_lawyer_id,
+         reply_content, praise_count, reply.create_date AS reply_create_date , reply.lawyer_name AS reply_lawyer_name
+    </select>
+</mapper>
