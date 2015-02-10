@@ -60,6 +60,7 @@ public class PriceController extends BaseController{
             result.put(RESULT, true);
             result.put(ERR_MSG, "接单律师创建报价规则成功");
         }catch (Exception e){
+            e.printStackTrace();
             logger.error("接单律师创建报价规则失败" + e.getMessage());
             result.put(ERR_MSG, "接单律师创建报价规则失败");
         }
@@ -67,19 +68,22 @@ public class PriceController extends BaseController{
     }
 
     @RequestMapping(value = "find/reject")
-    public Map<String, Object> findRejectReportPrice(@NotBlank Long orderId, BindingResult bindingResult,
+    public Map<String, Object> findRejectReportPrice(Long orderId,
                                                      HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
-        if(bindingResult.hasErrors()){
-            result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
+
+        if(orderId == null){
+            result.put(ERR_MSG, "订单ID不能为空");
             return result;
         }
+
         try {
             priceService.findRejectReportPrice(orderId);
             result.put(RESULT, true);
             result.put(ERR_MSG, "查询甩单律师报价规则成功");
         }catch (Exception e){
+            e.printStackTrace();
             logger.error("查询甩单律师报价规则失败:" + e.getMessage());
             result.put(ERR_MSG, "查询甩单律师报价规则失败");
         }
@@ -87,19 +91,22 @@ public class PriceController extends BaseController{
     }
 
     @RequestMapping(value = "find/receive")
-    public Map<String, Object> findReceiveReportPrice(@NotBlank Long lawyerId, @NotBlank Long orderId, BindingResult bindingResult,
+    public Map<String, Object> findReceiveReportPrice(Long orderId,
                                                       HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
-        if(bindingResult.hasErrors()){
-            result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
+
+        if(orderId == null){
+            result.put(ERR_MSG, "订单ID不能为空");
             return result;
         }
+
         try {
             priceService.findRejectReportPrice(orderId);
             result.put(ERR_MSG, "查询接单律师报价规则成功");
             result.put(RESULT, true);
         }catch (Exception e){
+            e.printStackTrace();
             result.put(ERR_MSG, "查询接单律师报价规则失败");
             logger.error("查询接单律师报价规则:" + e.getMessage());
         }
@@ -107,32 +114,42 @@ public class PriceController extends BaseController{
     }
 
     @RequestMapping(value = "calculate/reject")
-    public Map<String, Object> calculateRejectPrice(@NotBlank Long lawyerId, @NotBlank Long orderId,@NotBlank  Integer lawyerType,
-                                                    BindingResult bindingResult,
+    public Map<String, Object> calculateRejectPrice(Long lawyerId, Long orderId, Integer lawyerType,
                                                     HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
-        if(bindingResult.hasErrors()){
-            result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
+
+        if(lawyerId == null){
+            result.put(ERR_MSG, "律师id不能为空");
             return result;
         }
+
+        if(orderId == null){
+            result.put(ERR_MSG, "订单ID不能为空");
+            return result;
+        }
+
+        if(lawyerType == null){
+            result.put(ERR_MSG, "类型不能为空");
+            return result;
+        }
+
         try {
 
         }catch (Exception e){
-
+            e.printStackTrace();
+            result.put(ERR_MSG, "计算报价出错");
+            logger.error("计算报价出错：" + e.getMessage());
         }
         return result;
     }
 
     @RequestMapping(value = "find/byId")
-    public Map<String, Object> findReportPriceByOrderId(@NotBlank Long orderId, BindingResult bindingResult,
+    public Map<String, Object> findReportPriceByOrderId(Long orderId,
                                                         HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
-        if(bindingResult.hasErrors()){
-            result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
-            return result;
-        }
+
         try {
 
         }catch (Exception e){

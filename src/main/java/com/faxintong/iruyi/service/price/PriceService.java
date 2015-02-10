@@ -21,11 +21,10 @@ public interface PriceService {
 
     /**
      * 接单律师创建报价规则
-     * @param lawyerId
      * @param reportPrice
      * @throws Exception
      */
-    public void receiveReportPrice(Long lawyerId, List<ReceiveOrderPrice> reportPrice) throws Exception;
+    public void receiveReportPrice(List<ReceiveOrderPrice> reportPrice) throws Exception;
 
     /**
      * 甩单律师查询报价规则
@@ -37,12 +36,11 @@ public interface PriceService {
 
     /**
      * 接单律师查询报价规则
-     * @param lawyerId
      * @param orderId
      * @return
      * @throws Exception
      */
-    public List<ReceiveOrderPrice> findReceiveReportPrice(Long lawyerId,Long orderId)throws Exception;
+    public List<ReceiveOrderPrice> findReceiveReportPrice(Long orderId)throws Exception;
 
     /**
      * 计算甩/接单律师报价金额

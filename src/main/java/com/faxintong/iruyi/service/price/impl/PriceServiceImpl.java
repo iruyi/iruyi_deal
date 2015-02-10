@@ -31,16 +31,16 @@ public class PriceServiceImpl implements PriceService {
         Date date = new Date();
         for(RejectOrderPrice r: reportPrice){
             r.setCreateDate(date);
+            r.setLawyerId(lawyerId);
             rejectOrderPriceMapper.insertSelective(r);
         }
     }
 
     @Override
-    public void receiveReportPrice(Long lawyerId, List<ReceiveOrderPrice> reportPrice) throws Exception {
+    public void receiveReportPrice(List<ReceiveOrderPrice> reportPrice) throws Exception {
         Date date = new Date();
         for(ReceiveOrderPrice r: reportPrice){
             r.setCreateDate(date);
-            r.setLawyerId(lawyerId);
             receiveOrderPriceMapper.insertSelective(r);
         }
     }
@@ -53,9 +53,9 @@ public class PriceServiceImpl implements PriceService {
     }
 
     @Override
-    public List<ReceiveOrderPrice> findReceiveReportPrice(Long lawyerId, Long orderId) throws Exception {
+    public List<ReceiveOrderPrice> findReceiveReportPrice(Long orderId) throws Exception {
         ReceiveOrderPriceExample receiveOrderPriceExample = new ReceiveOrderPriceExample();
-        receiveOrderPriceExample.createCriteria().andLawyerIdEqualTo(lawyerId).andOrderIdEqualTo(orderId);
+        receiveOrderPriceExample.createCriteria().andOrderIdEqualTo(orderId);
         return receiveOrderPriceMapper.selectByExample(receiveOrderPriceExample);
     }
 
