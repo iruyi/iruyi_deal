@@ -7,6 +7,8 @@ public class Issue {
 
     private Long lawyerId;
 
+    private String lawyerName;
+
     private String title;
 
     private String content;
@@ -27,6 +29,14 @@ public class Issue {
 
     public void setLawyerId(Long lawyerId) {
         this.lawyerId = lawyerId;
+    }
+
+    public String getLawyerName() {
+        return lawyerName;
+    }
+
+    public void setLawyerName(String lawyerName) {
+        this.lawyerName = lawyerName;
     }
 
     public String getTitle() {

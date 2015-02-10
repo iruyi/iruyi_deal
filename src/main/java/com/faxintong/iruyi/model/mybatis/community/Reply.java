@@ -9,6 +9,8 @@ public class Reply {
 
     private Long lawyerId;
 
+    private String lawyerName;
+
     private String replyContent;
 
     private Integer praiseCount;
@@ -37,6 +39,14 @@ public class Reply {
 
     public void setLawyerId(Long lawyerId) {
         this.lawyerId = lawyerId;
+    }
+
+    public String getLawyerName() {
+        return lawyerName;
+    }
+
+    public void setLawyerName(String lawyerName) {
+        this.lawyerName = lawyerName;
     }
 
     public String getReplyContent() {
