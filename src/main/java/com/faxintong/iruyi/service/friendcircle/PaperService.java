@@ -76,5 +76,12 @@ public interface PaperService {
 
     public List<Paper> findPapers(Integer page) throws Exception;
 
+    /**
+     * 给评论点赞
+     * @param LawyerId
+     * @param LawyerName
+     * @param commentId
+     * @throws Exception
+     */
     public void praiseComment(Long LawyerId, String LawyerName, Long commentId) throws Exception;
 }
