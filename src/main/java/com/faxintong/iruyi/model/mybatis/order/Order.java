@@ -1,8 +1,9 @@
 package com.faxintong.iruyi.model.mybatis.order;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Order {
+public class Order implements Serializable{
     private Long id;
 
     private String title;

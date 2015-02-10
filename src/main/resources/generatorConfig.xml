@@ -32,20 +32,20 @@
         </javaTypeResolver>
 
         <!-- generate Model -->
-        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.order"
+        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.community"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!-- generate xml -->
-        <sqlMapGenerator targetPackage="mybatis.order"
+        <sqlMapGenerator targetPackage="mybatis.community"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- generate Mapper -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.order"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.community"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -129,7 +129,7 @@
             <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
         </table>-->
 
-        <table tableName="order" domainObjectName="Order">
+        <!--<table tableName="order" domainObjectName="Order">
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="title" javaType="String" ></columnOverride>
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
@@ -144,7 +144,7 @@
             <columnOverride column="keywords" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
             <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
-        </table>
+        </table>-->
 
         <!--<table tableName="order" domainObjectName="Order">
             <columnOverride column="id" javaType="Long" ></columnOverride>
@@ -177,5 +177,23 @@
             <columnOverride column="copy_flag" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
             <columnOverride column="payment" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
         </table>-->
+
+        <!--<table tableName="issue" domainObjectName="Issue">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="title" javaType="String" ></columnOverride>
+            <columnOverride column="content" javaType="String" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
+
+        <table tableName="reply" domainObjectName="Reply">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="issue_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="reply_content" javaType="String" ></columnOverride>
+            <columnOverride column="praise_count" javaType="Integer" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>
+
     </context>
 </generatorConfiguration>

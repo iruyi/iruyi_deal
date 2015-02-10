@@ -85,32 +85,36 @@
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from order
+    from `order`
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
     <if test="orderByClause != null" >
-      order by ${orderByClause}
+        `order` by ${orderByClause}
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
     select 
     <include refid="Base_Column_List" />
-    from order
+    from `order`
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="Long" >
-    delete from order
+    delete from `order`
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderExample" >
-    delete from order
+    delete from `order`
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
   <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.order.Order" >
-    insert into order (id, title, lawyer_id, 
+      <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID() AS id
+      </selectKey>
+
+    insert into `order` (id, title, lawyer_id,
       rule_id, status, type, 
       is_delay, end_flag, deadline_date, 
       description, create_date, update_date, 
@@ -122,7 +126,11 @@
       #{rosterType,jdbcType=TINYINT}, #{keywords,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.order.Order" >
-    insert into order
+      <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+          SELECT LAST_INSERT_ID() AS id
+      </selectKey>
+
+    insert into `order`
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
@@ -213,13 +221,13 @@
     </trim>
   </insert>
   <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderExample" resultType="java.lang.Integer" >
-    select count(*) from order
+    select count(*) from `order`
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update order
+    update `order`
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
@@ -269,7 +277,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update order
+    update `order`
     set id = #{record.id,jdbcType=BIGINT},
       title = #{record.title,jdbcType=VARCHAR},
       lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
@@ -289,7 +297,7 @@
     </if>
   </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.order.Order" >
-    update order
+    update `order`
     <set >
       <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
@@ -334,7 +342,7 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.order.Order" >
-    update order
+    update `order`
     set title = #{title,jdbcType=VARCHAR},
       lawyer_id = #{lawyerId,jdbcType=BIGINT},
       rule_id = #{ruleId,jdbcType=BIGINT},
