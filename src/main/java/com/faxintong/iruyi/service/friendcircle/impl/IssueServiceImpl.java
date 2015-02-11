@@ -1,74 +1,80 @@
 package com.faxintong.iruyi.service.friendcircle.impl;
 
+
+import com.faxintong.iruyi.dao.mybatis.community.CommunityNewsMapper;
 import com.faxintong.iruyi.dao.mybatis.community.IssueMapper;
 import com.faxintong.iruyi.dao.mybatis.community.ReplyMapper;
-import com.faxintong.iruyi.model.mybatis.community.Issue;
-import com.faxintong.iruyi.model.mybatis.community.IssueExample;
-import com.faxintong.iruyi.model.mybatis.community.Reply;
-import com.faxintong.iruyi.model.mybatis.community.ReplyExample;
+import com.faxintong.iruyi.model.mybatis.community.*;
 import com.faxintong.iruyi.service.friendcircle.IssueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
- * Created by ron on 2015/2/10.
+ * Created by admin on 15-1-3.
  */
 @Service
-public class IssueServiceImpl implements IssueService{
+public class IssueServiceImpl implements IssueService {
 
     @Autowired
     private IssueMapper issueMapper;
     @Autowired
     private ReplyMapper replyMapper;
+    @Autowired
+    private CommunityNewsMapper communityNewsMapper;
 
     @Override
-    public void createIssue(Issue issue) {
+    @Transactional
+    public void reportIssue(Issue issue) throws Exception {
         issueMapper.insert(issue);
     }
 
     @Override
-    public void deleteIssue(Long IssueId) {
-        issueMapper.deleteByPrimaryKey(IssueId);
+    @Transactional
+    public void deleteIssueById(Long issueId) throws Exception {
+        issueMapper.deleteByPrimaryKey(issueId);
     }
 
     @Override
-    public Issue findIssue(Long issueId) {
+    public List<Issue> findIssueByLawyerIds(List<Long> lawyerIds) throws Exception {
+        IssueExample issueExample = new IssueExample();
+        issueExample.createCriteria().andLawyerIdIn(lawyerIds);
+        return issueMapper.selectByExample(issueExample);
+    }
+
+    @Override
+    public Issue findIssueById(Long issueId) throws Exception {
         return issueMapper.selectByPrimaryKey(issueId);
     }
 
     @Override
-    public List<Issue> findIssues(Integer page, Integer pageSize) {
-        IssueExample issueExample = new IssueExample();
-        return issueMapper.selectByExample(issueExample);
-    }
-
-
-    @Override
-    public void findIssueAndComments(Integer page, Integer pageSize) {
-
-    }
-
-    @Override
-    public void createReply(Reply reply) {
+    @Transactional
+    public void reportReply(Long lawyerId, Long issueId, String replyContent) throws Exception {
+        Reply reply = new Reply();
+        reply.setLawyerId(lawyerId);
+        reply.setIssueId(issueId);
+        reply.setPraiseCount(0);
+        reply.setReplyContent(replyContent);
+        reply.setCreateDate(new Date());
         replyMapper.insert(reply);
     }
 
     @Override
-    public void deleteReply(Long replyId) {
-        replyMapper.deleteByPrimaryKey(replyId);
-    }
-
-    @Override
-    public void deleteIssueReply(Long issueId) {
+    public List<Reply> findIssueReply(Long issueId) throws Exception {
         ReplyExample replyExample = new ReplyExample();
         replyExample.createCriteria().andIssueIdEqualTo(issueId);
-        replyMapper.deleteByExample(replyExample);
+        return replyMapper.selectByExample(replyExample);
     }
 
     @Override
-    public void praiseReply(Long LawyerId, Long replyId) {
-
+    public List<CommunityNews> getCommunityNews(Integer page, Integer pageSize) throws Exception{
+        List<CommunityNews> communityNewsList = communityNewsMapper.getCommunityNews(page, pageSize);
+        for(CommunityNews news: communityNewsList){
+            //if(news)
+        }
+        return communityNewsList;
     }
 }

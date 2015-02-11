@@ -76,4 +76,8 @@ public class Constants {
     public static final Integer WHITE_LIST = 1;//白名单
     public static final Integer BLACK_LIST = 2;//白名单
 
+    /*************************社区事件类型*****************/
+    public static final Integer COMMUNITY_ISSUE = 1; //提问
+    public static final Integer COMMUNITY_REPLY = 2; //回复
+
 }
