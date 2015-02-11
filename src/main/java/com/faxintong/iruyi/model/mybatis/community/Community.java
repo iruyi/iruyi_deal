@@ -1,5 +1,7 @@
 package com.faxintong.iruyi.model.mybatis.community;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import java.util.Date;
 
 public class Community {
@@ -7,6 +9,7 @@ public class Community {
 
     private Long issueId;
 
+    @NotEmpty
     private String title;
 
     private Long lawyerId;
@@ -15,6 +18,7 @@ public class Community {
 
     private Integer type;
 
+    @NotEmpty
     private String content;
 
     private Integer praiseCount;
