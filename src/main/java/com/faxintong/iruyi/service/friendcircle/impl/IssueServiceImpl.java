@@ -1,11 +1,10 @@
 package com.faxintong.iruyi.service.friendcircle.impl;
 
 
+import com.faxintong.iruyi.dao.mybatis.community.CommunityNewsMapper;
 import com.faxintong.iruyi.dao.mybatis.community.IssueMapper;
 import com.faxintong.iruyi.dao.mybatis.community.ReplyMapper;
-import com.faxintong.iruyi.model.mybatis.community.Issue;
-import com.faxintong.iruyi.model.mybatis.community.IssueExample;
-import com.faxintong.iruyi.model.mybatis.community.Reply;
+import com.faxintong.iruyi.model.mybatis.community.*;
 import com.faxintong.iruyi.service.friendcircle.IssueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +23,8 @@ public class IssueServiceImpl implements IssueService {
     private IssueMapper issueMapper;
     @Autowired
     private ReplyMapper replyMapper;
+    @Autowired
+    private CommunityNewsMapper communityNewsMapper;
 
     @Override
     @Transactional
@@ -62,7 +63,18 @@ public class IssueServiceImpl implements IssueService {
     }
 
     @Override
-    public List<Reply> findIssueReply(Long IssueId) throws Exception {
-        return null;
+    public List<Reply> findIssueReply(Long issueId) throws Exception {
+        ReplyExample replyExample = new ReplyExample();
+        replyExample.createCriteria().andIssueIdEqualTo(issueId);
+        return replyMapper.selectByExample(replyExample);
+    }
+
+    @Override
+    public List<CommunityNews> getCommunityNews(Integer page, Integer pageSize) throws Exception{
+        List<CommunityNews> communityNewsList = communityNewsMapper.getCommunityNews(page, pageSize);
+        for(CommunityNews news: communityNewsList){
+            //if(news)
+        }
+        return communityNewsList;
     }
 }

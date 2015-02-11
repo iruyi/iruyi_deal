@@ -9,9 +9,11 @@ public class CommunityNews {
 
     private Long issueId;
 
-    private Long LawyerId;
+    private Long issueLawyerId;
 
     private Long replyId;
+
+    private Long replyLawyerId;
 
     private Integer type;
 
@@ -30,6 +32,14 @@ public class CommunityNews {
     private Date issueCreateDate;
 
     private Date replyCreateDate;
+
+    public Long getReplyId() {
+        return replyId;
+    }
+
+    public void setReplyId(Long replyId) {
+        this.replyId = replyId;
+    }
 
     public Integer getType() {
         return type;
@@ -96,20 +106,21 @@ public class CommunityNews {
         this.issueId = issueId;
     }
 
-    public Long getLawyerId() {
-        return LawyerId;
+    public Long getReplyLawyerId() {
+        return replyLawyerId;
     }
 
-    public void setLawyerId(Long lawyerId) {
-        LawyerId = lawyerId;
+    public void setReplyLawyerId(Long replyLawyerId) {
+        this.replyLawyerId = replyLawyerId;
     }
 
-    public Long getReplyId() {
-        return replyId;
+    public Long getIssueLawyerId() {
+
+        return issueLawyerId;
     }
 
-    public void setReplyId(Long replyId) {
-        this.replyId = replyId;
+    public void setIssueLawyerId(Long issueLawyerId) {
+        this.issueLawyerId = issueLawyerId;
     }
 
     public Date getIssueCreateDate() {

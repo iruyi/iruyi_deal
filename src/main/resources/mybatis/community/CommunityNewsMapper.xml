@@ -21,5 +21,6 @@
         title as issue_title, content as issue_content,
          issue.create_date AS issue_create_date, reply.id AS reply_id, reply.lawyer_id AS reply_lawyer_id,
          reply_content, praise_count, reply.create_date AS reply_create_date , reply.lawyer_name AS reply_lawyer_name
+         FROM issue, reply WHERE issue.id = reply.issue_id;
     </select>
 </mapper>

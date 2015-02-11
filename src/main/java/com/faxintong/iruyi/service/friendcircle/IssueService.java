@@ -1,6 +1,7 @@
 package com.faxintong.iruyi.service.friendcircle;
 
 
+import com.faxintong.iruyi.model.mybatis.community.CommunityNews;
 import com.faxintong.iruyi.model.mybatis.community.Issue;
 import com.faxintong.iruyi.model.mybatis.community.Reply;
 
@@ -60,5 +61,11 @@ public interface IssueService {
      */
     public List<Reply> findIssueReply(Long issueId) throws Exception;
 
-
+    /**
+     * 获取社区首页问题
+     * @param page
+     * @param pageSize
+     * @return
+     */
+    public List<CommunityNews> getCommunityNews(Integer page, Integer pageSize) throws Exception;
 }
