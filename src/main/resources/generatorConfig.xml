@@ -32,25 +32,25 @@
         </javaTypeResolver>
 
         <!-- generate Model -->
-        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.price"
+        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.order"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!-- generate xml -->
-        <sqlMapGenerator targetPackage="mybatis.price"
+        <sqlMapGenerator targetPackage="mybatis.order"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- generate Mapper -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.price"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.order"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="reject_order_price" domainObjectName="RejectOrderPrice">
+        <!--<table tableName="reject_order_price" domainObjectName="RejectOrderPrice">
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="order_id" javaType="Long" ></columnOverride>
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
@@ -81,7 +81,7 @@
             <columnOverride column="end_price" javaType="Float" ></columnOverride>
             <columnOverride column="percent_figure" javaType="Float" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
-        </table>
+        </table>-->
 
         <!--<table tableName="order_rule" domainObjectName="OrderRule">
             <columnOverride column="id" javaType="Long" ></columnOverride>
@@ -162,7 +162,7 @@
             <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
         </table>-->
 
-        <!--<table tableName="order" domainObjectName="Order">
+        <table tableName="orders" domainObjectName="Orders">
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="title" javaType="String" ></columnOverride>
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
@@ -177,7 +177,7 @@
             <columnOverride column="keywords" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
             <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
-        </table>-->
+        </table>
 
         <!--<table tableName="order" domainObjectName="Order">
             <columnOverride column="id" javaType="Long" ></columnOverride>
@@ -232,6 +232,18 @@
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="reply_id" javaType="Long" ></columnOverride>
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="community" domainObjectName="Community">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="issue_id" javaType="Long" ></columnOverride>
+            <columnOverride column="title" javaType="String" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_name" javaType="String" ></columnOverride>
+            <columnOverride column="type"  javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="content" javaType="String" ></columnOverride>
+            <columnOverride column="praise_count" javaType="Integer" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
         </table>-->
 
