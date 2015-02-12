@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +35,7 @@ public class CommunityController extends BaseController{
     @Autowired
     private CommunityService communityService;
 
-    @RequestMapping("issue/create")
+    @RequestMapping(value = "issue/create", method = RequestMethod.POST)
     public Map<String, Object> createIssue(@Valid Community community, BindingResult bindingResult,
                                            HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
@@ -75,7 +76,8 @@ public class CommunityController extends BaseController{
             return result;
         }
 
-        if(!communityService.issueIsExists(community.getIssueId())){
+        Community issue = communityService.getCommunity(community.getIssueId());
+        if(issue == null){
             result.put(ERR_MSG, "问题不存在");
             return result;
         }
@@ -87,6 +89,7 @@ public class CommunityController extends BaseController{
             community.setType(COMMUNITY_REPLY);
             community.setCreateDate(new Date());
             community.setPraiseCount(0);
+            community.setTitle(issue.getTitle());
             communityService.createCommunity(community);
             result.put(ERR_MSG, "回复成功");
             result.put(RESULT, true);
@@ -113,9 +116,12 @@ public class CommunityController extends BaseController{
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
 
-        if(page == null || pageSize == null){
-            result.put(ERR_MSG, "页数以及页码都不能空");
-            return result;
+        if(page == null || page <= 0){
+            page = 1;
+        }
+
+        if(pageSize == null || pageSize <= 0){
+            pageSize = 10;
         }
 
         try{
