@@ -35,14 +35,24 @@ public class CommunityServiceImpl implements CommunityService{
     @Override
     @Transactional
     public void deleteCommunity(Long communityId) {
+        Community community = communityMapper.selectByPrimaryKey(communityId);
         communityMapper.deleteByPrimaryKey(communityId);
     }
 
     @Override
-    public List<Community> getCommunityNews(Integer page, Integer pageSize) {
+    public List<Community> getCommunityNews(Long lawyerId, Integer page, Integer pageSize) {
+        int start = (page - 1) * pageSize;
+        int end = start + pageSize;
+        String limit = "limit " + start + "," + end + " ";
         CommunityExample communityExample = new CommunityExample();
-        communityExample.setOrderByClause("create_date desc");
-        return communityMapper.selectByExample(communityExample);
+        communityExample.setOrderByClause("create_date desc " + limit);
+        List<Community> communityList = communityMapper.selectByExample(communityExample);
+        for(Community community: communityList){
+            if(community.getType() == COMMUNITY_REPLY){
+                community.setHasPraised(hasPraised(lawyerId, community.getId()));
+            }
+        }
+        return communityList;
     }
 
     @Override

@@ -27,7 +27,7 @@ public interface CommunityService {
      * @param pageSize
      * @return
      */
-    public List<Community> getCommunityNews(Integer page, Integer pageSize);
+    public List<Community> getCommunityNews(Long lawyerId, Integer page, Integer pageSize);
 
     /**
      *

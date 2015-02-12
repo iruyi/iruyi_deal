@@ -25,6 +25,8 @@ public class Community {
 
     private Date createDate;
 
+    private  boolean hasPraised;
+
     public Long getId() {
         return id;
     }
@@ -95,5 +97,13 @@ public class Community {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public boolean isHasPraised() {
+        return hasPraised;
+    }
+
+    public void setHasPraised(boolean hasPraised) {
+        this.hasPraised = hasPraised;
     }
 }

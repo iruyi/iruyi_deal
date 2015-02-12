@@ -112,8 +112,15 @@ public class CommunityController extends BaseController{
                                                 HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
+
+        if(page == null || pageSize == null){
+            result.put(ERR_MSG, "页数以及页码都不能空");
+            return result;
+        }
+
         try{
-            result.put("communityNews", communityService.getCommunityNews(page, pageSize));
+            Long lawyerId = getLawyerId(request);
+            result.put("communityNews", communityService.getCommunityNews(lawyerId, page, pageSize));
             result.put(RESULT, true);
             result.put(ERR_MSG, "获取社区新鲜事成功");
         }catch (Exception e){
