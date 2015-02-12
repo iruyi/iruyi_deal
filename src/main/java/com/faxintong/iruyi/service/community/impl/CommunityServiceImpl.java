@@ -48,8 +48,6 @@ public class CommunityServiceImpl implements CommunityService{
     @Override
     @Transactional
     public void createCommunityPraise(Long lawyerId, Long communityId) {
-        if(hasPraised(lawyerId, communityId))
-            return;
         ReplyPraise replyPraise = new ReplyPraise();
         replyPraise.setLawyerId(lawyerId);
         replyPraise.setCreateDate(new Date());
@@ -65,7 +63,7 @@ public class CommunityServiceImpl implements CommunityService{
         return communityMapper.selectByPrimaryKey(communityId);
     }
 
-    private boolean hasPraised(Long lawyerId, Long communityId){
+    public boolean hasPraised(Long lawyerId, Long communityId){
         ReplyPraiseExample replyPraiseExample = new ReplyPraiseExample();
         replyPraiseExample.createCriteria().andLawyerIdEqualTo(lawyerId).andReplyIdEqualTo(communityId);
         return replyPraiseMapper.countByExample(replyPraiseExample) != 0;

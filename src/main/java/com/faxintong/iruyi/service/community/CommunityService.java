@@ -56,4 +56,6 @@ public interface CommunityService {
      */
     public boolean replyIsExists(Long communityId);
 
+    public boolean hasPraised(Long lawyerId, Long communityId);
+
 }

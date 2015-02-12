@@ -131,12 +131,18 @@ public class CommunityController extends BaseController{
         result.put(RESULT, false);
 
         if(!communityService.replyIsExists(replyId)){
-            result.put(ERR_MSG, "回复不存在");
+            result.put(ERR_MSG, "该回复不存在");
+            return result;
+        }
+
+        Long lawyerId = getLawyerId(request);
+
+        if(communityService.hasPraised(lawyerId, replyId)){
+            result.put(ERR_MSG, "不能重复点赞");
             return result;
         }
 
         try{
-            Long lawyerId = getLawyerId(request);
             communityService.createCommunityPraise(lawyerId, replyId);
             result.put(RESULT, true);
             result.put(ERR_MSG, "点赞成功");
@@ -147,7 +153,6 @@ public class CommunityController extends BaseController{
         }
         return result;
     }
-
 
 
 }
