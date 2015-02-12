@@ -12,6 +12,7 @@ public class GeneralOrder extends Order implements Serializable{
     private String cityName;
 
     private Long categoryId;
+    private String category;
     private Long cityId;
     private Long[] lawyerIds;
 
@@ -45,5 +46,13 @@ public class GeneralOrder extends Order implements Serializable{
 
     public void setLawyerIds(Long[] lawyerIds) {
         this.lawyerIds = lawyerIds;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 }

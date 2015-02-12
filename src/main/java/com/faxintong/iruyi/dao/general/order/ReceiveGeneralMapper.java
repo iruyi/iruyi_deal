@@ -128,22 +128,48 @@ public interface ReceiveGeneralMapper {
             "                              AND rr.order_id = o.id)        ")
     public List<GeneralOrder> findAvailReceiveOrders(@Param("lawyerId") Long lawyerId) throws Exception;
 
+    @Select("select o.title,DATE_FORMAT(o.create_date, '%Y-%m-%d') as create_date, o.type, lc.name as category, c.name as cityName,o.description " +
+            "from receive_order r,`order` o,order_rule ro,city c,lawyer_category lc where r.lawyer_id=#{lawyerId} and r.order_id=o.id " +
+            "and o.rule_id = ro.id and ro.city_id = c.id and ro.category_id = lc.id")
+    public List<GeneralOrder> findReceivedOrders(@Param("lawyerId") Long lawyerId) throws Exception;
+
+
     @Update("update receive_order set status=#{status},update_date=now() where order_id=#{orderId} and status=1")
     public void updateReceiveStatus(@Param("orderId") Long orderId, @Param("status") Integer status) throws Exception;
 
     @Update("update receive_order set status=#{status},update_date=now() where order_id=#{orderId} and lawyer_id=#{lawyerId} and status=5")
     public void cancelOrder(@Param("orderId") Long orderId, @Param("lawyerId") Long lawyerId, @Param("status") Integer status) throws Exception;
 
-    @Select("select " + ORDER + " from `order` o, receive_order r where r.lawyer_id=3 and r.`status`=1 and r.order_id=o.id " +
+    /**
+     * 待定
+     * @param lawyerId
+     * @return
+     * @throws Exception
+     */
+    @Select("select " + ORDER + " from `order` o, receive_order r where r.lawyer_id=#{lawyerId} and r.`status`=1 and r.order_id=o.id " +
             "UNION " +
-            "select " + ORDER + " from `order` o, receive_order r where r.lawyer_id=3 and r.`status`=2 and r.order_id=o.id")
+            "select " + ORDER + " from `order` o, receive_order r where r.lawyer_id=#{lawyerId} and r.`status`=2 and r.order_id=o.id")
     public List<Order> findReceivingOrders(@Param("lawyerId") Long lawyerId) throws Exception;
 
     @Insert("insert into receive_order(order_id,lawyer_id,status,create_date) values(#{orderId},#{lawyerId},1,now()) ")
     public void receiveOrder(@Param("orderId") Long orderId, @Param("lawyerId") Long lawyerId) throws Exception;
 
+    /**
+     * 旧方法
+     * @param lawyerId
+     * @param status
+     * @return
+     * @throws Exception
+     */
+/*
     @Select("select " + ORDER + " from `order` o, receive_order r where r.lawyer_id=#{lawyerId} and r.`status`=#{status} and r.order_id=o.id ")
     public List<Order> findOrdersByStatus(@Param("lawyerId") Long lawyerId, @Param("status") Integer status) throws Exception;
+*/
+
+    @Select("select o.title,DATE_FORMAT(o.create_date, '%Y-%m-%d') as create_date, o.type, lc.name as category, c.name as cityName,o.description " +
+            "from receive_order r,`order` o,order_rule ro,city c,lawyer_category lc where r.lawyer_id=1 and r.status=1 and r.order_id=o.id " +
+            "and o.rule_id = ro.id and ro.city_id = c.id and ro.category_id = lc.id")
+    public List<GeneralOrder> findOrdersByStatus(@Param("lawyerId") Long lawyerId, @Param("status") Integer status) throws Exception;
 
     @Select("select " + RECEIVE_ORDER + " from receive_order ro,lawyer l where ro.order_id=#{orderId} and ro.lawyer_id=l.id ")
     public List<ReceiveLawyer> findReceiveOrderLawyers(@Param("orderId") Long orderId) throws Exception;

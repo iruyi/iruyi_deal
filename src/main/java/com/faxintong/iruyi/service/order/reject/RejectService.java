@@ -18,7 +18,7 @@ public interface RejectService {
      * @return
      * @throws Exception
      */
-    public List<Order> findRejectOrders(Long lawyerId) throws Exception;
+    public List<GeneralOrder> findRejectOrders(Long lawyerId) throws Exception;
 
     /**
      * 查询单子详情
@@ -26,7 +26,7 @@ public interface RejectService {
      * @return
      * @throws Exception
      */
-    public Order findOrderById(Long orderId) throws Exception;
+    public List<GeneralOrder> findOrderById(Long orderId) throws Exception;
 
     /**
      * 查询甩出单子的接单人列表
@@ -50,7 +50,7 @@ public interface RejectService {
      * @return
      * @throws Exception
      */
-    public List<Order> findOrdersByStatus(Long lawyerId, Integer status) throws Exception;
+    public List<GeneralOrder> findOrdersByStatus(Long lawyerId, Integer status) throws Exception;
 
     /**
      * 甩单

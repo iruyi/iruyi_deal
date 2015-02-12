@@ -17,6 +17,14 @@ public interface CenterService {
     public Lawyer findLawyerById(Long lawyerId) throws Exception;
 
     /**
+     * 接单详情里律师相关统计信息
+     * @param orderId
+     * @return
+     * @throws Exception
+     */
+    public Lawyer findLawyerStatistic(Long orderId) throws Exception;
+
+    /**
      * 已注册成功律师修改不需要审核部分
      * @param lawyer
      * @throws Exception
