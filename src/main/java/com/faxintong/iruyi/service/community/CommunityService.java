@@ -58,4 +58,26 @@ public interface CommunityService {
 
     public boolean hasPraised(Long lawyerId, Long communityId);
 
+    /**
+     * 删除赞同
+     * @param praiseId
+     * @return
+     */
+    public void deletePraise(Long praiseId);
+
+    /**
+     *
+     * @param lawyerId
+     * @param issueId
+     * @return
+     */
+    public boolean isIssueOwner(Long lawyerId, Long issueId);
+
+    /**
+     *
+     * @param lawyerId
+     * @param replyId
+     * @return
+     */
+    public boolean isReplyOwner(Long lawyerId, Long replyId);
 }
