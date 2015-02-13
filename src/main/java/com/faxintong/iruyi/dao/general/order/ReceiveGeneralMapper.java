@@ -2,7 +2,6 @@ package com.faxintong.iruyi.dao.general.order;
 
 import com.faxintong.iruyi.model.general.lawyer.ReceiveLawyer;
 import com.faxintong.iruyi.model.general.order.GeneralOrder;
-import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.operate.OperateMyBatis;
 import org.apache.ibatis.annotations.Insert;
@@ -62,7 +61,7 @@ public interface ReceiveGeneralMapper {
             "       order_rule ru,                                        " +
             "       `order` o,                                            " +
             "       city c                                                " +
-            "WHERE  l.id = 1                                              " +
+            "WHERE  l.id = #{lawyerId}                                    " +
             "       AND l.id = r.lawyer_id                                " +
             "       AND r.category_id = ru.category_id                    " +
             "       AND l.city_id = ru.city_id                            " +
@@ -72,18 +71,19 @@ public interface ReceiveGeneralMapper {
             "       AND o.roster_type = 0                                 " +
             "       AND ru.city_id = c.id                                 " +
             "       AND o.type != 3                                       " +
+            "       AND o.lawyer_id != #{lawyerId}                        " +
             "       AND NOT EXISTS (SELECT 1                              " +
             "                       FROM   receive_order rr               " +
             "                       WHERE  rr.lawyer_id = l.id            " +
             "                              AND rr.order_id = o.id)        " +
             "UNION                                                        " +
-            "SELECT " + ORDER + ",c. name AS cityName                       " +
+            "SELECT " + ORDER + ",c. name AS cityName                      " +
             "FROM   lawyer l,                                             " +
             "       lawyer_category_rela r,                               " +
             "       order_rule ru,                                        " +
             "       `order` o,                                            " +
             "       city c                                                " +
-            "WHERE  l.id = 1                                              " +
+            "WHERE  l.id = #{lawyerId}                                    " +
             "       AND l.id = r.lawyer_id                                " +
             "       AND r.category_id = ru.category_id                    " +
             "       AND l.city_id = ru.city_id                            " +
@@ -93,6 +93,7 @@ public interface ReceiveGeneralMapper {
             "       AND o.roster_type = 1                                 " +
             "       AND ru.city_id = c.id                                 " +
             "       AND o.type != 3                                       " +
+            "       AND o.lawyer_id != #{lawyerId}                        " +
             "       AND EXISTS (SELECT 1                                  " +
             "                   FROM   whitelist b                        " +
             "                   WHERE  b.order_id = o.id                  " +
@@ -108,7 +109,7 @@ public interface ReceiveGeneralMapper {
             "       order_rule ru,                                        " +
             "       `order` o,                                            " +
             "       city c                                                " +
-            "WHERE  l.id = 1                                              " +
+            "WHERE  l.id = #{lawyerId}                                    " +
             "       AND l.id = r.lawyer_id                                " +
             "       AND r.category_id = ru.category_id                    " +
             "       AND l.city_id = ru.city_id                            " +
@@ -118,6 +119,7 @@ public interface ReceiveGeneralMapper {
             "       AND o.roster_type = 2                                 " +
             "       AND ru.city_id = c.id                                 " +
             "       AND o.type != 3                                       " +
+            "       AND o.lawyer_id != #{lawyerId}                        " +
             "       AND NOT EXISTS (SELECT 1                              " +
             "                       FROM   blacklist b                    " +
             "                       WHERE  b.order_id = o.id              " +

@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.controller.order;
 
+import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.general.order.GeneralOrder;
 import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.service.order.receive.ReceiveService;
@@ -24,7 +25,7 @@ import static com.faxintong.iruyi.utils.Constants.RESULT;
  */
 @RestController
 @RequestMapping("receiveOrder")
-public class ReceiveOrderController {
+public class ReceiveOrderController extends BaseController{
 
     private Logger logger = LoggerFactory.getLogger(ReceiveOrderController.class);
 
@@ -32,16 +33,12 @@ public class ReceiveOrderController {
     private ReceiveService receiveService;
 
     @RequestMapping(value = "availReceiveOrders")
-    public Map<String, Object> availReceiveOrders(HttpServletRequest request, String lawyerId) {
-        logger.info("lawyerId=" + lawyerId);
+    public Map<String, Object> availReceiveOrders(HttpServletRequest request) {
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
         try{
-            if(StringUtils.isEmpty(lawyerId)){
-                result.put(ERR_MSG, "律师id为空");
-                return result;
-            }
-            List<GeneralOrder> orderList = receiveService.findAvailReceiveOrders(Long.parseLong(lawyerId));
+            Long lawyerId = getLawyerId(request);
+            List<GeneralOrder> orderList = receiveService.findAvailReceiveOrders(lawyerId);
             result.put(RESULT, true);
             result.put(DATA, orderList);
         }catch (Exception e){
