@@ -80,4 +80,7 @@ public class Constants {
     public static final Integer COMMUNITY_ISSUE = 1; //提问
     public static final Integer COMMUNITY_REPLY = 2; //回复
 
+
+    /*************************文章类型*********************/
+    public static final Integer PAPER = 1; //文章
 }
