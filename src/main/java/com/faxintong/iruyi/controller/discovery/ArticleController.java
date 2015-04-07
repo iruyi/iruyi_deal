@@ -60,6 +60,25 @@ public class ArticleController extends BaseController{
         return result;
     }
 
+    @RequestMapping(value = "articleDetail")
+    public Map<String, Object> articleDetail(String id, HttpServletRequest request, HttpServletResponse response){
+        Map<String , Object> result = Maps.newHashMap();
+        result.put(RESULT, false);
+        if(StringUtils.isEmpty(id)){
+            result.put(ERR_MSG, "article id is null");
+            return result;
+        }
+        try {
+            GeneralArticle article = articleService.findArticleById(Long.parseLong(id));
+            result.put(RESULT, true);
+            result.put(DATA, article);
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("获取文章失败:" + e.getMessage());
+        }
+        return result;
+    }
+
     @RequestMapping(value = "articleComment")
     public Map<String, Object> articleComment(HttpServletRequest request, ArticleComment articleComment, BindingResult bindingResult){
         Map<String , Object> result = Maps.newHashMap();

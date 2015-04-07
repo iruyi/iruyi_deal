@@ -41,4 +41,12 @@ public interface ArticleService {
      */
     public boolean isExistPraise(ArticlePraise articlePraise) throws Exception;
 
+    /**
+     * 根据id获取文章详情
+     * @param id
+     * @return
+     * @throws Exception
+     */
+    public GeneralArticle findArticleById(Long  id) throws Exception;
+
 }

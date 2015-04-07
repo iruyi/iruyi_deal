@@ -17,4 +17,5 @@ public interface ArticleGeneralMapper {
     @Select("select id,title,content,creator,create_date from article where type=#{type} limit #{currentSize},#{pageSize}")
     public List<GeneralArticle> findArticles(@Param("pageSize") Integer pageSize, @Param("currentSize") Integer currentSize, @Param("type") Integer type) throws Exception;
 
+
 }

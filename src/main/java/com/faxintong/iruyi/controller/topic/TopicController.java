@@ -24,21 +24,21 @@ public class TopicController {
 
     /**
      * 获取话题列表
-     * @param topicType（话题类型）
+     * @param categoryId
      * @return
      */
     @RequestMapping(value = "getTopicList")
-    public Map<String, Object> getTopicList(Integer topicType){
+    public Map<String, Object> getTopicList(Long categoryId){
 
         return null;
     }
 
     /**
-     * 获取话题列表
+     * 获取话题详情
      * @param topicId
      * @return
      */
-    @RequestMapping(value = "getTopicList")
+    @RequestMapping(value = "getTopicDetail")
     public Map<String, Object> getTopicDetail(Long topicId){
 
         return null;

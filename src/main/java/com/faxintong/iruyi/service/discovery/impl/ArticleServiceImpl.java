@@ -75,4 +75,9 @@ public class ArticleServiceImpl implements ArticleService {
         }
     }
 
+    @Override
+    public GeneralArticle findArticleById(Long id) throws Exception {
+        return null;
+    }
+
 }
