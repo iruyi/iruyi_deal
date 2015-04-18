@@ -18,18 +18,14 @@ import java.util.List;
 public interface LawyerService {
 
     /**
-     * 获取律师关注列表(黑白名单用)
-     * @param pager
-     * @return
+     * 获取指定律师关注的律师列表
      */
-    public List<Lawyer> getAttetionList(Pager pager) throws Exception;
+    public List<Lawyer> getAttetionList(Pager pager,Integer lawyerId) throws Exception;
 
     /**
      * 获取城市列表
-     * @param pager
-     * @return
      */
-    public List<City> getCityList(Pager pager) throws Exception;
+    public List<City> getCityList(Pager pager);
 
 
     /**

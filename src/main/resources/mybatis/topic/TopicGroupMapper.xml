@@ -6,6 +6,36 @@
     <result column="group_name" property="groupName" jdbcType="VARCHAR" />
     <result column="access_count" property="accessCount" jdbcType="INTEGER" />
   </resultMap>
+  <sql id="Base_Column_List" >
+    id, group_name, access_count
+  </sql>
+  <select id="selectTopicGroup" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.utils.Pager" >
+    select
+    <include refid="Base_Column_List" />
+    from topic_group
+    order by access_count
+    limit (${pager.currentPage}-1)*pageSize,pageSize
+  </select>
+  <select id="countfans" resultType="_int" parameterType="int" >
+    select count(id)
+    from topic_group_atten
+    where category_id = ${id}
+  </select>
+  <select id="countRead" resultType="_int" parameterType="int" >
+    select access_count
+    from topic_group
+    where id = ${id}
+  </select>
+  <sql id="Base_Column_List_TOPIC_GROUP_ATTEN" >
+    id, category_id, lawyer_id
+  </sql>
+  <insert id="insertTopicGropuAtten" parameterType="map" >
+    insert into topic (category_id,lawyer_id)
+    values (#{groupId,jdbcType=BIGINT}, #{LawyerId,jdbcType=BIGINT})
+  </insert>
+
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -63,9 +93,6 @@
         </if>
       </foreach>
     </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    id, group_name, access_count
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.topic.TopicGroupExample" >
     select

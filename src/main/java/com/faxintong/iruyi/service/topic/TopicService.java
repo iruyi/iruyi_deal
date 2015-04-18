@@ -1,7 +1,10 @@
 package com.faxintong.iruyi.service.topic;
 
+import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.topic.Topic;
 import com.faxintong.iruyi.model.mybatis.topic.TopicGroup;
+import com.faxintong.iruyi.model.mybatis.topic.vo.TopicDetail;
+import com.faxintong.iruyi.model.mybatis.topic.vo.TopicGroupDetail;
 import com.faxintong.iruyi.utils.Pager;
 
 import java.util.List;
@@ -14,69 +17,47 @@ public interface TopicService {
 
     /**
      * 发表话题
-     * @param groupId
-     * @param content
-     * @param lawyerId
-     * @throws Exception
      */
-    public void reportTopic(Long groupId, String content, Long lawyerId) throws Exception;
+    public void reportTopic(Long groupId, String content, Lawyer lawyer) throws Exception;
 
     /**
      * 获取话题组列表
-     * @param pager
-     * @return
-     * @throws Exception
+     * 根据热度进行排序 热度 高->低
      */
     public List<TopicGroup> getGroupList(Pager pager) throws Exception;
 
     /**
      * 获取话题组详情
-     * @param groupId
-     * @param pager
-     * @return
-     * @throws Exception
+     *  此处需要获取的元素包含 粉丝数、阅读量、话题数、话题与赞数与是否点赞
      */
-    public List<Topic> getGroupDetail(Long groupId, Pager pager) throws Exception;
+    public TopicGroupDetail getGroupDetail(Long groupId, Pager pager,Long lawyerId) throws Exception;
 
     /**
      * 获取话题详情
      * @param topicId
      * @return
      */
-    public Topic getTopicDetail(Long topicId) throws Exception;
+    public TopicDetail getTopicDetail(Long topicId, Long LawyerId) throws Exception;
 
     /**
      * 关注话题组
-     * @param groupId
-     * @param LawyerId
-     * @throws Exception
      */
     public void attentionGroup(Long groupId, Long LawyerId) throws Exception;
 
     /**
      * 回应话题
-     * @param topicId
-     * @param content
-     * @param lawyerId
-     * @throws Exception
      */
-    public void topicReply(Long topicId, String content, Long lawyerId) throws Exception;
+    public void topicReply(Long topicId, String content, Lawyer lawyer) throws Exception;
 
     /**
-     * 关注话题
-     * @param topicId
-     * @param lawyerId
-     * @throws Exception
+     * 关注话题 ,其实就是点赞功能
      */
     public void attentionTopic(Long topicId, Long lawyerId) throws Exception;
 
     /**
      * 话题回应点赞
-     * @param replyId
-     * @param lawyerId
-     * @return
-     * @throws Exception
+     * 对话题的回复进行点赞
      */
-    public Map<String, Object> topicReplyPraise(Long replyId, Long lawyerId) throws Exception;
+    public void topicReplyPraise(Long replyId, Long lawyerId) throws Exception;
 
 }

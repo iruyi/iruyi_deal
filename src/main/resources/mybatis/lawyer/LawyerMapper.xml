@@ -19,6 +19,22 @@
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
   </resultMap>
+  <sql id="Base_Column_List">
+    id, name, password, email, status, sex, address, city_id, city_name, phone, age,
+    photo_url, law_office, introduction, create_date, update_date
+  </sql>
+  <select id="selectById" parameterType="com.faxintong.iruyi.model.mybatis.lawyer.Lawyer" resultMap="map">
+    select
+    <include refid="Base_Column_List" />
+    from lawyer
+    where id in (select other_lawyer_id from lawyer_attention where lawyer_id = ${id})
+    limit (${pager.currentPage}-1)*pageSize,pageSize
+  </select>
+
+
+
+
+
   <sql id="Example_Where_Clause">
     <where>
       <foreach collection="oredCriteria" item="criteria" separator="or">
@@ -76,10 +92,6 @@
         </if>
       </foreach>
     </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, name, password, email, status, sex, address, city_id, city_name, phone, age, 
-    photo_url, law_office, introduction, create_date, update_date
   </sql>
   <select id="selectByExample" parameterType="com.faxintong.iruyi.model.mybatis.lawyer.LawyerExample" resultMap="BaseResultMap">
     select

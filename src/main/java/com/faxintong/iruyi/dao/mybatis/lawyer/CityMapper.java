@@ -5,9 +5,15 @@ import com.faxintong.iruyi.model.mybatis.lawyer.CityExample;
 import java.util.List;
 
 import com.faxintong.iruyi.operate.OperateMyBatis;
+import com.faxintong.iruyi.utils.Pager;
 import org.apache.ibatis.annotations.Param;
 @OperateMyBatis
 public interface CityMapper {
+    /**获取城市列表*/
+    List<City> selectAll(Pager pager);
+
+
+
     int countByExample(CityExample example);
 
     int deleteByExample(CityExample example);

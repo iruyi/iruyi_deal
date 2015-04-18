@@ -11,6 +11,74 @@
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="BaseResultMapWithPraise" type="com.faxintong.iruyi.model.mybatis.topic.Topic" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="group_id" property="groupId" jdbcType="BIGINT" />
+    <result column="lawyer_id" property="lawyerId" jdbcType="BIGINT" />
+    <result column="lawyer_name" property="lawyerName" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="praiseCount" property="praiseCount" jdbcType="BIGINT" />
+    <result column="isPraise" property="praiseCount" jdbcType="BIGINT" />
+    <result column="photoUrl" property="photoUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, group_id, lawyer_id, lawyer_name, title, content, create_date, update_date
+  </sql>
+  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.topic.Topic" >
+    insert into topic (group_id, lawyer_id,
+    lawyer_name, title, content,
+    create_date, update_date)
+    values (#{groupId,jdbcType=BIGINT}, #{lawyerId,jdbcType=BIGINT},
+    #{lawyerName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+    #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
+  </insert>
+  <select id="countTopicByGroup" resultType="_int" parameterType="int" >
+    select count(*)
+    from topic_group
+    where group_id = ${groupId}
+  </select>
+  <select id="selectTopicByGroup" resultType="com.faxintong.iruyi.model.mybatis.topic.vo.TopicWithPraise" parameterType="int" >
+    select  <include refid="Base_Column_List" />,l.photo_url photoUrl,
+    (select count(tp.id) from topic_praise tp where tp.topic_id = c.id) praiseCount,
+    (select count(tp1.id) from topic_praise tp1 where tp1.lawyer_id = #{lawyerId}) isPraise
+    from topic c
+    inner join lawyer l on c.lawyer_id = l.id
+    where c.group_id = ${groupId}
+  </select>
+  <insert id="insertTopicReply" parameterType="map" >
+    insert into topic_reply (topic_id, lawyer_id,
+    lawyer_name, content,
+    create_date)
+    values (#{topicId,jdbcType=BIGINT}, #{lawyer.id,jdbcType=BIGINT},
+    #{lawyer.name,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+    now())
+  </insert>
+  <insert id="insertTopicParise" parameterType="map" >
+    insert into topic_praise (topic_id, lawyer_id)
+    values (#{topicId,jdbcType=BIGINT}, #{lawyerId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertReplyParise" parameterType="map" >
+    insert into reply_parise (reply_id, lawyer_id)
+    values (#{replyId,jdbcType=BIGINT}, #{lawyerId,jdbcType=BIGINT})
+  </insert>
+  <select id="selectById" resultType="com.faxintong.iruyi.model.mybatis.topic.vo.TopicDetail" parameterType="int" >
+    select t.content,l.photo_url photoUrl,t.create_date createDate
+    from topic t
+    inner join lawyer l on l.id = t.lawyer_id
+    where id = #{topic,jdbcType=BIGINT}
+  </select>
+  <select id="selectReplyByTopicId" resultType="com.faxintong.iruyi.model.mybatis.topic.vo.ReplyWithParis" parameterType="int" >
+    select r.content,l.photo_url photoUrl,r.create_date createDate
+    (select count(rp.id) from reply_praise rp where rp.reply_id = r.id) praiseCount,
+    (select count(rp1.id) from reply_praise rp1 where rp1.lawyer_id = #{LawyerId}) isPraise
+    from topic_reply r
+    inner join lawyer l on l.id = r.lawyer_id
+    where id = #{topic,jdbcType=BIGINT}
+  </select>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -69,9 +137,6 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
-    id, group_id, lawyer_id, lawyer_name, title, content, create_date, update_date
-  </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.topic.TopicExample" >
     select
     <if test="distinct" >
@@ -102,14 +167,6 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.topic.Topic" >
-    insert into topic (id, group_id, lawyer_id, 
-      lawyer_name, title, content, 
-      create_date, update_date)
-    values (#{id,jdbcType=BIGINT}, #{groupId,jdbcType=BIGINT}, #{lawyerId,jdbcType=BIGINT}, 
-      #{lawyerName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP})
-  </insert>
   <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.topic.Topic" >
     insert into topic
     <trim prefix="(" suffix=")" suffixOverrides="," >

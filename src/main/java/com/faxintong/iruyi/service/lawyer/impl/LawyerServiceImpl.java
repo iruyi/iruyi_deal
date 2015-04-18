@@ -1,5 +1,7 @@
 package com.faxintong.iruyi.service.lawyer.impl;
 
+import com.faxintong.iruyi.dao.mybatis.lawyer.CityMapper;
+import com.faxintong.iruyi.dao.mybatis.lawyer.LawyerMapper;
 import com.faxintong.iruyi.model.mybatis.active.Active;
 import com.faxintong.iruyi.model.mybatis.article.Article;
 import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
@@ -10,6 +12,7 @@ import com.faxintong.iruyi.model.mybatis.topic.Topic;
 import com.faxintong.iruyi.model.mybatis.topic.TopicReply;
 import com.faxintong.iruyi.service.lawyer.LawyerService;
 import com.faxintong.iruyi.utils.Pager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,14 +23,19 @@ import java.util.List;
 @Service
 public class LawyerServiceImpl implements LawyerService {
 
+    @Autowired
+    private LawyerMapper lawyerMapper;
+    @Autowired
+    private CityMapper cityMapper;
+
     @Override
-    public List<Lawyer> getAttetionList(Pager pager) throws Exception {
-        return null;
+    public List<Lawyer> getAttetionList(Pager pager,Integer lawyerId) throws Exception {
+        return lawyerMapper.selectById(pager,lawyerId);
     }
 
     @Override
     public List<City> getCityList(Pager pager) {
-        return null;
+        return cityMapper.selectAll(pager);
     }
 
     @Override
