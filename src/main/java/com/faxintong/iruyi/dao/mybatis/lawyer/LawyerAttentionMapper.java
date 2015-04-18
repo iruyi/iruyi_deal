@@ -2,9 +2,11 @@ package com.faxintong.iruyi.dao.mybatis.lawyer;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.LawyerAttention;
 import com.faxintong.iruyi.model.mybatis.lawyer.LawyerAttentionExample;
-import java.util.List;
+import com.faxintong.iruyi.operate.OperateMyBatis;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+@OperateMyBatis
 public interface LawyerAttentionMapper {
     int countByExample(LawyerAttentionExample example);
 
