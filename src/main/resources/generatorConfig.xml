@@ -295,5 +295,12 @@
             <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
         </table>
 
+        <table tableName="lawyer_attention" domainObjectName="LawyerAttention">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="other_lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>
+
     </context>
 </generatorConfiguration>
