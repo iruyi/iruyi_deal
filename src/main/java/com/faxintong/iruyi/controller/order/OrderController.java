@@ -1,20 +1,12 @@
 package com.faxintong.iruyi.controller.order;
 
-import com.faxintong.iruyi.model.general.order.GeneralOrder;
-import com.faxintong.iruyi.service.order.reject.RejectService;
+import com.faxintong.iruyi.model.mybatis.order.Order;
+import com.faxintong.iruyi.utils.Pager;
 import com.google.common.collect.Maps;
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.List;
 import java.util.Map;
-
-import static com.faxintong.iruyi.utils.Constants.*;
 
 /**
  * Created by hehongju on 2015/2/11.
@@ -23,53 +15,66 @@ import static com.faxintong.iruyi.utils.Constants.*;
 @RequestMapping("order")
 public class OrderController {
 
-    private Logger logger = LoggerFactory.getLogger(OrderController.class);
-
-    @Autowired
-    private RejectService rejectService;
-
-    @RequestMapping(value = "orderDetail")
-    public Map<String, Object> orderInfo(HttpServletRequest request, String orderId) {
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(RESULT, false);
-        if(StringUtils.isEmpty(orderId)){
-            result.put(ERR_MSG, "单子id为空");
-            return result;
-        }
-        try {
-            List<GeneralOrder> generalOrders = rejectService.findOrderById(Long.parseLong(orderId.toString()));
-            result.put(RESULT, true);
-            result.put(DATA, generalOrders);
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            result.put(ERR_MSG, "未知错误");
-        }
-        return result;
-    }
-
     /**
-     * 发单
-     * @param request
-     * @param orderId
+     * 发布商机
+     * @param order
      * @return
      */
-    @RequestMapping(value = "buildOrder")
-    public Map<String, Object> buildOrder(HttpServletRequest request, String orderId) {
+    @RequestMapping(value = "reportOrder")
+    public Map<String, Object> reportOrder(Order order) {
         Map<String, Object> result = Maps.newHashMap();
 
         return result;
     }
 
     /**
-     * 获取单子详情
-     * @param request
-     * @param orderId
+     * 获取单子列表
+     * @param pager
      * @return
      */
-    @RequestMapping(value = "orderDetail")
-    public Map<String, Object> orderDetail(HttpServletRequest request, String orderId) {
+    @RequestMapping(value = "getOrderList")
+    public Map<String, Object> getOrderList(Pager pager) {
         Map<String, Object> result = Maps.newHashMap();
 
         return result;
     }
+
+    /**
+     *
+     * @param orderId
+     * @return
+     */
+    @RequestMapping(value = "orderDetail")
+    public Map<String, Object> orderDetail(Long orderId) {
+        Map<String, Object> result = Maps.newHashMap();
+
+        return result;
+    }
+
+    /**
+     * 单子感兴趣
+     * @param orderId
+     * @return
+     */
+    @RequestMapping(value = "orderInterest")
+    public Map<String, Object> orderInterest(Long orderId) {
+        Map<String, Object> result = Maps.newHashMap();
+
+        return result;
+    }
+
+    /**
+     * 单子留言
+     * @param orderId
+     * @param content
+     * @return
+     */
+    @RequestMapping(value = "orderComment")
+    public Map<String, Object> orderComment(Long orderId, String content) {
+        Map<String, Object> result = Maps.newHashMap();
+
+        return result;
+    }
+
+
 }

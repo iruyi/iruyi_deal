@@ -32,20 +32,20 @@
         </javaTypeResolver>
 
         <!-- generate Model -->
-        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.topic"
+        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.order"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!-- generate xml -->
-        <sqlMapGenerator targetPackage="mybatis.topic"
+        <sqlMapGenerator targetPackage="mybatis.order"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- generate Mapper -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.topic"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.order"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -164,20 +164,25 @@
 
         <!--<table tableName="order" domainObjectName="Order">
             <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="type" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
             <columnOverride column="title" javaType="String" ></columnOverride>
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
-            <columnOverride column="rule_id" javaType="Long" ></columnOverride>
-            <columnOverride column="status" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
-            <columnOverride column="type" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
-            <columnOverride column="roster_type" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
-            <columnOverride column="is_delay" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
-            <columnOverride column="end_flag" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="lawyer_name" javaType="String" ></columnOverride>
+            <columnOverride column="content" javaType="String" ></columnOverride>
+            <columnOverride column="price" javaType="Double" ></columnOverride>
             <columnOverride column="deadline_date" javaType="java.util.Date" ></columnOverride>
-            <columnOverride column="description" javaType="String" ></columnOverride>
             <columnOverride column="keywords" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
             <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
         </table>-->
+
+        <table tableName="order_receive" domainObjectName="OrderReceive">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="order_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="content" javaType="String" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>
 
         <!--<table tableName="order" domainObjectName="Order">
             <columnOverride column="id" javaType="Long" ></columnOverride>
@@ -308,7 +313,7 @@
             <columnOverride column="access_count" javaType="Integer" ></columnOverride>
         </table>-->
 
-        <table tableName="topic" domainObjectName="Topic">
+        <!--<table tableName="topic" domainObjectName="Topic">
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="group_id" javaType="Long" ></columnOverride>
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
@@ -317,7 +322,39 @@
             <columnOverride column="content" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
             <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
-        </table>
+        </table>-->
+
+        <!--<table tableName="microview" domainObjectName="Microview">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="title" javaType="String" ></columnOverride>
+            <columnOverride column="content" javaType="String" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="view_time" javaType="java.util.Date" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="microview_attention" domainObjectName="ViewAttention">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="interview_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="microview_discuss" domainObjectName="ViewDiscuss">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="interview_id" javaType="Long" ></columnOverride>
+            <columnOverride column="type" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="content" javaType="String" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_name" javaType="String" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="microview_praise" domainObjectName="ViewPraise">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="discuss_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+        </table>-->
+
 
     </context>
 </generatorConfiguration>

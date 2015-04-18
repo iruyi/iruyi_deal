@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.service.lawyer;
 
+import com.faxintong.iruyi.model.mybatis.lawyer.City;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.utils.Pager;
 
@@ -17,4 +18,10 @@ public interface LawyerService {
      */
     public List<Lawyer> getAttetionList(Pager pager) throws Exception;
 
+    /**
+     * 获取城市列表
+     * @param pager
+     * @return
+     */
+    public List<City> getCityList(Pager pager);
 }

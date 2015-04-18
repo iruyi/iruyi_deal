@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.faxintong.iruyi.dao.mybatis.order.OrderRuleMapper" >
-  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.order.OrderRule" >
+<mapper namespace="com.faxintong.iruyi.dao.mybatis.order.OrderReceiveMapper" >
+  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.order.OrderReceive" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="rule_name" property="ruleName" jdbcType="VARCHAR" />
-    <result column="city_id" property="cityId" jdbcType="BIGINT" />
-    <result column="category_id" property="categoryId" jdbcType="BIGINT" />
-    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="lawyer_id" property="lawyerId" jdbcType="BIGINT" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -68,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, rule_name, city_id, category_id, description, create_date
+    id, order_id, lawyer_id, content, create_date
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderRuleExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderReceiveExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from order_rule
+    from order_receive
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -87,51 +86,39 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
     select 
     <include refid="Base_Column_List" />
-    from order_rule
+    from order_receive
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="Long" >
-    delete from order_rule
+    delete from order_receive
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderRuleExample" >
-    delete from order_rule
+  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderReceiveExample" >
+    delete from order_receive
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderRule" >
-      <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
-          SELECT LAST_INSERT_ID() AS id
-      </selectKey>
-    insert into order_rule (id, rule_name, city_id, 
-      category_id, description, create_date
-      )
-    values (#{id,jdbcType=BIGINT}, #{ruleName,jdbcType=VARCHAR}, #{cityId,jdbcType=BIGINT}, 
-      #{categoryId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}
-      )
+  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderReceive" >
+    insert into order_receive (id, order_id, lawyer_id, 
+      content, create_date)
+    values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{lawyerId,jdbcType=BIGINT}, 
+      #{content,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderRule" >
-      <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
-          SELECT LAST_INSERT_ID() AS id
-      </selectKey>
-
-    insert into order_rule
+  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderReceive" >
+    insert into order_receive
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="ruleName != null" >
-        rule_name,
+      <if test="orderId != null" >
+        order_id,
       </if>
-      <if test="cityId != null" >
-        city_id,
+      <if test="lawyerId != null" >
+        lawyer_id,
       </if>
-      <if test="categoryId != null" >
-        category_id,
-      </if>
-      <if test="description != null" >
-        description,
+      <if test="content != null" >
+        content,
       </if>
       <if test="createDate != null" >
         create_date,
@@ -141,46 +128,40 @@
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="ruleName != null" >
-        #{ruleName,jdbcType=VARCHAR},
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
       </if>
-      <if test="cityId != null" >
-        #{cityId,jdbcType=BIGINT},
+      <if test="lawyerId != null" >
+        #{lawyerId,jdbcType=BIGINT},
       </if>
-      <if test="categoryId != null" >
-        #{categoryId,jdbcType=BIGINT},
-      </if>
-      <if test="description != null" >
-        #{description,jdbcType=VARCHAR},
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
       </if>
       <if test="createDate != null" >
         #{createDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderRuleExample" resultType="java.lang.Integer" >
-    select count(*) from order_rule
+  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderReceiveExample" resultType="java.lang.Integer" >
+    select count(*) from order_receive
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update order_rule
+    update order_receive
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.ruleName != null" >
-        rule_name = #{record.ruleName,jdbcType=VARCHAR},
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=BIGINT},
       </if>
-      <if test="record.cityId != null" >
-        city_id = #{record.cityId,jdbcType=BIGINT},
+      <if test="record.lawyerId != null" >
+        lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
       </if>
-      <if test="record.categoryId != null" >
-        category_id = #{record.categoryId,jdbcType=BIGINT},
-      </if>
-      <if test="record.description != null" >
-        description = #{record.description,jdbcType=VARCHAR},
+      <if test="record.content != null" >
+        content = #{record.content,jdbcType=VARCHAR},
       </if>
       <if test="record.createDate != null" >
         create_date = #{record.createDate,jdbcType=TIMESTAMP},
@@ -191,31 +172,27 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update order_rule
+    update order_receive
     set id = #{record.id,jdbcType=BIGINT},
-      rule_name = #{record.ruleName,jdbcType=VARCHAR},
-      city_id = #{record.cityId,jdbcType=BIGINT},
-      category_id = #{record.categoryId,jdbcType=BIGINT},
-      description = #{record.description,jdbcType=VARCHAR},
+      order_id = #{record.orderId,jdbcType=BIGINT},
+      lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
+      content = #{record.content,jdbcType=VARCHAR},
       create_date = #{record.createDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderRule" >
-    update order_rule
+  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderReceive" >
+    update order_receive
     <set >
-      <if test="ruleName != null" >
-        rule_name = #{ruleName,jdbcType=VARCHAR},
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=BIGINT},
       </if>
-      <if test="cityId != null" >
-        city_id = #{cityId,jdbcType=BIGINT},
+      <if test="lawyerId != null" >
+        lawyer_id = #{lawyerId,jdbcType=BIGINT},
       </if>
-      <if test="categoryId != null" >
-        category_id = #{categoryId,jdbcType=BIGINT},
-      </if>
-      <if test="description != null" >
-        description = #{description,jdbcType=VARCHAR},
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
       </if>
       <if test="createDate != null" >
         create_date = #{createDate,jdbcType=TIMESTAMP},
@@ -223,12 +200,11 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderRule" >
-    update order_rule
-    set rule_name = #{ruleName,jdbcType=VARCHAR},
-      city_id = #{cityId,jdbcType=BIGINT},
-      category_id = #{categoryId,jdbcType=BIGINT},
-      description = #{description,jdbcType=VARCHAR},
+  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.order.OrderReceive" >
+    update order_receive
+    set order_id = #{orderId,jdbcType=BIGINT},
+      lawyer_id = #{lawyerId,jdbcType=BIGINT},
+      content = #{content,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

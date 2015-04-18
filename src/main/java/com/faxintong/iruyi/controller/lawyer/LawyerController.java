@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.controller.lawyer;
 
+import com.faxintong.iruyi.utils.Pager;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +18,18 @@ public class LawyerController {
      * @return
      */
     @RequestMapping(value = "getAttetionList")
-    public Map<String, Object> getAttetionList(){
+    public Map<String, Object> getAttetionList(Pager pager){
+
+        return null;
+    }
+
+    /**
+     * 获取城市
+     * @param pager
+     * @return
+     */
+    @RequestMapping(value = "getCityList")
+    public Map<String, Object> getCityList(Pager pager){
 
         return null;
     }

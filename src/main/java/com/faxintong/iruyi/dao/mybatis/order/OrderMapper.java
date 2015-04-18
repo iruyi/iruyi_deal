@@ -2,10 +2,10 @@ package com.faxintong.iruyi.dao.mybatis.order;
 
 import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.model.mybatis.order.OrderExample;
-import java.util.List;
-
 import com.faxintong.iruyi.operate.OperateMyBatis;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 @OperateMyBatis
 public interface OrderMapper {
     int countByExample(OrderExample example);

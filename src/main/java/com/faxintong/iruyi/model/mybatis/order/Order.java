@@ -1,36 +1,29 @@
 package com.faxintong.iruyi.model.mybatis.order;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class Order implements Serializable{
+public class Order {
     private Long id;
+
+    private Integer type;
 
     private String title;
 
     private Long lawyerId;
 
-    private Long ruleId;
+    private String lawyerName;
 
-    private Integer status;
+    private String content;
 
-    private Integer type;
-
-    private Integer isDelay;
-
-    private Integer endFlag;
+    private Double price;
 
     private Date deadlineDate;
 
-    private String description;
+    private String keywords;
 
     private Date createDate;
 
     private Date updateDate;
-
-    private Integer rosterType;
-
-    private String keywords;
 
     public Long getId() {
         return id;
@@ -38,6 +31,14 @@ public class Order implements Serializable{
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public String getTitle() {
@@ -56,44 +57,28 @@ public class Order implements Serializable{
         this.lawyerId = lawyerId;
     }
 
-    public Long getRuleId() {
-        return ruleId;
+    public String getLawyerName() {
+        return lawyerName;
     }
 
-    public void setRuleId(Long ruleId) {
-        this.ruleId = ruleId;
+    public void setLawyerName(String lawyerName) {
+        this.lawyerName = lawyerName;
     }
 
-    public Integer getStatus() {
-        return status;
+    public String getContent() {
+        return content;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public Integer getType() {
-        return type;
+    public Double getPrice() {
+        return price;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
-
-    public Integer getIsDelay() {
-        return isDelay;
-    }
-
-    public void setIsDelay(Integer isDelay) {
-        this.isDelay = isDelay;
-    }
-
-    public Integer getEndFlag() {
-        return endFlag;
-    }
-
-    public void setEndFlag(Integer endFlag) {
-        this.endFlag = endFlag;
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Date getDeadlineDate() {
@@ -104,12 +89,12 @@ public class Order implements Serializable{
         this.deadlineDate = deadlineDate;
     }
 
-    public String getDescription() {
-        return description;
+    public String getKeywords() {
+        return keywords;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
     }
 
     public Date getCreateDate() {
@@ -126,21 +111,5 @@ public class Order implements Serializable{
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
-    }
-
-    public Integer getRosterType() {
-        return rosterType;
-    }
-
-    public void setRosterType(Integer rosterType) {
-        this.rosterType = rosterType;
-    }
-
-    public String getKeywords() {
-        return keywords;
-    }
-
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
     }
 }
