@@ -41,9 +41,32 @@ public class ViewController {
      * @return
      */
     @RequestMapping(value = "attentionView")
-    public Map<String, Object> attentionView(Long microViewId){
+    public Map<String, Object> viewAttention(Long microViewId){
 
         return null;
     }
 
+    /**
+     * 微访谈讨论内容
+     * @param microViewId
+     * @param content
+     * @param type
+     * @return
+     */
+    @RequestMapping(value = "viewDiscuss")
+    public Map<String, Object> viewDiscuss(Long microViewId, String content, Integer type){
+
+        return null;
+    }
+
+    /**
+     * 访谈讨论点赞
+     * @param discussId
+     * @return
+     */
+    @RequestMapping(value = "discussPraise")
+    public Map<String, Object> discussPraise(Long discussId){
+
+        return null;
+    }
 }
