@@ -8,6 +8,7 @@ import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.lawyer.LawyerExample;
 import com.faxintong.iruyi.service.friendcircle.FriendsService;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import org.slf4j.Logger;
 
-import static com.faxintong.iruyi.utils.Constants.*;
+import static com.faxintong.iruyi.utils.Constants.FRIEND;
+import static com.faxintong.iruyi.utils.Constants.UNCONFIRMED_FRIEND;
 
 /**
  * Created by admin on 15-1-3.

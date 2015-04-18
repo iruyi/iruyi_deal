@@ -32,20 +32,20 @@
         </javaTypeResolver>
 
         <!-- generate Model -->
-        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.community"
+        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.lawyer"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!-- generate xml -->
-        <sqlMapGenerator targetPackage="mybatis.community"
+        <sqlMapGenerator targetPackage="mybatis.lawyer"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- generate Mapper -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.community"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.lawyer"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -248,6 +248,52 @@
             <columnOverride column="praise_count" javaType="Integer" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
         </table>-->
+
+
+        <!--<table tableName="article" domainObjectName="Article">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="type"  javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="title" javaType="String" ></columnOverride>
+            <columnOverride column="content" javaType="String" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_name" javaType="String" ></columnOverride>
+            <columnOverride column="image" javaType="String" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>
+
+        <table tableName="article_comment" domainObjectName="ArticleComment">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="article_id"  javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_name" javaType="String" ></columnOverride>
+            <columnOverride column="comment" javaType="String" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="article_praise" domainObjectName="ArticlePraise">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="article_id"  javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+        </table>-->
+
+        <table tableName="lawyer" domainObjectName="Lawyer">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="name"  javaType="String" ></columnOverride>
+            <columnOverride column="password" javaType="String" ></columnOverride>
+            <columnOverride column="email" javaType="String" ></columnOverride>
+            <columnOverride column="status"  javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="sex" javaType="Integer" jdbcType="TINYINT"></columnOverride>
+            <columnOverride column="address" javaType="String" ></columnOverride>
+            <columnOverride column="city_id" javaType="Long" ></columnOverride>
+            <columnOverride column="city_name" javaType="String" ></columnOverride>
+            <columnOverride column="phone" javaType="String" ></columnOverride>
+            <columnOverride column="age" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="photo_url" javaType="String" ></columnOverride>
+            <columnOverride column="law_office" javaType="String" ></columnOverride>
+            <columnOverride column="introduction" javaType="String" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+            <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
+        </table>
 
     </context>
 </generatorConfiguration>

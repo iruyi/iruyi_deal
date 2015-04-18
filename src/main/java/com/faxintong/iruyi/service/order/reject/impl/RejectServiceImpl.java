@@ -74,7 +74,7 @@ public class RejectServiceImpl implements RejectService {
     }
 
     @Transactional
-    public Integer buildOrder(GeneralOrder generalOrder) throws Exception{
+    public Long buildOrder(GeneralOrder generalOrder) throws Exception{
         Integer ruleId = 0;//默认情况下没有规则（商务单）
         if(generalOrder.getType() != null && generalOrder.getType().intValue() != SHANGWU){
             OrderRuleExample orderRuleExample = new OrderRuleExample();
@@ -139,7 +139,7 @@ public class RejectServiceImpl implements RejectService {
                 }
             }
         }
-        return orderId;
+        return order.getId();
     }
 
 }

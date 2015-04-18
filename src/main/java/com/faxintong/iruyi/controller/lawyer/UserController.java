@@ -151,7 +151,7 @@ public class UserController extends BaseController {
             try {
                 String fileName = uploadFile(request, Config.HEAD_DIR + sessionId);
                 Lawyer lawyer = getLawyer(request);
-                lawyer.setPhoto(fileName);
+                //lawyer.setPhoto(fileName);
                 userService.updateLawyerInfo(lawyer);
                 result.put(RESULT, true);
             } catch (IOException e) {
@@ -175,7 +175,7 @@ public class UserController extends BaseController {
             try {
                 String fileName =  uploadFile(request, Config.CERTIFICATE_INFO + sessionId);
                 Lawyer lawyer = getLawyer(request);
-                lawyer.setBusinessLicense(fileName);
+                //lawyer.setBusinessLicense(fileName);
                 userService.updateLawyerInfo(lawyer);
             } catch (IOException e) {
                 logger.error(lawyerId + ":上传执照信息失败:" + e.getMessage());

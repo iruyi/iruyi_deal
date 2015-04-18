@@ -2,8 +2,6 @@ package com.faxintong.iruyi.controller.indivcenter;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.indivcenter.CenterService;
-import static com.faxintong.iruyi.utils.Constants.*;
-
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -15,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
+
+import static com.faxintong.iruyi.utils.Constants.*;
 
 /**
  * Created by hehj on 15-1-8.

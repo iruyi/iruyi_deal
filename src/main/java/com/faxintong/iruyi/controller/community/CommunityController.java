@@ -3,10 +3,8 @@ package com.faxintong.iruyi.controller.community;
 import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.controller.comment.CommentController;
 import com.faxintong.iruyi.model.mybatis.community.Community;
-import com.faxintong.iruyi.model.mybatis.community.Issue;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.community.CommunityService;
-import com.faxintong.iruyi.service.friendcircle.IssueService;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.Map;
+
 import static com.faxintong.iruyi.utils.Constants.*;
 
 /**

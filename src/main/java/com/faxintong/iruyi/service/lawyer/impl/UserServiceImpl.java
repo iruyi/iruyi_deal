@@ -6,7 +6,6 @@ import com.faxintong.iruyi.model.mybatis.lawyer.LawyerExample;
 import com.faxintong.iruyi.service.lawyer.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

@@ -18,7 +18,8 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Map;
 
-import static com.faxintong.iruyi.utils.Constants.*;
+import static com.faxintong.iruyi.utils.Constants.ERR_MSG;
+import static com.faxintong.iruyi.utils.Constants.RESULT;
 
 /**
  * Created by ron on 2015/1/12.

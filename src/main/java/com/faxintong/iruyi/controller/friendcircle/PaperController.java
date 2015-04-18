@@ -6,7 +6,6 @@ import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.friendcircle.PaperService;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import static com.faxintong.iruyi.utils.Constants.*;
+import static com.faxintong.iruyi.utils.Constants.ERR_MSG;
+import static com.faxintong.iruyi.utils.Constants.RESULT;
 
 /**
  * Created by ron on 2015/1/12.

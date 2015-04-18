@@ -3,8 +3,6 @@ package com.faxintong.iruyi.controller.order;
 import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.general.lawyer.ReceiveLawyer;
 import com.faxintong.iruyi.model.general.order.GeneralOrder;
-import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
-import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.service.order.reject.RejectService;
 import com.faxintong.iruyi.utils.ValidateUtil;
 import com.google.common.collect.Maps;
@@ -19,9 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
-import static com.faxintong.iruyi.utils.Constants.DATA;
-import static com.faxintong.iruyi.utils.Constants.ERR_MSG;
-import static com.faxintong.iruyi.utils.Constants.RESULT;
+import static com.faxintong.iruyi.utils.Constants.*;
 
 /**
  * Created by hehj on 15-2-7.
@@ -42,7 +38,7 @@ public class RejectOrderController extends BaseController{
         if(ValidateUtil.validateGeneralOrder(generalOrder, result)){
             generalOrder.setLawyerId(getLawyerId(request));
             try {
-                Integer orderId = rejectService.buildOrder(generalOrder);
+                Long orderId = rejectService.buildOrder(generalOrder);
                 result.put(RESULT, true);
                 result.put("orderId", orderId);
             } catch (Exception e) {

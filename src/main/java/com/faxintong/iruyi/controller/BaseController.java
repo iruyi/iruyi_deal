@@ -2,11 +2,9 @@ package com.faxintong.iruyi.controller;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.lawyer.UserService;
-import com.faxintong.iruyi.utils.RedisUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-import org.springframework.web.multipart.MultipartRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +12,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 
-import static com.faxintong.iruyi.utils.Constants.*;
 /**
  * Created by ron on 2015/1/13.
  */

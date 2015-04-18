@@ -1,7 +1,5 @@
 package com.faxintong.iruyi.model.general.lawyer;
 
-import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
-
 import java.io.Serializable;
 
 /**

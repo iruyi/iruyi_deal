@@ -1,7 +1,6 @@
 package com.faxintong.iruyi.controller.order;
 
 import com.faxintong.iruyi.model.general.order.GeneralOrder;
-import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.service.order.reject.RejectService;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
@@ -15,9 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
-import static com.faxintong.iruyi.utils.Constants.DATA;
-import static com.faxintong.iruyi.utils.Constants.ERR_MSG;
-import static com.faxintong.iruyi.utils.Constants.RESULT;
+import static com.faxintong.iruyi.utils.Constants.*;
 
 /**
  * Created by hehongju on 2015/2/11.
@@ -47,6 +44,32 @@ public class OrderController {
             logger.error(e.getMessage(), e);
             result.put(ERR_MSG, "未知错误");
         }
+        return result;
+    }
+
+    /**
+     * 发单
+     * @param request
+     * @param orderId
+     * @return
+     */
+    @RequestMapping(value = "buildOrder")
+    public Map<String, Object> buildOrder(HttpServletRequest request, String orderId) {
+        Map<String, Object> result = Maps.newHashMap();
+
+        return result;
+    }
+
+    /**
+     * 获取单子详情
+     * @param request
+     * @param orderId
+     * @return
+     */
+    @RequestMapping(value = "orderDetail")
+    public Map<String, Object> orderDetail(HttpServletRequest request, String orderId) {
+        Map<String, Object> result = Maps.newHashMap();
+
         return result;
     }
 }

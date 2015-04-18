@@ -19,9 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
-import static com.faxintong.iruyi.utils.Constants.DATA;
-import static com.faxintong.iruyi.utils.Constants.ERR_MSG;
-import static com.faxintong.iruyi.utils.Constants.RESULT;
+import static com.faxintong.iruyi.utils.Constants.*;
 
 /**
  * Created by hehj on 15-1-15.
