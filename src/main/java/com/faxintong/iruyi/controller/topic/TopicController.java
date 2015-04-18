@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.controller.topic;
 
+import com.faxintong.iruyi.utils.Pager;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,11 +26,20 @@ public class TopicController {
 
     /**
      * 获取话题列表
-     * @param categoryId
      * @return
      */
-    @RequestMapping(value = "getTopicList")
-    public Map<String, Object> getTopicList(Long categoryId){
+    @RequestMapping(value = "getGroupList")
+    public Map<String, Object> getGroupList(){
+
+        return null;
+    }
+
+    /**
+     * 获取话题组详情
+     * @return
+     */
+    @RequestMapping(value = "getGroupDetail")
+    public Map<String, Object> getGroupDetail(Long groupId, Pager pager){
 
         return null;
     }
@@ -46,43 +56,46 @@ public class TopicController {
     }
 
     /**
+     * 关注话题组
+     * @return
+     */
+    @RequestMapping(value = "attentionGroup")
+    public Map<String, Object> attentionGroup(Long groupId){
+
+        return null;
+    }
+
+    /**
+     * 回应话题
+     * @param topicId
+     * @param content
+     * @return
+     */
+    @RequestMapping(value = "topicReply")
+    public Map<String, Object> topicReply(Long topicId, String content){
+
+        return null;
+    }
+
+    /**
      * 关注话题
+     * @param topicId
      * @return
      */
     @RequestMapping(value = "attentionTopic")
-    public Map<String, Object> attentionTopic(){
+    public Map<String, Object> attentionTopic(Long topicId){
 
         return null;
     }
 
     /**
-     * 获取微访谈话题列表
+     * 话题回应点赞
+     * @param replyId
      * @return
      */
-    @RequestMapping(value = "microViewList")
-    public Map<String, Object> microViewList(){
+    public Map<String, Object> topicReplyPraise(Long replyId){
 
         return null;
     }
 
-    /**
-     * 查看微访谈详情
-     * @param microViewId
-     * @return
-     */
-    @RequestMapping(value = "microViewDetail")
-    public Map<String, Object> microViewDetail(Long microViewId){
-
-        return null;
-    }
-
-    /**
-     * 关注微访谈
-     * @return
-     */
-    @RequestMapping(value = "attentionView")
-    public Map<String, Object> attentionView(){
-
-        return null;
-    }
 }
