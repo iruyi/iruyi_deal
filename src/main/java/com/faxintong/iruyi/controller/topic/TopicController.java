@@ -19,7 +19,7 @@ public class TopicController {
      * @return
      */
     @RequestMapping(value = "reportTopic")
-    public Map<String, Object> reportTopic(){
+    public Map<String, Object> reportTopic(Long groupId, String content){
 
         return null;
     }
@@ -29,7 +29,7 @@ public class TopicController {
      * @return
      */
     @RequestMapping(value = "getGroupList")
-    public Map<String, Object> getGroupList(){
+    public Map<String, Object> getGroupList(Pager pager){
 
         return null;
     }
