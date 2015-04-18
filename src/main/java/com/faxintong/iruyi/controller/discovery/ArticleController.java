@@ -3,9 +3,8 @@ package com.faxintong.iruyi.controller.discovery;
 import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.common.Page;
 import com.faxintong.iruyi.model.general.article.GeneralArticle;
-import com.faxintong.iruyi.model.mybatis.discovery.ArticleComment;
-import com.faxintong.iruyi.model.mybatis.discovery.ArticlePraise;
-import com.faxintong.iruyi.model.mybatis.friendcircle.Paper;
+import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
+import com.faxintong.iruyi.model.mybatis.article.ArticlePraise;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.discovery.ArticleService;
 import com.google.common.collect.Maps;
@@ -19,14 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import static com.faxintong.iruyi.utils.Constants.DATA;
-import static com.faxintong.iruyi.utils.Constants.ERR_MSG;
-import static com.faxintong.iruyi.utils.Constants.RESULT;
+import static com.faxintong.iruyi.utils.Constants.*;
 
 /**
  * Created by hehongju on 2015/2/15.
@@ -114,8 +110,8 @@ public class ArticleController extends BaseController{
             ArticlePraise articlePraise = new ArticlePraise();
             articlePraise.setArticleId(Long.parseLong(articleId.toString()));
             articlePraise.setLawyerId(lawyer.getId());
-            articlePraise.setLawyerName(lawyer.getName());
-            articlePraise.setCreateTime(new Date());
+            //articlePraise.setLawyerName(lawyer.getName());
+            //articlePraise.setCreateTime(new Date());
             if(articleService.isExistPraise(articlePraise)){
                 result.put(ERR_MSG, "律师" + lawyer.getName() + "已点过赞了");
                 return result;

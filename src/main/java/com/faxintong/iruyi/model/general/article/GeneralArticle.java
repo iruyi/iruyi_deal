@@ -1,6 +1,6 @@
 package com.faxintong.iruyi.model.general.article;
 
-import com.faxintong.iruyi.model.mybatis.discovery.Article;
+import com.faxintong.iruyi.model.mybatis.article.Article;
 
 import java.io.Serializable;
 

@@ -2,8 +2,8 @@ package com.faxintong.iruyi.service.discovery;
 
 import com.faxintong.iruyi.model.common.Page;
 import com.faxintong.iruyi.model.general.article.GeneralArticle;
-import com.faxintong.iruyi.model.mybatis.discovery.ArticleComment;
-import com.faxintong.iruyi.model.mybatis.discovery.ArticlePraise;
+import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
+import com.faxintong.iruyi.model.mybatis.article.ArticlePraise;
 
 import java.util.List;
 

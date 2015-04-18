@@ -1,14 +1,14 @@
 package com.faxintong.iruyi.service.discovery.impl;
 
 import com.faxintong.iruyi.dao.general.discovery.ArticleGeneralMapper;
-import com.faxintong.iruyi.dao.mybatis.discovery.ArticleCommentMapper;
-import com.faxintong.iruyi.dao.mybatis.discovery.ArticlePraiseMapper;
+import com.faxintong.iruyi.dao.mybatis.article.ArticleCommentMapper;
+import com.faxintong.iruyi.dao.mybatis.article.ArticlePraiseMapper;
 import com.faxintong.iruyi.model.common.Page;
 import com.faxintong.iruyi.model.general.article.GeneralArticle;
-import com.faxintong.iruyi.model.mybatis.discovery.ArticleComment;
-import com.faxintong.iruyi.model.mybatis.discovery.ArticleCommentExample;
-import com.faxintong.iruyi.model.mybatis.discovery.ArticlePraise;
-import com.faxintong.iruyi.model.mybatis.discovery.ArticlePraiseExample;
+import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
+import com.faxintong.iruyi.model.mybatis.article.ArticleCommentExample;
+import com.faxintong.iruyi.model.mybatis.article.ArticlePraise;
+import com.faxintong.iruyi.model.mybatis.article.ArticlePraiseExample;
 import com.faxintong.iruyi.service.discovery.ArticleService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
