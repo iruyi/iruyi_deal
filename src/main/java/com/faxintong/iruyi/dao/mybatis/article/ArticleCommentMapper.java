@@ -2,9 +2,11 @@ package com.faxintong.iruyi.dao.mybatis.article;
 
 import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
 import com.faxintong.iruyi.model.mybatis.article.ArticleCommentExample;
-import java.util.List;
+import com.faxintong.iruyi.operate.OperateMyBatis;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+@OperateMyBatis
 public interface ArticleCommentMapper {
     int countByExample(ArticleCommentExample example);
 

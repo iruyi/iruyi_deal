@@ -1,8 +1,5 @@
 package com.faxintong.iruyi.controller.article;
 
-import com.faxintong.iruyi.model.mybatis.article.Article;
-import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
-import com.faxintong.iruyi.model.mybatis.article.ArticlePraise;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,22 +14,12 @@ public class ArticleController {
 
     /**
      * 发布文章
-     * @param article
+     * @param content
+     * @param url
      * @return
      */
     @RequestMapping(value = "reportArticle")
-    public Map<String, Object> reportArticle(Article article){
-
-        return null;
-    }
-
-    /**
-     * 获取文章详情通过文章id
-     * @param articleId
-     * @return
-     */
-    @RequestMapping(value = "articleDetail")
-    public Map<String, Object> articleDetail(Long articleId){
+    public Map<String, Object> reportArticle(String content, String url){
 
         return null;
     }
@@ -48,22 +35,35 @@ public class ArticleController {
     }
 
     /**
+     * 获取文章详情
+     * @param articleId
+     * @return
+     */
+    @RequestMapping(value = "articleDetail")
+    public Map<String, Object> articleDetail(Long articleId){
+
+        return null;
+    }
+
+    /**
      * 评论文章
+     * @param articleId
+     * @param comment
      * @return
      */
     @RequestMapping(value = "aticleComment")
-    public Map<String, Object> aticleComment(ArticleComment articleComment){
+    public Map<String, Object> aticleComment(String articleId, String comment){
 
         return null;
     }
 
     /**
      * 文章点赞
-     * @param articlePraise
+     * @param articleId
      * @return
      */
     @RequestMapping(value = "articlePraise")
-    public Map<String, Object> articlePraise(ArticlePraise articlePraise){
+    public Map<String, Object> articlePraise(Long articleId){
 
         return null;
     }
