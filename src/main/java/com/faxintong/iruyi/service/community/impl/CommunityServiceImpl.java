@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import static com.faxintong.iruyi.utils.Constants.*;
@@ -35,21 +36,50 @@ public class CommunityServiceImpl implements CommunityService{
     @Override
     @Transactional
     public void deleteCommunity(Long communityId) {
-        communityMapper.deleteByPrimaryKey(communityId);
+        Community community = communityMapper.selectByPrimaryKey(communityId);
+        if(community.getType() == COMMUNITY_REPLY) {
+            ReplyPraiseExample replyPraiseExample = new ReplyPraiseExample();
+            replyPraiseExample.createCriteria().andReplyIdEqualTo(community.getId());
+            replyPraiseMapper.deleteByExample(replyPraiseExample);
+            communityMapper.deleteByPrimaryKey(communityId);
+        }else{
+            CommunityExample communityExample = new CommunityExample();
+            communityExample.createCriteria().andIssueIdEqualTo(community.getId());
+            List<Community> communityList = communityMapper.selectByExample(communityExample);
+
+            List<Long> idList = new ArrayList<Long>();
+            for(Community community1 : communityList){
+                idList.add(community1.getId());
+            }
+
+            ReplyPraiseExample replyPraiseExample = new ReplyPraiseExample();
+            replyPraiseExample.createCriteria().andReplyIdIn(idList);
+            replyPraiseMapper.deleteByExample(replyPraiseExample);
+
+            communityMapper.deleteByExample(communityExample);
+            communityMapper.deleteByPrimaryKey(communityId);
+        }
     }
 
     @Override
-    public List<Community> getCommunityNews(Integer page, Integer pageSize) {
+    public List<Community> getCommunityNews(Long lawyerId, Integer page, Integer pageSize) {
+        int start = (page - 1) * pageSize;
+        int end = start + pageSize;
+        String limit = "limit " + start + "," + end + " ";
         CommunityExample communityExample = new CommunityExample();
-        communityExample.setOrderByClause("create_date desc");
-        return communityMapper.selectByExample(communityExample);
+        communityExample.setOrderByClause("create_date desc " + limit);
+        List<Community> communityList = communityMapper.selectByExample(communityExample);
+        for(Community community: communityList){
+            if(community.getType() == COMMUNITY_REPLY){
+                community.setHasPraised(hasPraised(lawyerId, community.getId()));
+            }
+        }
+        return communityList;
     }
 
     @Override
     @Transactional
     public void createCommunityPraise(Long lawyerId, Long communityId) {
-        if(hasPraised(lawyerId, communityId))
-            return;
         ReplyPraise replyPraise = new ReplyPraise();
         replyPraise.setLawyerId(lawyerId);
         replyPraise.setCreateDate(new Date());
@@ -65,7 +95,7 @@ public class CommunityServiceImpl implements CommunityService{
         return communityMapper.selectByPrimaryKey(communityId);
     }
 
-    private boolean hasPraised(Long lawyerId, Long communityId){
+    public boolean hasPraised(Long lawyerId, Long communityId){
         ReplyPraiseExample replyPraiseExample = new ReplyPraiseExample();
         replyPraiseExample.createCriteria().andLawyerIdEqualTo(lawyerId).andReplyIdEqualTo(communityId);
         return replyPraiseMapper.countByExample(replyPraiseExample) != 0;
@@ -81,5 +111,24 @@ public class CommunityServiceImpl implements CommunityService{
     public boolean replyIsExists(Long communityId) {
         Community community = communityMapper.selectByPrimaryKey(communityId);
         return community == null ? false : community.getType() == COMMUNITY_REPLY;
+    }
+
+    @Override
+    public void deletePraise(Long praiseId) {
+        replyPraiseMapper.deleteByPrimaryKey(praiseId);
+    }
+
+    @Override
+    public boolean isIssueOwner(Long lawyerId, Long issueId) {
+        CommunityExample communityExample = new CommunityExample();
+        communityExample.createCriteria().andLawyerIdEqualTo(lawyerId).andIdEqualTo(issueId).andTypeEqualTo(COMMUNITY_ISSUE);
+        return communityMapper.countByExample(communityExample) == 1;
+    }
+
+    @Override
+    public boolean isReplyOwner(Long lawyerId, Long replyId) {
+        CommunityExample communityExample = new CommunityExample();
+        communityExample.createCriteria().andLawyerIdEqualTo(lawyerId).andIdEqualTo(replyId).andTypeEqualTo(COMMUNITY_REPLY);
+        return communityMapper.countByExample(communityExample) == 1;
     }
 }

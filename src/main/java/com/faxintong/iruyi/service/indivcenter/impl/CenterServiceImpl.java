@@ -6,6 +6,7 @@ import com.faxintong.iruyi.dao.mybatis.order.ReceiveOrderMapper;
 import com.faxintong.iruyi.dao.mybatis.pay.PaymentRecordMapper;
 import com.faxintong.iruyi.model.general.Statistic;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
+import com.faxintong.iruyi.model.mybatis.lawyer.LawyerExample;
 import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.model.mybatis.order.OrderExample;
 import com.faxintong.iruyi.model.mybatis.order.ReceiveOrder;
@@ -38,6 +39,7 @@ public class CenterServiceImpl implements CenterService {
     private ReceiveOrderMapper receiveOrderMapper;
     @Autowired
     private PaymentRecordMapper payRecordMapper;
+
     private Long lawyerID;
     private static final Integer receiveSuccessStatus=4;
     private static final Integer sendSuccessStatus=4;
@@ -48,6 +50,18 @@ public class CenterServiceImpl implements CenterService {
     public Lawyer findLawyerById(Long lawyerId) throws Exception {
         logger.info("律师id为" + lawyerId);
         return lawyerMapper.selectByPrimaryKey(lawyerId);
+    }
+
+    @Override
+    public Lawyer findLawyerStatistic(Long orderId) throws Exception {
+        Order order = orderMapper.selectByPrimaryKey(orderId);
+        LawyerExample example = new LawyerExample();
+        example.createCriteria().andIdEqualTo(order.getLawyerId());
+        List<Lawyer> lawyers = lawyerMapper.selectByExample(example);
+        if(lawyers != null && lawyers.size() > 0){
+            return lawyers.get(0);
+        }
+        return null;
     }
 
     @Override

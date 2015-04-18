@@ -19,7 +19,15 @@ public interface ReceiveService {
     public List<GeneralOrder> findAvailReceiveOrders(Long lawyerId) throws Exception;
 
     /**
-     * 查询已接但还未审核单子(状态：待审核)
+     * 查询该律师参与的所有单子（接的所有单）
+     * @param lawyerId
+     * @return
+     * @throws Exception
+     */
+    public List<GeneralOrder> findReceivedOrders(Long lawyerId) throws Exception;
+
+    /**
+     * 查询已接但还未审核单子(状态：待审核)   ---待定
      * @param lawyerId
      * @return
      * @throws Exception
@@ -32,7 +40,7 @@ public interface ReceiveService {
      * @return
      * @throws Exception
      */
-    public List<Order> findOrdersByStatus(Long lawyerId, Integer status) throws Exception;
+    public List<GeneralOrder> findOrdersByStatus(Long lawyerId, Integer status) throws Exception;
 
     /**
      * 律师接单

@@ -230,12 +230,24 @@
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
         </table>-->
 
-        <table tableName="reply_praise" domainObjectName="ReplyPraise">
+        <!--<table tableName="reply_praise" domainObjectName="ReplyPraise">
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="reply_id" javaType="Long" ></columnOverride>
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
-        </table>
+        </table>-->
+
+        <!--<table tableName="community" domainObjectName="Community">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="issue_id" javaType="Long" ></columnOverride>
+            <columnOverride column="title" javaType="String" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_name" javaType="String" ></columnOverride>
+            <columnOverride column="type"  javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="content" javaType="String" ></columnOverride>
+            <columnOverride column="praise_count" javaType="Integer" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
 
     </context>
 </generatorConfiguration>

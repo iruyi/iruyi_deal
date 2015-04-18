@@ -5,10 +5,18 @@ import org.hibernate.validator.constraints.NotEmpty;
 import java.util.Date;
 
 public class Community {
+    /**
+     * communityId
+     */
     private Long id;
-
+    /**
+     * 提问的ID
+     */
     private Long issueId;
 
+    /**
+     * 标题
+     */
     @NotEmpty
     private String title;
 
@@ -24,6 +32,8 @@ public class Community {
     private Integer praiseCount;
 
     private Date createDate;
+
+    private  boolean hasPraised;
 
     public Long getId() {
         return id;
@@ -95,5 +105,13 @@ public class Community {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public boolean isHasPraised() {
+        return hasPraised;
+    }
+
+    public void setHasPraised(boolean hasPraised) {
+        this.hasPraised = hasPraised;
     }
 }

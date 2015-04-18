@@ -3,6 +3,7 @@ package com.faxintong.iruyi.controller.order;
 import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.general.lawyer.ReceiveLawyer;
 import com.faxintong.iruyi.model.general.order.GeneralOrder;
+import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.service.order.reject.RejectService;
 import com.faxintong.iruyi.utils.ValidateUtil;
@@ -52,8 +53,31 @@ public class RejectOrderController extends BaseController{
         return result;
     }
 
+    @RequestMapping(value = "findOrdersDetail")
+    public Map<String, Object> findOrdersDetail(HttpServletRequest request, String orderId) {
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(RESULT, false);
+        try{
+            if(StringUtils.isEmpty(orderId)){
+                result.put(ERR_MSG, "单子id为空");
+                return result;
+            }
+            //获取单子信息
+            List<GeneralOrder> generalOrders = rejectService.findOrderById(Long.parseLong(orderId.toString()));
+            //获取律师信息
+            List<ReceiveLawyer> receiveLawyers = rejectService.findReceiveOrderLawyers(Long.parseLong(orderId.toString()));
+            result.put(RESULT, true);
+            result.put("order", generalOrders);
+            result.put("lawyers", receiveLawyers);
+        }catch (Exception e){
+            logger.error(e.getMessage(), e);
+            result.put(ERR_MSG, "未知异常");
+        }
+        return result;
+    }
+
     @RequestMapping(value = "rejectOrders")
-    public Map<String, Object> rejectOrders(HttpServletRequest request, String lawyerId) {
+    public Map<String, Object> rejectOrders(HttpServletRequest request, String lawyerId, String status) {
         Map<String, Object> result = Maps.newHashMap();
         result.put(RESULT, false);
         if(StringUtils.isEmpty(lawyerId)){
@@ -61,7 +85,12 @@ public class RejectOrderController extends BaseController{
             return result;
         }
         try {
-            List<Order> orders = rejectService.findRejectOrders(Long.parseLong(lawyerId.toString()));
+            List<GeneralOrder> orders = null;
+            if(StringUtils.isEmpty(status)){
+                orders = rejectService.findRejectOrders(Long.parseLong(lawyerId.toString()));
+            }else{
+                orders = rejectService.findOrdersByStatus(Long.parseLong(lawyerId.toString()), Integer.parseInt(status.toString()));
+            }
             result.put(RESULT, true);
             result.put(DATA, orders);
         } catch (Exception e) {
@@ -71,25 +100,12 @@ public class RejectOrderController extends BaseController{
         return result;
     }
 
-    @RequestMapping(value = "orderInfo")
-    public Map<String, Object> orderInfo(HttpServletRequest request, String orderId) {
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(RESULT, false);
-        if(StringUtils.isEmpty(orderId)){
-            result.put(ERR_MSG, "单子id为空");
-            return result;
-        }
-        try {
-            Order order = rejectService.findOrderById(Long.parseLong(orderId.toString()));
-            result.put(RESULT, true);
-            result.put(DATA, order);
-        } catch (Exception e) {
-            logger.error(e.getMessage(), e);
-            result.put(ERR_MSG, "未知错误");
-        }
-        return result;
-    }
-
+    /**
+     * 暂时没有单独使用
+     * @param request
+     * @param orderId
+     * @return
+     */
     @RequestMapping(value = "receiveLawyers")
     public Map<String, Object> receiveLawyers(HttpServletRequest request, String orderId) {
         Map<String, Object> result = Maps.newHashMap();

@@ -1,6 +1,8 @@
 package com.faxintong.iruyi.service.order.reject.impl;
 
+import com.faxintong.iruyi.dao.general.order.OrderGeneralMapper;
 import com.faxintong.iruyi.dao.general.order.ReceiveGeneralMapper;
+import com.faxintong.iruyi.dao.general.order.RejectGeneralMapper;
 import com.faxintong.iruyi.dao.mybatis.lawyer.LawyerMapper;
 import com.faxintong.iruyi.dao.mybatis.order.*;
 import com.faxintong.iruyi.model.general.lawyer.ReceiveLawyer;
@@ -37,23 +39,23 @@ public class RejectServiceImpl implements RejectService {
     private BlacklistMapper blacklistMapper;
     @Autowired
     private ReceiveGeneralMapper receiveGeneralMapper;
+    @Autowired
+    private OrderGeneralMapper orderGeneralMapper;
+    @Autowired
+    private RejectGeneralMapper rejectGeneralMapper;
 
     private final Integer orderConfirmStatus=2;
     private final Integer receiveOrderConfirmStatus=2;
     private final Integer receiveOrderRejectStatus=3;
 
     @Override
-    public List<Order> findRejectOrders(Long lawyerId) throws Exception {
-        OrderExample example = new OrderExample();
-        example.createCriteria().andLawyerIdEqualTo(lawyerId);
-        List<Order> orderList = orderMapper.selectByExample(example);
-        return orderList;
+    public List<GeneralOrder> findRejectOrders(Long lawyerId) throws Exception {
+        return rejectGeneralMapper.findRejectOrders(lawyerId);
     }
 
     @Override
-    public Order findOrderById(Long orderId) throws Exception {
-        Order order = orderMapper.selectByPrimaryKey(orderId);
-        return order;
+    public List<GeneralOrder> findOrderById(Long orderId) throws Exception {
+        return orderGeneralMapper.findOrderById(orderId);
     }
 
     @Override
@@ -67,11 +69,8 @@ public class RejectServiceImpl implements RejectService {
     }
 
     @Override
-    public List<Order> findOrdersByStatus(Long lawyerId, Integer status) throws Exception {
-        OrderExample example = new OrderExample();
-        example.createCriteria().andLawyerIdEqualTo(lawyerId).andStatusEqualTo(status);
-        List<Order> orderList = orderMapper.selectByExample(example);
-        return orderList;
+    public List<GeneralOrder> findOrdersByStatus(Long lawyerId, Integer status) throws Exception {
+        return rejectGeneralMapper.findOrdersByStatus(lawyerId, status);
     }
 
     @Transactional
@@ -90,7 +89,8 @@ public class RejectServiceImpl implements RejectService {
                 orderRule.setCityId(generalOrder.getCityId());
                 orderRule.setCreateDate(new Date());
                 orderRule.setDescription(generalOrder.getTitle());
-                ruleId = orderRuleMapper.insertSelective(orderRule);
+                orderRuleMapper.insertSelective(orderRule);
+                ruleId = Integer.parseInt(orderRule.getId().toString());
             }
         }
 
@@ -108,10 +108,12 @@ public class RejectServiceImpl implements RejectService {
         order.setType(generalOrder.getType());
         order.setDescription(generalOrder.getDescription());
         order.setCreateDate(new Date());
-        Integer orderId = orderMapper.insertSelective(order);
+        order.setKeywords(generalOrder.getKeywords());
+        order.setDeadlineDate(generalOrder.getDeadlineDate());
+        orderMapper.insertSelective(order);
 
         if(generalOrder.getRosterType().intValue() == WHITE_LIST){
-            if(orderId == null){
+            if(order.getId() == null){
                 throw new Exception("orderId is null");
             }
             if(generalOrder.getLawyerIds() != null && generalOrder.getLawyerIds().length > 0){
@@ -119,12 +121,12 @@ public class RejectServiceImpl implements RejectService {
                 for(Long lawyerId : generalOrder.getLawyerIds()){
                     Whitelist whitelist = new Whitelist();
                     whitelist.setLawyerId(lawyerId);
-                    whitelist.setOrderId(Long.parseLong(orderId.toString()));
+                    whitelist.setOrderId(order.getId());
                     whitelistMapper.insertSelective(whitelist);
                 }
             }
         }else if(generalOrder.getRosterType().intValue() == BLACK_LIST){
-            if(orderId == null){
+            if(order.getId() == null){
                 throw new Exception("orderId is null");
             }
             if(generalOrder.getLawyerIds() != null && generalOrder.getLawyerIds().length > 0){
@@ -132,7 +134,7 @@ public class RejectServiceImpl implements RejectService {
                 for(Long lawyerId : generalOrder.getLawyerIds()){
                     Blacklist blacklist = new Blacklist();
                     blacklist.setLawyerId(lawyerId);
-                    blacklist.setOrderId(Long.parseLong(orderId.toString()));
+                    blacklist.setOrderId(order.getId());
                     blacklistMapper.insertSelective(blacklist);
                 }
             }
