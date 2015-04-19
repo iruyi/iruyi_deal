@@ -29,7 +29,7 @@ public class LawyerServiceImpl implements LawyerService {
     private CityMapper cityMapper;
 
     @Override
-    public List<Lawyer> getAttetionList(Pager pager,Integer lawyerId) throws Exception {
+    public List<Lawyer> getAttetionList(Pager pager,Long lawyerId) throws Exception {
         return lawyerMapper.selectById(pager,lawyerId);
     }
 

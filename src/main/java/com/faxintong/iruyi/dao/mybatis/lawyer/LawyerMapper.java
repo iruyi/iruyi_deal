@@ -10,7 +10,7 @@ import java.util.List;
 @OperateMyBatis
 public interface LawyerMapper {
     /**获取指定律师关注的律师列表*/
-    List<Lawyer> selectById(Pager pager,Integer id);
+    List<Lawyer> selectById(Pager pager,Long id);
 
     int countByExample(LawyerExample example);
 

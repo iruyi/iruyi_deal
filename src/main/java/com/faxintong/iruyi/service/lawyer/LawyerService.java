@@ -20,7 +20,7 @@ public interface LawyerService {
     /**
      * 获取指定律师关注的律师列表
      */
-    public List<Lawyer> getAttetionList(Pager pager,Integer lawyerId) throws Exception;
+    public List<Lawyer> getAttetionList(Pager pager,Long lawyerId) throws Exception;
 
     /**
      * 获取城市列表
