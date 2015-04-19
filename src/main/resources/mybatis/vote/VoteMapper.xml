@@ -8,6 +8,59 @@
     <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
     <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
   </resultMap>
+  <resultMap id="BaseResultMaphVoteOption" type="com.faxintong.iruyi.model.mybatis.vote.VotehVoteOptionVo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="end_time" property="endTime" jdbcType="TIMESTAMP" />
+    <result column="isEnd" property="isEnd" jdbcType="BIGINT" />
+    <collection property="voteOptions" ofType="com.faxintong.iruyi.model.mybatis.vote.vo.VoteOption"
+                column="id" select="selectVoteOptionByVoteId"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, content, create_date, end_time
+  </sql>
+  <sql id="Base_Colum_List_Vote_option">
+    id, vote_id, content
+  </sql>
+  <sql id="Base_Colum_List_Vote_Result">
+    id, vote_id, option_id,lawyer_id
+  </sql>
+  <insert id="insertVoteResult" parameterType="map">
+    insert into vote (vote_id, option_id, lawyer_id)
+    values (#{voteId,jdbcType=BIGINT}, #{optionId,jdbcType=BIGINT}, #{lawyerId,jdbcType=BIGINT})
+  </insert>
+  <select id="selectVotehVoteOption" resultType="com.faxintong.iruyi.utils.Pager" resultMap="BaseResultMaphVoteOption">
+    select <include refid="Base_Column_List"/>
+    from vote
+    <where>
+      <if test="voteId!=null">
+        and vote_id = #{voteId}
+      </if>
+    </where>
+    <if test="pager!=null">
+    limit (${pager.currentPage}-1)*pageSize,pageSize
+    </if>
+  </select>
+  <select id="selectVoteOptionByVoteId" parameterType="int" resultType="com.faxintong.iruyi.model.mybatis.vote.vo.VoteOption">
+    select <include refid="Base_Colum_List_Vote_Result"/>
+    from vote_option
+    where vote_id = #{voteId}
+  </select>
+  <select id="countVoteOption" resultType="_int" parameterType="int">
+    select count(id)
+    from vote_result
+    where vote_id = #{voteId}
+  </select>
+  <select id="countVoteOptionGroupByOption" resultType="map" parameterType="int">
+    select option_id,count(id)
+    from vote_result
+    where vote_id = #{voteId}
+    group by option_id
+  </select>
+
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -65,9 +118,6 @@
         </if>
       </foreach>
     </where>
-  </sql>
-  <sql id="Base_Column_List" >
-    id, title, content, create_date, end_time
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.vote.VoteExample" >
     select

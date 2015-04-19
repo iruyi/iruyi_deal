@@ -27,7 +27,7 @@
     select
     <include refid="Base_Column_List" />
     from lawyer
-    where id in (select other_lawyer_id from lawyer_attention where lawyer_id = ${id})
+    where id in (select other_lawyer_id from lawyer_attention where lawyer_id = #{id})
     limit (${pager.currentPage}-1)*pageSize,pageSize
   </select>
 
