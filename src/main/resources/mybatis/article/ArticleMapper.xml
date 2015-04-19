@@ -1,35 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.faxintong.iruyi.dao.mybatis.article.ArticleMapper">
-  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.article.Article">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="type" jdbcType="TINYINT" property="type" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="lawyer_id" jdbcType="BIGINT" property="lawyerId" />
-    <result column="lawyer_name" jdbcType="VARCHAR" property="lawyerName" />
-    <result column="image" jdbcType="VARCHAR" property="image" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.faxintong.iruyi.dao.mybatis.article.ArticleMapper" >
+  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.article.Article" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="lawyer_id" property="lawyerId" jdbcType="BIGINT" />
+    <result column="lawyer_name" property="lawyerName" jdbcType="VARCHAR" />
+    <result column="image" property="image" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -40,25 +40,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue">
+                <when test="criterion.singleValue" >
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue">
+                <when test="criterion.betweenValue" >
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue">
+                <when test="criterion.listValue" >
                   and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
                     #{listItem}
                   </foreach>
                 </when>
@@ -69,40 +69,40 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List">
+  <sql id="Base_Column_List" >
     id, type, title, content, lawyer_id, lawyer_name, image, create_date
   </sql>
-  <select id="selectByExample" parameterType="com.faxintong.iruyi.model.mybatis.article.ArticleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.article.ArticleExample" >
     select
-    <if test="distinct">
+    <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
     from article
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null">
+    <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" parameterType="Long" resultMap="BaseResultMap">
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
     select 
     <include refid="Base_Column_List" />
     from article
     where id = #{id,jdbcType=BIGINT}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="Long">
+  <delete id="deleteByPrimaryKey" parameterType="Long" >
     delete from article
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.article.ArticleExample">
+  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.article.ArticleExample" >
     delete from article
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.article.Article">
+  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.article.Article" >
     insert into article (id, type, title, 
       content, lawyer_id, lawyer_name, 
       image, create_date)
@@ -110,100 +110,100 @@
       #{content,jdbcType=VARCHAR}, #{lawyerId,jdbcType=BIGINT}, #{lawyerName,jdbcType=VARCHAR}, 
       #{image,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.article.Article">
+  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.article.Article" >
     insert into article
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         id,
       </if>
-      <if test="type != null">
+      <if test="type != null" >
         type,
       </if>
-      <if test="title != null">
+      <if test="title != null" >
         title,
       </if>
-      <if test="content != null">
+      <if test="content != null" >
         content,
       </if>
-      <if test="lawyerId != null">
+      <if test="lawyerId != null" >
         lawyer_id,
       </if>
-      <if test="lawyerName != null">
+      <if test="lawyerName != null" >
         lawyer_name,
       </if>
-      <if test="image != null">
+      <if test="image != null" >
         image,
       </if>
-      <if test="createDate != null">
+      <if test="createDate != null" >
         create_date,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="type != null">
+      <if test="type != null" >
         #{type,jdbcType=TINYINT},
       </if>
-      <if test="title != null">
+      <if test="title != null" >
         #{title,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
+      <if test="content != null" >
         #{content,jdbcType=VARCHAR},
       </if>
-      <if test="lawyerId != null">
+      <if test="lawyerId != null" >
         #{lawyerId,jdbcType=BIGINT},
       </if>
-      <if test="lawyerName != null">
+      <if test="lawyerName != null" >
         #{lawyerName,jdbcType=VARCHAR},
       </if>
-      <if test="image != null">
+      <if test="image != null" >
         #{image,jdbcType=VARCHAR},
       </if>
-      <if test="createDate != null">
+      <if test="createDate != null" >
         #{createDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.article.ArticleExample" resultType="java.lang.Integer">
+  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.article.ArticleExample" resultType="java.lang.Integer" >
     select count(*) from article
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map">
+  <update id="updateByExampleSelective" parameterType="map" >
     update article
-    <set>
-      <if test="record.id != null">
+    <set >
+      <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.type != null">
+      <if test="record.type != null" >
         type = #{record.type,jdbcType=TINYINT},
       </if>
-      <if test="record.title != null">
+      <if test="record.title != null" >
         title = #{record.title,jdbcType=VARCHAR},
       </if>
-      <if test="record.content != null">
+      <if test="record.content != null" >
         content = #{record.content,jdbcType=VARCHAR},
       </if>
-      <if test="record.lawyerId != null">
+      <if test="record.lawyerId != null" >
         lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
       </if>
-      <if test="record.lawyerName != null">
+      <if test="record.lawyerName != null" >
         lawyer_name = #{record.lawyerName,jdbcType=VARCHAR},
       </if>
-      <if test="record.image != null">
+      <if test="record.image != null" >
         image = #{record.image,jdbcType=VARCHAR},
       </if>
-      <if test="record.createDate != null">
+      <if test="record.createDate != null" >
         create_date = #{record.createDate,jdbcType=TIMESTAMP},
       </if>
     </set>
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map">
+  <update id="updateByExample" parameterType="map" >
     update article
     set id = #{record.id,jdbcType=BIGINT},
       type = #{record.type,jdbcType=TINYINT},
@@ -213,546 +213,38 @@
       lawyer_name = #{record.lawyerName,jdbcType=VARCHAR},
       image = #{record.image,jdbcType=VARCHAR},
       create_date = #{record.createDate,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
+    <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.article.Article">
+  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.article.Article" >
     update article
-    <set>
-      <if test="type != null">
+    <set >
+      <if test="type != null" >
         type = #{type,jdbcType=TINYINT},
       </if>
-      <if test="title != null">
+      <if test="title != null" >
         title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="content != null">
+      <if test="content != null" >
         content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="lawyerId != null">
+      <if test="lawyerId != null" >
         lawyer_id = #{lawyerId,jdbcType=BIGINT},
       </if>
-      <if test="lawyerName != null">
+      <if test="lawyerName != null" >
         lawyer_name = #{lawyerName,jdbcType=VARCHAR},
       </if>
-      <if test="image != null">
+      <if test="image != null" >
         image = #{image,jdbcType=VARCHAR},
       </if>
-      <if test="createDate != null">
+      <if test="createDate != null" >
         create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.article.Article">
-    update article
-    set type = #{type,jdbcType=TINYINT},
-      title = #{title,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
-      lawyer_id = #{lawyerId,jdbcType=BIGINT},
-      lawyer_name = #{lawyerName,jdbcType=VARCHAR},
-      image = #{image,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.article.Article">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="type" jdbcType="TINYINT" property="type" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="lawyer_id" jdbcType="BIGINT" property="lawyerId" />
-    <result column="lawyer_name" jdbcType="VARCHAR" property="lawyerName" />
-    <result column="image" jdbcType="VARCHAR" property="image" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, type, title, content, lawyer_id, lawyer_name, image, create_date
-  </sql>
-  <select id="selectByExample" parameterType="com.faxintong.iruyi.model.mybatis.article.ArticleExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from article
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from article
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="Long">
-    delete from article
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.article.ArticleExample">
-    delete from article
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.article.Article">
-    insert into article (id, type, title, 
-      content, lawyer_id, lawyer_name, 
-      image, create_date)
-    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=TINYINT}, #{title,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{lawyerId,jdbcType=BIGINT}, #{lawyerName,jdbcType=VARCHAR}, 
-      #{image,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.article.Article">
-    insert into article
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="content != null">
-        content,
-      </if>
-      <if test="lawyerId != null">
-        lawyer_id,
-      </if>
-      <if test="lawyerName != null">
-        lawyer_name,
-      </if>
-      <if test="image != null">
-        image,
-      </if>
-      <if test="createDate != null">
-        create_date,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=TINYINT},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="lawyerId != null">
-        #{lawyerId,jdbcType=BIGINT},
-      </if>
-      <if test="lawyerName != null">
-        #{lawyerName,jdbcType=VARCHAR},
-      </if>
-      <if test="image != null">
-        #{image,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.article.ArticleExample" resultType="java.lang.Integer">
-    select count(*) from article
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update article
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=TINYINT},
-      </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=VARCHAR},
-      </if>
-      <if test="record.lawyerId != null">
-        lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
-      </if>
-      <if test="record.lawyerName != null">
-        lawyer_name = #{record.lawyerName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.image != null">
-        image = #{record.image,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createDate != null">
-        create_date = #{record.createDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update article
-    set id = #{record.id,jdbcType=BIGINT},
-      type = #{record.type,jdbcType=TINYINT},
-      title = #{record.title,jdbcType=VARCHAR},
-      content = #{record.content,jdbcType=VARCHAR},
-      lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
-      lawyer_name = #{record.lawyerName,jdbcType=VARCHAR},
-      image = #{record.image,jdbcType=VARCHAR},
-      create_date = #{record.createDate,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.article.Article">
-    update article
-    <set>
-      <if test="type != null">
-        type = #{type,jdbcType=TINYINT},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="lawyerId != null">
-        lawyer_id = #{lawyerId,jdbcType=BIGINT},
-      </if>
-      <if test="lawyerName != null">
-        lawyer_name = #{lawyerName,jdbcType=VARCHAR},
-      </if>
-      <if test="image != null">
-        image = #{image,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.article.Article">
-    update article
-    set type = #{type,jdbcType=TINYINT},
-      title = #{title,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
-      lawyer_id = #{lawyerId,jdbcType=BIGINT},
-      lawyer_name = #{lawyerName,jdbcType=VARCHAR},
-      image = #{image,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.article.Article">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="type" jdbcType="TINYINT" property="type" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="lawyer_id" jdbcType="BIGINT" property="lawyerId" />
-    <result column="lawyer_name" jdbcType="VARCHAR" property="lawyerName" />
-    <result column="image" jdbcType="VARCHAR" property="image" />
-    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
-  </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    id, type, title, content, lawyer_id, lawyer_name, image, create_date
-  </sql>
-  <select id="selectByExample" parameterType="com.faxintong.iruyi.model.mybatis.article.ArticleExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from article
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from article
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="Long">
-    delete from article
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.article.ArticleExample">
-    delete from article
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.article.Article">
-    insert into article (id, type, title, 
-      content, lawyer_id, lawyer_name, 
-      image, create_date)
-    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=TINYINT}, #{title,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR}, #{lawyerId,jdbcType=BIGINT}, #{lawyerName,jdbcType=VARCHAR}, 
-      #{image,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.article.Article">
-    insert into article
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="content != null">
-        content,
-      </if>
-      <if test="lawyerId != null">
-        lawyer_id,
-      </if>
-      <if test="lawyerName != null">
-        lawyer_name,
-      </if>
-      <if test="image != null">
-        image,
-      </if>
-      <if test="createDate != null">
-        create_date,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=TINYINT},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="lawyerId != null">
-        #{lawyerId,jdbcType=BIGINT},
-      </if>
-      <if test="lawyerName != null">
-        #{lawyerName,jdbcType=VARCHAR},
-      </if>
-      <if test="image != null">
-        #{image,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.article.ArticleExample" resultType="java.lang.Integer">
-    select count(*) from article
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update article
-    <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=BIGINT},
-      </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=TINYINT},
-      </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=VARCHAR},
-      </if>
-      <if test="record.lawyerId != null">
-        lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
-      </if>
-      <if test="record.lawyerName != null">
-        lawyer_name = #{record.lawyerName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.image != null">
-        image = #{record.image,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createDate != null">
-        create_date = #{record.createDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update article
-    set id = #{record.id,jdbcType=BIGINT},
-      type = #{record.type,jdbcType=TINYINT},
-      title = #{record.title,jdbcType=VARCHAR},
-      content = #{record.content,jdbcType=VARCHAR},
-      lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
-      lawyer_name = #{record.lawyerName,jdbcType=VARCHAR},
-      image = #{record.image,jdbcType=VARCHAR},
-      create_date = #{record.createDate,jdbcType=TIMESTAMP}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.article.Article">
-    update article
-    <set>
-      <if test="type != null">
-        type = #{type,jdbcType=TINYINT},
-      </if>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="lawyerId != null">
-        lawyer_id = #{lawyerId,jdbcType=BIGINT},
-      </if>
-      <if test="lawyerName != null">
-        lawyer_name = #{lawyerName,jdbcType=VARCHAR},
-      </if>
-      <if test="image != null">
-        image = #{image,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null">
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.article.Article">
+  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.article.Article" >
     update article
     set type = #{type,jdbcType=TINYINT},
       title = #{title,jdbcType=VARCHAR},

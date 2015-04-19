@@ -32,20 +32,20 @@
         </javaTypeResolver>
 
         <!-- generate Model -->
-        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.topic"
+        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.lawyer"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!-- generate xml -->
-        <sqlMapGenerator targetPackage="mybatis.topic"
+        <sqlMapGenerator targetPackage="mybatis.lawyer"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- generate Mapper -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.topic"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.lawyer"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -264,6 +264,17 @@
             <columnOverride column="lawyer_name" javaType="String" ></columnOverride>
             <columnOverride column="image" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="article" domainObjectName="Article">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="type"  javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="title" javaType="String" ></columnOverride>
+            <columnOverride column="content" javaType="String" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_name" javaType="String" ></columnOverride>
+            <columnOverride column="image" javaType="String" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
         </table>
 
         <table tableName="article_comment" domainObjectName="ArticleComment">
@@ -281,7 +292,7 @@
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
         </table>-->
 
-        <!--<table tableName="lawyer" domainObjectName="Lawyer">
+        <table tableName="lawyer" domainObjectName="Lawyer">
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="name"  javaType="String" ></columnOverride>
             <columnOverride column="password" javaType="String" ></columnOverride>
@@ -299,6 +310,8 @@
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
             <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
         </table>
+
+        <!--
 
         <table tableName="lawyer_attention" domainObjectName="LawyerAttention">
             <columnOverride column="id" javaType="Long" ></columnOverride>
@@ -373,14 +386,14 @@
             <columnOverride column="end_time" javaType="java.util.Date" ></columnOverride>
         </table>-->
 
-        <table tableName="topic_reply" domainObjectName="TopicReply">
+        <!--<table tableName="topic_reply" domainObjectName="TopicReply">
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="topic_id" javaType="Long" ></columnOverride>
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
             <columnOverride column="lawyer_name" javaType="String" ></columnOverride>
             <columnOverride column="content" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
-        </table>
+        </table>-->
 
     </context>
 </generatorConfiguration>

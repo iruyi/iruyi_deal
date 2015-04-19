@@ -2,10 +2,10 @@ package com.faxintong.iruyi.dao.mybatis.lawyer;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.City;
 import com.faxintong.iruyi.model.mybatis.lawyer.CityExample;
-import java.util.List;
-
 import com.faxintong.iruyi.operate.OperateMyBatis;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 @OperateMyBatis
 public interface CityMapper {
     int countByExample(CityExample example);
