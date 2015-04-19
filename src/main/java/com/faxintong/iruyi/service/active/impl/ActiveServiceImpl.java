@@ -41,7 +41,6 @@ public class ActiveServiceImpl implements ActiveService {
     public void activeStore(Long activeId, Long lawyerId) throws Exception {
         ActiveStore activeStore = new ActiveStore();
         activeStore.setLawyerId(lawyerId);
-        activeStore.setActiveId(activeId);
         activeStoreMapper.insert(activeStore);
     }
 }

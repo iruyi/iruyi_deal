@@ -140,7 +140,7 @@ public class ArticleController extends BaseController{
     @RequestMapping(value = "articlePraise")
     public Map<String, Object> articlePraise(HttpServletRequest request, Long articleId){
         Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+        /*result.put(ERRCODE, 0);
         try {
             if(articleId == null){
                 result.put(ERRMESSAGE, "文章id为null");
@@ -152,7 +152,7 @@ public class ArticleController extends BaseController{
         }catch (Exception e){
             logger.error("文章点赞失败:" + e.getMessage());
             result.put(ERRMESSAGE, "文章点赞失败!");
-        }
+        }*/
         return result;
     }
 }

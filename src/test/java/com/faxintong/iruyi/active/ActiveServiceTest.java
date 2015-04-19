@@ -23,11 +23,11 @@ public class ActiveServiceTest extends BaseTest {
         pager.setCurrentPage(2);
         try {
             List<Active> list = activeService.getActiveList(pager);
-            System.out.println("========================list size="+list.size());
-            System.out.println("========================第"+pager.getCurrentPage()+"页");
-            for(Active active : list){
+            //System.out.println("========================list size="+list.size());
+            //System.out.println("========================第"+pager.getCurrentPage()+"页");
+            /*for(Active active : list){
                 System.out.println(active.getId());
-            }
+            }*/
         } catch (Exception e) {
             e.printStackTrace();
         }
