@@ -7,46 +7,47 @@ import java.io.Serializable;
  */
 public class Pager implements Serializable {
 
-    private int totalPage;     //总页数
-    private int totalCount;    //总记录数
-    private int currentPage;   //当前页
-    private int pageSize = 10;      //每页的数量
+    private Integer totalPage;     //总页数
+    private Integer totalCount;    //总记录数
+    private Integer currentPage;   //当前页
+    private Integer pageSize = 10;      //每页的数量
 
-    private int startCount;//开始条数
+    private Integer startCount;//开始条数
 
-    public int getTotalPage() {
+
+    public Integer getTotalPage() {
         return totalPage;
     }
 
-    public void setTotalPage(int totalPage) {
+    public void setTotalPage(Integer totalPage) {
         this.totalPage = totalPage;
     }
 
-    public int getTotalCount() {
+    public Integer getTotalCount() {
         return totalCount;
     }
 
-    public void setTotalCount(int totalCount) {
+    public void setTotalCount(Integer totalCount) {
         this.totalCount = totalCount;
     }
 
-    public int getCurrentPage() {
+    public Integer getCurrentPage() {
         return currentPage;
     }
 
-    public void setCurrentPage(int currentPage) {
+    public void setCurrentPage(Integer currentPage) {
         this.currentPage = currentPage;
     }
 
-    public int getPageSize() {
+    public Integer getPageSize() {
         return pageSize;
     }
 
-    public void setPageSize(int pageSize) {
+    public void setPageSize(Integer pageSize) {
         this.pageSize = pageSize;
     }
 
-    public int getStartCount(int pageSize, int currentPage) {
+    public Integer getStartCount(Integer pageSize, Integer currentPage) {
         if(currentPage <= 1){
             return 0;
         }else{
@@ -54,7 +55,7 @@ public class Pager implements Serializable {
         }
     }
 
-    public void setStartCount(int startCount) {
+    public void setStartCount(Integer startCount) {
         this.startCount = startCount;
     }
 }

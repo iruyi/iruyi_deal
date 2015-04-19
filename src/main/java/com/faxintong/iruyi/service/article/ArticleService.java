@@ -1,6 +1,6 @@
 package com.faxintong.iruyi.service.article;
 
-import com.faxintong.iruyi.model.mybatis.article.Article;
+import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.utils.Pager;
 
 import java.util.List;
@@ -12,12 +12,12 @@ public interface ArticleService {
 
     /**
      * 发布文章
-     * @param content
+     * @param comment
      * @param url
      * @param lawyerId
      * @throws Exception
      */
-    public void reportArticle(String content, String url, Long lawyerId) throws Exception;
+    public void reportArticle(String comment, String url, Long lawyerId) throws Exception;
 
     /**
      * 获取文章列表（分页）
@@ -25,7 +25,7 @@ public interface ArticleService {
      * @return
      * @throws Exception
      */
-    public List<Article> articleList(Pager pager) throws Exception;
+    public List<AppArticle> articleList(Pager pager) throws Exception;
 
     /**
      * 获取文章详情
@@ -33,7 +33,7 @@ public interface ArticleService {
      * @return
      * @throws Exception
      */
-    public Article articleDetail(Long articleId) throws Exception;
+    public AppArticle articleDetail(Long articleId) throws Exception;
 
     /**
      * 评论文章
@@ -42,7 +42,7 @@ public interface ArticleService {
      * @param lawyerId
      * @return
      */
-    public void aticleComment(String articleId, String comment, Long lawyerId) throws Exception;
+    public void aticleComment(Long articleId, String comment, Long lawyerId) throws Exception;
 
     /**
      * 文章点赞

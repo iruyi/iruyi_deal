@@ -34,6 +34,10 @@ public class Constants {
     public static final String AUTOINCREMENT = "autoincrement";
     public static final String DATA = "data";
 
+
+    public static final String ERRCODE = "errcode";
+    public static final String ERRMESSAGE = "errmessage";
+
     /**********************甩单、接单状态*******************/
     public static final Integer RECEIVING = 1;//竞标中
     public static final Integer RECEIVED = 2;//已接单，待确认
