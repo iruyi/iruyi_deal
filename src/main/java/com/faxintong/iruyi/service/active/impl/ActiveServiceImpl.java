@@ -1,6 +1,7 @@
 package com.faxintong.iruyi.service.active.impl;
 
 import com.faxintong.iruyi.dao.general.ActiveGeneralMapper;
+import com.faxintong.iruyi.dao.mybatis.active.ActiveMapper;
 import com.faxintong.iruyi.model.mybatis.active.Active;
 import com.faxintong.iruyi.service.active.ActiveService;
 import com.faxintong.iruyi.utils.Pager;
@@ -18,6 +19,11 @@ public class ActiveServiceImpl implements ActiveService {
     @Autowired
     private ActiveGeneralMapper activeGeneralMapper;
 
+    @Autowired
+    private ActiveMapper activeMapper;
+
+    private 
+
     @Override
     public List<Active> getActiveList(Pager pager) throws Exception {
         return activeGeneralMapper.getActiveList(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize());
@@ -25,7 +31,7 @@ public class ActiveServiceImpl implements ActiveService {
 
     @Override
     public Active getActiveDetail(Long activeId) throws Exception {
-        return null;
+        return activeMapper.selectByPrimaryKey(activeId);
     }
 
     @Override

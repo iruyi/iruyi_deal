@@ -32,20 +32,20 @@
         </javaTypeResolver>
 
         <!-- generate Model -->
-        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.lawyer"
+        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.active"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!-- generate xml -->
-        <sqlMapGenerator targetPackage="mybatis.lawyer"
+        <sqlMapGenerator targetPackage="mybatis.active"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- generate Mapper -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.lawyer"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.active"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -292,7 +292,7 @@
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
         </table>-->
 
-        <table tableName="lawyer" domainObjectName="Lawyer">
+        <!--<table tableName="lawyer" domainObjectName="Lawyer">
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="name"  javaType="String" ></columnOverride>
             <columnOverride column="password" javaType="String" ></columnOverride>
@@ -309,7 +309,7 @@
             <columnOverride column="introduction" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
             <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
-        </table>
+        </table>-->
 
         <!--
 
@@ -394,6 +394,12 @@
             <columnOverride column="content" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
         </table>-->
+
+        <table tableName="active_store" domainObjectName="ActiveStore">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="active_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+        </table>
 
     </context>
 </generatorConfiguration>
