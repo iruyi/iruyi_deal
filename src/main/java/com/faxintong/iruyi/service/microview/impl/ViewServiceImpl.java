@@ -1,10 +1,18 @@
 package com.faxintong.iruyi.service.microview.impl;
 
+import com.faxintong.iruyi.dao.general.ViewGeneralMapper;
+import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.microview.Microview;
+import com.faxintong.iruyi.model.mybatis.microview.ViewDiscuss;
+import com.faxintong.iruyi.model.mybatis.vo.ViewDiscussVo;
+import com.faxintong.iruyi.model.mybatis.vo.ViewVo;
 import com.faxintong.iruyi.service.microview.ViewService;
 import com.faxintong.iruyi.utils.Pager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.swing.text.View;
 import java.util.List;
 
 /**
@@ -12,31 +20,39 @@ import java.util.List;
  */
 @Service
 public class ViewServiceImpl implements ViewService{
-
+    @Autowired
+    private ViewGeneralMapper viewGeneralMapper;
 
     @Override
-    public List<Microview> getViewList(Pager pager) {
-        return null;
+    public List<ViewVo> getViewList(Pager pager) {
+        return viewGeneralMapper.selectViewVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize());
     }
 
     @Override
-    public Microview viewDetail(Long microViewId) {
-        return null;
+    //TODO 以后要加分页
+    public ViewVo viewDetail(Long microViewId,Long lawyerId) {
+        ViewVo viewVo = viewGeneralMapper.selectViewVoOne(microViewId,lawyerId);
+        List<ViewDiscussVo> viewDiscussList = viewGeneralMapper.selectViewDiscussVo(microViewId,lawyerId);
+        viewVo.setViewDiscussVoList(viewDiscussList);
+        return viewVo;
     }
 
     @Override
+    @Transactional
     public void viewAttention(Long microViewId, Long lawyerId) {
-
+        viewGeneralMapper.insertViewAtten(microViewId,lawyerId);
     }
 
     @Override
-    public void viewDiscuss(Long lawyerId, Long microViewId, String content, Integer type) throws Exception {
-
+    @Transactional
+    public void viewDiscuss(Lawyer lawyer, Long microViewId, String content, Integer type) throws Exception {
+        viewGeneralMapper.insertViewDiscuss(lawyer,microViewId,content,type);
     }
 
     @Override
+    @Transactional
     public void discussPraise(Long discussId, Long lawyerId) throws Exception {
-
+        viewGeneralMapper.insertViewPraise(discussId,lawyerId);
     }
 
 }

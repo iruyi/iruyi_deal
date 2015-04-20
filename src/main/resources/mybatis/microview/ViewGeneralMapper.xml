@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.faxintong.iruyi.dao.general.ViewGeneralMapper" >
+  <select id="selectViewVo" parameterType="map" resultType="com.faxintong.iruyi.model.mybatis.vo.ViewVo">
+    select m.id,m.title,m.content,m.create_date createDate,1 isLive
+    ,l.id lawyerId,l.name lawyerName,l.photo_url photoUrl
+    from microview m
+    inner join lawyer l on m.lawyer_id = l.id
+    limit #{startCount},#{pageSize}
+  </select>
+
+  <select id="selectViewDiscussVo" resultType="com.faxintong.iruyi.model.mybatis.vo.ViewDiscussVo">
+    select d.id,d.type,d.content
+    ,(select count(*) from microview_praise mp where mp.discuss_id = d.id) praiseCount
+    <if test="lawyerId != null">
+    ,(select count(*) from microview_praise mp where mp.discuss_id = d.id and mp.lawyer_id = #{lawyerId}) isParise
+    </if>
+    from microview_discuss d
+    where d.interview_id = #{microViewId}
+  </select>
+
+  <select id="selectViewVoOne" parameterType="map" resultType="com.faxintong.iruyi.model.mybatis.vo.ViewVo">
+    select l.introduction
+    ,(select count(*) from lawyer_attention la where la.other_lawyer_id = m.lawyer_id) fansCount
+    ,(select count(*) from microview_attention ma where ma.interview_id = #{microViewId} and lawyer_id=#{lawyerId}) isAtten
+    from microview m
+    inner join lawyer l on m.lawyer_id = l.id
+    where m.id = #{microViewId}
+  </select>
+</mapper>
