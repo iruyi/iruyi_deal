@@ -1,7 +1,10 @@
 package com.faxintong.iruyi.service.topic;
 
+import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.topic.Topic;
 import com.faxintong.iruyi.model.mybatis.topic.TopicGroup;
+import com.faxintong.iruyi.model.mybatis.vo.TopicGroupVo;
+import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.utils.Pager;
 
 import java.util.List;
@@ -16,10 +19,10 @@ public interface TopicService {
      * 发表话题
      * @param groupId
      * @param content
-     * @param lawyerId
+     * @param lawyer
      * @throws Exception
      */
-    public void reportTopic(Long groupId, String content, Long lawyerId) throws Exception;
+    public void reportTopic(Long groupId, String content, Lawyer lawyer) throws Exception;
 
     /**
      * 获取话题组列表
@@ -27,7 +30,7 @@ public interface TopicService {
      * @return
      * @throws Exception
      */
-    public List<TopicGroup> getGroupList(Pager pager) throws Exception;
+    public List<TopicGroupVo> getGroupList(Pager pager) throws Exception;
 
     /**
      * 获取话题组详情
@@ -36,14 +39,15 @@ public interface TopicService {
      * @return
      * @throws Exception
      */
-    public List<Topic> getGroupDetail(Long groupId, Pager pager) throws Exception;
+    public TopicGroupVo getGroupDetail(Long groupId, Pager pager, Long lawyerId) throws Exception;
 
     /**
      * 获取话题详情
      * @param topicId
      * @return
+     * //TODO 话题组详情已经获取了话题的相关信息，这里只封装了回复详细信息
      */
-    public Topic getTopicDetail(Long topicId) throws Exception;
+    public TopicVo getTopicDetail(Long topicId, Long lawyerId) throws Exception;
 
     /**
      * 关注话题组
@@ -57,10 +61,10 @@ public interface TopicService {
      * 回应话题
      * @param topicId
      * @param content
-     * @param lawyerId
+     * @param lawyer
      * @throws Exception
      */
-    public void topicReply(Long topicId, String content, Long lawyerId) throws Exception;
+    public void topicReply(Long topicId, String content, Lawyer lawyer) throws Exception;
 
     /**
      * 关注话题
@@ -77,6 +81,6 @@ public interface TopicService {
      * @return
      * @throws Exception
      */
-    public Map<String, Object> topicReplyPraise(Long replyId, Long lawyerId) throws Exception;
+    public void topicReplyPraise(Long replyId, Long lawyerId) throws Exception;
 
 }

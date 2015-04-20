@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.faxintong.iruyi.dao.general.TopicGeneralMapper" >
+    <select id="selectTopicVo" resultType="com.faxintong.iruyi.model.mybatis.vo.TopicVo" parameterType="map" >
+        select  c.id,c.content,c.create_date createDate
+        ,l.id lawyerId,l.name lawyerName,l.photo_url photoUrl
+        ,(select count(tp.id) from topic_praise tp where tp.topic_id = c.id) praiseCount
+        <if test="lawyerId != null">
+        ,(select count(tp1.id) from topic_praise tp1 where where tp1.topic_id = c.id and tp1.lawyer_id = #{lawyerId}) isPraise
+        </if>
+        from topic c
+        inner join lawyer l on c.lawyer_id = l.id
+        where c.group_id = #{groupId}
+        limit #{startCount},#{pageSize}
+    </select>
+
+    <select id="selectReplyVo" resultType="com.faxintong.iruyi.model.mybatis.vo.ReplyVo" parameterType="map">
+        select r.id,r.content,r.create_date createDate,r.lawyer_id lawyerId
+        ,l.name lawyerName,l.photo_url photoUrl
+        ,(select count(trp.id) from topic_reply_praise trp where trp.reply_id = r.id) praiseCount
+        <if test="lawyerId != null">
+        ,(select count(trp1.id) from topic_reply_praise trp1 where trp1.reply_id = r.id and trp1.lawyer_id = #{lawyerId}) isPraise
+        </if>
+        from topic_reply r
+        inner join lawyer l on l.id = r.lawyer_id
+        where r.topic_id = #{topicId}
+    </select>
+
+</mapper>

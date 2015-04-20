@@ -1,6 +1,6 @@
 package com.faxintong.iruyi.controller.vote;
 
-import com.faxintong.iruyi.model.mybatis.article.AppArticle;
+import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.vo.VoteVo;
 import com.faxintong.iruyi.service.vote.VoteService;
 import com.faxintong.iruyi.utils.Pager;
@@ -23,7 +23,7 @@ import static com.faxintong.iruyi.utils.Constants.*;
  */
 @RestController
 @RequestMapping("vote")
-public class VoteController {
+public class VoteController extends BaseController{
     private Logger logger = LoggerFactory.getLogger(VoteController.class);
 
     @Autowired
@@ -98,8 +98,7 @@ public class VoteController {
         result.put(ERRCODE, 0);
         try {
             // 用户信息获取
-            String sessionId = request.getSession().getId();
-            String lawyerId = RedisUtils.get(SESSION_PREFIX + sessionId);
+            Long lawyerId = getLawyerId(request);
 
             // 非空校验
             if(voteId == null || optionId == null){
@@ -108,7 +107,7 @@ public class VoteController {
             }
 
             // 调用投票服务
-            voteService.voteChoise(voteId,optionId,Long.valueOf(lawyerId));
+            voteService.voteChoise(voteId,optionId,lawyerId);
             result.put(ERRCODE, 1);
             result.put(ERRMESSAGE, "投票成功！");
 

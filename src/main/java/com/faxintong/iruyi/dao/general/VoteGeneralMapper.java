@@ -17,7 +17,7 @@ public interface VoteGeneralMapper {
 
     int insertVoteResult(@Param("voteId")Long voteId, @Param("optionId")Long optionId, @Param("lawyerId")Long lawyerId);
 
-    List<VoteVo> selectVoteVoteOption(@Param("startCount")Integer startCount, @Param("pagerSize")Integer pagerSize);
+    List<VoteVo> selectVoteVoteOption(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize);
 
     @Select("select option_id optionId,count(id) optionNum from vote_result where vote_id = #{voteId} group by option_id")
     List<Map<String,Long>> countVoteOptionGroupByOptionId(@Param("voteId")Long voteId);

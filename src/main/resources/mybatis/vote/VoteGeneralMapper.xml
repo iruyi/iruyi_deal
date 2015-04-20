@@ -31,7 +31,7 @@
     <select id="selectVoteVoteOption" resultMap="VoteVoResultMap">
         select id,content,end_time &gt; now() isEnd
         from vote
-        limit #{startCount},#{pagerSize}
+        limit #{startCount},#{pageSize}
     </select>
 
     <select id="selectVoteOption" resultType="com.faxintong.iruyi.model.mybatis.vo.VoteOptionVo">
