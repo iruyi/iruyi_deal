@@ -1,11 +1,11 @@
-package com.faxintong.iruyi.model.mybatis.vote.vo;
+package com.faxintong.iruyi.model.mybatis.vo;
 
 /**
- * Created by bochenlong on 2015/4/19.
+ * Created by yunaxie on 2015/4/20.
  */
-public class VoteOption {
+public class VoteOptionVo {
     private Long id;
-    private Long content;
+    private String content;
 
     public Long getId() {
         return id;
@@ -15,11 +15,11 @@ public class VoteOption {
         this.id = id;
     }
 
-    public Long getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(Long content) {
+    public void setContent(String content) {
         this.content = content;
     }
 }

@@ -1,6 +1,7 @@
 package com.faxintong.iruyi.dao.general;
 
 import com.faxintong.iruyi.model.mybatis.article.AppArticle;
+import com.faxintong.iruyi.operate.OperateMyBatis;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Created by admin on 15-4-19.
  */
-
+@OperateMyBatis
 public interface ArticleGeneralMapper {
 
     String VIEW = "id,type,lawyer_id as lawyerId,url,comment,create_date as createDate";
