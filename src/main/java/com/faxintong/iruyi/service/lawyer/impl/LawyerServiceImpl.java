@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.service.lawyer.impl;
 
+import com.faxintong.iruyi.dao.general.LawyerGeneralMapper;
 import com.faxintong.iruyi.model.mybatis.active.Active;
 import com.faxintong.iruyi.model.mybatis.article.Article;
 import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
@@ -8,8 +9,11 @@ import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.model.mybatis.topic.Topic;
 import com.faxintong.iruyi.model.mybatis.topic.TopicReply;
+import com.faxintong.iruyi.model.mybatis.vo.CityVo;
+import com.faxintong.iruyi.model.mybatis.vo.LawyerVo;
 import com.faxintong.iruyi.service.lawyer.LawyerService;
 import com.faxintong.iruyi.utils.Pager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,25 +23,27 @@ import java.util.List;
  */
 @Service
 public class LawyerServiceImpl implements LawyerService {
+    @Autowired
+    LawyerGeneralMapper lawyerGeneralMapper;
 
     @Override
-    public List<Lawyer> getAttetionList(Pager pager) throws Exception {
+    public List<LawyerVo> getAttetionList(Pager pager,Long lawyerId) throws Exception {
+        return lawyerGeneralMapper.selectLawyerVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId);
+    }
+
+    @Override
+    public List<CityVo> getCityList(Pager pager) {
+        return lawyerGeneralMapper.selectCityVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize());
+    }
+
+    @Override
+    public LawyerVo getLawyerInfo(Long lawyerId) throws Exception {
         return null;
     }
 
     @Override
-    public List<City> getCityList(Pager pager) {
-        return null;
-    }
-
-    @Override
-    public Lawyer getLawyerInfo(Long lawyerId) throws Exception {
-        return null;
-    }
-
-    @Override
-    public Lawyer getMaterialt(Long lawyerId) throws Exception {
-        return null;
+    public LawyerVo getMaterialt(Long lawyerId) throws Exception {
+        return lawyerGeneralMapper.selectLawyerVoOne(lawyerId);
     }
 
     @Override

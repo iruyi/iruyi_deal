@@ -47,6 +47,7 @@ public class LawyerController {
     /**
      * 获取个人资料
      * @return
+     * 个人主页的个人信息
      */
     @RequestMapping(value = "getMaterialt")
     public Map<String, Object> getMaterialt(){

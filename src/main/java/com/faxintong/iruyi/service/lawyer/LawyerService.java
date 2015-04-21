@@ -8,6 +8,8 @@ import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.model.mybatis.topic.Topic;
 import com.faxintong.iruyi.model.mybatis.topic.TopicReply;
+import com.faxintong.iruyi.model.mybatis.vo.CityVo;
+import com.faxintong.iruyi.model.mybatis.vo.LawyerVo;
 import com.faxintong.iruyi.utils.Pager;
 
 import java.util.List;
@@ -22,14 +24,14 @@ public interface LawyerService {
      * @param pager
      * @return
      */
-    public List<Lawyer> getAttetionList(Pager pager) throws Exception;
+    public List<LawyerVo> getAttetionList(Pager pager,Long lawyerId) throws Exception;
 
     /**
      * 获取城市列表
      * @param pager
      * @return
      */
-    public List<City> getCityList(Pager pager) throws Exception;
+    public List<CityVo> getCityList(Pager pager) throws Exception;
 
 
     /**
@@ -38,7 +40,7 @@ public interface LawyerService {
      * @return
      * @throws Exception
      */
-    public Lawyer getLawyerInfo(Long lawyerId) throws Exception;
+    public LawyerVo getLawyerInfo(Long lawyerId) throws Exception;
 
     /**
      * 获取个人资料
@@ -46,7 +48,7 @@ public interface LawyerService {
      * @return
      * @throws Exception
      */
-    public Lawyer getMaterialt(Long lawyerId) throws Exception;
+    public LawyerVo getMaterialt(Long lawyerId) throws Exception;
 
     /**
      * 我发表的商机列表
