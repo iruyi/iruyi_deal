@@ -15,6 +15,7 @@ public class OrderVo {
     private Date deadDate;
     private String keyWords;
     private Double price;
+    private Integer isInterest;
 
 
     private Integer fansCount;
@@ -91,6 +92,14 @@ public class OrderVo {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public Integer getIsInterest() {
+        return isInterest;
+    }
+
+    public void setIsInterest(Integer isInterest) {
+        this.isInterest = isInterest;
     }
 
     public Integer getFansCount() {

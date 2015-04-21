@@ -1,6 +1,7 @@
 package com.faxintong.iruyi.service.lawyer.impl;
 
 import com.faxintong.iruyi.dao.general.LawyerGeneralMapper;
+import com.faxintong.iruyi.dao.general.OrderGeneralMapper;
 import com.faxintong.iruyi.dao.general.TopicGeneralMapper;
 import com.faxintong.iruyi.model.mybatis.active.Active;
 import com.faxintong.iruyi.model.mybatis.article.Article;
@@ -10,9 +11,7 @@ import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.model.mybatis.topic.Topic;
 import com.faxintong.iruyi.model.mybatis.topic.TopicReply;
-import com.faxintong.iruyi.model.mybatis.vo.CityVo;
-import com.faxintong.iruyi.model.mybatis.vo.LawyerVo;
-import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
+import com.faxintong.iruyi.model.mybatis.vo.*;
 import com.faxintong.iruyi.service.lawyer.LawyerService;
 import com.faxintong.iruyi.utils.Pager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +28,8 @@ public class LawyerServiceImpl implements LawyerService {
     LawyerGeneralMapper lawyerGeneralMapper;
     @Autowired
     TopicGeneralMapper topicGeneralMapper;
+    @Autowired
+    OrderGeneralMapper orderGeneralMapper;
 
     @Override
     public List<LawyerVo> getAttetionList(Pager pager,Long lawyerId) throws Exception {
@@ -51,13 +52,13 @@ public class LawyerServiceImpl implements LawyerService {
     }
 
     @Override
-    public List<Order> getOrderList(Pager pager, Long lawyerId) throws Exception {
-        return null;
+    public List<OrderVo> getOrderList(Pager pager, Long lawyerId) throws Exception {
+        return orderGeneralMapper.selectMyOrderVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId);
     }
 
     @Override
-    public List<Order> getReceiveOrders(Pager pager, Long lawyerId) throws Exception {
-        return null;
+    public List<OrderReceiveVo> getReceiveOrders(Pager pager, Long lawyerId) throws Exception {
+        return orderGeneralMapper.selectMyOrderReceiveVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId);
     }
 
     @Override

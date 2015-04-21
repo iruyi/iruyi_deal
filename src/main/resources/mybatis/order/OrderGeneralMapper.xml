@@ -58,4 +58,36 @@
             now()
         </trim>
     </insert>
+    <select id="selectOrderVo" parameterType="map" resultType="com.faxintong.iruyi.model.mybatis.vo.OrderVo">
+        select o.id,o.type,o.title,o.content,o.city_name cityName,o.deadline_date deadDate,o.keywords,o.price
+        ,(select count(*) from order_receive orc where orc.order_id = o.id) interestCount
+        <if test="lawyerId != null">
+        ,(select count(*) from order_receive orc1 where orc1.order_id = o.id and orc1.lawyer_id = #{lawyerId}) isInterest
+        </if>
+        from `order` o
+        order by o.create_date
+        limit #{startCount},#{pageSize}
+    </select>
+    <resultMap id="OrderReceiveVo" type="com.faxintong.iruyi.model.mybatis.vo.OrderReceiveVo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="lawyerId" property="lawyerId" jdbcType="BIGINT" />
+        <result column="lawyerName" property="lawyerName" jdbcType="VARCHAR" />
+        <result column="photoUrl" property="photoUrl" jdbcType="VARCHAR" />
+        <association property="orderVo" column="order_id" javaType="com.faxintong.iruyi.model.mybatis.vo.OrderVo" select="selectOrderVoByOrderReceiveVo" />
+    </resultMap>
+    <select id="selectMyOrderReceiveVo" parameterType="map" resultMap="OrderReceiveVo">
+        select ore.id,ore.content,ore.create_date createDate
+        ,l.id lawyerId,l.`name` lawyerName,l.photo_url photoUrl
+        ,ore.order_id
+        from order_receive ore
+        inner join lawyer l on ore.lawyer_id = l.id
+        where ore.lawyer_id = #{lawyerId};
+    </select>
+    <select id="selectOrderVoByOrderReceiveVo" resultType="com.faxintong.iruyi.model.mybatis.vo.OrderVo">
+        select o.title,o.content
+        from `order` o
+        where o.id = #{order_id}
+    </select>
 </mapper>

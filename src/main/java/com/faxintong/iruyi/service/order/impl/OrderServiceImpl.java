@@ -30,8 +30,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<OrderVo> getOrderList(Pager pager) throws Exception {
-        return orderGeneralMapper.selectOrderVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize());
+    public List<OrderVo> getOrderList(Pager pager,Long lawyerId) throws Exception {
+        return orderGeneralMapper.selectOrderVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId);
     }
 
     @Override

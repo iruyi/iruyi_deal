@@ -2,11 +2,11 @@ package com.faxintong.iruyi.lawyer;
 
 import com.faxintong.iruyi.base.BaseTest;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
-import com.faxintong.iruyi.model.mybatis.vo.CityVo;
-import com.faxintong.iruyi.model.mybatis.vo.LawyerVo;
-import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
+import com.faxintong.iruyi.model.mybatis.order.OrderReceive;
+import com.faxintong.iruyi.model.mybatis.vo.*;
 import com.faxintong.iruyi.service.lawyer.LawyerService;
 import com.faxintong.iruyi.service.lawyer.UserService;
+import com.faxintong.iruyi.service.order.OrderService;
 import com.faxintong.iruyi.utils.MD5;
 import com.faxintong.iruyi.utils.Pager;
 import org.junit.Test;
@@ -22,6 +22,7 @@ public class LawyerServiceTest extends BaseTest {
 
     @Autowired
     private LawyerService lawyerService;
+
 
     static Pager pager;
     {
@@ -43,7 +44,7 @@ public class LawyerServiceTest extends BaseTest {
     @Test
     public void testGetAttetionList() {
         try {
-            List<LawyerVo> lawyerVoList = lawyerService.getAttetionList(pager,1L);
+            List<LawyerVo> lawyerVoList = lawyerService.getAttetionList(pager, 1L);
             for(LawyerVo v: lawyerVoList) {
                 System.out.println("1 关注了" + v.getName());
             }
@@ -67,7 +68,7 @@ public class LawyerServiceTest extends BaseTest {
     @Test
     public void testGetAttetionTopics() {
         try {
-            List<TopicVo> topicVoList = lawyerService.getAttetionTopics(pager,28L);
+            List<TopicVo> topicVoList = lawyerService.getAttetionTopics(pager, 28L);
             for(TopicVo v: topicVoList) {
                 System.out.println("28 律师关注的话题：");
                 System.out.println(v.getContent() + "\n" +
@@ -84,7 +85,7 @@ public class LawyerServiceTest extends BaseTest {
     @Test
     public void testGetReportTopics() {
         try {
-            List<TopicVo> topicVoList = lawyerService.getReportTopics(pager,1L);
+            List<TopicVo> topicVoList = lawyerService.getReportTopics(pager, 1L);
             for(TopicVo v: topicVoList) {
                 System.out.println("1L 律师发布的话题：");
                 System.out.println(v.getContent() + "\n" +
@@ -98,4 +99,33 @@ public class LawyerServiceTest extends BaseTest {
         }
     }
 
+    @Test
+    public void testGetOrderList() {
+        try {
+            List<OrderVo> vs = lawyerService.getOrderList(pager, 28L);
+            for(OrderVo v : vs) {
+                System.out.println("商机title：" + v.getTitle() + "\n" +
+                                "商机content：" + v.getContent() + "\n" +
+                                "感兴趣的数量：" + v.getInterestCount() + "\n"
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testGetReceiveOrders() {
+        try {
+            List<OrderReceiveVo> vs = lawyerService.getReceiveOrders(pager,11L);
+            for(OrderReceiveVo v : vs) {
+                System.out.println("律师：" + v.getLawyerName() + " 留言：" + v.getContent() + "\n" +
+                        "商机title：" + v.getOrderVo().getTitle() + "\n" +
+                                "商机content：" + v.getOrderVo().getContent() + "\n"
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

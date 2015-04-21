@@ -28,13 +28,14 @@ public class OrderServiceTest extends BaseTest{
     @Test
     public void testGetPositionList() {
         try {
-            List<OrderVo> orderList = orderService.getOrderList(pager);
+            List<OrderVo> orderList = orderService.getOrderList(pager,1L);
             for(OrderVo v : orderList) {
-                System.out.println("标题：" + v.getTitle() + "\n" +
+                System.out.println(v.getId() + "标题：" + v.getTitle() + "\n" +
                                 "类型：" + v.getType() + "\n" +
                                 "内容：" + v.getContent() + "\n" +
                      "地点：" + v.getCityName() + "\n"
-                                + "关注数:" + v.getInterestCount() + "\n"
+                                + "关注数:" + v.getInterestCount() + "\n" +
+                                "1L 是否关注" + v.getIsInterest()
                 );
             }
         } catch (Exception e) {
@@ -45,7 +46,7 @@ public class OrderServiceTest extends BaseTest{
     @Test
     public void testOrderDetail() {
         try {
-            OrderVo v = orderService.orderDetail(null,28L);
+            OrderVo v = orderService.orderDetail(null, 28L);
                 System.out.println("粉丝：" + v.getFansCount() + "\n" +
                                 "发布数量：" + v.getIssueCount() + "\n" +
                                 "感兴趣的数量：" + v.getInterestCount() + "\n"
@@ -54,5 +55,6 @@ public class OrderServiceTest extends BaseTest{
             e.printStackTrace();
         }
     }
+
 
 }

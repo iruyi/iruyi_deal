@@ -25,7 +25,7 @@ public interface OrderService {
      * @return
      * @throws Exception
      */
-    public List<OrderVo> getOrderList(Pager pager) throws Exception;
+    public List<OrderVo> getOrderList(Pager pager,Long lawyerId) throws Exception;
 
     /**
      * 获取单子详情
