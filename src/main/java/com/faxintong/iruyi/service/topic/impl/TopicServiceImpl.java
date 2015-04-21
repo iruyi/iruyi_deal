@@ -47,7 +47,7 @@ public class TopicServiceImpl implements TopicService {
             topicGroupVo.setFansCount(fansNum);
         }
 
-        List<TopicVo> topicVoList = topicGeneralMapper.selectTopicVo(groupId,pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize(),lawyerId);
+        List<TopicVo> topicVoList = topicGeneralMapper.selectTopicVo(groupId,pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize(),lawyerId,null);
         topicGroupVo.setTopicVoList(topicVoList);
         return topicGroupVo;
     }

@@ -6,11 +6,24 @@
         ,l.id lawyerId,l.name lawyerName,l.photo_url photoUrl
         ,(select count(tp.id) from topic_praise tp where tp.topic_id = c.id) praiseCount
         <if test="lawyerId != null">
-        ,(select count(tp1.id) from topic_praise tp1 where where tp1.topic_id = c.id and tp1.lawyer_id = #{lawyerId}) isPraise
+        ,(select count(tp1.id) from topic_praise tp1 where tp1.topic_id = c.id and tp1.lawyer_id = #{lawyerId}) isPraise
         </if>
         from topic c
         inner join lawyer l on c.lawyer_id = l.id
-        where c.group_id = #{groupId}
+        <choose>
+            <when test="groupId != null">
+                where c.group_id = #{groupId}
+            </when>
+            <otherwise>
+                <if test="mo != null and mo ==0">
+                    where c.lawyer_id in (select la.other_lawyer_id from lawyer_attention la where la.lawyer_id = #{lawyerId})
+                </if>
+                <if test="mo != null and mo ==1">
+                    where c.lawyer_id  = #{lawyerId}
+                </if>
+            </otherwise>
+        </choose>
+        order by c.create_date desc
         limit #{startCount},#{pageSize}
     </select>
 

@@ -32,7 +32,13 @@ public interface TopicGeneralMapper {
     @Select("select count(id) from topic_group_atten where category_id = #{groupId}")
     int countFansNumByGroupId(@Param("groupId")Long groupId);
 
-    List<TopicVo> selectTopicVo(@Param("groupId")Long groupId,@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize, @Param("lawyerId")Long lawyerId);
+    /**
+     * groupId 不为空的时候，根据groupId查询话题
+     * 否则根据mo值
+     * 1 查询关注的律师发的话题
+     * 2 查询自己发的话题
+     * */
+    List<TopicVo> selectTopicVo(@Param("groupId")Long groupId,@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize, @Param("lawyerId")Long lawyerId,@Param("mo")Integer mo);
 
     List<ReplyVo> selectReplyVo(@Param("topicId")Long topicId, @Param("lawyerId")Long lawyerId);
 

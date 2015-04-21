@@ -10,6 +10,7 @@ import com.faxintong.iruyi.model.mybatis.topic.Topic;
 import com.faxintong.iruyi.model.mybatis.topic.TopicReply;
 import com.faxintong.iruyi.model.mybatis.vo.CityVo;
 import com.faxintong.iruyi.model.mybatis.vo.LawyerVo;
+import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.utils.Pager;
 
 import java.util.List;
@@ -75,7 +76,7 @@ public interface LawyerService {
      * @return
      * @throws Exception
      */
-    public List<Topic> getReportTopics(Pager pager, Long lawyerId) throws Exception;
+    public List<TopicVo> getReportTopics(Pager pager, Long lawyerId) throws Exception;
 
     /**
      * 我回应的话题列表
@@ -93,7 +94,7 @@ public interface LawyerService {
      * @return
      * @throws Exception
      */
-    public List<Topic> getAttetionTopics(Pager pager, Long lawyerId) throws Exception;
+    public List<TopicVo> getAttetionTopics(Pager pager, Long lawyerId) throws Exception;
 
     /**
      * 赞过话题的回应列表
