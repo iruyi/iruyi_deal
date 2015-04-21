@@ -1,6 +1,7 @@
 package com.faxintong.iruyi.service.order;
 
 import com.faxintong.iruyi.model.mybatis.order.Order;
+import com.faxintong.iruyi.model.mybatis.vo.OrderVo;
 import com.faxintong.iruyi.utils.Pager;
 
 import java.util.List;
@@ -21,11 +22,10 @@ public interface OrderService {
     /**
      * 获取单子列表(未在黑名单里)
      * @param pager
-     * @param lawyer
      * @return
      * @throws Exception
      */
-    public List<Order> getOrderList(Pager pager, Long lawyer) throws Exception;
+    public List<OrderVo> getOrderList(Pager pager) throws Exception;
 
     /**
      * 获取单子详情
@@ -33,7 +33,7 @@ public interface OrderService {
      * @return
      * @throws Exception
      */
-    public Order orderDetail(Long orderId) throws Exception;
+    public OrderVo orderDetail(Long orderId,Long lawyerId) throws Exception;
 
     /**
      * 单子感兴趣
@@ -51,6 +51,6 @@ public interface OrderService {
      * @return
      * @throws Exception
      */
-    public Map<String, Object> orderComment(Long orderId, String content, Long lawyerId) throws Exception;
+    public void orderComment(Long orderId, String content, Long lawyerId) throws Exception;
 
 }

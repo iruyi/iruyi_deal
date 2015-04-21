@@ -25,6 +25,9 @@ public class Order {
 
     private Date updateDate;
 
+    private Long cityId;
+    private String cityName;
+
     public Long getId() {
         return id;
     }
@@ -111,5 +114,21 @@ public class Order {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
+    }
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
     }
 }

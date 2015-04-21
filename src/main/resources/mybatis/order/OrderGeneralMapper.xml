@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.faxintong.iruyi.dao.general.OrderGeneralMapper" >
+    <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.order.Order" >
+        insert into order
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="title != null" >
+                title,
+            </if>
+            <if test="lawyerId != null" >
+                lawyer_id,
+            </if>
+            <if test="lawyerName != null" >
+                lawyer_name,
+            </if>
+            <if test="content != null" >
+                content,
+            </if>
+            <if test="price != null" >
+                price,
+            </if>
+            <if test="deadlineDate != null" >
+                deadline_date,
+            </if>
+            <if test="keywords != null" >
+                keywords,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="type != null" >
+                #{type,jdbcType=TINYINT},
+            </if>
+            <if test="title != null" >
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="lawyerId != null" >
+                #{lawyerId,jdbcType=BIGINT},
+            </if>
+            <if test="lawyerName != null" >
+                #{lawyerName,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null" >
+                #{price,jdbcType=DOUBLE},
+            </if>
+            <if test="deadlineDate != null" >
+                #{deadlineDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="keywords != null" >
+                #{keywords,jdbcType=VARCHAR},
+            </if>
+            now(),
+            now()
+        </trim>
+    </insert>
+</mapper>

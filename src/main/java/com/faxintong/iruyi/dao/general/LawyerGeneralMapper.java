@@ -33,5 +33,6 @@ public interface LawyerGeneralMapper {
             " limit #{startCount},#{pageSize}")
     List<LawyerVo> selectLawyerVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize,@Param("lawyerId")Long lawyerId);
 
-
+    @Select("select count(*) from lawyer_attention where lawyer_id = #{lawyerId}")
+    int countFansByLawyerId(@Param("lawyerId")Long lawyerId);
 }
