@@ -51,7 +51,7 @@
         <context:property-placeholder ignore-resource-not-found="true" />
         <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
             <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-            <property name="jdbcUrl" value="jdbc:mysql://123.57.252.2:3306/iruyi?useUnicode=true"/>
+            <property name="jdbcUrl" value="jdbc:mysql://123.57.252.2:3306/iruyi?useUnicode=true&amp;characterEncoding=utf8"/>
             <property name="user" value="root"/>
             <property name="password" value="lawyer123"/>
             <property name="testConnectionOnCheckin" value="true"/>
@@ -72,7 +72,7 @@
         <context:property-placeholder ignore-resource-not-found="true" />
         <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
             <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-            <property name="jdbcUrl" value="jdbc:mysql://123.57.252.2:3306/iruyi?useUnicode=true"/>
+            <property name="jdbcUrl" value="jdbc:mysql://123.57.252.2:3306/iruyi?useUnicode=true&amp;characterEncoding=utf8"/>
             <property name="user" value="root"/>
             <property name="password" value="lawyer123"/>
             <property name="testConnectionOnCheckin" value="true"/>
