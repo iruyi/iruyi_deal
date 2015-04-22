@@ -12,7 +12,7 @@
                   "isEnd":${a.isEnd},
                   [#assign voteOptionVos=a.voteOptionVos]
                   [#if voteOptionVos?? && voteOptionVos?size>0]
-                    "voteOptionVos":[
+                    "voteOptions":[
                          [#list voteOptionVos as b]
                             {   "id":${b.id},
                                 "content":"${b.content}"

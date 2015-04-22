@@ -8,15 +8,19 @@ import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.service.topic.TopicService;
 import com.faxintong.iruyi.utils.Pager;
 import com.faxintong.iruyi.utils.RedisUtils;
+import com.faxintong.iruyi.utils.Result;
+import com.faxintong.iruyi.utils.ServletUtils;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -34,34 +38,33 @@ public class TopicController extends BaseController{
     /**
      * 发表话题
      * @return
+     *
+     * @note
+     *  发表话题
+     *   必须登录
+     *
      */
     @RequestMapping(value = "reportTopic")
-    public Map<String, Object> reportTopic(HttpServletRequest request, Long groupId, String content){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public Map<String, Object> reportTopic(HttpServletRequest request, Long groupId, String content, ModelMap modelMap,HttpServletResponse response){
+
         try {
             // 用户信息获取
             Lawyer lawyer = getLawyer(request);
-            if(lawyer == null) {
-                result.put(ERRMESSAGE, "请登录！");
-                return result;
-            }
 
             // 参数校验
             if(groupId == null || StringUtils.isEmpty(content)){
-                result.put(ERRMESSAGE, "话题所属组和话题为空！");
-                return result;
+                resultModelMap(0,"话题所属组和话题为空！",modelMap);
+                return null;
             }
 
             topicService.reportTopic(groupId,content,lawyer);
 
-            result.put(ERRCODE, 1);
-            result.put(ERRMESSAGE, "发表话题成功！");
+            ServletUtils.responseJson(response, new Result(1, "投票成功！"));
         }catch (Exception e){
             logger.error("发表话题失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "发表话题失败!");
+            resultModelMap(0, "发表话题失败!", modelMap);
         }
-        return result;
+        return null;
     }
 
     /**
