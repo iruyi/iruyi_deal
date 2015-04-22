@@ -3,6 +3,7 @@ package com.faxintong.iruyi.controller;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.service.lawyer.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
@@ -11,6 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
+
+import static com.faxintong.iruyi.utils.Constants.ERRCODE;
+import static com.faxintong.iruyi.utils.Constants.ERRMESSAGE;
 
 /**
  * Created by ron on 2015/1/13.
@@ -65,5 +69,16 @@ public class BaseController {
         String id = RedisUtils.get(SESSION_PREFIX + sessionId);
         return userService.getLawyerByPrimaryKey(Long.parseLong(id));*/
         return userService.getLawyerByPrimaryKey(getLawyerId(request));
+    }
+
+    /**
+     * modelMap 封装errcode errmessage
+     * @param errcode
+     * @param errmessage
+     * @param modelMap
+     */
+    protected void resultModelMap(Integer errcode,String errmessage,ModelMap modelMap) {
+        modelMap.addAttribute(ERRCODE, errcode);
+        modelMap.addAttribute(ERRMESSAGE, errmessage);
     }
 }
