@@ -3,7 +3,9 @@
 <mapper namespace="com.faxintong.iruyi.dao.general.VoteGeneralMapper" >
     <resultMap id="VoteVoResultMap" type="com.faxintong.iruyi.model.mybatis.vo.VoteVo" >
         <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
         <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
         <result column="isEnd" property="isEnd" jdbcType="BIGINT" />
         <collection property="voteOptionVos" column="id"
         ofType="com.faxintong.iruyi.model.mybatis.vo.VoteOptionVo" select="selectVoteOption"/>
@@ -29,8 +31,9 @@
     </insert>
     
     <select id="selectVoteVoteOption" resultMap="VoteVoResultMap">
-        select id,content,end_time &gt; now() isEnd
+        select id,title,content,create_date createDate,end_time &lt; now() isEnd
         from vote
+        order by create_date desc
         limit #{startCount},#{pageSize}
     </select>
 

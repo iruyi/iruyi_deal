@@ -10,7 +10,10 @@ import java.util.Map;
 public class VoteVo {
     private Long id;
 
+    private String title;
     private String content;
+
+    private Date createDate;
 
     private Integer isEnd;
 
@@ -18,7 +21,7 @@ public class VoteVo {
 
     private Integer voteSum;
 
-    private Map<Integer,Integer> optionNumMap;
+    private Map<String,Integer> optionNumMap;
 
     public Long getId() {
         return id;
@@ -28,12 +31,28 @@ public class VoteVo {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public Integer getIsEnd() {
@@ -60,11 +79,11 @@ public class VoteVo {
         this.voteSum = voteSum;
     }
 
-    public Map<Integer, Integer> getOptionNumMap() {
+    public Map<String, Integer> getOptionNumMap() {
         return optionNumMap;
     }
 
-    public void setOptionNumMap(Map<Integer, Integer> optionNumMap) {
+    public void setOptionNumMap(Map<String, Integer> optionNumMap) {
         this.optionNumMap = optionNumMap;
     }
 }

@@ -31,14 +31,14 @@ public class VoteServiceImpl implements VoteService {
     public VoteVo voteDetail(Long voteId) throws Exception {
         List<Map<String,Long>> list = voteGeneralMapper.countVoteOptionGroupByOptionId(voteId);
         int sum = 0;
-        Map<Integer,Integer> reMap = Maps.newHashMap();
+        Map<String,Integer> reMap = Maps.newHashMap();
         // 这里投个懒，手工过滤一遍，分装成对应的数据
         // 注意字段值要非常一致
         for(int i=0;i<list.size();i++) {
             Map<String,Long> map = list.get(i);
             int n = map.get("optionNum").intValue();
             sum += n;
-            reMap.put(map.get("optionId").intValue(),n);
+            reMap.put(map.get("optionId").toString(),n);
         }
 
         VoteVo voteVo = new VoteVo();

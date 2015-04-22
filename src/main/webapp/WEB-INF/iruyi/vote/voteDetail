@@ -1,0 +1,15 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    "voteSum":${data.voteSum},
+    [#if data.optionNumMap??]
+        "data":{
+            [#list data.optionNumMap?keys as key]
+                "${key}":${data.optionNumMap[key?string]}
+            [#if key_has_next],[/#if]
+            [/#list]
+               }
+    [#else]
+        "data":""
+    [/#if]
+}
