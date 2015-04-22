@@ -31,11 +31,16 @@ public interface TopicGeneralMapper {
     @Select("select count(id) from topic_group_atten where category_id = #{groupId}")
     int countFansNumByGroupId(@Param("groupId")Long groupId);
 
+    @Select("select count(id) from topic_group_atten where category_id = #{groupId} and lawyer_id = #{lawyerId}")
+    int countFansNumByGroupIdMy(@Param("groupId")Long groupId,@Param("lawyerId")Long lawyerId);
+
     /**
      * groupId 不为空的时候，根据groupId查询话题
      * 否则根据mo值
      * 1 查询关注的律师发的话题
      * 2 查询自己发的话题
+     *
+     * 否则都为空时 查询全部分页时间倒叙
      * */
     List<TopicVo> selectTopicVo(@Param("groupId")Long groupId,@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize, @Param("lawyerId")Long lawyerId,@Param("mo")Integer mo);
 

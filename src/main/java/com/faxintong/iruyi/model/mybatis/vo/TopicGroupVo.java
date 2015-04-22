@@ -16,6 +16,7 @@ public class TopicGroupVo {
 
     private Integer topicCount;
 
+    private Integer isAtten;
     private List<TopicVo> topicVoList;
 
     public Long getId() {
@@ -56,6 +57,14 @@ public class TopicGroupVo {
 
     public void setTopicCount(Integer topicCount) {
         this.topicCount = topicCount;
+    }
+
+    public Integer getIsAtten() {
+        return isAtten;
+    }
+
+    public void setIsAtten(Integer isAtten) {
+        this.isAtten = isAtten;
     }
 
     public List<TopicVo> getTopicVoList() {

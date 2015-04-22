@@ -1,0 +1,35 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    [#if data.readerCount?? ]
+    "readerCount",${(data.readerCount)!0},
+    [/#if]
+    [#if data.readerCount?? ]
+    "fansCount":${(data.fansCount)!0},
+    [/#if]
+    [#if data.readerCount?? ]
+    "topicCount":${(data.topicCount)!0},
+    [/#if]
+    [#if data.readerCount?? ]
+    "isAtten":${(data.isAtten)!0},
+    [/#if]
+    [#if data.topicVoList?? && data.topicVoList?size>0]
+        "data":[
+            [#list data.topicVoList as a]
+                {
+                  "id":${a.id},
+                  "content":${a.content},
+                  "createDate":"${a.createDate?datetime}",
+                  "lawyerId":${a.lawyerId},
+                  "lawyerName":"${a.lawyerName}",
+                  "photoUrl":"${a.photoUrl!!}",
+                  "praiseCount":${a.praiseCount},
+                  "isPraise":${a.isPraise}
+                }
+                [#if a_has_next],[/#if]
+            [/#list]
+               ]
+    [#else]
+        "data":[]
+    [/#if]
+}

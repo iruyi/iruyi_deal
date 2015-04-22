@@ -67,11 +67,11 @@ public class TopicController extends BaseController{
     }
 
     /**
-     * 获取话题列表
+     * 获取话题组列表
      * @return
      *
      * @note
-     *  获取话题列表
+     *  获取话题组列表
      *   无需登录
      *
      */
@@ -99,27 +99,32 @@ public class TopicController extends BaseController{
     /**
      * 获取话题组详情
      * @return
+     *
+     * @note
+     *  获取话题组详情
+     *  无需登录
+     *  如果登录的话 会返回是否关注字段，以及是否点赞字段；否则默认为没有
      */
     @RequestMapping(value = "getGroupDetail")
-    public Map<String, Object> getGroupDetail(HttpServletRequest request, Long groupId, Pager pager){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String getGroupDetail(HttpServletRequest request, HttpServletResponse response, Long groupId, Pager pager,ModelMap modelMap){
         try {
             // 参数校验
             if(pager == null || pager.getCurrentPage() == null) {
-                result.put(ERRMESSAGE, "当前页为null");
+                ServletUtils.responseJson(response,new Result(0,"当前页为null"));
+                return null;
             }
 
-            TopicGroupVo topicGroupVo = topicService.getGroupDetail(groupId,pager,getLawyerId(request).longValue());
+            TopicGroupVo topicGroupVo = topicService.getGroupDetail(groupId,pager,getLawyerId(request));
 
-            result.put(ERRCODE, 1);
-            result.put(ERRMESSAGE, "获取话题组详情成功！");
-            result.put(DATA,topicGroupVo);
+            modelMap.put(DATA, topicGroupVo);
+            resultModelMap(1,"获取话题组详情成功！",modelMap);
+
+            return "topic/getGroupDetail";
         }catch (Exception e){
             logger.error("获取话题组详情失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "获取话题组详情失败!");
+            ServletUtils.responseJson(response, new Result(0, "获取话题组详情失败!"));
         }
-        return result;
+        return null;
     }
 
     /**
@@ -128,50 +133,52 @@ public class TopicController extends BaseController{
      * @return
      */
     @RequestMapping(value = "getTopicDetail")
-    public Map<String, Object> getTopicDetail(HttpServletRequest request,Long topicId){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String getTopicDetail(HttpServletRequest request,HttpServletResponse response,Long topicId,ModelMap modelMap){
         try {
             // 参数校验
             if(topicId == null) {
-                result.put(ERRMESSAGE, "话题ID为空！");
+                ServletUtils.responseJson(response,new Result(0,"话题ID为空！"));
+                return null;
             }
 
             TopicVo topicVo = topicService.getTopicDetail(topicId,getLawyerId(request));
 
-            result.put(ERRCODE, 1);
-            result.put(ERRMESSAGE, "获取话题详情成功！");
-            result.put(DATA,topicVo);
+            modelMap.put(DATA,topicVo);
+            resultModelMap(1, "获取话题详情成功！", modelMap);
+
+            return "topic/getTopicDetail";
         }catch (Exception e){
-            logger.error("获取话题组详情失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "获取话题详情失败!");
+            logger.error("获取话题详情失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(0, "获取话题详情失败！"));
         }
-        return result;
+        return null;
     }
 
     /**
      * 关注话题组
      * @return
+     *
+     * @note
+     *  关注话题组
+     *  必须登录
      */
     @RequestMapping(value = "attentionGroup")
-    public Map<String, Object> attentionGroup(HttpServletRequest request,Long groupId){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String attentionGroup(HttpServletRequest request,Long groupId,HttpServletResponse response){
         try {
             // 参数校验
             if(groupId == null) {
-                result.put(ERRMESSAGE, "话题ID为空！");
+                ServletUtils.responseJson(response,new Result(0,"话题ID为空！"));
+                return null;
             }
 
-            topicService.attentionGroup(groupId,getLawyerId(request));
+            topicService.attentionGroup(groupId, getLawyerId(request));
 
-            result.put(ERRCODE, 1);
-            result.put(ERRMESSAGE, "关注话题组成功！");
+            ServletUtils.responseJson(response, new Result(1, "关注话题组成功！"));
         }catch (Exception e){
             logger.error("关注话题组失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "关注话题组失败!");
+            ServletUtils.responseJson(response, new Result(0, "关注话题组失败！"));
         }
-        return result;
+        return null;
     }
 
     /**
@@ -181,50 +188,49 @@ public class TopicController extends BaseController{
      * @return
      */
     @RequestMapping(value = "topicReply")
-    public Map<String, Object> topicReply(HttpServletRequest request,Long topicId, String content){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String topicReply(HttpServletRequest request,Long topicId, String content, HttpServletResponse response){
         try {
             // 参数校验
             if(topicId == null || StringUtils.isEmpty(content)) {
-                result.put(ERRMESSAGE, "话题ID或者回复内容为空！");
+                ServletUtils.responseJson(response,new Result(0,"话题ID或者回复内容为空！"));
+                return null;
             }
 
-            topicService.topicReply(topicId,content,getLawyer(request));
+            topicService.topicReply(topicId, content, getLawyer(request));
 
-            result.put(ERRCODE, 1);
-            result.put(ERRMESSAGE, "关注话题组成功！");
+            ServletUtils.responseJson(response, new Result(1, "回应话题成功！"));
         }catch (Exception e){
-            logger.error("关注话题组失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "关注话题组失败!");
+            logger.error("回应话题失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(1, "回应话题失败！"));
         }
-        return result;
+        return null;
     }
 
     /**
      * 关注话题
      * @param topicId
      * @return
+     *
+     * @note
+     * 关注话题  收藏话题
      */
     @RequestMapping(value = "attentionTopic")
-    public Map<String, Object> attentionTopic(Long topicId, HttpServletRequest request){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String attentionTopic(Long topicId, HttpServletRequest request,HttpServletResponse response){
         try {
             // 参数校验
             if(topicId == null) {
-                result.put(ERRMESSAGE, "话题ID为空！");
+                ServletUtils.responseJson(response,new Result(0,"话题ID为空！"));
+                return null;
             }
 
-            topicService.attentionTopic(topicId,getLawyerId(request));
+            topicService.attentionTopic(topicId, getLawyerId(request));
 
-            result.put(ERRCODE, 1);
-            result.put(ERRMESSAGE, "关注话题组成功！");
+            ServletUtils.responseJson(response, new Result(1, "关注话题成功！"));
         }catch (Exception e){
-            logger.error("关注话题组失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "关注话题组失败!");
+            logger.error("关注话题失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(0, "关注话题失败！"));
         }
-        return result;
+        return null;
     }
 
     /**
@@ -232,24 +238,23 @@ public class TopicController extends BaseController{
      * @param replyId
      * @return
      */
-    public Map<String, Object> topicReplyPraise(HttpServletRequest request,Long replyId){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    @RequestMapping(value = "topicReplyPraise")
+    public String topicReplyPraise(HttpServletRequest request,Long replyId,HttpServletResponse response){
         try {
             // 参数校验
             if(replyId == null) {
-                result.put(ERRMESSAGE, "回复ID为空！");
+                ServletUtils.responseJson(response,new Result(0,"回复ID为空！"));
+                return null;
             }
 
-            topicService.topicReplyPraise(replyId,getLawyerId(request));
+            topicService.topicReplyPraise(replyId, getLawyerId(request));
 
-            result.put(ERRCODE, 1);
-            result.put(ERRMESSAGE, "关注话题组成功！");
+            ServletUtils.responseJson(response, new Result(1, "话题回应点赞成功！"));
         }catch (Exception e){
             logger.error("关注话题组失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "关注话题组失败!");
+            ServletUtils.responseJson(response, new Result(0, "话题回应点赞成功！"));
         }
-        return result;
+        return null;
     }
 
 }

@@ -26,13 +26,13 @@
         <bean class="com.faxintong.iruyi.interceptor.TimeInterceptor"></bean>
     </mvc:interceptors>
 
-    <mvc:annotation-driven>
+    <!--<mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">
             <bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter" />
         </mvc:message-converters>
-    </mvc:annotation-driven>
+    </mvc:annotation-driven>-->
 
-    <!--&lt;!&ndash; freemarker的配置 &ndash;&gt;
+    <!-- freemarker的配置 -->
     <bean id="freemarkerConfigurer"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
         <property name="templateLoaderPath" value="/WEB-INF/iruyi/" />
@@ -50,7 +50,7 @@
             </props>
         </property>
     </bean>
-    &lt;!&ndash; FreeMarker视图解析 &ndash;&gt;
+    <!-- FreeMarker视图解析 -->
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
         <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView" />
@@ -59,7 +59,7 @@
         <property name="exposeSessionAttributes" value="false" />
         <property name="exposeSpringMacroHelpers" value="true" />
         <property name="order" value="0"/>
-    </bean>-->
+    </bean>
 
     <!-- 上传文件 -->
     <bean id="multipartResolver"
@@ -81,6 +81,6 @@
     </bean>
 
     <!-- 容器默认的DefaultServletHandler处理 所有静态内容与无RequestMapping处理的URL-->
-    <mvc:default-servlet-handler/>
+    <!--<mvc:default-servlet-handler/>-->
 
 </beans>

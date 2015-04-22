@@ -42,9 +42,11 @@ public class TopicServiceImpl implements TopicService {
             int topicNum = topicGeneralMapper.countTopicNumByGroupId(groupId);
             int readerNum = topicGeneralMapper.countReaderNumByGroupId(groupId);
             int fansNum = topicGeneralMapper.countFansNumByGroupId(groupId);
+            int isAttenNum = topicGeneralMapper.countFansNumByGroupIdMy(groupId,lawyerId);
             topicGroupVo.setTopicCount(topicNum);
             topicGroupVo.setReaderCount(readerNum);
             topicGroupVo.setFansCount(fansNum);
+            topicGroupVo.setIsAtten(isAttenNum);
         }
 
         List<TopicVo> topicVoList = topicGeneralMapper.selectTopicVo(groupId,pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize(),lawyerId,null);

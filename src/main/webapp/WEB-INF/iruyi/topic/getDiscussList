@@ -1,0 +1,23 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    [#if data?? && data?size>0]
+        "data":[
+            [#list data as a]
+                {
+                  "id":${a.id},
+                  "content":${a.content},
+                  "createDate":"${a.createDate?datetime}",
+                  "lawyerId":${a.lawyerId},
+                  "lawyerName":"${a.lawyerName}",
+                  "photoUrl":"${a.photoUrl!!}",
+                  "praiseCount":${a.praiseCount},
+                  "isPraise":${(a.isPraise)!0}
+                }
+                [#if a_has_next],[/#if]
+            [/#list]
+               ]
+    [#else]
+        "data":[]
+    [/#if]
+}
