@@ -46,14 +46,13 @@ public class TopicController extends BaseController{
      */
     @RequestMapping(value = "reportTopic")
     public Map<String, Object> reportTopic(HttpServletRequest request, Long groupId, String content, ModelMap modelMap,HttpServletResponse response){
-
         try {
             // 用户信息获取
             Lawyer lawyer = getLawyer(request);
 
             // 参数校验
             if(groupId == null || StringUtils.isEmpty(content)){
-                resultModelMap(0,"话题所属组和话题为空！",modelMap);
+                ServletUtils.responseJson(response, new Result(0, "话题所属组和话题为空！"));
                 return null;
             }
 
@@ -70,27 +69,31 @@ public class TopicController extends BaseController{
     /**
      * 获取话题列表
      * @return
+     *
+     * @note
+     *  获取话题列表
+     *   无需登录
+     *
      */
     @RequestMapping(value = "getGroupList")
-    public Map<String, Object> getGroupList(Pager pager){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String getGroupList(Pager pager,ModelMap modelMap,HttpServletResponse response){
         try {
             // 参数校验
             if(pager == null || pager.getCurrentPage() == null) {
-                result.put(ERRMESSAGE, "当前页为null");
+                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                return null;
             }
 
             List<TopicGroupVo> list = topicService.getGroupList(pager);
+            resultModelMap(1,"获取话题组列表成功！",modelMap);
+            modelMap.put(DATA,list);
 
-            result.put(ERRCODE, 1);
-            result.put(ERRMESSAGE, "获取话题列表成功！");
-            result.put(DATA,list);
+            return "topic/getGroupList";
         }catch (Exception e){
             logger.error("获取话题列表失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "获取话题列表失败!");
+            ServletUtils.responseJson(response, new Result(0, "获取话题列表失败！"));
         }
-        return result;
+        return null;
     }
 
     /**

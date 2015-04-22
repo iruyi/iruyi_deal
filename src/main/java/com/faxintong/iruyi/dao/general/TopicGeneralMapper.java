@@ -17,12 +17,11 @@ import java.util.List;
  */
 @OperateMyBatis
 public interface TopicGeneralMapper {
-    String TOPICGROUPVIEW = "id,group_name as groupName,access_count as readerCount";
 
     @Insert("insert into topic (group_id,lawyer_id,lawyer_name,content,create_date) values (#{groupId},#{lawyer.id},#{lawyer.name},#{content},now())")
     int insertTopic(@Param("groupId")Long groupId, @Param("content")String content, @Param("lawyer")Lawyer lawyer);
 
-    @Select("select " + TOPICGROUPVIEW +" from topic_group order by access_count limit #{startCount},#{pageSize}")
+    @Select("select id,group_name as groupName from topic_group order by access_count limit #{startCount},#{pageSize}")
     List<TopicGroupVo> selectTopicGroup(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize);
 
     @Select("select count(id) from topic where group_id = #{groupId}")
