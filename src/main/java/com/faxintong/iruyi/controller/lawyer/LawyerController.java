@@ -2,6 +2,8 @@ package com.faxintong.iruyi.controller.lawyer;
 
 import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
+import com.faxintong.iruyi.model.mybatis.vo.CityVo;
+import com.faxintong.iruyi.model.mybatis.vo.LawyerVo;
 import com.faxintong.iruyi.model.mybatis.vo.ReplyVo;
 import com.faxintong.iruyi.service.lawyer.LawyerService;
 import com.faxintong.iruyi.utils.Pager;
@@ -46,8 +48,22 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "getAttetionList")
-    public Map<String, Object> getAttetionList(Pager pager){
+    public String getAttetionList(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                return null;
+            }
 
+            List<LawyerVo> lawyerVoList = lawyerService.getAttetionList(pager,getLawyerId(request));
+            modelMap.put(DATA,lawyerVoList);
+            resultModelMap(1,"获取我关注的律师列表成功！",modelMap);
+
+            return "lawyer/getAttetionList";
+        } catch (Exception e) {
+            logger.error("获取我关注的律师列表失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(0, "获取我关注的律师列表失败！"));
+        }
         return null;
     }
 
@@ -57,8 +73,22 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "getCityList")
-    public Map<String, Object> getCityList(Pager pager){
+    public String getCityList(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                return null;
+            }
 
+            List<CityVo> cityVoList = lawyerService.getCityList(pager);
+            modelMap.put(DATA,cityVoList);
+            resultModelMap(1,"获取城市列表成功！",modelMap);
+
+            return "city/getCityList";
+        } catch (Exception e) {
+            logger.error("获取城市列表失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(0, "获取城市列表失败！"));
+        }
         return null;
     }
 
