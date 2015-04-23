@@ -44,7 +44,7 @@ public class ViewServiceTest extends BaseTest {
     @Test
     public void testGetViewList() {
         try {
-            List<ViewVo> viewList = viewService.getViewList(pager);
+            List<ViewVo> viewList = viewService.getViewList(pager,1L);
             for(ViewVo v : viewList) {
                 System.out.println("微访谈：" + v.getTitle() +"||" +v.getContent());
                 System.out.println("作者：" + v.getLawyerName() + "是否结束" + v.getIsLive());

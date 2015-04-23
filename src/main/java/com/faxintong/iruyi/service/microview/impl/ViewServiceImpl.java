@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.service.microview.impl;
 
+import com.faxintong.iruyi.dao.general.LawyerGeneralMapper;
 import com.faxintong.iruyi.dao.general.ViewGeneralMapper;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.microview.Microview;
@@ -24,8 +25,8 @@ public class ViewServiceImpl implements ViewService{
     private ViewGeneralMapper viewGeneralMapper;
 
     @Override
-    public List<ViewVo> getViewList(Pager pager) {
-        return viewGeneralMapper.selectViewVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize());
+    public List<ViewVo> getViewList(Pager pager,Long lawyerId) {
+        return viewGeneralMapper.selectViewVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize(),lawyerId);
     }
 
     @Override

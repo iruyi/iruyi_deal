@@ -18,7 +18,7 @@
             [#list data.topicVoList as a]
                 {
                   "id":${a.id},
-                  "content":${a.content},
+                  "content":"${a.content}",
                   "createDate":"${a.createDate?datetime}",
                   "lawyerId":${a.lawyerId},
                   "lawyerName":"${a.lawyerName}",

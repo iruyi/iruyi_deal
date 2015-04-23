@@ -1,18 +1,24 @@
 {
     "errcode":${errcode},
     "errmessage":"${errmessage}",
-    [#if data?? && data?size>0]
-        "data":[
-            [#list data as a]
+    "view":{
+        "introduction":"${data.introduction}",
+        "fansCount":${(data.fansCount)!0},
+        "isAtten":${(data.isAtten)!0}
+    },
+    [#if data.viewDiscussVoList?? && data.viewDiscussVoList?size>0]
+        "viewDisscusses":[
+            [#list data.viewDiscussVoList as a]
                 {
                   "id":${a.id},
+                  "type":"${a.type}",
                   "content":"${a.content}",
                   "createDate":"${a.createDate?datetime}",
                   "lawyerId":${a.lawyerId},
                   "lawyerName":"${a.lawyerName}",
                   "photoUrl":"${a.photoUrl!!}",
-                  "praiseCount":${a.praiseCount},
-                  "isPraise":${(a.isPraise)!0}
+                  "praiseCount":${(a.praiseCount)!0},
+                  "isParise":${(a.isParise)!0}
                 }
                 [#if a_has_next],[/#if]
             [/#list]

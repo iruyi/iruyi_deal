@@ -23,7 +23,7 @@ public interface ViewGeneralMapper {
             " values(#{microViewId},#{lawyerId})" )
     int insertViewAtten(@Param("microViewId")Long microViewId, @Param("lawyerId")Long lawyerId);
 
-    List<ViewVo> selectViewVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize);
+    List<ViewVo> selectViewVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize,@Param("lawyerId")Long lawyerId);
 
     ViewVo selectViewVoOne(@Param("microViewId")Long microViewId,@Param("lawyerId")Long lawyerId);
 

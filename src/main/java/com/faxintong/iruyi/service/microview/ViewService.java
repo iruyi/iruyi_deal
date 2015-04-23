@@ -19,7 +19,7 @@ public interface ViewService {
      *
      * @TODO  表缺少字段 结束时间，因此无法给出是否在直播标识，后台写死了1
      */
-    public List<ViewVo> getViewList(Pager pager) throws Exception;
+    public List<ViewVo> getViewList(Pager pager,Long lawyerId) throws Exception;
 
     /**
      * 查看微访谈详情
