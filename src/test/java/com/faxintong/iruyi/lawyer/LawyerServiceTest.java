@@ -128,4 +128,18 @@ public class LawyerServiceTest extends BaseTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testGetReplyTopics() {
+        try{
+            List<ReplyVo> vs = lawyerService.getReplyTopics(pager, 1L);
+            for(ReplyVo v : vs) {
+                System.out.println("回复内容：" + v.getContent() + " \n 话题内容：" + v.getTopicVo().getContent() + "\n" +
+                                "回复时间：" + v.getCreateDate() + "\n"
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

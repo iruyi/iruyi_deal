@@ -57,4 +57,6 @@ public interface TopicGeneralMapper {
 
     @Insert("insert into topic_praise (topic_id,lawyer_id) values (#{topicId},#{lawyerId})")
     int insertTopicPraise(@Param("topicId")Long topicId, @Param("lawyerId")Long lawyerId);
+
+    List<ReplyVo> selectMyReplyVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize, @Param("lawyerId")Long lawyerId);
 }

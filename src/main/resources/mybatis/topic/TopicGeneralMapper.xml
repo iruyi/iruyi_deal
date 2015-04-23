@@ -39,4 +39,21 @@
         where r.topic_id = #{topicId}
     </select>
 
+    <resultMap id="ReplyVoMap" type="com.faxintong.iruyi.model.mybatis.vo.ReplyVo" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <association property="topicVo" column="topic_id" javaType="com.faxintong.iruyi.model.mybatis.vo.TopicVo" select="selectTopicVoByReplyVo" />
+    </resultMap>
+    <select id="selectMyReplyVo" parameterType="map" resultMap="ReplyVoMap">
+        select tp.id,tp.content,tp.create_date createDate
+        ,tp.topic_id
+        from topic_reply tp
+        where tp.lawyer_id = #{lawyerId}
+    </select>
+    <select id="selectTopicVoByReplyVo" resultType="com.faxintong.iruyi.model.mybatis.vo.TopicVo">
+        select t.content
+        from topic t
+        where t.id = #{topic_id}
+    </select>
 </mapper>

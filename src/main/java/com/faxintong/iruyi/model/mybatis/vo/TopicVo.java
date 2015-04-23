@@ -96,4 +96,6 @@ public class TopicVo {
     public void setReplyVoList(List<ReplyVo> replyVoList) {
         this.replyVoList = replyVoList;
     }
+
+
 }

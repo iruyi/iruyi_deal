@@ -22,6 +22,8 @@ public class ReplyVo {
 
     private Integer isPraise;
 
+    private TopicVo topicVo;
+
     public Long getId() {
         return id;
     }
@@ -84,5 +86,13 @@ public class ReplyVo {
 
     public void setIsPraise(Integer isPraise) {
         this.isPraise = isPraise;
+    }
+
+    public TopicVo getTopicVo() {
+        return topicVo;
+    }
+
+    public void setTopicVo(TopicVo topicVo) {
+        this.topicVo = topicVo;
     }
 }

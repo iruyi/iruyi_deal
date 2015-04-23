@@ -1,17 +1,35 @@
 package com.faxintong.iruyi.controller.lawyer;
 
+import com.faxintong.iruyi.controller.BaseController;
+import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
+import com.faxintong.iruyi.model.mybatis.vo.ReplyVo;
+import com.faxintong.iruyi.service.lawyer.LawyerService;
 import com.faxintong.iruyi.utils.Pager;
+import com.faxintong.iruyi.utils.Result;
+import com.faxintong.iruyi.utils.ServletUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 import java.util.Map;
+
+import static com.faxintong.iruyi.utils.Constants.DATA;
 
 /**
  * Created by admin on 15-4-18.
  */
 @RestController
 @RequestMapping("lawyer")
-public class LawyerController {
+public class LawyerController extends BaseController{
+    private Logger logger = LoggerFactory.getLogger(LawyerController.class);
+    @Autowired
+    private LawyerService lawyerService;
 
     /**
      * 获取个人信息
@@ -94,8 +112,24 @@ public class LawyerController {
      * @return
      */
     @RequestMapping(value = "getReplyTopics")
-    public Map<String, Object> getReplyTopics(Pager pager){
+    public String getReplyTopics(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                return null;
+            }
 
+            Lawyer lawyer = getLawyer(request);
+            List<ReplyVo> replyVoList = lawyerService.getReplyTopics(pager,lawyer.getId());
+            modelMap.put(DATA,replyVoList);
+            modelMap.put("lawyer",lawyer);
+            resultModelMap(1,"获取我回应的话题列表成功！",modelMap);
+
+            return "lawyer/getReplyTopics";
+        } catch (Exception e) {
+            logger.error("获取我回应的话题列表失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(0, "获取我回应的话题列表失败！"));
+        }
         return null;
     }
 

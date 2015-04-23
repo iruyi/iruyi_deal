@@ -67,8 +67,8 @@ public class LawyerServiceImpl implements LawyerService {
     }
 
     @Override
-    public List<Topic> getReplyTopics(Pager pager, Long lawyerId) throws Exception {
-        return null;
+    public List<ReplyVo> getReplyTopics(Pager pager, Long lawyerId) throws Exception {
+        return topicGeneralMapper.selectMyReplyVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId);
     }
 
     @Override

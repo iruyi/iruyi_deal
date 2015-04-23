@@ -1,19 +1,17 @@
 {
     "errcode":${errcode},
     "errmessage":"${errmessage}",
+    "lawyerId":${lawyer.id},
+    "lawyerName":"${lawyer.name}",
+    "photoUrl":"${lawyer.photoUrl!!}",
     [#if data?? && data?size>0]
         "data":[
             [#list data as a]
                 {
                   "id":${a.id},
-                  "title":"${a.title}",
-                  "content":"${a.content}",
+                  "replyContent":"${a.content}",
                   "createDate":"${a.createDate?datetime}",
-                  "isLive": ${(a.isLive)!0},
-                  "lawyerId":${a.lawyerId},
-                  "lawyerName":"${a.lawyerName}",
-                  "photoUrl":"${a.photoUrl!!}",
-                  "isAtten":${(a.isAtten)!0}
+                  "topicContent":"${a.topicVo.content}"
                 }
                 [#if a_has_next],[/#if]
             [/#list]

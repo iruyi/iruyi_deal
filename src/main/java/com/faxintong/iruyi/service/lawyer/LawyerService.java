@@ -10,12 +10,14 @@ import com.faxintong.iruyi.model.mybatis.topic.Topic;
 import com.faxintong.iruyi.model.mybatis.topic.TopicReply;
 import com.faxintong.iruyi.model.mybatis.vo.*;
 import com.faxintong.iruyi.utils.Pager;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 /**
  * Created by admin on 15-4-18.
  */
+@Service
 public interface LawyerService {
 
     /**
@@ -83,7 +85,7 @@ public interface LawyerService {
      * @return
      * @throws Exception
      */
-    public List<Topic> getReplyTopics(Pager pager, Long lawyerId) throws Exception;
+    public List<ReplyVo> getReplyTopics(Pager pager, Long lawyerId) throws Exception;
 
     /**
      * 获取我关注的话题列表
