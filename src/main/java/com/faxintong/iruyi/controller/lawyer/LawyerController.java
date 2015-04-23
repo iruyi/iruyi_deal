@@ -150,8 +150,24 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "praiseTopicReplyList")
-    public Map<String, Object> praiseTopicReplyList(Pager pager){
+    public String praiseTopicReplyList(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                return null;
+            }
 
+            Lawyer lawyer = getLawyer(request);
+            List<ReplyVo> replyVoList = lawyerService.praiseTopicReplyList(pager, lawyer.getId());
+            modelMap.put(DATA,replyVoList);
+            modelMap.put("lawyer",lawyer);
+            resultModelMap(1,"获取我赞过的话题回应列表成功！",modelMap);
+
+            return "lawyer/praiseTopicReplyList";
+        } catch (Exception e) {
+            logger.error("获取我赞过的话题回应列表失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(0, "获取我赞过的话题回应列表失败！"));
+        }
         return null;
     }
 

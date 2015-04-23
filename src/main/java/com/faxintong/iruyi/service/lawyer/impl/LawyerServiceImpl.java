@@ -68,7 +68,7 @@ public class LawyerServiceImpl implements LawyerService {
 
     @Override
     public List<ReplyVo> getReplyTopics(Pager pager, Long lawyerId) throws Exception {
-        return topicGeneralMapper.selectMyReplyVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId);
+        return topicGeneralMapper.selectMyReplyVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId,0);
     }
 
     @Override
@@ -77,8 +77,8 @@ public class LawyerServiceImpl implements LawyerService {
     }
 
     @Override
-    public List<TopicReply> praiseTopicReplyList(Pager pager, Long lawyerId) throws Exception {
-        return null;
+    public List<ReplyVo> praiseTopicReplyList(Pager pager, Long lawyerId) throws Exception {
+        return topicGeneralMapper.selectMyReplyVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId,1);
     }
 
     @Override

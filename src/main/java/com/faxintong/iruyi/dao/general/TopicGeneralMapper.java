@@ -58,5 +58,10 @@ public interface TopicGeneralMapper {
     @Insert("insert into topic_praise (topic_id,lawyer_id) values (#{topicId},#{lawyerId})")
     int insertTopicPraise(@Param("topicId")Long topicId, @Param("lawyerId")Long lawyerId);
 
-    List<ReplyVo> selectMyReplyVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize, @Param("lawyerId")Long lawyerId);
+    /**
+     * 如果type
+     * 为0 查询我回复的话题 回复和话题
+     * 为1 查询我赞过的回复 回复和话题
+     */
+    List<ReplyVo> selectMyReplyVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize, @Param("lawyerId")Long lawyerId,@Param("type")Integer type);
 }

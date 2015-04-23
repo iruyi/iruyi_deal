@@ -103,7 +103,7 @@ public interface LawyerService {
      * @return
      * @throws Exception
      */
-    public List<TopicReply> praiseTopicReplyList(Pager pager, Long lawyerId) throws Exception;
+    public List<ReplyVo> praiseTopicReplyList(Pager pager, Long lawyerId) throws Exception;
 
     /**
      * 我发布的文章列表

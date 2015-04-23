@@ -1,0 +1,22 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    "lawyerId":${lawyer.id},
+    "lawyerName":"${lawyer.name}",
+    "photoUrl":"${lawyer.photoUrl!!}",
+    [#if data?? && data?size>0]
+        "data":[
+            [#list data as a]
+                {
+                  "id":${a.id},
+                  "replyContent":"${a.content}",
+                  "createDate":"${a.createDate?datetime}",
+                  "topicContent":"${a.topicVo.content}"
+                }
+                [#if a_has_next],[/#if]
+            [/#list]
+               ]
+    [#else]
+        "data":[]
+    [/#if]
+}
