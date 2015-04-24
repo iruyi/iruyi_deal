@@ -1,0 +1,21 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    [#if data?? && data?size>0]
+        "data":[
+            [#list data as a]
+                {
+                  "id":${a.id},
+                  "createDate":"${a.createDate?datetime}",
+                  "officeName":"${a.officeName}",
+                  "cityName":"${a.cityName}",
+                  "salary":"${a.salary!0}"
+                }
+                [#if a_has_next],[/#if]
+            [/#list]
+               ]
+    [#else]
+        "data":[]
+    [/#if]
+}
+

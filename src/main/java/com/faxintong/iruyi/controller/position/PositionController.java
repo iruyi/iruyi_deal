@@ -4,14 +4,18 @@ import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.vo.PositionVo;
 import com.faxintong.iruyi.service.Position.PositionService;
 import com.faxintong.iruyi.utils.Pager;
+import com.faxintong.iruyi.utils.Result;
+import com.faxintong.iruyi.utils.ServletUtils;
 import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -34,25 +38,25 @@ public class PositionController extends BaseController {
      * @return
      */
     @RequestMapping(value = "getPositionList")
-    public Map<String, Object> getPositionList(Pager pager){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String getPositionList(Pager pager,ModelMap modelMap,HttpServletResponse response){
         try {
             // 参数校验
             if(pager == null || pager.getCurrentPage() == null) {
-                result.put(ERRMESSAGE, "当前页为null");
+                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                return null;
             }
 
             List<PositionVo> list = positionService.getPositionList(pager);
 
-            result.put(ERRCODE, 1);
-            result.put(ERRMESSAGE, "获取招聘列表成功！");
-            result.put(DATA, list);
+            modelMap.put(DATA, list);
+            resultModelMap(1,"获取招聘列表成功！",modelMap);
+
+            return "position/getPositionList";
         }catch (Exception e){
             logger.error("获取招聘列表失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "获取招聘列表失败!");
+            ServletUtils.responseJson(response, new Result(0, "获取招聘列表失败！"));
         }
-        return result;
+        return null;
     }
 
     /**
@@ -60,25 +64,25 @@ public class PositionController extends BaseController {
      * @return
      */
     @RequestMapping(value = "positionDetail")
-    public Map<String, Object> positionDetail(HttpServletRequest request,Long positionId){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String positionDetail(HttpServletRequest request,Long positionId,ModelMap modelMap,HttpServletResponse response){
         try {
             // 参数校验
             if(positionId == null) {
-                result.put(ERRMESSAGE, "职位ID为空！");
+                ServletUtils.responseJson(response, new Result(0, "职位ID为空！"));
+                return null;
             }
 
             PositionVo positionVo = positionService.positionDetail(positionId,getLawyerId(request));
 
-            result.put(ERRCODE, 1);
-            result.put(ERRMESSAGE, "获取招聘详情成功！");
-            result.put(DATA, positionVo);
+            modelMap.put(DATA, positionVo);
+            resultModelMap(0,"获取招聘详情成功！",modelMap);
+
+            return "position/positionDetail";
         }catch (Exception e){
             logger.error("获取招聘详情失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "获取招聘详情失败!");
+            ServletUtils.responseJson(response, new Result(0, "获取招聘详情失败！"));
         }
-        return result;
+        return null;
     }
 
     /**
@@ -87,24 +91,24 @@ public class PositionController extends BaseController {
      * @return
      */
     @RequestMapping(value = "positionStore")
-    public Map<String, Object> positionStore(HttpServletRequest request,Long positionId){
+    public String positionStore(HttpServletRequest request,Long positionId,HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
         result.put(ERRCODE, 0);
         try {
             // 参数校验
             if(positionId == null) {
-                result.put(ERRMESSAGE, "职位ID为空！");
+                ServletUtils.responseJson(response, new Result(0, "职位ID为空！"));
+                return null;
             }
 
-            positionService.positionStore(positionId,getLawyerId(request));
+            positionService.positionStore(positionId, getLawyerId(request));
 
-            result.put(ERRCODE, 1);
-            result.put(ERRMESSAGE, "职位收藏成功！");
+            ServletUtils.responseJson(response, new Result(1, "职位收藏成功！"));
         }catch (Exception e){
             logger.error("职位收藏失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "职位收藏失败!");
+            ServletUtils.responseJson(response, new Result(0, "职位收藏失败！"));
         }
-        return result;
+        return null;
     }
 
     /**
@@ -113,24 +117,23 @@ public class PositionController extends BaseController {
      * @return
      */
     @RequestMapping(value = "getStoreList")
-    public Map<String, Object> getStoreList(Pager pager){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String getStoreList(Pager pager,ModelMap modelMap,HttpServletResponse response){
         try {
             // 参数校验
             if(pager == null || pager.getCurrentPage() == null) {
-                result.put(ERRMESSAGE, "当前页为null");
+                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                return null;
             }
 
             List<PositionVo> list = positionService.getPositionList(pager);
+            modelMap.put(DATA, list);
+            resultModelMap(1,"获取职位收藏列表成功！",modelMap);
 
-            result.put(ERRCODE, 1);
-            result.put(ERRMESSAGE, "获取招聘列表成功！");
-            result.put(DATA, list);
+            return "position/getStoreList";
         }catch (Exception e){
             logger.error("获取招聘列表失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "获取招聘列表失败!");
+            ServletUtils.responseJson(response, new Result(0, "获取招聘列表失败！"));
         }
-        return result;
+        return null;
     }
 }

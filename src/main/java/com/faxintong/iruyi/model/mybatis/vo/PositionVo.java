@@ -20,6 +20,8 @@ public class PositionVo {
     private String keywords;
     private Integer isCollection;
 
+    private String officeIntroduction;
+
     public Long getId() {
         return id;
     }
@@ -114,5 +116,13 @@ public class PositionVo {
 
     public void setIsCollection(Integer isCollection) {
         this.isCollection = isCollection;
+    }
+
+    public String getOfficeIntroduction() {
+        return officeIntroduction;
+    }
+
+    public void setOfficeIntroduction(String officeIntroduction) {
+        this.officeIntroduction = officeIntroduction;
     }
 }

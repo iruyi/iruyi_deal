@@ -1,0 +1,17 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    "id":${data.id},
+    "salary":"${data.salary!0}",
+    "createDate":"${data.createDate?datetime}",
+    "officeName":"${data.officeName}",
+    "cityName":"${data.cityName}",
+    "title":"${data.title}",
+    "content":"${data.content}",
+    "type":${data.type},
+    "education":"${data.education}",
+    "experience":"${data.experience}",
+    "keywords":"${data.keywords}",
+    "officeIntroduction":"${data.officeIntroduction!}",
+    "isCollection":${data.isCollection!0}
+}
