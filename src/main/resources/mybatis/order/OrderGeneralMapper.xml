@@ -92,10 +92,11 @@
         ,ore.order_id
         from order_receive ore
         inner join lawyer l on ore.lawyer_id = l.id
-        where ore.lawyer_id = #{lawyerId};
+        where ore.lawyer_id = #{lawyerId}
+        limit #{startCount},#{pageSize}
     </select>
     <select id="selectOrderVoByOrderReceiveVo" resultType="com.faxintong.iruyi.model.mybatis.vo.OrderVo">
-        select o.title,o.content
+        select o.id,o.title,o.content
         from `order` o
         where o.id = #{order_id}
     </select>

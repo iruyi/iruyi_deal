@@ -4,9 +4,7 @@ import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.active.Active;
 import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
-import com.faxintong.iruyi.model.mybatis.vo.CityVo;
-import com.faxintong.iruyi.model.mybatis.vo.LawyerVo;
-import com.faxintong.iruyi.model.mybatis.vo.ReplyVo;
+import com.faxintong.iruyi.model.mybatis.vo.*;
 import com.faxintong.iruyi.service.lawyer.LawyerService;
 import com.faxintong.iruyi.utils.Pager;
 import com.faxintong.iruyi.utils.Result;
@@ -112,8 +110,22 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "getOrderList")
-    public Map<String, Object> getOrderList(Pager pager){
+    public String getOrderList(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                return null;
+            }
 
+            List<OrderVo> orderList = lawyerService.getOrderList(pager, getLawyerId(request));
+            modelMap.put(DATA,orderList);
+            resultModelMap(1,"获取我发表的商机列表成功！",modelMap);
+
+            return "order/getOrderList";
+        } catch (Exception e) {
+            logger.error("获取城市列表失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(0, "获取城市列表失败！"));
+        }
         return null;
     }
 
@@ -123,8 +135,22 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "getReceiveOrders")
-    public Map<String, Object> getReceiveOrders(Pager pager){
+    public String getReceiveOrders(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                return null;
+            }
 
+            List<OrderReceiveVo> orderReceiveVoList = lawyerService.getReceiveOrders(pager, getLawyerId(request));
+            modelMap.put(DATA,orderReceiveVoList);
+            resultModelMap(1,"获取我感兴趣的商机列表成功！",modelMap);
+
+            return "lawyer/getReceiveOrders";
+        } catch (Exception e) {
+            logger.error("获取我感兴趣的商机列表成功:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(0, "获取我感兴趣的商机列表成功！"));
+        }
         return null;
     }
 
