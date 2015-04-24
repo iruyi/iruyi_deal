@@ -1,13 +1,8 @@
 package com.faxintong.iruyi.service.lawyer;
 
 import com.faxintong.iruyi.model.mybatis.active.Active;
-import com.faxintong.iruyi.model.mybatis.article.Article;
+import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
-import com.faxintong.iruyi.model.mybatis.lawyer.City;
-import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
-import com.faxintong.iruyi.model.mybatis.order.Order;
-import com.faxintong.iruyi.model.mybatis.topic.Topic;
-import com.faxintong.iruyi.model.mybatis.topic.TopicReply;
 import com.faxintong.iruyi.model.mybatis.vo.*;
 import com.faxintong.iruyi.utils.Pager;
 import org.springframework.stereotype.Service;
@@ -112,7 +107,7 @@ public interface LawyerService {
      * @return
      * @throws Exception
      */
-    public List<Article> getReportArticles(Pager pager, Long lawyerId) throws Exception;
+    public List<AppArticle> getReportArticles(Pager pager, Long lawyerId) throws Exception;
 
     /**
      * 我收藏的文章列表
@@ -121,7 +116,7 @@ public interface LawyerService {
      * @return
      * @throws Exception
      */
-    public List<Article> getStoreArticles(Pager pager, Long lawyerId) throws Exception;
+    public List<AppArticle> getStoreArticles(Pager pager, Long lawyerId) throws Exception;
 
     /**
      * 获取赞过的文章评论列表(缺文章评论点攒表)

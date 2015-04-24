@@ -1,16 +1,9 @@
 package com.faxintong.iruyi.service.lawyer.impl;
 
-import com.faxintong.iruyi.dao.general.LawyerGeneralMapper;
-import com.faxintong.iruyi.dao.general.OrderGeneralMapper;
-import com.faxintong.iruyi.dao.general.TopicGeneralMapper;
+import com.faxintong.iruyi.dao.general.*;
 import com.faxintong.iruyi.model.mybatis.active.Active;
-import com.faxintong.iruyi.model.mybatis.article.Article;
+import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
-import com.faxintong.iruyi.model.mybatis.lawyer.City;
-import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
-import com.faxintong.iruyi.model.mybatis.order.Order;
-import com.faxintong.iruyi.model.mybatis.topic.Topic;
-import com.faxintong.iruyi.model.mybatis.topic.TopicReply;
 import com.faxintong.iruyi.model.mybatis.vo.*;
 import com.faxintong.iruyi.service.lawyer.LawyerService;
 import com.faxintong.iruyi.utils.Pager;
@@ -30,6 +23,12 @@ public class LawyerServiceImpl implements LawyerService {
     TopicGeneralMapper topicGeneralMapper;
     @Autowired
     OrderGeneralMapper orderGeneralMapper;
+
+    @Autowired
+    ArticleGeneralMapper articleGeneralMapper;
+
+    @Autowired
+    ActiveGeneralMapper activeGeneralMapper;
 
     @Override
     public List<LawyerVo> getAttetionList(Pager pager,Long lawyerId) throws Exception {
@@ -82,23 +81,23 @@ public class LawyerServiceImpl implements LawyerService {
     }
 
     @Override
-    public List<Article> getReportArticles(Pager pager, Long lawyerId) throws Exception {
-        return null;
+    public List<AppArticle> getReportArticles(Pager pager, Long lawyerId) throws Exception {
+        return articleGeneralMapper.getOwnArticleList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(), lawyerId);
     }
 
     @Override
-    public List<Article> getStoreArticles(Pager pager, Long lawyerId) throws Exception {
-        return null;
+    public List<AppArticle> getStoreArticles(Pager pager, Long lawyerId) throws Exception {
+        return articleGeneralMapper.getStoreArticleList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(), lawyerId);
     }
 
     @Override
     public List<ArticleComment> praiseArticleComments(Pager pager, Long lawyerId) throws Exception {
-        return null;
+        return articleGeneralMapper.getArticleCommentList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(), lawyerId);
     }
 
     @Override
     public List<Active> getStoreActives(Pager pager, Long lawyerId) throws Exception {
-        return null;
+        return activeGeneralMapper.getStoreActiveList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(), lawyerId);
     }
 
 }

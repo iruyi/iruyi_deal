@@ -1,6 +1,8 @@
 package com.faxintong.iruyi.controller.lawyer;
 
 import com.faxintong.iruyi.controller.BaseController;
+import com.faxintong.iruyi.model.mybatis.active.Active;
+import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.vo.CityVo;
 import com.faxintong.iruyi.model.mybatis.vo.LawyerVo;
@@ -9,6 +11,7 @@ import com.faxintong.iruyi.service.lawyer.LawyerService;
 import com.faxintong.iruyi.utils.Pager;
 import com.faxintong.iruyi.utils.Result;
 import com.faxintong.iruyi.utils.ServletUtils;
+import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
-import static com.faxintong.iruyi.utils.Constants.DATA;
+import static com.faxintong.iruyi.utils.Constants.*;
 
 /**
  * Created by admin on 15-4-18.
@@ -207,9 +210,23 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "getReportArticles")
-    public Map<String, Object> getReportArticles(Pager pager){
-
-        return null;
+    public Map<String, Object> getReportArticles(HttpServletRequest request, Pager pager){
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(ERRCODE, 0);
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                result.put(ERRMESSAGE, "当前页为null");
+            }else{
+                List<AppArticle> list = lawyerService.getReportArticles(pager, getLawyerId(request));
+                result.put(ERRCODE, 1);
+                result.put(ERRMESSAGE, "获取文章列表成功！");
+                result.put(DATA, list);
+            }
+        }catch (Exception e){
+            logger.error("获取文章列表失败:" + e.getMessage());
+            result.put(ERRMESSAGE, "获取文章列表失败!");
+        }
+        return result;
     }
 
     /**
@@ -218,9 +235,23 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "getStoreArticles")
-    public Map<String, Object> getStoreArticles(Pager pager){
-
-        return null;
+    public Map<String, Object> getStoreArticles(HttpServletRequest request, Pager pager){
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(ERRCODE, 0);
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                result.put(ERRMESSAGE, "当前页为null");
+            }else{
+                List<AppArticle> list = lawyerService.getStoreArticles(pager, getLawyerId(request));
+                result.put(ERRCODE, 1);
+                result.put(ERRMESSAGE, "获取收藏文章列表成功！");
+                result.put(DATA, list);
+            }
+        }catch (Exception e){
+            logger.error("获取收藏文章列表失败:" + e.getMessage());
+            result.put(ERRMESSAGE, "获取收藏文章列表失败!");
+        }
+        return result;
     }
 
     /**
@@ -235,13 +266,27 @@ public class LawyerController extends BaseController{
     }
 
     /**
-     * 获取我收藏的获取
+     * 获取我收藏的活动
      * @param pager
      * @return
      */
     @RequestMapping(value = "getStoreActives")
-    public Map<String, Object> getStoreActives(Pager pager){
-
-        return null;
+    public Map<String, Object> getStoreActives(HttpServletRequest request, Pager pager){
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(ERRCODE, 0);
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                result.put(ERRMESSAGE, "当前页为null");
+            }else{
+                List<Active> list = lawyerService.getStoreActives(pager, getLawyerId(request));
+                result.put(ERRCODE, 1);
+                result.put(ERRMESSAGE, "获取收藏活动列表成功！");
+                result.put(DATA, list);
+            }
+        }catch (Exception e){
+            logger.error("获取收藏活动列表失败:" + e.getMessage());
+            result.put(ERRMESSAGE, "获取收藏活动列表失败!");
+        }
+        return result;
     }
 }
