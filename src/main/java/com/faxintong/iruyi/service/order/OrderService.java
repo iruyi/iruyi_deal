@@ -11,13 +11,12 @@ import java.util.Map;
  * Created by admin on 15-4-18.
  */
 public interface OrderService {
-
     /**
      * 发布商机
      * @param order
      * @return
      */
-    public void reportOrder(Order order) throws Exception;
+    public void reportOrder(OrderVo order) throws Exception;
 
     /**
      * 获取单子列表(未在黑名单里)

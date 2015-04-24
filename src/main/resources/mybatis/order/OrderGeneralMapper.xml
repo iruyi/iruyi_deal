@@ -1,70 +1,79 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.faxintong.iruyi.dao.general.OrderGeneralMapper" >
-    <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.order.Order" >
-        insert into order
+    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="order.id" parameterType="com.faxintong.iruyi.model.mybatis.vo.OrderVo" >
+        insert into `order`
         <trim prefix="(" suffix=")" suffixOverrides="," >
-            <if test="type != null" >
-                type,
+            <if test="order.type != null" >
+                `type`,
             </if>
-            <if test="title != null" >
+            <if test="order.title != null" >
                 title,
             </if>
-            <if test="lawyerId != null" >
+            <if test="order.lawyerId != null" >
                 lawyer_id,
             </if>
-            <if test="lawyerName != null" >
+            <if test="order.lawyerName != null" >
                 lawyer_name,
             </if>
-            <if test="content != null" >
+            <if test="order.content != null" >
                 content,
             </if>
-            <if test="price != null" >
+            <if test="order.price != null" >
                 price,
             </if>
-            <if test="deadlineDate != null" >
+            <if test="order.deadDate != null" >
                 deadline_date,
             </if>
-            <if test="keywords != null" >
+            <if test="order.keyWords != null" >
                 keywords,
             </if>
+            create_date,
+            update_date
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides="," >
-            <if test="type != null" >
-                #{type,jdbcType=TINYINT},
+            <if test="order.type != null" >
+                #{order.type,jdbcType=TINYINT},
             </if>
-            <if test="title != null" >
-                #{title,jdbcType=VARCHAR},
+            <if test="order.title != null" >
+                #{order.title,jdbcType=VARCHAR},
             </if>
-            <if test="lawyerId != null" >
-                #{lawyerId,jdbcType=BIGINT},
+            <if test="order.lawyerId != null" >
+                #{order.lawyerId,jdbcType=BIGINT},
             </if>
-            <if test="lawyerName != null" >
-                #{lawyerName,jdbcType=VARCHAR},
+            <if test="order.lawyerName != null" >
+                #{order.lawyerName,jdbcType=VARCHAR},
             </if>
-            <if test="content != null" >
-                #{content,jdbcType=VARCHAR},
+            <if test="order.content != null" >
+                #{order.content,jdbcType=VARCHAR},
             </if>
-            <if test="price != null" >
-                #{price,jdbcType=DOUBLE},
+            <if test="order.price != null" >
+                #{order.price,jdbcType=DOUBLE},
             </if>
-            <if test="deadlineDate != null" >
-                #{deadlineDate,jdbcType=TIMESTAMP},
+            <if test="order.deadDate != null" >
+                #{order.deadDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="keywords != null" >
-                #{keywords,jdbcType=VARCHAR},
+            <if test="order.keyWords != null" >
+                #{order.keyWords,jdbcType=VARCHAR},
             </if>
             now(),
             now()
         </trim>
     </insert>
     <select id="selectOrderVo" parameterType="map" resultType="com.faxintong.iruyi.model.mybatis.vo.OrderVo">
-        select o.id,o.type,o.title,o.content,o.city_name cityName,o.deadline_date deadDate,o.keywords,o.price
+        select o.id,o.type,o.title,o.content,o.city_name cityName,o.deadline_date deadDate,o.keywords keyWords,o.price
         ,(select count(*) from order_receive orc where orc.order_id = o.id) interestCount
         <if test="lawyerId != null">
         ,(select count(*) from order_receive orc1 where orc1.order_id = o.id and orc1.lawyer_id = #{lawyerId}) isInterest
         </if>
         from `order` o
+        where (not EXISTS (select 1 from order_blacklist ob where ob.order_id = o.id)
+            and not EXISTS (select 1 from order_whitelist ow where ow.order_id = o.id))
+        <if test="lawyerId != null">
+            or (o.id in (select ow1.order_id from order_whitelist ow1 where ow1.lawyer_id = #{lawyerId} )
+                and not exists (select ob1.order_id from order_blacklist ob1 where ob1.lawyer_id = #{lawyerId} and ob1.order_id = o.id)
+            )
+        </if>
         order by o.create_date
         limit #{startCount},#{pageSize}
     </select>
@@ -90,4 +99,17 @@
         from `order` o
         where o.id = #{order_id}
     </select>
+
+    <insert id="insertOrderBlackOrWhite" parameterType="map">
+        insert into
+        <if test="type !=null and type == 0"> order_whitelist </if>
+        <if test="type !=null and type == 1"> order_blacklist </if>
+        (order_id,lawyer_id)
+        values
+        <trim suffix="" suffixOverrides=",">
+            <foreach collection="lawyerIds" item="item" separator="," >
+                (#{orderId},#{item})
+            </foreach>
+        </trim>
+    </insert>
 </mapper>

@@ -9,6 +9,7 @@ import com.faxintong.iruyi.utils.Pager;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,6 +24,28 @@ public class OrderServiceTest extends BaseTest{
         pager = new Pager();
         pager.setCurrentPage(1);
         pager.setPageSize(10);
+    }
+
+    @Test
+    public void testReportOrder() {
+        OrderVo order = new OrderVo();
+        order.setTitle("我是哈哈");
+        order.setContent("我是哼哼");
+        order.setType(1);
+        order.setDeadDate(new Date());
+        order.setKeyWords("高,大,尚");
+        order.setBlackList("28");
+        order.setWhiteList("10");
+        order.setLawyerId(1L);
+        order.setLawyerName("heyhey");
+        order.setCityName("上海");
+        order.setCityId(2L);
+
+        try {
+            orderService.reportOrder(order);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test

@@ -22,6 +22,12 @@ public class OrderVo {
     private Integer issueCount;
     private Integer interestCountMy;
 
+    private String blackList;
+    private String whiteList;
+    private Long lawyerId;
+    private String lawyerName;
+    private Long cityId;
+
     public Long getId() {
         return id;
     }
@@ -124,5 +130,45 @@ public class OrderVo {
 
     public void setInterestCountMy(Integer interestCountMy) {
         this.interestCountMy = interestCountMy;
+    }
+
+    public String getBlackList() {
+        return blackList;
+    }
+
+    public void setBlackList(String blackList) {
+        this.blackList = blackList;
+    }
+
+    public String getWhiteList() {
+        return whiteList;
+    }
+
+    public void setWhiteList(String whiteList) {
+        this.whiteList = whiteList;
+    }
+
+    public Long getLawyerId() {
+        return lawyerId;
+    }
+
+    public void setLawyerId(Long lawyerId) {
+        this.lawyerId = lawyerId;
+    }
+
+    public String getLawyerName() {
+        return lawyerName;
+    }
+
+    public void setLawyerName(String lawyerName) {
+        this.lawyerName = lawyerName;
+    }
+
+    public Long getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(Long cityId) {
+        this.cityId = cityId;
     }
 }

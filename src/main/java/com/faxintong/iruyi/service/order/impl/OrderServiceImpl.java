@@ -7,6 +7,7 @@ import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.model.mybatis.vo.OrderVo;
 import com.faxintong.iruyi.service.order.OrderService;
 import com.faxintong.iruyi.utils.Pager;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,10 +24,29 @@ public class OrderServiceImpl implements OrderService {
     private OrderGeneralMapper orderGeneralMapper;
     @Autowired
     LawyerGeneralMapper lawyerGeneralMapper;
+
     @Override
     @Transactional
-    public void reportOrder(Order order) throws Exception {
+    public void reportOrder(OrderVo order) throws Exception {
         orderGeneralMapper.insertOrder(order);
+        // 这里处理下黑白名单问题
+        if(StringUtils.isNotEmpty(order.getWhiteList())) {
+            String[] whiteSts = order.getWhiteList().trim().split(",");
+            Long[] whiteLongs = new Long[whiteSts.length];
+            for(int i=0;i<whiteSts.length;i++) {
+                whiteLongs[i] = Long.valueOf(whiteSts[i]);
+            }
+            orderGeneralMapper.insertOrderBlackOrWhite(whiteLongs,order.getId(),0);
+        }
+
+        if(StringUtils.isNotEmpty(order.getBlackList())) {
+            String[] blackStrs = order.getBlackList().trim().split(",");
+            Long[] blackLongs = new Long[blackStrs.length];
+            for(int i=0;i<blackStrs.length;i++) {
+                blackLongs[i] = Long.valueOf(blackStrs[i]);
+            }
+            orderGeneralMapper.insertOrderBlackOrWhite(blackLongs,order.getId(),1);
+        }
     }
 
     @Override
@@ -42,7 +62,7 @@ public class OrderServiceImpl implements OrderService {
         int interestCount = orderGeneralMapper.countIssueOfmyInterest(lawyerId);
         vo.setFansCount(fansNum);
         vo.setIssueCount(issueNum);
-        vo.setInterestCount(interestCount);
+        vo.setInterestCountMy(interestCount);
         return vo;
     }
 

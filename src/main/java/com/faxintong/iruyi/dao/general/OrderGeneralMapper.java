@@ -13,12 +13,18 @@ import java.util.List;
  */
 @OperateMyBatis
 public interface OrderGeneralMapper {
-    int insertOrder(@Param("order")Order order);
+    Long insertOrder(@Param("order")OrderVo order);
+
+    /**
+     * 白名单添加 type 0
+     * 黑名单添加 type 1
+     */
+    int insertOrderBlackOrWhite(@Param("lawyerIds")Long[] lawyerIds,@Param("orderId")Long orderId,@Param("type")Integer type);
 
     @Insert("insert into order_receive (order_id,lawyer_id,create_date) values(#{orderId},#{lawyerId},now())")
     int insertOrderReceive(@Param("orderId")Long orderId, @Param("lawyerId")Long lawyerId);
 
-    @Update("update order_receive set content = #{content} where order_id = #{orderId} and lawyer_id = #{lawyerId")
+    @Update("update order_receive set content = #{content} where order_id = #{orderId} and lawyer_id = #{lawyerId}")
     int updateOrderReceive(@Param("orderId")Long orderId, @Param("content")String content, @Param("lawyerId")Long lawyerId);
 
     List<OrderVo> selectOrderVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize,@Param("lawyerId")Long lawyerId);
