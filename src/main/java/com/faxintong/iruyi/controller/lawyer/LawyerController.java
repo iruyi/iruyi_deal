@@ -160,8 +160,23 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "getReportTopics")
-    public Map<String, Object> getReportTopics(Pager pager){
+    public String getReportTopics(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                return null;
+            }
 
+            List<TopicVo> topicVoList = lawyerService.getReportTopics(pager, getLawyerId(request));
+            modelMap.put(DATA,topicVoList);
+            resultModelMap(1,"获取我发布的话题列表成功！",modelMap);
+
+            return "lawyer/getReportTopics";
+
+        } catch (Exception e) {
+            logger.error("获取我发布的话题列表成功:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(0, "获取我发布的话题列表成功！"));
+        }
         return null;
     }
 
@@ -198,8 +213,23 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "getAttetionTopics")
-    public Map<String, Object> getAttetionTopics(Pager pager){
+    public String getAttetionTopics(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                return null;
+            }
 
+            Lawyer lawyer = getLawyer(request);
+            List<TopicVo> topicVoList = lawyerService.getAttetionTopics(pager, lawyer.getId());
+            modelMap.put(DATA,topicVoList);
+            resultModelMap(1,"获取我关注的话题列表成功！",modelMap);
+
+            return "lawyer/getReportTopics";
+        } catch (Exception e) {
+            logger.error("获取我关注的话题列表失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(0, "获取我关注的话题列表失败！"));
+        }
         return null;
     }
 

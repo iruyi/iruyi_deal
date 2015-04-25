@@ -37,8 +37,8 @@ public interface TopicGeneralMapper {
     /**
      * groupId 不为空的时候，根据groupId查询话题
      * 否则根据mo值
-     * 1 查询关注的律师发的话题
-     * 2 查询自己发的话题
+     * 0 查询关注的律师发的话题
+     * 1 查询自己发的话题
      *
      * 否则都为空时 查询全部分页时间倒叙
      * */
