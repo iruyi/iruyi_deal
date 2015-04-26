@@ -21,6 +21,8 @@ public class ViewVo {
 
     private Date viewTime;
 
+    private Date endTime;
+
     private Date createDate;
 
     private Integer isLive;
@@ -137,5 +139,14 @@ public class ViewVo {
 
     public void setIsAtten(Integer isAtten) {
         this.isAtten = isAtten;
+    }
+
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
     }
 }

@@ -11,7 +11,7 @@ public class PositionVo {
     private String cityName;
     private String salary;
     private Date createDate;
-    //TODO 律所头像没有表里
+    private String photo;
     private String title;
     private String content;
     private Integer type;
@@ -124,5 +124,13 @@ public class PositionVo {
 
     public void setOfficeIntroduction(String officeIntroduction) {
         this.officeIntroduction = officeIntroduction;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

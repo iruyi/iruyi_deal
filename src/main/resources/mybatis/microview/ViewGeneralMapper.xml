@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.faxintong.iruyi.dao.general.ViewGeneralMapper" >
   <select id="selectViewVo" parameterType="map" resultType="com.faxintong.iruyi.model.mybatis.vo.ViewVo">
-    select m.id,m.title,m.content,m.create_date createDate,1 isLive
+    select m.id,m.title,m.content,m.view_time viewTime,m.end_time endTime,m.create_date createDate,(view_time &lt; now() &lt; end_time) isLive
     ,l.id lawyerId,l.name lawyerName,l.photo_url photoUrl
     <if test="lawyerId != null">
     ,(select count(*) from microview_attention ma where ma.interview_id = m.id and lawyer_id=#{lawyerId}) isAtten

@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.faxintong.iruyi.dao.general.PositionGeneralMapper" >
     <select id="selectPositionVo" resultType="com.faxintong.iruyi.model.mybatis.vo.PositionVo" parameterType="map" >
-        select p.id,p.salary,p.create_date createDate
-        ,lo.name officeName,c.name cityName
+        select p.id,p.salary,p.create_date createDate,p.type
+        ,lo.name officeName,lo.photo,c.name cityName
         from position p
         inner join law_office lo on lo.id = p.office_id
         inner join city c on c.id = p.city_id

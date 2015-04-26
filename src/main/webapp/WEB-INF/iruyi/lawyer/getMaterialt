@@ -5,5 +5,6 @@
     "name":"${data.name}",
     "cityName":"${data.cityName}",
     "photoUrl":"${data.photoUrl!!}",
-    "lawOffice":"${data.lawOffice!!}"
+    "lawOffice":"${data.lawOffice!!}",
+    "introduction":"${data.introduction!!}"
 }

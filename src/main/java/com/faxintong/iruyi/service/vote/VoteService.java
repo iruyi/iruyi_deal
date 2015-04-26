@@ -17,7 +17,7 @@ public interface VoteService {
      * @param pager
      * @return
      */
-    public List<VoteVo> getVoteList(Pager pager) throws Exception;
+    public List<VoteVo> getVoteList(Pager pager,Long lawyerId) throws Exception;
 
     /**
      * 获取投票详情

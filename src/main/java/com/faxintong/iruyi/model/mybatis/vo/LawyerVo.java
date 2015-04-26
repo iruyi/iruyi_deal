@@ -13,6 +13,7 @@ public class LawyerVo {
     private String cityName;
     private String photoUrl;
     private String lawOffice;
+    private String instroduction;
 
     private Integer attentionCount;
     private Integer fansCount;
@@ -73,5 +74,21 @@ public class LawyerVo {
 
     public void setFansCount(Integer fansCount) {
         this.fansCount = fansCount;
+    }
+
+    public List<TopicVo> getTopicVoList() {
+        return topicVoList;
+    }
+
+    public void setTopicVoList(List<TopicVo> topicVoList) {
+        this.topicVoList = topicVoList;
+    }
+
+    public String getInstroduction() {
+        return instroduction;
+    }
+
+    public void setInstroduction(String instroduction) {
+        this.instroduction = instroduction;
     }
 }

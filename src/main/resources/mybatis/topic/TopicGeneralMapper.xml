@@ -16,7 +16,7 @@
             </when>
             <otherwise>
                 <if test="mo != null and mo ==0">
-                    where c.lawyer_id in (select la.other_lawyer_id from lawyer_attention la where la.lawyer_id = #{lawyerId})
+                    where c.id in (select la.topic_id from topic_store la where la.lawyer_id = #{lawyerId})
                 </if>
                 <if test="mo != null and mo ==1">
                     where c.lawyer_id  = #{lawyerId}
@@ -57,8 +57,61 @@
         </if>
     </select>
     <select id="selectTopicVoByReplyVo" resultType="com.faxintong.iruyi.model.mybatis.vo.TopicVo">
-        select t.content
+        select t.id,t.content
         from topic t
         where t.id = #{topic_id}
     </select>
+
+    <select id="selectTopicAllVo" parameterType="map" resultType="com.faxintong.iruyi.model.mybatis.vo.TopicAllVo">
+        select * from (
+        select t.id,t.title,t.content,t.create_date createDate
+        ,l.id lawyerId,l.`name` lawyerName,l.photo_url photoUrl
+        ,0 type,0 id2,"" content2,0 lawyerId2,"" lawyerName2,"" photoUrl2
+        from topic t
+        INNER JOIN lawyer l on l.id = t.lawyer_id
+        <where>
+            <if test="groupId != null">
+                and t.groupId = #{groupId}
+            </if>
+            <if test="lawyerId != null">
+                and t.lawyer_id = #{lawyerId}
+            </if>
+        </where>
+        union
+        select t.id,t.title,t.content,tr.create_date createDate
+        ,l.id lawyerId,l.`name` lawyerName,l.photo_url photoUrl
+        ,1 type,tr.id id2,tr.content content2,l1.id laywerId2,l1.`name` laywerName2,l1.photo_url photoUrl2
+        from topic_reply tr
+        INNER JOIN topic t on t.id = tr.topic_id
+        INNER JOIN lawyer l on l.id = t.lawyer_id
+        inner join lawyer l1 on l1.id = tr.lawyer_id
+        <where>
+            <if test="groupId != null">
+                and t.groupId = #{groupId}
+            </if>
+            <if test="lawyerId != null">
+                and tr.lawyer_id = #{lawyerId}
+            </if>
+        </where>
+        union
+        select t.id,t.title,t.content,ts.create_date createDate
+        ,l.id lawyerId,l.`name` lawyerName,l.photo_url photoUrl
+        ,2 type,ts.id id2,"" content2,l1.id laywerId2,l1.`name` laywerName2,l1.photo_url photoUrl2
+        from topic_store ts
+        INNER JOIN topic t on t.id = ts.topic_id
+        INNER JOIN lawyer l on l.id = t.lawyer_id
+        inner join lawyer l1 on l1.id = ts.lawyer_id
+        <where>
+            <if test="groupId != null">
+                and t.groupId = #{groupId}
+            </if>
+            <if test="lawyerId != null">
+                and ts.lawyer_id = #{lawyerId}
+            </if>
+        </where>
+        ) tmp
+        order by tmp.createDate desc
+        limit #{startCount},#{pageSize}
+    </select>
+
 </mapper>

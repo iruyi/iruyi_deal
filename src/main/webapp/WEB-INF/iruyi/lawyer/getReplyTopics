@@ -8,9 +8,10 @@
         "data":[
             [#list data as a]
                 {
-                  "id":${a.id},
+                  "replyiId":${a.id},
                   "replyContent":"${a.content}",
                   "createDate":"${a.createDate?datetime}",
+                  "topicId":"${a.topicVo.id}
                   "topicContent":"${a.topicVo.content}"
                 }
                 [#if a_has_next],[/#if]

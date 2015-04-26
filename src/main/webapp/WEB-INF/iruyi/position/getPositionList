@@ -8,8 +8,10 @@
                   "id":${a.id},
                   "createDate":"${a.createDate?datetime}",
                   "officeName":"${a.officeName}",
+                  "type":"${a.type}",
                   "cityName":"${a.cityName}",
-                  "salary":"${a.salary!0}"
+                  "salary":"${a.salary!0}",
+                  "photo":"${a.photo!!}"
                 }
                 [#if a_has_next],[/#if]
             [/#list]

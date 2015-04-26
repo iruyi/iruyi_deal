@@ -127,15 +127,15 @@ public class ViewController extends BaseController{
      * @return
      */
     @RequestMapping(value = "viewDiscuss")
-    public String viewDiscuss(HttpServletRequest request,Long microViewId, String content, Integer type,HttpServletResponse response){
+    public String viewDiscuss(HttpServletRequest request,Long microViewId, String content, HttpServletResponse response){
         try {
             // 参数校验
-            if(microViewId == null || StringUtils.isEmpty(content) || type == null) {
-                ServletUtils.responseJson(response, new Result(0, "微访谈ID或者讨论内容、类型为空！"));
+            if(microViewId == null || StringUtils.isEmpty(content) ) {
+                ServletUtils.responseJson(response, new Result(0, "微访谈ID或者讨论内容为空！"));
                 return null;
             }
 
-            viewService.viewDiscuss(getLawyer(request), microViewId, content, type);
+            viewService.viewDiscuss(getLawyer(request), microViewId, content, 0);
             ServletUtils.responseJson(response, new Result(0, "微访谈讨论成功！"));
         }catch (Exception e){
             logger.error("微访谈讨论失败:" + e.getMessage());

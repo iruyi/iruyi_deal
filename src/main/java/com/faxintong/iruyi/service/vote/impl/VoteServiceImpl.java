@@ -23,8 +23,8 @@ public class VoteServiceImpl implements VoteService {
     @Autowired
     private VoteGeneralMapper voteGeneralMapper;// vote Mybatis
     @Override
-    public List<VoteVo> getVoteList(Pager pager) throws Exception {
-        return voteGeneralMapper.selectVoteVoteOption(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize());
+    public List<VoteVo> getVoteList(Pager pager,Long lawyerId) throws Exception {
+        return voteGeneralMapper.selectVoteVoteOption(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize(),lawyerId);
     }
 
     @Override

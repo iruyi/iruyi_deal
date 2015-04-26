@@ -1,6 +1,7 @@
 package com.faxintong.iruyi.dao.general;
 
 import com.faxintong.iruyi.model.mybatis.order.Order;
+import com.faxintong.iruyi.model.mybatis.order.OrderReceive;
 import com.faxintong.iruyi.model.mybatis.vo.OrderReceiveVo;
 import com.faxintong.iruyi.model.mybatis.vo.OrderVo;
 import com.faxintong.iruyi.operate.OperateMyBatis;
@@ -45,4 +46,6 @@ public interface OrderGeneralMapper {
     List<OrderVo> selectMyOrderVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize,@Param("lawyerId")Long lawyerId);
 
     List<OrderReceiveVo> selectMyOrderReceiveVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize,@Param("lawyerId")Long lawyerId);
+
+    List<OrderReceiveVo> selectReceiveMyOrder(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize,@Param("lawyerId")Long lawyerId);
 }

@@ -3,6 +3,7 @@ package com.faxintong.iruyi.topic;
 import com.faxintong.iruyi.base.BaseTest;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.vo.ReplyVo;
+import com.faxintong.iruyi.model.mybatis.vo.TopicAllVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicGroupVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.service.lawyer.UserService;
@@ -66,7 +67,7 @@ public class TopicServiceTest extends BaseTest{
     @Test
     public void testGetTopicDetail() {
         try {
-            TopicVo topicVo = topicService.getTopicDetail(3L,10L);
+            TopicVo topicVo = topicService.getTopicDetail(3L, 10L);
             List<ReplyVo> replyVoList = topicVo.getReplyVoList();
             for(int i=0;i<replyVoList.size();i++) {
                 ReplyVo replyVo = replyVoList.get(i);
@@ -92,7 +93,7 @@ public class TopicServiceTest extends BaseTest{
     public void testTopicReply() {
         try {
             Lawyer lawyer = userService.getLawyerByPrimaryKey(1L);
-            topicService.topicReply(3L,"hello world",lawyer);
+            topicService.topicReply(3L, "hello world", lawyer);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,7 +102,7 @@ public class TopicServiceTest extends BaseTest{
     @Test
     public void testAttentionTopic() {
         try {
-            topicService.attentionTopic(3L,28L);
+            topicService.attentionTopic(3L, 28L);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -110,7 +111,20 @@ public class TopicServiceTest extends BaseTest{
     @Test
     public void testTopicReplyPraise() {
         try {
-            topicService.topicReplyPraise(1L,28L);
+            topicService.topicReplyPraise(1L, 28L);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testTopicAll() {
+        try {
+            List<TopicAllVo> topicAllVoList = topicService.topicAll(pager,1L,null);
+            for(TopicAllVo topicAllVo:topicAllVoList) {
+                System.out.println(topicAllVo.getType() + "|" +topicAllVo.getLawyerName() + ":" + topicAllVo.getContent() + "|"
+                + topicAllVo.getLawyerName2() + ":" + topicAllVo.getContent2());
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

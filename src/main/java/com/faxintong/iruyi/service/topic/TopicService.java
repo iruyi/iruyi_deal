@@ -3,6 +3,7 @@ package com.faxintong.iruyi.service.topic;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.topic.Topic;
 import com.faxintong.iruyi.model.mybatis.topic.TopicGroup;
+import com.faxintong.iruyi.model.mybatis.vo.TopicAllVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicGroupVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.utils.Pager;
@@ -83,4 +84,9 @@ public interface TopicService {
      */
     public void topicReplyPraise(Long replyId, Long lawyerId) throws Exception;
 
+
+    /**
+     * 获取话题的动态
+     */
+    List<TopicAllVo> topicAll(Pager pager,Long lawyerId,Long groupId);
 }

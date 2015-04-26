@@ -37,7 +37,7 @@ public class VoteServiceTest extends BaseTest {
         pager.setCurrentPage(1);
         pager.setPageSize(2);
         try {
-            List<VoteVo> list = voteService.getVoteList(pager);
+            List<VoteVo> list = voteService.getVoteList(pager,null);
             for(VoteVo voteVo : list) {
                 System.out.println("投票：" + voteVo.getContent());
                 for(VoteOptionVo v : list.get(0).getVoteOptionVos()) {

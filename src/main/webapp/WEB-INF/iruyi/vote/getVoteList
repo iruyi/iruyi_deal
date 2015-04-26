@@ -10,6 +10,7 @@
                   "content":"${a.content}",
                   "createDate":"${a.createDate?datetime}",
                   "isEnd":${a.isEnd},
+                  "isVote":${a.isVote!0},
                   [#assign voteOptionVos=a.voteOptionVos]
                   [#if voteOptionVos?? && voteOptionVos?size>0]
                     "voteOptions":[

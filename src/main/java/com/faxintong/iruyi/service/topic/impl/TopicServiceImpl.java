@@ -5,6 +5,7 @@ import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.topic.Topic;
 import com.faxintong.iruyi.model.mybatis.topic.TopicGroup;
 import com.faxintong.iruyi.model.mybatis.vo.ReplyVo;
+import com.faxintong.iruyi.model.mybatis.vo.TopicAllVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicGroupVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.service.topic.TopicService;
@@ -83,6 +84,11 @@ public class TopicServiceImpl implements TopicService {
     @Override
     @Transactional
     public void topicReplyPraise(Long replyId, Long lawyerId) throws Exception {
-        topicGeneralMapper.insertTopicPraise(replyId,lawyerId);
+        topicGeneralMapper.insertReplyPraise(replyId,lawyerId);
+    }
+
+    @Override
+    public List<TopicAllVo> topicAll(Pager pager, Long lawyerId, Long groupId) {
+        return topicGeneralMapper.selectTopicAllVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId,groupId);
     }
 }

@@ -44,14 +44,14 @@ public class VoteController extends BaseController{
      *   获取信息：标题、是否结束、创建时间、内容、选项
      */
     @RequestMapping(value = "getVoteList")
-    public String getVoteList(Pager pager,ModelMap modelMap,HttpServletResponse response){
+    public String getVoteList(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
         try {
             if(pager == null || pager.getCurrentPage() == null){
                 ServletUtils.responseJson(response,new Result(1,"当前页为null！"));
                 return null;
             }
 
-            List<VoteVo> voteVoList = voteService.getVoteList(pager);
+            List<VoteVo> voteVoList = voteService.getVoteList(pager,getLawyerId(request));
 
             modelMap.put(DATA,voteVoList);
             resultModelMap(1, "获取投票列表成功！",modelMap);

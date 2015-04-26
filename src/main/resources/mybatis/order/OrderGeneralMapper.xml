@@ -16,6 +16,12 @@
             <if test="order.lawyerName != null" >
                 lawyer_name,
             </if>
+            <if test="order.cityId != null">
+                city_id,
+            </if>
+            <if test="order.cityName != null">
+                city_name,
+            </if>
             <if test="order.content != null" >
                 content,
             </if>
@@ -43,6 +49,12 @@
             </if>
             <if test="order.lawyerName != null" >
                 #{order.lawyerName,jdbcType=VARCHAR},
+            </if>
+            <if test="order.cityId != null">
+                #{order.cityId,jdbcType=BIGINT},
+            </if>
+            <if test="order.cityName != null">
+                #{order.cityName,jdbcType=VARCHAR},
             </if>
             <if test="order.content != null" >
                 #{order.content,jdbcType=VARCHAR},
@@ -99,6 +111,17 @@
         select o.id,o.title,o.content
         from `order` o
         where o.id = #{order_id}
+    </select>
+
+    <select id="selectReceiveMyOrder" parameterType="map" resultMap="OrderReceiveVo">
+        select ore.id,ore.content,ore.create_date createDate
+        ,l.id lawyerId,l.`name` lawyerName,l.photo_url photoUrl
+        ,ore.order_id
+        from order_receive ore
+        inner join `order` o on o.id = ore.order_id
+        inner join lawyer l on ore.lawyer_id = l.id
+        where o.lawyer_id = #{lawyerId}
+        limit #{startCount},#{pageSize}
     </select>
 
     <insert id="insertOrderBlackOrWhite" parameterType="map">

@@ -95,7 +95,7 @@ public class OrderController extends BaseController{
 
             List<OrderVo> orderVoList = orderService.getOrderList(pager, getLawyerId(request));
             modelMap.put(DATA,orderVoList);
-            resultModelMap(1,"获取商机列表失败！",modelMap);
+            resultModelMap(1,"获取商机列表成功！",modelMap);
 
             return "order/getOrderList";
         }catch (Exception e){

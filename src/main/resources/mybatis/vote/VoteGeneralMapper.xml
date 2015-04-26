@@ -7,6 +7,7 @@
         <result column="content" property="content" jdbcType="VARCHAR" />
         <result column="createDate" property="createDate" jdbcType="TIMESTAMP" />
         <result column="isEnd" property="isEnd" jdbcType="BIGINT" />
+        <result column="isVote" property="isVote" jdbcType="BIGINT"/>
         <collection property="voteOptionVos" column="id"
         ofType="com.faxintong.iruyi.model.mybatis.vo.VoteOptionVo" select="selectVoteOption"/>
 
@@ -31,9 +32,12 @@
     </insert>
     
     <select id="selectVoteVoteOption" resultMap="VoteVoResultMap">
-        select id,title,content,create_date createDate,end_time &lt; now() isEnd
-        from vote
-        order by create_date desc
+        select v.id,v.title,v.content,v.create_date createDate,v.end_time &lt; now() isEnd
+        <if test="lawyerId != null">
+            ,(select count(*) from vote_result vr where vr.lawyer_Id = #{lawyerId} and vr.vote_id = v.id) isVote
+        </if>
+        from vote v
+        order by v.create_date desc
         limit #{startCount},#{pageSize}
     </select>
 

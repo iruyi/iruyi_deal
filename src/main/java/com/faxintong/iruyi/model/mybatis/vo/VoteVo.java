@@ -21,6 +21,8 @@ public class VoteVo {
 
     private Integer voteSum;
 
+    private Integer isVote;
+
     private Map<String,Integer> optionNumMap;
 
     public Long getId() {
@@ -85,5 +87,13 @@ public class VoteVo {
 
     public void setOptionNumMap(Map<String, Integer> optionNumMap) {
         this.optionNumMap = optionNumMap;
+    }
+
+    public Integer getIsVote() {
+        return isVote;
+    }
+
+    public void setIsVote(Integer isVote) {
+        this.isVote = isVote;
     }
 }

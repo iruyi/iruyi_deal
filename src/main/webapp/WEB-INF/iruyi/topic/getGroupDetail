@@ -2,7 +2,7 @@
     "errcode":${errcode},
     "errmessage":"${errmessage}",
     [#if data.readerCount?? ]
-    "readerCount",${(data.readerCount)!0},
+    "readerCount":${(data.readerCount)!0},
     [/#if]
     [#if data.readerCount?? ]
     "fansCount":${(data.fansCount)!0},

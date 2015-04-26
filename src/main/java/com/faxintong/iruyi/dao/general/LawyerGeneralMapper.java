@@ -15,7 +15,7 @@ import java.util.List;
 @OperateMyBatis
 public interface LawyerGeneralMapper {
     @ResultType(LawyerVo.class)
-    @Select("select l.id,l.name,l.city_name cityName,l.photo_url photoUrl,l.law_office lawOffice" +
+    @Select("select l.id,l.name,l.city_name cityName,l.photo_url photoUrl,l.law_office lawOffice,l.introduction" +
             ",(select count(*) from lawyer_attention la where la.lawyer_id = #{lawyerId}) attentionCount" +
             ",(select count(*) from lawyer_attention la1 where la1.other_lawyer_id = #{lawyerId}) fansCount" +
             " from lawyer l" +

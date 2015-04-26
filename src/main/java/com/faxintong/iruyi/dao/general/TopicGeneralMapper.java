@@ -3,6 +3,7 @@ package com.faxintong.iruyi.dao.general;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.topic.TopicGroup;
 import com.faxintong.iruyi.model.mybatis.vo.ReplyVo;
+import com.faxintong.iruyi.model.mybatis.vo.TopicAllVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicGroupVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.operate.OperateMyBatis;
@@ -21,7 +22,7 @@ public interface TopicGeneralMapper {
     @Insert("insert into topic (group_id,lawyer_id,lawyer_name,content,create_date) values (#{groupId},#{lawyer.id},#{lawyer.name},#{content},now())")
     int insertTopic(@Param("groupId")Long groupId, @Param("content")String content, @Param("lawyer")Lawyer lawyer);
 
-    @Select("select id,group_name as groupName from topic_group order by access_count limit #{startCount},#{pageSize}")
+    @Select("select id,group_name as groupName from topic_group order by access_count desc limit #{startCount},#{pageSize}")
     List<TopicGroupVo> selectTopicGroup(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize);
 
     @Select("select count(id) from topic where group_id = #{groupId}")
@@ -58,10 +59,15 @@ public interface TopicGeneralMapper {
     @Insert("insert into topic_praise (topic_id,lawyer_id) values (#{topicId},#{lawyerId})")
     int insertTopicPraise(@Param("topicId")Long topicId, @Param("lawyerId")Long lawyerId);
 
+    @Insert("insert into topic_reply_praise (reply_id,lawyer_id) values (#{replyId},#{lawyerId})")
+    int insertReplyPraise(@Param("replyId")Long replyId, @Param("lawyerId")Long lawyerId);
+
     /**
      * 如果type
      * 为0 查询我回复的话题 回复和话题
      * 为1 查询我赞过的回复 回复和话题
      */
     List<ReplyVo> selectMyReplyVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize, @Param("lawyerId")Long lawyerId,@Param("type")Integer type);
+
+    List<TopicAllVo> selectTopicAllVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize, @Param("lawyerId")Long lawyerId,@Param("groupId")Long groupId);
 }
