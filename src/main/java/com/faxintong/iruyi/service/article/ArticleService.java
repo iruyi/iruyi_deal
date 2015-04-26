@@ -42,7 +42,7 @@ public interface ArticleService {
      * @param lawyerId
      * @return
      */
-    public void aticleComment(Long articleId, String comment, Long lawyerId) throws Exception;
+    public void articleComment(Long articleId, String comment, Long lawyerId) throws Exception;
 
     /**
      * 文章点赞
@@ -51,5 +51,13 @@ public interface ArticleService {
      * @return
      */
     public void articlePraise(Long articleId ,Long lawyerId) throws Exception;
+
+    /**
+     * 文章收藏
+     * @param articleId
+     * @param lawyerId
+     * @throws Exception
+     */
+    public void articleStore(Long articleId ,Long lawyerId) throws  Exception;
 
 }

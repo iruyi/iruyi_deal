@@ -1,6 +1,6 @@
 package com.faxintong.iruyi.service.active;
 
-import com.faxintong.iruyi.model.mybatis.active.Active;
+import com.faxintong.iruyi.model.mybatis.vo.ActiveVo;
 import com.faxintong.iruyi.utils.Pager;
 
 import java.util.List;
@@ -15,14 +15,14 @@ public interface ActiveService {
      * @param pager
      * @return
      */
-    public List<Active> getActiveList(Pager pager) throws Exception;
+    public List<ActiveVo> getActiveList(Pager pager) throws Exception;
 
     /**
      * 获取活动详情
      * @param activeId
      * @return
      */
-    public Active getActiveDetail(Long activeId) throws Exception;
+    public ActiveVo getActiveDetail(Long activeId) throws Exception;
 
     /**
      * 活动收藏

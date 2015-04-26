@@ -425,6 +425,76 @@ public class AppArticleExample {
             return (Criteria) this;
         }
 
+        public Criteria andAcroIsNull() {
+            addCriterion("acro is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAcroIsNotNull() {
+            addCriterion("acro is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andAcroEqualTo(String value) {
+            addCriterion("acro =", value, "acro");
+            return (Criteria) this;
+        }
+
+        public Criteria andAcroNotEqualTo(String value) {
+            addCriterion("acro <>", value, "acro");
+            return (Criteria) this;
+        }
+
+        public Criteria andAcroGreaterThan(String value) {
+            addCriterion("acro >", value, "acro");
+            return (Criteria) this;
+        }
+
+        public Criteria andAcroGreaterThanOrEqualTo(String value) {
+            addCriterion("acro >=", value, "acro");
+            return (Criteria) this;
+        }
+
+        public Criteria andAcroLessThan(String value) {
+            addCriterion("acro <", value, "acro");
+            return (Criteria) this;
+        }
+
+        public Criteria andAcroLessThanOrEqualTo(String value) {
+            addCriterion("acro <=", value, "acro");
+            return (Criteria) this;
+        }
+
+        public Criteria andAcroLike(String value) {
+            addCriterion("acro like", value, "acro");
+            return (Criteria) this;
+        }
+
+        public Criteria andAcroNotLike(String value) {
+            addCriterion("acro not like", value, "acro");
+            return (Criteria) this;
+        }
+
+        public Criteria andAcroIn(List<String> values) {
+            addCriterion("acro in", values, "acro");
+            return (Criteria) this;
+        }
+
+        public Criteria andAcroNotIn(List<String> values) {
+            addCriterion("acro not in", values, "acro");
+            return (Criteria) this;
+        }
+
+        public Criteria andAcroBetween(String value1, String value2) {
+            addCriterion("acro between", value1, value2, "acro");
+            return (Criteria) this;
+        }
+
+        public Criteria andAcroNotBetween(String value1, String value2) {
+            addCriterion("acro not between", value1, value2, "acro");
+            return (Criteria) this;
+        }
+
         public Criteria andCreateDateIsNull() {
             addCriterion("create_date is null");
             return (Criteria) this;

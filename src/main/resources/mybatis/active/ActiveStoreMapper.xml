@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.faxintong.iruyi.dao.mybatis.article.AppArticleMapper" >
-  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.article.AppArticle" >
+<mapper namespace="com.faxintong.iruyi.dao.mybatis.active.ActiveStoreMapper" >
+  <resultMap id="BaseResultMap" type="com.faxintong.iruyi.model.mybatis.active.ActiveStore" >
     <id column="id" property="id" jdbcType="BIGINT" />
-    <result column="type" property="type" jdbcType="TINYINT" />
+    <result column="active_id" property="activeId" jdbcType="BIGINT" />
     <result column="lawyer_id" property="lawyerId" jdbcType="BIGINT" />
-    <result column="url" property="url" jdbcType="VARCHAR" />
-    <result column="comment" property="comment" jdbcType="VARCHAR" />
-    <result column="acro" property="acro" jdbcType="VARCHAR" />
-    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -69,15 +65,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, type, lawyer_id, url, comment, acro, create_date
+    id, active_id, lawyer_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.article.AppArticleExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.active.ActiveStoreExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from app_article
+    from active_store
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -88,105 +84,67 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="Long" >
     select 
     <include refid="Base_Column_List" />
-    from app_article
+    from active_store
     where id = #{id,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="Long" >
-    delete from app_article
+    delete from active_store
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.article.AppArticleExample" >
-    delete from app_article
+  <delete id="deleteByExample" parameterType="com.faxintong.iruyi.model.mybatis.active.ActiveStoreExample" >
+    delete from active_store
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.article.AppArticle" >
-    insert into app_article (id, type, lawyer_id, 
-      url, comment, acro, 
-      create_date)
-    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=TINYINT}, #{lawyerId,jdbcType=BIGINT}, 
-      #{url,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, #{acro,jdbcType=VARCHAR}, 
-      #{createDate,jdbcType=TIMESTAMP})
+  <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.active.ActiveStore" >
+    insert into active_store (id, active_id, lawyer_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{activeId,jdbcType=BIGINT}, #{lawyerId,jdbcType=BIGINT}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.article.AppArticle" >
-    insert into app_article
+  <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.active.ActiveStore" >
+    insert into active_store
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="type != null" >
-        type,
+      <if test="activeId != null" >
+        active_id,
       </if>
       <if test="lawyerId != null" >
         lawyer_id,
-      </if>
-      <if test="url != null" >
-        url,
-      </if>
-      <if test="comment != null" >
-        comment,
-      </if>
-      <if test="acro != null" >
-        acro,
-      </if>
-      <if test="createDate != null" >
-        create_date,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=BIGINT},
       </if>
-      <if test="type != null" >
-        #{type,jdbcType=TINYINT},
+      <if test="activeId != null" >
+        #{activeId,jdbcType=BIGINT},
       </if>
       <if test="lawyerId != null" >
         #{lawyerId,jdbcType=BIGINT},
       </if>
-      <if test="url != null" >
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="comment != null" >
-        #{comment,jdbcType=VARCHAR},
-      </if>
-      <if test="acro != null" >
-        #{acro,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null" >
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.article.AppArticleExample" resultType="java.lang.Integer" >
-    select count(*) from app_article
+  <select id="countByExample" parameterType="com.faxintong.iruyi.model.mybatis.active.ActiveStoreExample" resultType="java.lang.Integer" >
+    select count(*) from active_store
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update app_article
+    update active_store
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=BIGINT},
       </if>
-      <if test="record.type != null" >
-        type = #{record.type,jdbcType=TINYINT},
+      <if test="record.activeId != null" >
+        active_id = #{record.activeId,jdbcType=BIGINT},
       </if>
       <if test="record.lawyerId != null" >
         lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
-      </if>
-      <if test="record.url != null" >
-        url = #{record.url,jdbcType=VARCHAR},
-      </if>
-      <if test="record.comment != null" >
-        comment = #{record.comment,jdbcType=VARCHAR},
-      </if>
-      <if test="record.acro != null" >
-        acro = #{record.acro,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createDate != null" >
-        create_date = #{record.createDate,jdbcType=TIMESTAMP},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -194,50 +152,30 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update app_article
+    update active_store
     set id = #{record.id,jdbcType=BIGINT},
-      type = #{record.type,jdbcType=TINYINT},
-      lawyer_id = #{record.lawyerId,jdbcType=BIGINT},
-      url = #{record.url,jdbcType=VARCHAR},
-      comment = #{record.comment,jdbcType=VARCHAR},
-      acro = #{record.acro,jdbcType=VARCHAR},
-      create_date = #{record.createDate,jdbcType=TIMESTAMP}
+      active_id = #{record.activeId,jdbcType=BIGINT},
+      lawyer_id = #{record.lawyerId,jdbcType=BIGINT}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.article.AppArticle" >
-    update app_article
+  <update id="updateByPrimaryKeySelective" parameterType="com.faxintong.iruyi.model.mybatis.active.ActiveStore" >
+    update active_store
     <set >
-      <if test="type != null" >
-        type = #{type,jdbcType=TINYINT},
+      <if test="activeId != null" >
+        active_id = #{activeId,jdbcType=BIGINT},
       </if>
       <if test="lawyerId != null" >
         lawyer_id = #{lawyerId,jdbcType=BIGINT},
       </if>
-      <if test="url != null" >
-        url = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="comment != null" >
-        comment = #{comment,jdbcType=VARCHAR},
-      </if>
-      <if test="acro != null" >
-        acro = #{acro,jdbcType=VARCHAR},
-      </if>
-      <if test="createDate != null" >
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.article.AppArticle" >
-    update app_article
-    set type = #{type,jdbcType=TINYINT},
-      lawyer_id = #{lawyerId,jdbcType=BIGINT},
-      url = #{url,jdbcType=VARCHAR},
-      comment = #{comment,jdbcType=VARCHAR},
-      acro = #{acro,jdbcType=VARCHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP}
+  <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.active.ActiveStore" >
+    update active_store
+    set active_id = #{activeId,jdbcType=BIGINT},
+      lawyer_id = #{lawyerId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

@@ -407,8 +407,33 @@
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
             <columnOverride column="url" javaType="String" ></columnOverride>
             <columnOverride column="comment" javaType="String" ></columnOverride>
+            <columnOverride column="acro" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
         </table>
+
+        <!--<table tableName="active_store" domainObjectName="ActiveStore">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="active_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="article_store" domainObjectName="ArticleStore">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="article_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="article_comment_praise" domainObjectName="ArtCommentPraise">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="comment_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="active_praise" domainObjectName="ActivePraise">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="active_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+        </table>-->
 
     </context>
 </generatorConfiguration>

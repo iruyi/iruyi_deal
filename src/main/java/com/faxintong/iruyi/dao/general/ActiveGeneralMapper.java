@@ -18,8 +18,10 @@ public interface ActiveGeneralMapper {
     @Select("select " + VIEW + " from active limit #{startCount},#{pagerSize}")
     public List<Active> getActiveList(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize);
 
-
     @Select("select " + VIEW + " from active where lawyer_id=#{lawyerId} limit #{startCount},#{pagerSize}")
     public List<Active> getStoreActiveList(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize, @Param("lawyerId") Long lawyerId);
+
+    @Select("select l.photo_url from active_store s,lawyer l where s.active_id=#{activeId} and s.lawyer_id=l.id")
+    public List<String> getPhotoList(@Param("activeId") Long activeId);
 
 }

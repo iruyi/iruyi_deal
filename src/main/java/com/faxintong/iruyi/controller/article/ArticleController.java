@@ -121,7 +121,7 @@ public class ArticleController extends BaseController{
             }else if(comment == null){
                 result.put(ERRMESSAGE, "文章评论为null");
             }else{
-                articleService.aticleComment(articleId, comment, getLawyerId(request));
+                articleService.articleComment(articleId, comment, getLawyerId(request));
                 result.put(ERRCODE, 1);
                 result.put(ERRMESSAGE, "评论文章成功！");
             }
@@ -140,7 +140,7 @@ public class ArticleController extends BaseController{
     @RequestMapping(value = "articlePraise")
     public Map<String, Object> articlePraise(HttpServletRequest request, Long articleId){
         Map<String, Object> result = Maps.newHashMap();
-        /*result.put(ERRCODE, 0);
+        result.put(ERRCODE, 0);
         try {
             if(articleId == null){
                 result.put(ERRMESSAGE, "文章id为null");
@@ -152,7 +152,33 @@ public class ArticleController extends BaseController{
         }catch (Exception e){
             logger.error("文章点赞失败:" + e.getMessage());
             result.put(ERRMESSAGE, "文章点赞失败!");
-        }*/
+        }
         return result;
     }
+
+    /**
+     * 文章存储
+     * @param request
+     * @param articleId
+     * @return
+     */
+    @RequestMapping(value = "articleStore")
+    public Map<String, Object> articleStore(HttpServletRequest request, Long articleId){
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(ERRCODE, 0);
+        try {
+            if(articleId == null){
+                result.put(ERRMESSAGE, "文章id为null");
+            }else{
+                articleService.articleStore(articleId, getLawyerId(request));
+                result.put(ERRCODE, 1);
+                result.put(ERRMESSAGE, "文章存储成功！");
+            }
+        }catch (Exception e){
+            logger.error("文章点赞失败:" + e.getMessage());
+            result.put(ERRMESSAGE, "文章存储失败!");
+        }
+        return result;
+    }
+
 }

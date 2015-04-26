@@ -13,6 +13,8 @@ public class AppArticle {
 
     private String comment;
 
+    private String acro;
+
     private Date createDate;
 
     public Long getId() {
@@ -53,6 +55,14 @@ public class AppArticle {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getAcro() {
+        return acro;
+    }
+
+    public void setAcro(String acro) {
+        this.acro = acro;
     }
 
     public Date getCreateDate() {

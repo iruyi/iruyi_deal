@@ -1,8 +1,8 @@
 package com.faxintong.iruyi.controller.lawyer;
 
 import com.faxintong.iruyi.controller.BaseController;
-import com.faxintong.iruyi.model.mybatis.active.Active;
 import com.faxintong.iruyi.model.mybatis.article.AppArticle;
+import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.vo.*;
 import com.faxintong.iruyi.service.lawyer.LawyerService;
@@ -316,9 +316,23 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "praiseArticleComments")
-    public Map<String, Object> praiseArticleComments(Pager pager){
-
-        return null;
+    public Map<String, Object> praiseArticleComments(HttpServletRequest request, Pager pager){
+        Map<String, Object> result = Maps.newHashMap();
+        result.put(ERRCODE, 0);
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                result.put(ERRMESSAGE, "当前页为null");
+            }else{
+                List<ArticleComment> list = lawyerService.praiseArticleComments(pager, getLawyerId(request));
+                result.put(ERRCODE, 1);
+                result.put(ERRMESSAGE, "获取赞过的文章评论列表成功！");
+                result.put(DATA, list);
+            }
+        }catch (Exception e){
+            logger.error("获取赞过的文章评论列表失败:" + e.getMessage());
+            result.put(ERRMESSAGE, "获取赞过的文章评论列表失败!");
+        }
+        return result;
     }
 
     /**
@@ -334,7 +348,7 @@ public class LawyerController extends BaseController{
             if(pager == null || pager.getCurrentPage() == null){
                 result.put(ERRMESSAGE, "当前页为null");
             }else{
-                List<Active> list = lawyerService.getStoreActives(pager, getLawyerId(request));
+                List<ActiveVo> list = lawyerService.getStoreActives(pager, getLawyerId(request));
                 result.put(ERRCODE, 1);
                 result.put(ERRMESSAGE, "获取收藏活动列表成功！");
                 result.put(DATA, list);

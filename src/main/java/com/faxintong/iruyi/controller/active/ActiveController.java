@@ -1,7 +1,7 @@
 package com.faxintong.iruyi.controller.active;
 
 import com.faxintong.iruyi.controller.BaseController;
-import com.faxintong.iruyi.model.mybatis.active.Active;
+import com.faxintong.iruyi.model.mybatis.vo.ActiveVo;
 import com.faxintong.iruyi.service.active.ActiveService;
 import com.faxintong.iruyi.utils.Pager;
 import com.google.common.collect.Maps;
@@ -42,7 +42,7 @@ public class ActiveController extends BaseController {
             if(pager == null || pager.getCurrentPage() == null){
                 result.put(ERRMESSAGE, "当前页为null");
             }else{
-                List<Active> list = activeService.getActiveList(pager);
+                List<ActiveVo> list = activeService.getActiveList(pager);
                 result.put(ERRCODE, 1);
                 result.put(ERRMESSAGE, "获取活动列表成功！");
                 result.put(DATA, list);
@@ -55,7 +55,7 @@ public class ActiveController extends BaseController {
     }
 
     /**
-     *
+     * 获取活动详情
      * @param activeId
      * @return
      */
@@ -67,7 +67,7 @@ public class ActiveController extends BaseController {
             if(activeId == null){
                 result.put(ERRMESSAGE, "活动id为null");
             }else{
-                Active activeDetail = activeService.getActiveDetail(activeId);
+                ActiveVo activeDetail = activeService.getActiveDetail(activeId);
                 result.put(ERRCODE, 1);
                 result.put(ERRMESSAGE, "获取活动详情成功！");
                 result.put(DATA, activeDetail);

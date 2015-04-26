@@ -2,7 +2,7 @@ package com.faxintong.iruyi.controller.position;
 
 import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.vo.PositionVo;
-import com.faxintong.iruyi.service.Position.PositionService;
+import com.faxintong.iruyi.service.position.PositionService;
 import com.faxintong.iruyi.utils.Pager;
 import com.faxintong.iruyi.utils.Result;
 import com.faxintong.iruyi.utils.ServletUtils;

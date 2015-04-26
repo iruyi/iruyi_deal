@@ -1,6 +1,5 @@
 package com.faxintong.iruyi.service.lawyer;
 
-import com.faxintong.iruyi.model.mybatis.active.Active;
 import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
 import com.faxintong.iruyi.model.mybatis.vo.*;
@@ -130,5 +129,5 @@ public interface LawyerService {
      * @param pager
      * @return
      */
-    public List<Active> getStoreActives(Pager pager, Long lawyerId) throws Exception;
+    public List<ActiveVo> getStoreActives(Pager pager, Long lawyerId) throws Exception;
 }

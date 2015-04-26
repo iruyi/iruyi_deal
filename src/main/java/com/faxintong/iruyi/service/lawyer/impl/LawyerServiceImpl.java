@@ -1,15 +1,19 @@
 package com.faxintong.iruyi.service.lawyer.impl;
 
 import com.faxintong.iruyi.dao.general.*;
+import com.faxintong.iruyi.dao.mybatis.active.ActivePraiseMapper;
 import com.faxintong.iruyi.model.mybatis.active.Active;
+import com.faxintong.iruyi.model.mybatis.active.ActivePraiseExample;
 import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
 import com.faxintong.iruyi.model.mybatis.vo.*;
 import com.faxintong.iruyi.service.lawyer.LawyerService;
 import com.faxintong.iruyi.utils.Pager;
+import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,6 +33,9 @@ public class LawyerServiceImpl implements LawyerService {
 
     @Autowired
     ActiveGeneralMapper activeGeneralMapper;
+
+    @Autowired
+    ActivePraiseMapper activePraiseMapper;
 
     @Override
     public List<LawyerVo> getAttetionList(Pager pager,Long lawyerId) throws Exception {
@@ -92,12 +99,25 @@ public class LawyerServiceImpl implements LawyerService {
 
     @Override
     public List<ArticleComment> praiseArticleComments(Pager pager, Long lawyerId) throws Exception {
-        return articleGeneralMapper.getArticleCommentList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(), lawyerId);
+        return articleGeneralMapper.getArticleCommentPraiseList(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), lawyerId);
     }
 
     @Override
-    public List<Active> getStoreActives(Pager pager, Long lawyerId) throws Exception {
-        return activeGeneralMapper.getStoreActiveList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(), lawyerId);
+    public List<ActiveVo> getStoreActives(Pager pager, Long lawyerId) throws Exception {
+        List<Active> list = activeGeneralMapper.getStoreActiveList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(), lawyerId);
+        List<ActiveVo> activeVoList = new ArrayList<ActiveVo>();
+        if(list != null && list.size() > 0){
+            for(Active active : list){
+                ActivePraiseExample example = new ActivePraiseExample();
+                example.createCriteria().andActiveIdEqualTo(active.getId());
+                Integer count = activePraiseMapper.countByExample(example);
+                ActiveVo activeVo = new ActiveVo();
+                activeVo.setPraiseCount(count);
+                PropertyUtils.copyProperties(activeVo, active);
+                activeVoList.add(activeVo);
+            }
+        }
+        return activeVoList;
     }
 
 }

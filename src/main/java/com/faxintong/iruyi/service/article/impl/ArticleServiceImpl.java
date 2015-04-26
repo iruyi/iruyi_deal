@@ -4,11 +4,14 @@ import com.faxintong.iruyi.dao.general.ArticleGeneralMapper;
 import com.faxintong.iruyi.dao.mybatis.article.AppArticleMapper;
 import com.faxintong.iruyi.dao.mybatis.article.ArticleCommentMapper;
 import com.faxintong.iruyi.dao.mybatis.article.ArticlePraiseMapper;
+import com.faxintong.iruyi.dao.mybatis.article.ArticleStoreMapper;
 import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
 import com.faxintong.iruyi.model.mybatis.article.ArticlePraise;
+import com.faxintong.iruyi.model.mybatis.article.ArticleStore;
 import com.faxintong.iruyi.service.article.ArticleService;
 import com.faxintong.iruyi.utils.Pager;
+import com.faxintong.iruyi.utils.PaperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +36,9 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticlePraiseMapper articlePraiseMapper;
 
+    @Autowired
+    private ArticleStoreMapper articleStoreMapper;
+
     @Override
     public void reportArticle(String comment, String url, Long lawyerId) throws Exception {
         AppArticle appArticle = new AppArticle();
@@ -40,12 +46,19 @@ public class ArticleServiceImpl implements ArticleService {
         appArticle.setComment(comment);
         appArticle.setUrl(url);
         appArticle.setCreateDate(new Date());
-        appArticleMapper.insert(appArticle);
+        appArticle.setAcro(PaperUtil.getPaperAcro(url));
+        appArticleMapper.insertSelective(appArticle);
     }
 
     @Override
     public List<AppArticle> articleList(Pager pager) throws Exception {
-        return articleGeneralMapper.getAppArticleList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize());
+        List<AppArticle> list = articleGeneralMapper.getAppArticleList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize());
+        /*if(list != null && list.size() > 0){
+            for (AppArticle appArticle : list){
+                appArticle.setAcro(PaperUtil.getPaperAcro(appArticle.getUrl()));
+            }
+        }*/
+        return list;
     }
 
     @Override
@@ -54,7 +67,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public void aticleComment(Long articleId, String comment, Long lawyerId) throws Exception {
+    public void articleComment(Long articleId, String comment, Long lawyerId) throws Exception {
         ArticleComment articleComment = new ArticleComment();
         articleComment.setArticleId(articleId);
         articleComment.setComment(comment);
@@ -70,4 +83,13 @@ public class ArticleServiceImpl implements ArticleService {
         articlePraise.setArticleId(articleId);
         articlePraiseMapper.insert(articlePraise);
     }
+
+    @Override
+    public void articleStore(Long articleId, Long lawyerId) throws Exception {
+        ArticleStore articleStore = new ArticleStore();
+        articleStore.setArticleId(articleId);
+        articleStore.setLawyerId(lawyerId);
+        articleStoreMapper.insertSelective(articleStore);
+    }
+
 }
