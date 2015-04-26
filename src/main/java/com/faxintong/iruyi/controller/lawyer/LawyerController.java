@@ -39,8 +39,32 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "getLawyerInfo")
-    public Map<String, Object> getLawyerInfo(){
+    public String getLawyerInfo(Long lawyerId,Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+        try {
+            if(lawyerId == null){
+                ServletUtils.responseJson(response, new Result(0, "律师ID不能为空！"));
+                return null;
+            }
 
+            if(pager == null || pager.getCurrentPage() == null){
+                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                return null;
+            }
+
+            if(pager.getCurrentPage() ==1 ){
+                LawyerVo lawyerVo = lawyerService.getMaterialt(lawyerId);
+                modelMap.put("lawyerInfo",lawyerVo);
+            }
+
+            List<TopicVo> topicVoList = lawyerService.getReportTopics(pager, lawyerId);
+            modelMap.put(DATA,topicVoList);
+            resultModelMap(1,"获取律师信息成功！",modelMap);
+
+            return "lawyer/getLawyerInfo";
+        } catch (Exception e) {
+            logger.error("获取律师信息失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(0, "获取律师信息失败！"));
+        }
         return null;
     }
 
@@ -74,7 +98,7 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "getCityList")
-    public String getCityList(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+    public String getCityList(Pager pager,ModelMap modelMap,HttpServletResponse response){
         try {
             if(pager == null || pager.getCurrentPage() == null){
                 ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
@@ -99,8 +123,17 @@ public class LawyerController extends BaseController{
      * 个人主页的个人信息
      */
     @RequestMapping(value = "getMaterialt")
-    public Map<String, Object> getMaterialt(){
+    public String getMaterialt(ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+        try {
 
+            LawyerVo lawyerVo = lawyerService.getMaterialt(getLawyerId(request));
+            modelMap.put(DATA, lawyerVo);
+            resultModelMap(1,"获取个人资料成功！",modelMap);
+            return "lawyer/getMaterialt";
+        } catch (Exception e) {
+            logger.error("获取个人资料失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(0, "获取个人资料失败！"));
+        }
         return null;
     }
 
