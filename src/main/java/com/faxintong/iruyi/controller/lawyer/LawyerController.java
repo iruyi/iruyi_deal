@@ -6,6 +6,7 @@ import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.vo.*;
 import com.faxintong.iruyi.service.lawyer.LawyerService;
+import com.faxintong.iruyi.service.topic.TopicService;
 import com.faxintong.iruyi.utils.Pager;
 import com.faxintong.iruyi.utils.Result;
 import com.faxintong.iruyi.utils.ServletUtils;
@@ -33,6 +34,8 @@ public class LawyerController extends BaseController{
     private Logger logger = LoggerFactory.getLogger(LawyerController.class);
     @Autowired
     private LawyerService lawyerService;
+    @Autowired
+    private TopicService topicService;
 
     /**
      * 获取个人信息
@@ -53,11 +56,11 @@ public class LawyerController extends BaseController{
 
             if(pager.getCurrentPage() ==1 ){
                 LawyerVo lawyerVo = lawyerService.getMaterialt(lawyerId);
-                modelMap.put("lawyerInfo",lawyerVo);
+                modelMap.put("lawyerInfo", lawyerVo);
             }
 
-            List<TopicVo> topicVoList = lawyerService.getReportTopics(pager, lawyerId);
-            modelMap.put(DATA,topicVoList);
+            List<TopicAllVo> topicAllVoList = topicService.topicAll(pager, lawyerId,null);
+            modelMap.put(DATA,topicAllVoList);
             resultModelMap(1,"获取律师信息成功！",modelMap);
 
             return "lawyer/getLawyerInfo";
@@ -80,7 +83,7 @@ public class LawyerController extends BaseController{
                 return null;
             }
 
-            List<LawyerVo> lawyerVoList = lawyerService.getAttetionList(pager,getLawyerId(request));
+            List<LawyerVo> lawyerVoList = lawyerService.getAttetionList(pager, getLawyerId(request));
             modelMap.put(DATA,lawyerVoList);
             resultModelMap(1,"获取我关注的律师列表成功！",modelMap);
 
