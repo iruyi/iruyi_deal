@@ -233,7 +233,7 @@ public class TopicController extends BaseController{
         return null;
     }
 
-    @RequestMapping(value = "topicReplyPraise")
+    @RequestMapping(value = "topicPraise")
     public String topicPraise(HttpServletRequest request,Long topicId,HttpServletResponse response){
         try {
             // 参数校验
