@@ -233,6 +233,25 @@ public class TopicController extends BaseController{
         return null;
     }
 
+    @RequestMapping(value = "topicReplyPraise")
+    public String topicPraise(HttpServletRequest request,Long topicId,HttpServletResponse response){
+        try {
+            // 参数校验
+            if(topicId == null) {
+                ServletUtils.responseJson(response,new Result(0,"话题ID为空！"));
+                return null;
+            }
+
+            topicService.topicPraise(topicId, getLawyerId(request));
+
+            ServletUtils.responseJson(response, new Result(1, "话题点赞成功！"));
+        }catch (Exception e){
+            logger.error("话题点赞失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(0, "话题点赞失败！"));
+        }
+        return null;
+    }
+
     /**
      * 话题回应点赞
      * @param replyId
@@ -251,7 +270,7 @@ public class TopicController extends BaseController{
 
             ServletUtils.responseJson(response, new Result(1, "话题回应点赞成功！"));
         }catch (Exception e){
-            logger.error("关注话题组失败:" + e.getMessage());
+            logger.error("话题回应点赞失败:" + e.getMessage());
             ServletUtils.responseJson(response, new Result(0, "话题回应点赞成功！"));
         }
         return null;

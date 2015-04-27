@@ -83,6 +83,12 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     @Transactional
+    public void topicPraise(Long topicId, Long lawyerId) throws Exception {
+        topicGeneralMapper.insertTopicPraise(topicId,lawyerId);
+    }
+
+    @Override
+    @Transactional
     public void topicReplyPraise(Long replyId, Long lawyerId) throws Exception {
         topicGeneralMapper.insertReplyPraise(replyId,lawyerId);
     }
