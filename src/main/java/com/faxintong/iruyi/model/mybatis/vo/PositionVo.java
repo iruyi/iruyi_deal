@@ -21,6 +21,7 @@ public class PositionVo {
     private Integer isCollection;
 
     private String officeIntroduction;
+    private String officeKeywords;
 
     public Long getId() {
         return id;
@@ -132,5 +133,13 @@ public class PositionVo {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getOfficeKeywords() {
+        return officeKeywords;
+    }
+
+    public void setOfficeKeywords(String officeKeywords) {
+        this.officeKeywords = officeKeywords;
     }
 }

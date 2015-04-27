@@ -93,7 +93,7 @@
             <if test="groupId != null">
                 and t.group_id = #{groupId}
             </if>
-            <if test="lawyerId != null">
+            <if test="targetLawyerId != null">
                 and tr.lawyer_id = #{targetLawyerId}
             </if>
         </where>
@@ -111,7 +111,7 @@
             <if test="groupId != null">
                 and t.group_id = #{groupId}
             </if>
-            <if test="lawyerId != null">
+            <if test="targetLawyerId != null">
                 and ts.lawyer_id = #{targetLawyerId}
             </if>
         </where>

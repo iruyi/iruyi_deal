@@ -9,7 +9,8 @@
                   "createDate":"${a.createDate?datetime}",
                   "officeName":"${a.officeName}",
                   "cityName":"${a.cityName}",
-                  "salary":"${a.salary!0}"
+                  "salary":"${a.salary!0}",
+                  "type":${a.type}
                 }
                 [#if a_has_next],[/#if]
             [/#list]

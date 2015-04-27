@@ -58,7 +58,7 @@ public class TopicController extends BaseController{
 
             topicService.reportTopic(groupId,content,lawyer);
 
-            ServletUtils.responseJson(response, new Result(1, "投票成功！"));
+            ServletUtils.responseJson(response, new Result(1, "发表话题成功！"));
         }catch (Exception e){
             logger.error("发表话题失败:" + e.getMessage());
             resultModelMap(0, "发表话题失败!", modelMap);

@@ -10,8 +10,8 @@
         limit #{startCount},#{pageSize}
     </select>
     <select id="selectPositionVoOne" resultType="com.faxintong.iruyi.model.mybatis.vo.PositionVo" parameterType="map" >
-        select p.id,p.salary,p.create_date createDate
-        ,lo.name officeName,c.name cityName,lo.introduction officeIntroduction
+        select p.id,p.salary,p.create_date createDate,p.type
+        ,lo.name officeName,c.name cityName,lo.introduction officeIntroduction,lo.keywords officeKeywords
         ,p.title,p.content,p.type,p.education,p.experience,p.keywords
         ,(select count(*) from position_store ps where ps.position_id = #{positionId}) isCollection
         from position p

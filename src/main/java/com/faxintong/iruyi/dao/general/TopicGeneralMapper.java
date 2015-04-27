@@ -53,7 +53,7 @@ public interface TopicGeneralMapper {
     @Insert("insert into topic_reply (topic_id,lawyer_id,lawyer_name,content,create_date) values(#{topicId},#{lawyer.id},#{lawyer.name},#{content},now())")
     int insertTopicReply(@Param("topicId")Long topicId, @Param("content")String content, @Param("lawyer")Lawyer lawyer);
 
-    @Insert("insert into topic_store (topic_id,lawyer_id) values (#{topicId},#{lawyerId})")
+    @Insert("insert into topic_store (topic_id,lawyer_id,create_date) values (#{topicId},#{lawyerId},now())")
     int insertTopicStore(@Param("topicId")Long topicId, @Param("lawyerId")Long lawyerId);
 
     @Insert("insert into topic_praise (topic_id,lawyer_id) values (#{topicId},#{lawyerId})")

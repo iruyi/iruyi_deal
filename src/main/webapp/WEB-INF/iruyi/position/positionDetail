@@ -13,5 +13,6 @@
     "experience":"${data.experience}",
     "keywords":"${data.keywords}",
     "officeIntroduction":"${data.officeIntroduction!}",
+    "officeKeywords":"${data.officeKeywords!}",
     "isCollection":${data.isCollection!0}
 }
