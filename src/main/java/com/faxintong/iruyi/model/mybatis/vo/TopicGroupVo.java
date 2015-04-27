@@ -17,7 +17,7 @@ public class TopicGroupVo {
     private Integer topicCount;
 
     private Integer isAtten;
-    private List<TopicVo> topicVoList;
+    private List<TopicAllVo> topicAllVoList;
 
     public Long getId() {
         return id;
@@ -67,11 +67,11 @@ public class TopicGroupVo {
         this.isAtten = isAtten;
     }
 
-    public List<TopicVo> getTopicVoList() {
-        return topicVoList;
+    public List<TopicAllVo> getTopicAllVoList() {
+        return topicAllVoList;
     }
 
-    public void setTopicVoList(List<TopicVo> topicVoList) {
-        this.topicVoList = topicVoList;
+    public void setTopicAllVoList(List<TopicAllVo> topicAllVoList) {
+        this.topicAllVoList = topicAllVoList;
     }
 }

@@ -1,6 +1,7 @@
 package com.faxintong.iruyi.service.discuss;
 
 import com.faxintong.iruyi.model.mybatis.topic.Topic;
+import com.faxintong.iruyi.model.mybatis.vo.TopicAllVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.utils.Pager;
 
@@ -17,6 +18,6 @@ public interface DiscussService {
      * @return
      * @throws Exception
      */
-    public List<TopicVo> getDiscussList(Pager pager,Long lawyerId) throws Exception;
+    public List<TopicAllVo> getDiscussList(Pager pager,Long lawyerId) throws Exception;
 
 }

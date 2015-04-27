@@ -2,6 +2,7 @@ package com.faxintong.iruyi.service.discuss.impl;
 
 import com.faxintong.iruyi.dao.general.TopicGeneralMapper;
 import com.faxintong.iruyi.model.mybatis.topic.Topic;
+import com.faxintong.iruyi.model.mybatis.vo.TopicAllVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.service.discuss.DiscussService;
 import com.faxintong.iruyi.utils.Pager;
@@ -18,8 +19,8 @@ public class DiscussServiceImpl implements DiscussService {
     @Autowired
     TopicGeneralMapper topicGeneralMapper;
     @Override
-    public List<TopicVo> getDiscussList(Pager pager,Long lawyerId) throws Exception {
-        return topicGeneralMapper.selectTopicVo(null,pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize(),lawyerId,null);
+    public List<TopicAllVo> getDiscussList(Pager pager,Long lawyerId) throws Exception {
+        return topicGeneralMapper.selectTopicAllVo(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), null, lawyerId, null);
     }
 
 }

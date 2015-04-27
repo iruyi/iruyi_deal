@@ -22,6 +22,9 @@ public class TopicAllVo {
 
     private String createDate;// 收藏、发表、或回复时间
 
+    private Integer praiseCount;//话题或回复点赞总数，
+    private Integer isPraise;//话题或回复是否点赞
+
     public Long getLawyerId2() {
         return lawyerId2;
     }
@@ -124,5 +127,21 @@ public class TopicAllVo {
 
     public void setCreateDate(String createDate) {
         this.createDate = createDate;
+    }
+
+    public Integer getPraiseCount() {
+        return praiseCount;
+    }
+
+    public void setPraiseCount(Integer praiseCount) {
+        this.praiseCount = praiseCount;
+    }
+
+    public Integer getIsPraise() {
+        return isPraise;
+    }
+
+    public void setIsPraise(Integer isPraise) {
+        this.isPraise = isPraise;
     }
 }

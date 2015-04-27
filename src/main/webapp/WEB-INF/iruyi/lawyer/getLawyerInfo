@@ -27,7 +27,9 @@
                      "photoUrl":"${a.photoUrl!!}",
                      "id2":${a.id2},
                      "content2":"${a.content2}",
-                     "createDate":"${a.createDate?datetime}"
+                     "createDate":"${a.createDate?datetime}",
+                     "praiseCount":${a.praiseCount},
+                     "isPraise":${a.isPraise}
                     }
                     [#if a_has_next],[/#if]
                 [/#list]

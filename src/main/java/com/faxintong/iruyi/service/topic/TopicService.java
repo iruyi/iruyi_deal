@@ -82,11 +82,11 @@ public interface TopicService {
      * @return
      * @throws Exception
      */
-    public void topicReplyPraise(Long replyId, Long lawyerId) throws Exception;
+    public void topicReplyPraise(Long replyId,Long lawyerId) throws Exception;
 
 
     /**
      * 获取话题的动态
      */
-    List<TopicAllVo> topicAll(Pager pager,Long lawyerId,Long groupId);
+    List<TopicAllVo> topicAll(Pager pager,Long targetLawyerId,Long lawyerId,Long groupId);
 }

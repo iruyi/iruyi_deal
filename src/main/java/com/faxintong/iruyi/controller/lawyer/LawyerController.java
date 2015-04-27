@@ -59,7 +59,7 @@ public class LawyerController extends BaseController{
                 modelMap.put("lawyerInfo", lawyerVo);
             }
 
-            List<TopicAllVo> topicAllVoList = topicService.topicAll(pager, lawyerId,null);
+            List<TopicAllVo> topicAllVoList = topicService.topicAll(pager, lawyerId, getLawyerId(request),null);
             modelMap.put(DATA,topicAllVoList);
             resultModelMap(1,"获取律师信息成功！",modelMap);
 

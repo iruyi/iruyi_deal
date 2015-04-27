@@ -55,7 +55,7 @@ public class TopicServiceTest extends BaseTest{
     public void testGetGroupDetail() {
         try {
             TopicGroupVo topicGroupVo = topicService.getGroupDetail(1L,pager,1L);
-            List<TopicVo> topicVoList = topicGroupVo.getTopicVoList();
+            List<TopicAllVo> topicVoList = topicGroupVo.getTopicAllVoList();
             for(int i=0;i<topicVoList.size();i++) {
                 System.out.println(topicVoList.get(i).getIsPraise());
             }
@@ -120,7 +120,7 @@ public class TopicServiceTest extends BaseTest{
     @Test
     public void testTopicAll() {
         try {
-            List<TopicAllVo> topicAllVoList = topicService.topicAll(pager,1L,null);
+            List<TopicAllVo> topicAllVoList = topicService.topicAll(pager,28L,1L,null);
             for(TopicAllVo topicAllVo:topicAllVoList) {
                 System.out.println(topicAllVo.getType() + "|" +topicAllVo.getLawyerName() + ":" + topicAllVo.getContent() + "|"
                 + topicAllVo.getLawyerName2() + ":" + topicAllVo.getContent2());

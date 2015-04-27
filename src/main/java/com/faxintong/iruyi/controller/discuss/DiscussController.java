@@ -1,6 +1,7 @@
 package com.faxintong.iruyi.controller.discuss;
 
 import com.faxintong.iruyi.controller.BaseController;
+import com.faxintong.iruyi.model.mybatis.vo.TopicAllVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicGroupVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.service.discuss.DiscussService;
@@ -45,9 +46,9 @@ public class DiscussController extends BaseController{
                 return null;
             }
 
-            List<TopicVo> topicVoList = discussService.getDiscussList(pager,getLawyerId(request));
+            List<TopicAllVo> topicAllVoList = discussService.getDiscussList(pager,getLawyerId(request));
 
-            modelMap.put(DATA, topicVoList);
+            modelMap.put(DATA, topicAllVoList);
             resultModelMap(1,"获取讨论列表成功！",modelMap);
 
             return "topic/getDiscussList";
