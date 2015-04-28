@@ -2,8 +2,8 @@
     "errcode":${errcode},
     "errmessage":"${errmessage}",
     "id":${data.id},
-    "name":"${data.name}",
-    "cityName":"${data.cityName}",
+    "name":"${data.name!!}",
+    "cityName":"${data.cityName!!}",
     "photoUrl":"${data.photoUrl!!}",
     "lawOffice":"${data.lawOffice!!}",
     "introduction":"${data.introduction!!}"
