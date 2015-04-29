@@ -1,29 +1,31 @@
 {
     "errcode":${errcode},
     "errmessage":"${errmessage}",
-    "view":{
-        "introduction":"${data.introduction}",
-        "fansCount":${(data.fansCount)!0},
-        "isAtten":${(data.isAtten)!0}
-    },
-    [#if data.viewDiscussVoList?? && data.viewDiscussVoList?size>0]
-        "viewDisscusses":[
-            [#list data.viewDiscussVoList as a]
-                {
-                  "id":${a.id},
-                  "type":"${a.type}",
-                  "content":"${a.content}",
-                  "createDate":"${a.createDate?datetime}",
-                  "lawyerId":${a.lawyerId},
-                  "lawyerName":"${a.lawyerName}",
-                  "photoUrl":"${a.photoUrl!!}",
-                  "praiseCount":${(a.praiseCount)!0},
-                  "isParise":${(a.isParise)!0}
-                }
-                [#if a_has_next],[/#if]
-            [/#list]
-               ]
-    [#else]
-        "data":[]
-    [/#if]
+    "data":{
+        "viewDetail":{
+                "introduction":"${data.introduction!!}",
+                "fansCount":${(data.fansCount)!0},
+                "isAtten":${(data.isAtten)!0}
+            },
+            [#if data.viewDiscussVoList?? && data.viewDiscussVoList?size>0]
+                "viewDisscusses":[
+                    [#list data.viewDiscussVoList as a]
+                        {
+                          "id":${a.id},
+                          "type":"${a.type}",
+                          "content":"${a.content}",
+                          "createDate":"${a.createDate?datetime}",
+                          "lawyerId":${a.lawyerId},
+                          "lawyerName":"${a.lawyerName!!}",
+                          "photoUrl":"${a.photoUrl!!}",
+                          "praiseCount":${(a.praiseCount)!0},
+                          "isParise":${(a.isParise)!0}
+                        }
+                        [#if a_has_next],[/#if]
+                    [/#list]
+                       ]
+            [#else]
+                "data":[]
+            [/#if]
+    }
 }
