@@ -8,7 +8,7 @@
                     {
                       "id":${a.id},
                       "lawyerId":"${a.lawyerId}",
-                      "lawyerName":"${a.lawyerName}",
+                      "lawyerName":"${a.lawyerName!!}",
                       "photoUrl":"${a.photoUrl!!}",
                       "content":"${a.content}",
                       "createDate":"${a.createDate?datetime}",
