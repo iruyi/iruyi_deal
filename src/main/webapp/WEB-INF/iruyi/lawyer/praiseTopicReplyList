@@ -1,23 +1,25 @@
 {
     "errcode":${errcode},
     "errmessage":"${errmessage}",
-    "lawyerId":${lawyer.id},
-    "lawyerName":"${lawyer.name}",
-    "photoUrl":"${lawyer.photoUrl!!}",
-    [#if data?? && data?size>0]
-        "data":[
-            [#list data as a]
-                {
-                  "praiseId":${a.id},
-                  "replyContent":"${a.content}",
-                  "createDate":"${a.createDate?datetime}",
-                  "topicId":"${a.topicVo.id}",
-                  "topicContent":"${a.topicVo.content}"
-                }
-                [#if a_has_next],[/#if]
-            [/#list]
-               ]
-    [#else]
-        "data":[]
-    [/#if]
+    "data":{
+        [#if data?? && data?size>0]
+            "topicList":[
+                [#list data as a]
+                    {
+                      "lawyerId":${lawyer.id},
+                      "lawyerName":"${lawyer.name!!}",
+                      "photoUrl":"${lawyer.photoUrl!!}",
+                      "praiseId":${a.id},
+                      "replyContent":"${a.content}",
+                      "createDate":"${a.createDate?datetime}",
+                      "topicId":"${a.topicVo.id}",
+                      "topicContent":"${a.topicVo.content}"
+                    }
+                    [#if a_has_next],[/#if]
+                [/#list]
+                   ]
+        [#else]
+            "topicList":[]
+        [/#if]
+    }
 }

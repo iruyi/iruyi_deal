@@ -1,25 +1,27 @@
 {
     "errcode":${errcode},
     "errmessage":"${errmessage}",
-    [#if data?? && data?size>0]
-        "data":[
-            [#list data as a]
-                {
-                  "id":${a.id},
-                  "type":${a.type},
-                  "title":"${a.title}",
-                  "content":"${a.content}",
-                  "cityName":"${a.cityName!!}",
-                  "deadDate":"${a.deadDate?datetime}",
-                  "keyWords":"${a.keyWords}",
-                  "price":${(a.price?double)!0.00},
-                  "interestCount": ${(a.interestCount)!0},
-                  "isInterest":${(a.isInterest)!0}
-                }
-                [#if a_has_next],[/#if]
-            [/#list]
-               ]
-    [#else]
-        "data":[]
-    [/#if]
+    "data":{
+        [#if data?? && data?size>0]
+            "orderList":[
+                [#list data as a]
+                    {
+                      "id":${a.id},
+                      "type":${a.type},
+                      "title":"${a.title}",
+                      "content":"${a.content}",
+                      "cityName":"${a.cityName!!}",
+                      "deadDate":"${a.deadDate?datetime}",
+                      "keyWords":"${a.keyWords}",
+                      "price":${(a.price?double)!0.00},
+                      "interestCount": ${(a.interestCount)!0},
+                      "isInterest":${(a.isInterest)!0}
+                    }
+                    [#if a_has_next],[/#if]
+                [/#list]
+                   ]
+        [#else]
+            "orderList":[]
+        [/#if]
+    }
 }

@@ -1,24 +1,26 @@
 {
     "errcode":${errcode},
     "errmessage":"${errmessage}",
-    [#if data?? && data?size>0]
-        "data":[
-            [#list data as a]
-                {
-                  "id":${a.id},
-                  "replyContent":"${a.content!!}",
-                  "createDate":"${a.createDate?datetime}",
-                  "lawyerId":${a.lawyerId},
-                  "lawyerName":"${a.lawyerName}",
-                  "photoUrl":"${a.photoUrl!!}",
-                  "orderId":${a.orderVo.id},
-                  "orderTitle": "${a.orderVo.title}",
-                  "orderContent":"${a.orderVo.content}"
-                }
-                [#if a_has_next],[/#if]
-            [/#list]
-               ]
-    [#else]
-        "data":[]
-    [/#if]
+    "data":{
+        [#if data?? && data?size>0]
+            "orderList":[
+                [#list data as a]
+                    {
+                      "id":${a.id},
+                      "replyContent":"${a.content!!}",
+                      "createDate":"${a.createDate?datetime}",
+                      "lawyerId":${a.lawyerId},
+                      "lawyerName":"${a.lawyerName!!}",
+                      "photoUrl":"${a.photoUrl!!}",
+                      "orderId":${a.orderVo.id},
+                      "orderTitle": "${a.orderVo.title!!}",
+                      "orderContent":"${a.orderVo.content!!}"
+                    }
+                    [#if a_has_next],[/#if]
+                [/#list]
+                   ]
+        [#else]
+            "orderList":[]
+        [/#if]
+    }
 }

@@ -1,40 +1,44 @@
 {
     "errcode":${errcode},
     "errmessage":"${errmessage}",
-    [#if lawyerInfo?? ]
-    "id":${lawyerInfo.id},
-    "name":"${lawyerInfo.name}",
-    "cityName":"${lawyerInfo.cityName}",
-    "photoUrl":"${lawyerInfo.photoUrl!!}",
-    "lawOffice":"${lawyerInfo.lawOffice!!}",
-    "attentionCount":${lawyerInfo.attentionCount!0},
-    "fansCount":${lawyerInfo.fansCount!0},
-    "introduction":"${lawyerInfo.introduction!!}",
-    [/#if]
-    [#if data?? && data?size>0]
-            "data":[
-                [#list data as a]
-                    {
-                     "lawyerId2":${a.lawyerId2},
-                     "lawyerName2":"${a.lawyerName2}",
-                      "photoUrl2":"${a.photoUrl2!!}",
-                     "type":${a.type},
-                     "id":${a.id},
-                     "title":"${a.title!!}",
-                     "content":"${a.content}",
-                     "lawyerId":${a.lawyerId},
-                     "lawyerName":"${a.lawyerName}",
-                     "photoUrl":"${a.photoUrl!!}",
-                     "id2":${a.id2},
-                     "content2":"${a.content2}",
-                     "createDate":"${a.createDate?datetime}",
-                     "praiseCount":${a.praiseCount},
-                     "isPraise":${a.isPraise}
-                    }
-                    [#if a_has_next],[/#if]
-                [/#list]
-                   ]
-        [#else]
-            "data":[]
+    "data":{
+        [#if lawyerInfo?? ]
+        "id":${lawyerInfo.id},
+        "name":"${lawyerInfo.name}",
+        "cityName":"${lawyerInfo.cityName}",
+        "photoUrl":"${lawyerInfo.photoUrl!!}",
+        "lawOffice":"${lawyerInfo.lawOffice!!}",
+        "attentionCount":${lawyerInfo.attentionCount!0},
+        "fansCount":${lawyerInfo.fansCount!0},
+        "introduction":"${lawyerInfo.introduction!!}",
         [/#if]
+        [#if data?? && data?size>0]
+                 "topicList":[
+                     [#list data as a]
+                         {
+                          "lawyerId2":${a.lawyerId2},
+                          "lawyerName2":"${a.lawyerName2!!}",
+                          "photoUrl2":"${a.photoUrl2!!}",
+                          "type":${a.type},
+                          "id":${a.id},
+                          "title":"${a.title!!}",
+                          "content":"${a.content}",
+                          "lawyerId":${a.lawyerId},
+                          "lawyerName":"${a.lawyerName!!}",
+                          "photoUrl":"${a.photoUrl!!}",
+                          "id2":${a.id2},
+                          "content2":"${a.content2}",
+                          "createDate":"${a.createDate?datetime}",
+                          "praiseCount":${a.praiseCount},
+                          "isPraise":${a.isPraise}
+                         }
+                         [#if a_has_next],[/#if]
+                     [/#list]
+                 ]
+        [#else]
+                 "topicList":[]
+        [/#if]
+    }
+
+
 }

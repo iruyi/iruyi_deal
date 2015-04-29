@@ -1,18 +1,20 @@
 {
     "errcode":${errcode},
     "errmessage":"${errmessage}",
-    [#if data?? && data?size>0]
-        "data":[
-            [#list data as a]
-                {
-                  "id":${a.id},
-                  "name":"${a.name}",
-                  "photoUrl":"${a.photoUrl!!}"
-                }
-                [#if a_has_next],[/#if]
-            [/#list]
-               ]
-    [#else]
-        "data":[]
-    [/#if]
+    "data":{
+        [#if data?? && data?size>0]
+            "lawyerList":[
+                [#list data as a]
+                    {
+                      "id":${a.id},
+                      "name":"${a.name!!}",
+                      "photoUrl":"${a.photoUrl!!}"
+                    }
+                    [#if a_has_next],[/#if]
+                [/#list]
+                   ]
+        [#else]
+            "lawyerList":[]
+        [/#if]
+    }
 }
