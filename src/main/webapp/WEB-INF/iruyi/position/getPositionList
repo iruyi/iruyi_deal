@@ -9,7 +9,7 @@
                       "id":${a.id},
                       "createDate":"${a.createDate?datetime}",
                       "officeName":"${a.officeName!!}",
-                      "type":"${a.type}",
+                      "type":${a.type!0},
                       "cityName":"${a.cityName}",
                       "salary":"${a.salary!0}",
                       "photo":"${a.photo!!}"
