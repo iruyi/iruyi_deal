@@ -1,19 +1,24 @@
 package com.faxintong.iruyi.controller.article;
 
 import com.faxintong.iruyi.controller.BaseController;
+import com.faxintong.iruyi.dao.mybatis.article.ArticleCommentMapper;
+import com.faxintong.iruyi.dao.mybatis.article.ArticlePraiseMapper;
+import com.faxintong.iruyi.dao.mybatis.article.ArticleStoreMapper;
 import com.faxintong.iruyi.model.mybatis.article.AppArticle;
+import com.faxintong.iruyi.model.mybatis.article.ArticleCommentExample;
+import com.faxintong.iruyi.model.mybatis.article.ArticlePraiseExample;
+import com.faxintong.iruyi.model.mybatis.article.ArticleStoreExample;
 import com.faxintong.iruyi.service.article.ArticleService;
 import com.faxintong.iruyi.utils.Pager;
-import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
 
 import static com.faxintong.iruyi.utils.Constants.*;
 
@@ -29,6 +34,14 @@ public class ArticleController extends BaseController{
     @Autowired
     private ArticleService articleService;
 
+    @Autowired
+    private ArticlePraiseMapper articlePraiseMapper;
+
+    @Autowired
+    private ArticleCommentMapper articleCommentMapper;
+
+    @Autowired
+    private ArticleStoreMapper articleStoreMapper;
     /**
      * 发布文章
      * @param comment
@@ -36,24 +49,23 @@ public class ArticleController extends BaseController{
      * @return
      */
     @RequestMapping(value = "reportArticle")
-    public Map<String, Object> reportArticle(HttpServletRequest request, String comment, String url){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String reportArticle(HttpServletRequest request, String comment, String url, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
         try {
             if(comment == null){
-                result.put(ERRMESSAGE, "文章评论为null");
+                modelMap.put(ERRMESSAGE, "文章评论为null");
             }else if(url == null){
-                result.put(ERRMESSAGE, "分享文章url为null");
+                modelMap.put(ERRMESSAGE, "分享文章url为null");
             }else{
                 articleService.reportArticle(comment, url, getLawyerId(request));
-                result.put(ERRCODE, 1);
-                result.put(ERRMESSAGE, "发布文章成功！");
+                modelMap.put(ERRCODE, RESULTSUCCESS);
+                modelMap.put(ERRMESSAGE, "发布文章成功！");
             }
         }catch (Exception e){
             logger.error("发布文章失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "发布文章失败!");
+            modelMap.put(ERRMESSAGE, "发布文章失败!");
         }
-        return result;
+        return "lawyer/common";
     }
 
     /**
@@ -61,23 +73,22 @@ public class ArticleController extends BaseController{
      * @return
      */
     @RequestMapping(value = "articleList")
-    public Map<String, Object> articleList(Pager pager){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String articleList(Pager pager, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
         try {
             if(pager == null || pager.getCurrentPage() == null){
-                result.put(ERRMESSAGE, "当前页为null");
+                modelMap.put(ERRMESSAGE, "当前页为null");
             }else{
                 List<AppArticle> list = articleService.articleList(pager);
-                result.put(ERRCODE, 1);
-                result.put(ERRMESSAGE, "获取文章列表！");
-                result.put(DATA, list);
+                modelMap.put(ERRCODE, RESULTSUCCESS);
+                modelMap.put(ERRMESSAGE, "获取文章列表！");
+                modelMap.put(DATA, list);
             }
         }catch (Exception e){
             logger.error("获取文章列表失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "获取文章列表失败!");
+            modelMap.put(ERRMESSAGE, "获取文章列表失败!");
         }
-        return result;
+        return "article/articleList";
     }
 
     /**
@@ -86,23 +97,22 @@ public class ArticleController extends BaseController{
      * @return
      */
     @RequestMapping(value = "articleDetail")
-    public Map<String, Object> articleDetail(Long articleId){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String articleDetail(Long articleId, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
         try {
             if(articleId == null){
-                result.put(ERRMESSAGE, "文章id为null");
+                modelMap.put(ERRMESSAGE, "文章id为null");
             }else{
                 AppArticle appArticle = articleService.articleDetail(articleId);
-                result.put(ERRCODE, 1);
-                result.put(ERRMESSAGE, "获取文章详情成功！");
-                result.put(DATA, appArticle);
+                modelMap.put(ERRCODE, RESULTSUCCESS);
+                modelMap.put(ERRMESSAGE, "获取文章详情成功！");
+                modelMap.put(DATA, appArticle);
             }
         }catch (Exception e){
             logger.error("获取文章详情失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "获取文章详情失败!");
+            modelMap.put(ERRMESSAGE, "获取文章详情失败!");
         }
-        return result;
+        return "article/articleDetail";
     }
 
     /**
@@ -112,24 +122,30 @@ public class ArticleController extends BaseController{
      * @return
      */
     @RequestMapping(value = "aticleComment")
-    public Map<String, Object> aticleComment(HttpServletRequest request, Long articleId, String comment){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String aticleComment(HttpServletRequest request, Long articleId, String comment, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
         try {
             if(articleId == null){
-                result.put(ERRMESSAGE, "文章id为null");
+                modelMap.put(ERRMESSAGE, "文章id为null");
             }else if(comment == null){
-                result.put(ERRMESSAGE, "文章评论为null");
+                modelMap.put(ERRMESSAGE, "文章评论为null");
             }else{
-                articleService.articleComment(articleId, comment, getLawyerId(request));
-                result.put(ERRCODE, 1);
-                result.put(ERRMESSAGE, "评论文章成功！");
+                ArticleCommentExample example = new ArticleCommentExample();
+                example.createCriteria().andLawyerIdEqualTo(getLawyerId(request)).andArticleIdEqualTo(articleId);
+                Integer count = articleCommentMapper.countByExample(example);
+                if(count != null && count.intValue() > 0){
+                    modelMap.put(ERRMESSAGE, "已评论过文章！");
+                }else{
+                    articleService.articleComment(articleId, comment, getLawyerId(request));
+                    modelMap.put(ERRCODE, RESULTSUCCESS);
+                    modelMap.put(ERRMESSAGE, "评论文章成功！");
+                }
             }
         }catch (Exception e){
             logger.error("评论文章失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "评论文章失败!");
+            modelMap.put(ERRMESSAGE, "评论文章失败!");
         }
-        return result;
+        return "lawyer/common";
     }
 
     /**
@@ -138,22 +154,28 @@ public class ArticleController extends BaseController{
      * @return
      */
     @RequestMapping(value = "articlePraise")
-    public Map<String, Object> articlePraise(HttpServletRequest request, Long articleId){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String articlePraise(HttpServletRequest request, Long articleId, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
         try {
             if(articleId == null){
-                result.put(ERRMESSAGE, "文章id为null");
+                modelMap.put(ERRMESSAGE, "文章id为null");
             }else{
-                articleService.articlePraise(articleId, getLawyerId(request));
-                result.put(ERRCODE, 1);
-                result.put(ERRMESSAGE, "文章点赞成功！");
+                ArticlePraiseExample example = new ArticlePraiseExample();
+                example.createCriteria().andLawyerIdEqualTo(getLawyerId(request)).andArticleIdEqualTo(articleId);
+                Integer count = articlePraiseMapper.countByExample(example);
+                if(count != null && count.intValue() > 0){
+                    modelMap.put(ERRMESSAGE, "已点赞过文章！");
+                }else{
+                    articleService.articlePraise(articleId, getLawyerId(request));
+                    modelMap.put(ERRCODE, RESULTSUCCESS);
+                    modelMap.put(ERRMESSAGE, "文章点赞成功！");
+                }
             }
         }catch (Exception e){
             logger.error("文章点赞失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "文章点赞失败!");
+            modelMap.put(ERRMESSAGE, "文章点赞失败!");
         }
-        return result;
+        return "lawyer/common";
     }
 
     /**
@@ -163,22 +185,28 @@ public class ArticleController extends BaseController{
      * @return
      */
     @RequestMapping(value = "articleStore")
-    public Map<String, Object> articleStore(HttpServletRequest request, Long articleId){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String articleStore(HttpServletRequest request, Long articleId, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
         try {
             if(articleId == null){
-                result.put(ERRMESSAGE, "文章id为null");
+                modelMap.put(ERRMESSAGE, "文章id为null");
             }else{
-                articleService.articleStore(articleId, getLawyerId(request));
-                result.put(ERRCODE, 1);
-                result.put(ERRMESSAGE, "文章存储成功！");
+                ArticleStoreExample example = new ArticleStoreExample();
+                example.createCriteria().andLawyerIdEqualTo(getLawyerId(request)).andArticleIdEqualTo(articleId);
+                Integer count = articleStoreMapper.countByExample(example);
+                if(count != null && count.intValue() > 0){
+                    modelMap.put(ERRMESSAGE, "已存储过文章！");
+                }else{
+                    articleService.articleStore(articleId, getLawyerId(request));
+                    modelMap.put(ERRCODE, RESULTSUCCESS);
+                    modelMap.put(ERRMESSAGE, "文章存储成功！");
+                }
             }
         }catch (Exception e){
             logger.error("文章点赞失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "文章存储失败!");
+            modelMap.put(ERRMESSAGE, "文章存储失败!");
         }
-        return result;
+        return "lawyer/common";
     }
 
 }

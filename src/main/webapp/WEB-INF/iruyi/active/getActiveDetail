@@ -1,0 +1,27 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    [#if data??]
+        "data":{
+              "title":${data.title},
+              "content":${data.content},
+              "photoUrl":"${data.photoUrl}",
+              "activeTime":"${data.activeTime?datetime}",
+              "isCollect":${data.isCollect},
+              [#if data.attentionPhotos?? && data.attentionPhotos?size>0 ]
+                "attentionPhotos":[
+                    [#list data.attentionPhotos as a]
+                        {
+                          "photoUrl":${a}
+                        }
+                        [#if a_has_next],[/#if]
+                    [/#list]
+                ]
+                [#else]
+                    "attentionPhotos":""
+                [/#if]
+        }
+    [#else]
+        "data":""
+    [/#if]
+}

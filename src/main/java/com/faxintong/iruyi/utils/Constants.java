@@ -37,6 +37,8 @@ public class Constants {
 
     public static final String ERRCODE = "errcode";
     public static final String ERRMESSAGE = "errmessage";
+    public static final Integer RESULTSUCCESS = 0;
+    public static final Integer RESULTFAIL = 1;
 
     /**********************甩单、接单状态*******************/
     public static final Integer RECEIVING = 1;//竞标中

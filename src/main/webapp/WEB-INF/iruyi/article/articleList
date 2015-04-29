@@ -1,0 +1,19 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    [#if data?? && data?size>0]
+        "data":{"articleList":[
+            [#list data as a]
+                {
+                  "type":${a.type},
+                  "comment":"${a.comment}",
+                  "url":"${a.url}",
+                  "acro":"${a.acro}"
+                }
+                [#if a_has_next],[/#if]
+            [/#list]
+               ]}
+    [#else]
+        "data":{"articleList":[]}
+    [/#if]
+}

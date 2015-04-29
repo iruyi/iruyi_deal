@@ -1,0 +1,19 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    [#if data?? && data?size>0]
+        "data":{"activeList":[
+            [#list data as a]
+                {
+                  "title":${a.title},
+                  "photoUrl":"${a.photoUrl}",
+                  "activeTime":"${a.activeTime?datetime}",
+                  "praiseCount":${a.praiseCount}
+                }
+                [#if a_has_next],[/#if]
+            [/#list]
+               ]}
+    [#else]
+        "data":{"activeList":[]}
+    [/#if]
+}

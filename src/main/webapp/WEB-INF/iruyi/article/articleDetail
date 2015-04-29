@@ -1,0 +1,14 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    [#if data??]
+        "data":{
+              "type":${data.type},
+                "comment":"${data.comment}",
+                "url":"${data.url}",
+                "acro":"${data.acro}"
+        }
+    [#else]
+        "data":""
+    [/#if]
+}

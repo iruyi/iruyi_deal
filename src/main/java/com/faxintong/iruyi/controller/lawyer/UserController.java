@@ -2,14 +2,12 @@ package com.faxintong.iruyi.controller.lawyer;
 
 import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
-import com.faxintong.iruyi.utils.Config;
-import com.faxintong.iruyi.utils.MD5;
-import com.faxintong.iruyi.utils.RedisUtils;
-import com.faxintong.iruyi.utils.SessionUtil;
+import com.faxintong.iruyi.utils.*;
 import com.google.common.collect.Maps;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,24 +41,24 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "reg")
-    public Map<String, Object> register(@Valid Lawyer lawyer, BindingResult bindingResult, String validCode,
+    public String register(@Valid Lawyer lawyer, BindingResult bindingResult, String validCode, ModelMap modelMap,
                                         HttpServletRequest request, HttpServletResponse response){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(RESULT, false);
+        //Map<String, Object> result = Maps.newHashMap();
+        modelMap.put(ERRCODE, RESULTFAIL);
         try {
             if(bindingResult.hasErrors()){
-                result.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
+                modelMap.put(ERR_MSG, bindingResult.getFieldError().getDefaultMessage());
             }else{
                 String code = "123";//(String) request.getSession().getAttribute("code");
-                if(code == null) {
+                /*if(code == null) {
                     result.put(ERR_MSG, "请先填写验证码");
                 }else if (!code.equals(validCode)) {
                     result.put(ERR_MSG, "验证码填写错误");
                 }
-                else if (userService.containsPhone(lawyer.getPhone())) {
-                    result.put(ERR_MSG, "该手机号已经注册");
+                else*/ if (userService.containsPhone(lawyer.getPhone())) {
+                    modelMap.put(ERRMESSAGE, "该手机号已经注册");
                 }else if (!userService.regisValidate(lawyer.getPhone())){
-                    result.put(ERR_MSG, "该手机号格式错误");
+                    modelMap.put(ERRMESSAGE, "该手机号格式错误");
                 }
                 else {
                     lawyer.setPassword(MD5.newinstance().getMD5ofStr(lawyer.getPassword()));
@@ -68,16 +66,17 @@ public class UserController extends BaseController {
                     lawyer.setCreateDate(date);
                     lawyer.setUpdateDate(date);
                     userService.registerLawyer(lawyer);
-                    result.put(RESULT, true);
-                    result.put(ERR_MSG, "注册成功");
+                    modelMap.put(ERRCODE, RESULTSUCCESS);
+                    modelMap.put(ERRMESSAGE, "注册成功");
                 }
             }
         }catch (Exception e){
-            e.printStackTrace();
             logger.error("注册失败:" + e.getMessage());
-            result.put(ERR_MSG, "注册出错!");
+            modelMap.put(ERRMESSAGE, "注册出错!");
         }
-        return result;
+        //return result;
+        //ServletUtils.responseJson(response, result);
+        return "lawyer/common";
     }
 
 
@@ -89,32 +88,31 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping(value = "login")
-    public Map<String, Object> login(String phone, String password, HttpServletRequest request, HttpServletResponse response){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(RESULT, false);
-
+    public String login(String phone, String password, ModelMap modelMap, HttpServletRequest request, HttpServletResponse response){
+        modelMap.put(ERRCODE, RESULTFAIL);
         if(StringUtils.isEmpty(phone)) {
-            result.put(ERR_MSG, "帐号不能为空");
+            modelMap.put(ERRMESSAGE, "帐号不能为空");
         }else if(StringUtils.isEmpty(password)){
-            result.put(ERR_MSG, "密码不能为空");
+            modelMap.put(ERRMESSAGE, "密码不能为空");
         }else {
             try {
                 password = MD5.newinstance().getMD5ofStr(password);
                 if (!userService.loginValidate(phone, password))
-                    result.put(ERR_MSG, "帐号密码不匹配");
+                    modelMap.put(ERRMESSAGE, "帐号密码不匹配");
                 else {
                     String sessionId = SessionUtil.getSessionId();
-                    result.put("sessionId", sessionId);
+                    modelMap.put("sessionId", sessionId);
                     Lawyer lawyer = userService.getLawyer(phone);
                     RedisUtils.set(SESSION_PREFIX + sessionId, "" + lawyer.getId());
-                    result.put(RESULT, true);
+                    modelMap.put(ERRCODE, RESULTSUCCESS);
+                    modelMap.put(ERRMESSAGE, "登录成功");
                 }
             } catch (Exception e) {
-                result.put(ERR_MSG, "登录出错");
+                modelMap.put(ERRMESSAGE, "登录出错");
                 logger.error("登录出错:" + e.getMessage());
             }
         }
-        return result;
+        return "lawyer/login";
     }
 
     /**
@@ -123,17 +121,19 @@ public class UserController extends BaseController {
      * @param response
      */
     @RequestMapping(value = "logout")
-    public Map<String, Object> logOut(HttpServletRequest request, HttpServletResponse response){
+    public String logOut(HttpServletRequest request, HttpServletResponse response){
         Map<String, Object> result = Maps.newHashMap();
-        result.put(RESULT, false);
+        result.put(ERRCODE, RESULTFAIL);
         try {
             String sessionId = request.getParameter("sessionId");
             RedisUtils.del(SESSION_PREFIX + sessionId);
-            result.put(RESULT, true);
+            result.put(ERRCODE, RESULTSUCCESS);
+            result.put(ERRMESSAGE, "登出成功");
         }catch (Exception e){
             e.printStackTrace();
+            result.put(ERRMESSAGE, "登出出错");
         }
-        return result;
+        return "lawyer/common";
     }
 
     /**
