@@ -1,23 +1,25 @@
 {
     "errcode":${errcode},
     "errmessage":"${errmessage}",
-    [#if data.replyVoList?? && data.replyVoList?size>0]
-        "data":[
-            [#list data.replyVoList as a]
-                {
-                  "id":${a.id},
-                  "lawyerId":"${a.lawyerId}",
-                  "lawyerName":"${a.lawyerName}",
-                  "photoUrl":"${a.photoUrl!!}",
-                  "content":"${a.content}",
-                  "createDate":"${a.createDate?datetime}",
-                  "praiseCount":"${a.praiseCount}",
-                  "isPraise":"${a.isPraise}"
-                }
-                [#if a_has_next],[/#if]
-            [/#list]
-               ]
-    [#else]
-        "data":[]
-    [/#if]
+    "data":{
+        [#if data.replyVoList?? && data.replyVoList?size>0]
+            "replyList":[
+                [#list data.replyVoList as a]
+                    {
+                      "id":${a.id},
+                      "lawyerId":"${a.lawyerId}",
+                      "lawyerName":"${a.lawyerName}",
+                      "photoUrl":"${a.photoUrl!!}",
+                      "content":"${a.content}",
+                      "createDate":"${a.createDate?datetime}",
+                      "praiseCount":"${a.praiseCount}",
+                      "isPraise":"${a.isPraise}"
+                    }
+                    [#if a_has_next],[/#if]
+                [/#list]
+                   ]
+        [#else]
+            "replyList":[]
+        [/#if]
+    }
 }
