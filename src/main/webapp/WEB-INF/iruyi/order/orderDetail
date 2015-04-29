@@ -1,9 +1,11 @@
 {
     "errcode":${errcode},
     "errmessage":"${errmessage}",
-    "lawyerRelate":{
-        "fansCount":"${(data.fansCount)!0}",
-        "issueCount":"${(data.issueCount)!0}",
-        "interestCountMy":"${(data.interestCountMy)!0}"
+    "data":{
+        "lawyerRelate":{
+                "fansCount":"${(data.fansCount)!0}",
+                "issueCount":"${(data.issueCount)!0}",
+                "interestCountMy":"${(data.interestCountMy)!0}"
+    }
     }
 }
