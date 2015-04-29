@@ -1,34 +1,38 @@
 {
     "errcode":${errcode},
     "errmessage":"${errmessage}",
-    [#if data?? && data?size>0]
-        "data":[
-            [#list data as a]
+    "data":{
+        [#if data?? && data?size>0]
+            "voteList":[
+                [#list data as a]
                 {
-                  "id":${a.id},
-                  "title":"${a.title}",
-                  "content":"${a.content}",
-                  "createDate":"${a.createDate?datetime}",
-                  "isEnd":${a.isEnd},
-                  "isVote":${a.isVote!0},
-                  [#assign voteOptionVos=a.voteOptionVos]
-                  [#if voteOptionVos?? && voteOptionVos?size>0]
-                    "voteOptions":[
-                         [#list voteOptionVos as b]
-                            {   "id":${b.id},
-                                "content":"${b.content}"
-                            }
-                            [#if b_has_next],[/#if]
-                         [/#list]
-                                    ]
-                  [#else]
-                    "voteOptionVos":[]
-                  [/#if]
+                        "voteDetail":{
+                            "id":${a.id},
+                            "title":"${a.title}",
+                            "content":"${a.content}",
+                            "createDate":"${a.createDate?datetime}",
+                            "isEnd":${a.isEnd},
+                            "isVote":${a.isVote!0}
+                        },
+                      [#assign voteOptionVos=a.voteOptionVos]
+                      [#if voteOptionVos?? && voteOptionVos?size>0]
+                        "voteOptions":[
+                             [#list voteOptionVos as b]
+                                {   "id":${b.id},
+                                    "content":"${b.content}"
+                                }
+                                [#if b_has_next],[/#if]
+                             [/#list]
+                                        ]
+                      [#else]
+                        "voteOptionVos":[]
+                      [/#if]
                 }
-                [#if a_has_next],[/#if]
-            [/#list]
-               ]
-    [#else]
-        "data":[]
-    [/#if]
+                    [#if a_has_next],[/#if]
+                [/#list]
+                   ]
+        [#else]
+            "voteList":[]
+        [/#if]
+    }
 }
