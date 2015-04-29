@@ -10,7 +10,6 @@ import com.faxintong.iruyi.service.topic.TopicService;
 import com.faxintong.iruyi.utils.Pager;
 import com.faxintong.iruyi.utils.Result;
 import com.faxintong.iruyi.utils.ServletUtils;
-import com.google.common.collect.Maps;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Map;
 
 import static com.faxintong.iruyi.utils.Constants.*;
 
@@ -302,23 +300,22 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "getReportArticles")
-    public Map<String, Object> getReportArticles(HttpServletRequest request, Pager pager){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String getReportArticles(HttpServletRequest request, Pager pager, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
         try {
             if(pager == null || pager.getCurrentPage() == null){
-                result.put(ERRMESSAGE, "当前页为null");
+                modelMap.put(ERRMESSAGE, "当前页为null");
             }else{
                 List<AppArticle> list = lawyerService.getReportArticles(pager, getLawyerId(request));
-                result.put(ERRCODE, 1);
-                result.put(ERRMESSAGE, "获取文章列表成功！");
-                result.put(DATA, list);
+                modelMap.put(ERRCODE, RESULTSUCCESS);
+                modelMap.put(ERRMESSAGE, "获取文章列表成功！");
+                modelMap.put(DATA, list);
             }
         }catch (Exception e){
             logger.error("获取文章列表失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "获取文章列表失败!");
+            modelMap.put(ERRMESSAGE, "获取文章列表失败!");
         }
-        return result;
+        return "article/articleList";
     }
 
     /**
@@ -327,23 +324,22 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "getStoreArticles")
-    public Map<String, Object> getStoreArticles(HttpServletRequest request, Pager pager){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String getStoreArticles(HttpServletRequest request, Pager pager, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
         try {
             if(pager == null || pager.getCurrentPage() == null){
-                result.put(ERRMESSAGE, "当前页为null");
+                modelMap.put(ERRMESSAGE, "当前页为null");
             }else{
                 List<AppArticle> list = lawyerService.getStoreArticles(pager, getLawyerId(request));
-                result.put(ERRCODE, 1);
-                result.put(ERRMESSAGE, "获取收藏文章列表成功！");
-                result.put(DATA, list);
+                modelMap.put(ERRCODE, RESULTSUCCESS);
+                modelMap.put(ERRMESSAGE, "获取收藏文章列表成功！");
+                modelMap.put(DATA, list);
             }
         }catch (Exception e){
             logger.error("获取收藏文章列表失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "获取收藏文章列表失败!");
+            modelMap.put(ERRMESSAGE, "获取收藏文章列表失败!");
         }
-        return result;
+        return "article/articleList";
     }
 
     /**
@@ -352,23 +348,22 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "praiseArticleComments")
-    public Map<String, Object> praiseArticleComments(HttpServletRequest request, Pager pager){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String praiseArticleComments(HttpServletRequest request, Pager pager, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
         try {
             if(pager == null || pager.getCurrentPage() == null){
-                result.put(ERRMESSAGE, "当前页为null");
+                modelMap.put(ERRMESSAGE, "当前页为null");
             }else{
                 List<ArticleComment> list = lawyerService.praiseArticleComments(pager, getLawyerId(request));
-                result.put(ERRCODE, 1);
-                result.put(ERRMESSAGE, "获取赞过的文章评论列表成功！");
-                result.put(DATA, list);
+                modelMap.put(ERRCODE, RESULTSUCCESS);
+                modelMap.put(ERRMESSAGE, "获取赞过的文章评论列表成功！");
+                modelMap.put(DATA, list);
             }
         }catch (Exception e){
             logger.error("获取赞过的文章评论列表失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "获取赞过的文章评论列表失败!");
+            modelMap.put(ERRMESSAGE, "获取赞过的文章评论列表失败!");
         }
-        return result;
+        return "";
     }
 
     /**
@@ -377,22 +372,21 @@ public class LawyerController extends BaseController{
      * @return
      */
     @RequestMapping(value = "getStoreActives")
-    public Map<String, Object> getStoreActives(HttpServletRequest request, Pager pager){
-        Map<String, Object> result = Maps.newHashMap();
-        result.put(ERRCODE, 0);
+    public String getStoreActives(HttpServletRequest request, Pager pager, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
         try {
             if(pager == null || pager.getCurrentPage() == null){
-                result.put(ERRMESSAGE, "当前页为null");
+                modelMap.put(ERRMESSAGE, "当前页为null");
             }else{
                 List<ActiveVo> list = lawyerService.getStoreActives(pager, getLawyerId(request));
-                result.put(ERRCODE, 1);
-                result.put(ERRMESSAGE, "获取收藏活动列表成功！");
-                result.put(DATA, list);
+                modelMap.put(ERRCODE, RESULTSUCCESS);
+                modelMap.put(ERRMESSAGE, "获取收藏活动列表成功！");
+                modelMap.put(DATA, list);
             }
         }catch (Exception e){
             logger.error("获取收藏活动列表失败:" + e.getMessage());
-            result.put(ERRMESSAGE, "获取收藏活动列表失败!");
+            modelMap.put(ERRMESSAGE, "获取收藏活动列表失败!");
         }
-        return result;
+        return "active/getActiveList";
     }
 }

@@ -13,12 +13,12 @@ import java.util.List;
 @OperateMyBatis
 public interface ActiveGeneralMapper {
 
-    String VIEW = "id,title,content,photo_url as photoUrl,address,active_time as activeTime,create_date as createDate";
+    String VIEW = "a.id,a.title,a.content,a.photo_url as photoUrl,a.address,a.active_time as activeTime,a.create_date as createDate";
 
-    @Select("select " + VIEW + " from active limit #{startCount},#{pagerSize}")
+    @Select("select " + VIEW + " from active a limit #{startCount},#{pagerSize}")
     public List<Active> getActiveList(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize);
 
-    @Select("select " + VIEW + " from active where lawyer_id=#{lawyerId} limit #{startCount},#{pagerSize}")
+    @Select("select " + VIEW + " from active_store s,active a where s.lawyer_id=#{lawyerId} and s.active_id=a.id limit #{startCount},#{pagerSize}")
     public List<Active> getStoreActiveList(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize, @Param("lawyerId") Long lawyerId);
 
     @Select("select l.photo_url from active_store s,lawyer l where s.active_id=#{activeId} and s.lawyer_id=l.id")
