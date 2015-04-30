@@ -7,10 +7,16 @@ package com.faxintong.iruyi.utils;
 public class Result {
     private Integer errcode;
     private String errmessage;
+    private String data;
 
-    public Result(Integer errcode, String errmessage) {
+    public Result(Integer errcode, String errmessage, String data) {
         this.errcode = errcode;
         this.errmessage = errmessage;
+        this.data = data;
+    }
+
+    public Result(Integer errcode, String errmessage) {
+        this(errcode, errmessage, "");
     }
 
     public Integer getErrcode() {
@@ -27,5 +33,13 @@ public class Result {
 
     public void setErrmessage(String errmessage) {
         this.errmessage = errmessage;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }

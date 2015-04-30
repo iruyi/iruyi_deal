@@ -2,9 +2,9 @@
     "errcode":${errcode},
     "errmessage":"${errmessage}",
     "data":{
-        "voteSum":${data.voteSum},
+        "vote_sum":${data.voteSum},
         [#if data.optionNumMap??]
-            "voteResult":{
+            "vote_result":{
                 [#list data.optionNumMap?keys as key]
                     "${key}":${data.optionNumMap[key?string]}
                 [#if key_has_next],[/#if]

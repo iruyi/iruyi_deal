@@ -6,27 +6,26 @@
             "voteList":[
                 [#list data as a]
                 {
-                        "voteDetail":{
-                            "id":${a.id},
-                            "title":"${a.title}",
-                            "content":"${a.content}",
-                            "createDate":"${a.createDate?datetime}",
-                            "isEnd":${a.isEnd},
-                            "isVote":${a.isVote!0}
-                        },
-                      [#assign voteOptionVos=a.voteOptionVos]
-                      [#if voteOptionVos?? && voteOptionVos?size>0]
-                        "voteOptions":[
+                    "vote_id":${a.id},
+                    "vote_title":"${a.title}",
+                    "vote_content":"${a.content}",
+                    "vote_createDate":"${a.createDate?datetime}",
+                    "vote_isEnd":${a.isEnd},
+                    "vote_isVote":${a.isVote!0},
+                    [#assign voteOptionVos=a.voteOptionVos]
+                    [#if voteOptionVos?? && voteOptionVos?size>0]
+                        "vote_options":[
                              [#list voteOptionVos as b]
-                                {   "id":${b.id},
-                                    "content":"${b.content}"
+                                {
+                                    "option_id":${b.id},
+                                    "option_content":"${b.content}"
                                 }
                                 [#if b_has_next],[/#if]
                              [/#list]
                                         ]
-                      [#else]
+                    [#else]
                         "voteOptionVos":[]
-                      [/#if]
+                    [/#if]
                 }
                     [#if a_has_next],[/#if]
                 [/#list]

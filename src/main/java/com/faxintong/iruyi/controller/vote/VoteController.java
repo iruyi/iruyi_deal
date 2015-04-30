@@ -43,19 +43,19 @@ public class VoteController extends BaseController{
     public String getVoteList(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
         try {
             if(pager == null || pager.getCurrentPage() == null){
-                ServletUtils.responseJson(response,new Result(1,"当前页为null！"));
+                ServletUtils.responseJson(response,new Result(RESULTFAIL,"当前页为null！"));
                 return null;
             }
 
             List<VoteVo> voteVoList = voteService.getVoteList(pager,getLawyerId(request));
 
             modelMap.put(DATA,voteVoList);
-            resultModelMap(1, "获取投票列表成功！",modelMap);
+            resultModelMap(RESULTSUCCESS, "获取投票列表成功！",modelMap);
 
             return "vote/getVoteList";
         }catch (Exception e){
             logger.error("获取投票列表失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(1, "获取投票列表失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取投票列表失败！"));
         }
         return null;
     }
@@ -69,19 +69,19 @@ public class VoteController extends BaseController{
     public String voteDetail(Long voteId,ModelMap modelMap,HttpServletResponse response){
         try {
             if(voteId == null){
-                ServletUtils.responseJson(response, new Result(0, "投票ID为空！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "投票ID为空！"));
                 return null;
             }
 
             VoteVo voteVo = voteService.voteDetail(voteId);
 
             modelMap.put(DATA, voteVo);
-            resultModelMap(1,"获取投票详情成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取投票详情成功！",modelMap);
 
             return "vote/voteDetail";
         }catch (Exception e){
             logger.error("获取投票详情失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取投票详情失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取投票详情失败！"));
         }
         return null;
     }
@@ -100,17 +100,17 @@ public class VoteController extends BaseController{
 
             // 非空校验
             if(voteId == null || optionId == null){
-                ServletUtils.responseJson(response,new Result(0,"投票ID或者选项ID不能为空！"));
+                ServletUtils.responseJson(response,new Result(RESULTFAIL,"投票ID或者选项ID不能为空！"));
                 return null;
             }
 
             // 调用投票服务
             voteService.voteChoise(voteId, optionId, lawyerId);
-            ServletUtils.responseJson(response, new Result(1, "投票成功！"));
+            ServletUtils.responseJson(response, new Result(RESULTSUCCESS, "投票成功！"));
 
         }catch (Exception e){
             logger.error("投票失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0,e.getMessage()));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL,e.getMessage()));
         }
         return null;
     }
