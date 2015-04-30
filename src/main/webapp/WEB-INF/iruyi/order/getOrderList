@@ -11,7 +11,11 @@
                       "title":"${a.title}",
                       "content":"${a.content}",
                       "cityName":"${a.cityName!!}",
+                      [#if a.deadDate?? ]
                       "deadDate":"${a.deadDate?datetime}",
+                      [#else]
+                      "deadDate":"",
+                      [/#if]
                       "keyWords":"${a.keyWords}",
                       "price":${(a.price?double)!0.00},
                       "interestCount": ${(a.interestCount)!0},
