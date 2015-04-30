@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 import static com.faxintong.iruyi.utils.Constants.DATA;
+import static com.faxintong.iruyi.utils.Constants.RESULTFAIL;
+import static com.faxintong.iruyi.utils.Constants.RESULTSUCCESS;
 
 /**
  * Created by admin on 15-4-18.
@@ -42,19 +44,19 @@ public class DiscussController extends BaseController{
         try {
             // 参数校验
             if(pager == null || pager.getCurrentPage() == null) {
-                ServletUtils.responseJson(response, new Result(0, "当前页为null"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为null"));
                 return null;
             }
 
             List<TopicAllVo> topicAllVoList = discussService.getDiscussList(pager,getLawyerId(request));
 
             modelMap.put(DATA, topicAllVoList);
-            resultModelMap(1,"获取讨论列表成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取讨论列表成功！",modelMap);
 
             return "topic/getDiscussList";
         }catch (Exception e){
             logger.error("获取讨论列表失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取讨论列表失败!"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取讨论列表失败!"));
         }
         return null;
     }

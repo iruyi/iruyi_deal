@@ -6,8 +6,8 @@
             "groupList":[
                 [#list data as a]
                     {
-                      "id":${a.id},
-                      "groupName":"${a.groupName}"
+                      "group_id":${a.id},
+                      "group_name":"${a.groupName}"
                     }
                     [#if a_has_next],[/#if]
                 [/#list]
