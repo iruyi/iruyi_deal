@@ -38,10 +38,6 @@ public class VoteController extends BaseController{
      * @param pager
      * @return
      *
-     * @note
-     *  获取投票列表
-     *   无需登录
-     *   获取信息：标题、是否结束、创建时间、内容、选项
      */
     @RequestMapping(value = "getVoteList")
     public String getVoteList(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
@@ -59,7 +55,7 @@ public class VoteController extends BaseController{
             return "vote/getVoteList";
         }catch (Exception e){
             logger.error("获取投票列表失败:" + e.getMessage());
-            resultModelMap(0, "获取投票列表失败!",modelMap);
+            ServletUtils.responseJson(response, new Result(1, "获取投票列表失败！"));
         }
         return null;
     }
@@ -68,18 +64,12 @@ public class VoteController extends BaseController{
      * 获取投票详情
      * @param voteId
      * @return
-     *
-     * @note
-     *  获取投票详情
-     *   无需登录
-     *   获取信息：投票参与总人数，投票各项的投票数(投票相关信息已经在列表的时候返给前端)
-     *
      */
     @RequestMapping(value = "voteDetail")
-    public String voteDetail(Long voteId,ModelMap modelMap){
+    public String voteDetail(Long voteId,ModelMap modelMap,HttpServletResponse response){
         try {
             if(voteId == null){
-                resultModelMap(0,"投票ID为空！",modelMap);
+                ServletUtils.responseJson(response, new Result(0, "投票ID为空！"));
                 return null;
             }
 
@@ -91,7 +81,7 @@ public class VoteController extends BaseController{
             return "vote/voteDetail";
         }catch (Exception e){
             logger.error("获取投票详情失败:" + e.getMessage());
-            resultModelMap(0,"投票ID为空！",modelMap);
+            ServletUtils.responseJson(response, new Result(0, "获取投票详情失败！"));
         }
         return null;
     }
@@ -101,11 +91,6 @@ public class VoteController extends BaseController{
      * @param voteId
      * @param optionId
      * @return
-     *
-     * @note
-     *  这里理解投票为非必须登录操作
-     *   如果登录，则在投票结果里记录对应用户ID
-     *   否则不记录，不影响APP逻辑
      */
     @RequestMapping(value = "voteChoise")
     public String voteChoise(Long voteId, Long optionId, HttpServletRequest request, HttpServletResponse response){
@@ -125,7 +110,7 @@ public class VoteController extends BaseController{
 
         }catch (Exception e){
             logger.error("投票失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "投票失败！"));
+            ServletUtils.responseJson(response, new Result(0,e.getMessage()));
         }
         return null;
     }
