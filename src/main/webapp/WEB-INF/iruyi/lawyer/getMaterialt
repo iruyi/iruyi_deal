@@ -2,11 +2,11 @@
     "errcode":${errcode},
     "errmessage":"${errmessage}",
     "data":{
-        "id":${data.id},
-        "name":"${data.name!!}",
-        "cityName":"${data.cityName!!}",
-        "photoUrl":"${data.photoUrl!!}",
-        "lawOffice":"${data.lawOffice!!}",
-        "introduction":"${data.introduction!!}"
+        "lawyer_id":${data.id},
+        "lawyer_name":"${data.name!!}",
+        "lawyer_cityName":"${data.cityName!!}",
+        "lawyer_photoUrl":"${data.photoUrl!!}",
+        "lawyer_lawOffice":"${data.lawOffice!!}",
+        "lawyer_introduction":"${data.introduction!!}"
     }
 }

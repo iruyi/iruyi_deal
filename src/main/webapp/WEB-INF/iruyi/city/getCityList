@@ -6,8 +6,8 @@
             "cityList":[
                 [#list data as a]
                     {
-                      "id":${a.id},
-                      "name":"${a.name!!}"
+                      "city_id":${a.id},
+                      "city_name":"${a.name!!}"
                     }
                     [#if a_has_next],[/#if]
                 [/#list]

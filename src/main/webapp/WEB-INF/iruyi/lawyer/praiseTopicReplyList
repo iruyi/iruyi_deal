@@ -3,17 +3,17 @@
     "errmessage":"${errmessage}",
     "data":{
         [#if data?? && data?size>0]
-            "topicList":[
+            "topicReplyList":[
                 [#list data as a]
                     {
-                      "lawyerId":${lawyer.id},
-                      "lawyerName":"${lawyer.name!!}",
-                      "photoUrl":"${lawyer.photoUrl!!}",
-                      "praiseId":${a.id},
-                      "replyContent":"${a.content}",
-                      "createDate":"${a.createDate?datetime}",
-                      "topicId":"${a.topicVo.id}",
-                      "topicContent":"${a.topicVo.content}"
+                      "reply_lawyerId":${lawyer.id},
+                      "reply_lawyerName":"${lawyer.name!!}",
+                      "reply_lawyerPhotoUrl":"${lawyer.photoUrl!!}",
+                      "reply_id":${a.id},
+                      "reply_content":"${a.content}",
+                      "reply_createDate":"${a.createDate?datetime}",
+                      "topic_id":"${a.topicVo.id}",
+                      "topic_content":"${a.topicVo.content}"
                     }
                     [#if a_has_next],[/#if]
                 [/#list]

@@ -55,6 +55,7 @@
         <if test="type != null and type == 1">
             where tp.id in (select trp.reply_id from topic_reply_praise trp where trp.lawyer_id = #{lawyerId})
         </if>
+        limit #{startCount},${pageSize}
     </select>
     <select id="selectTopicVoByReplyVo" resultType="com.faxintong.iruyi.model.mybatis.vo.TopicVo">
         select t.id,t.content

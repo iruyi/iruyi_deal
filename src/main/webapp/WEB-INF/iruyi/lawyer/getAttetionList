@@ -6,9 +6,9 @@
             "lawyerList":[
                 [#list data as a]
                     {
-                      "id":${a.id},
-                      "name":"${a.name!!}",
-                      "photoUrl":"${a.photoUrl!!}"
+                      "lawyer_id":${a.id},
+                      "lawyer_name":"${a.name!!}",
+                      "lawyer_photoUrl":"${a.photoUrl!!}"
                     }
                     [#if a_has_next],[/#if]
                 [/#list]

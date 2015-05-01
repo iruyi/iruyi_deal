@@ -6,20 +6,20 @@
             "orderList":[
                 [#list data as a]
                     {
-                      "id":${a.id},
-                      "type":${a.type},
-                      "title":"${a.title}",
-                      "content":"${a.content}",
-                      "cityName":"${a.cityName!!}",
+                      "order_id":${a.id},
+                      "order_type":${a.type},
+                      "order_title":"${a.title}",
+                      "order_content":"${a.content}",
+                      "order_cityName":"${a.cityName!!}",
                       [#if a.deadDate?? ]
-                      "deadDate":"${a.deadDate?datetime}",
+                      "order_deadDate":"${a.deadDate?datetime}",
                       [#else]
-                      "deadDate":"",
+                      "order_deadDate":"",
                       [/#if]
-                      "keyWords":"${a.keyWords}",
-                      "price":${(a.price?double)!0.00},
-                      "interestCount": ${(a.interestCount)!0},
-                      "isInterest":${(a.isInterest)!0}
+                      "order_keyWords":"${a.keyWords}",
+                      "order_price":${(a.price?double)!0.00},
+                      "order_interestCount": ${(a.interestCount)!0},
+                      "order_isInterest":${(a.isInterest)!0}
                     }
                     [#if a_has_next],[/#if]
                 [/#list]

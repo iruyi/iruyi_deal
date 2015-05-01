@@ -6,15 +6,15 @@
             "orderList":[
                 [#list data as a]
                     {
-                      "id":${a.id},
-                      "replyContent":"${a.content!!}",
-                      "createDate":"${a.createDate?datetime}",
-                      "lawyerId":${a.lawyerId},
-                      "lawyerName":"${a.lawyerName!!}",
-                      "photoUrl":"${a.photoUrl!!}",
-                      "orderId":${a.orderVo.id},
-                      "orderTitle": "${a.orderVo.title!!}",
-                      "orderContent":"${a.orderVo.content!!}"
+                      "message_id":${a.id},
+                      "message_content":"${a.content!!}",
+                      "message_createDate":"${a.createDate?datetime}",
+                      "message_lawyerId":${a.lawyerId},
+                      "message_lawyerName":"${a.lawyerName!!}",
+                      "message_lawyerPhotoUrl":"${a.photoUrl!!}",
+                      "order_id":${a.orderVo.id},
+                      "order_title": "${a.orderVo.title!!}",
+                      "order_content":"${a.orderVo.content!!}"
                     }
                     [#if a_has_next],[/#if]
                 [/#list]

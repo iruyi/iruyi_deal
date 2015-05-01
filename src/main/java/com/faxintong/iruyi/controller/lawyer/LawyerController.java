@@ -43,28 +43,28 @@ public class LawyerController extends BaseController{
     public String getLawyerInfo(Long lawyerId,Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
         try {
             if(lawyerId == null){
-                ServletUtils.responseJson(response, new Result(0, "律师ID不能为空！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "律师ID不能为空！"));
                 return null;
             }
 
             if(pager == null || pager.getCurrentPage() == null){
-                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为null！"));
                 return null;
             }
 
-            if(pager.getCurrentPage() ==1 ){
+            if(pager.getCurrentPage() ==RESULTSUCCESS ){
                 LawyerVo lawyerVo = lawyerService.getMaterialt(lawyerId);
                 modelMap.put("lawyerInfo", lawyerVo);
             }
 
             List<TopicAllVo> topicAllVoList = topicService.topicAll(pager, lawyerId, getLawyerId(request),null);
             modelMap.put(DATA,topicAllVoList);
-            resultModelMap(1,"获取律师信息成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取律师信息成功！",modelMap);
 
             return "lawyer/getLawyerInfo";
         } catch (Exception e) {
             logger.error("获取律师信息失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取律师信息失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取律师信息失败！"));
         }
         return null;
     }
@@ -77,18 +77,18 @@ public class LawyerController extends BaseController{
     public String getAttetionList(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
         try {
             if(pager == null || pager.getCurrentPage() == null){
-                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为null！"));
                 return null;
             }
 
             List<LawyerVo> lawyerVoList = lawyerService.getAttetionList(pager, getLawyerId(request));
             modelMap.put(DATA,lawyerVoList);
-            resultModelMap(1,"获取我关注的律师列表成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取我关注的律师列表成功！",modelMap);
 
             return "lawyer/getAttetionList";
         } catch (Exception e) {
             logger.error("获取我关注的律师列表失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取我关注的律师列表失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取我关注的律师列表失败！"));
         }
         return null;
     }
@@ -102,18 +102,18 @@ public class LawyerController extends BaseController{
     public String getCityList(Pager pager,ModelMap modelMap,HttpServletResponse response){
         try {
             if(pager == null || pager.getCurrentPage() == null){
-                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为null！"));
                 return null;
             }
 
             List<CityVo> cityVoList = lawyerService.getCityList(pager);
             modelMap.put(DATA,cityVoList);
-            resultModelMap(1,"获取城市列表成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取城市列表成功！",modelMap);
 
             return "city/getCityList";
         } catch (Exception e) {
             logger.error("获取城市列表失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取城市列表失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取城市列表失败！"));
         }
         return null;
     }
@@ -129,11 +129,11 @@ public class LawyerController extends BaseController{
 
             LawyerVo lawyerVo = lawyerService.getMaterialt(getLawyerId(request));
             modelMap.put(DATA, lawyerVo);
-            resultModelMap(1,"获取个人资料成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取个人资料成功！",modelMap);
             return "lawyer/getMaterialt";
         } catch (Exception e) {
             logger.error("获取个人资料失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取个人资料失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取个人资料失败！"));
         }
         return null;
     }
@@ -147,18 +147,18 @@ public class LawyerController extends BaseController{
     public String getOrderList(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
         try {
             if(pager == null || pager.getCurrentPage() == null){
-                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为null！"));
                 return null;
             }
 
             List<OrderVo> orderList = lawyerService.getOrderList(pager, getLawyerId(request));
             modelMap.put(DATA,orderList);
-            resultModelMap(1,"获取我发表的商机列表成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取我发表的商机列表成功！",modelMap);
 
             return "order/getOrderList";
         } catch (Exception e) {
             logger.error("获取城市列表失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取城市列表失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取城市列表失败！"));
         }
         return null;
     }
@@ -172,18 +172,18 @@ public class LawyerController extends BaseController{
     public String getReceiveOrders(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
         try {
             if(pager == null || pager.getCurrentPage() == null){
-                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为null！"));
                 return null;
             }
 
             List<OrderReceiveVo> orderReceiveVoList = lawyerService.getReceiveOrders(pager, getLawyerId(request));
             modelMap.put(DATA,orderReceiveVoList);
-            resultModelMap(1,"获取我感兴趣的商机列表成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取我感兴趣的商机列表成功！",modelMap);
 
             return "lawyer/getReceiveOrders";
         } catch (Exception e) {
-            logger.error("获取我感兴趣的商机列表成功:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取我感兴趣的商机列表成功！"));
+            logger.error("获取我感兴趣的商机列表失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取我感兴趣的商机列表失败！"));
         }
         return null;
     }
@@ -197,19 +197,19 @@ public class LawyerController extends BaseController{
     public String getReportTopics(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
         try {
             if(pager == null || pager.getCurrentPage() == null){
-                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为null！"));
                 return null;
             }
 
             List<TopicVo> topicVoList = lawyerService.getReportTopics(pager, getLawyerId(request));
             modelMap.put(DATA,topicVoList);
-            resultModelMap(1,"获取我发布的话题列表成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取我发布的话题列表成功！",modelMap);
 
             return "lawyer/getReportTopics";
 
         } catch (Exception e) {
             logger.error("获取我发布的话题列表成功:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取我发布的话题列表成功！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取我发布的话题列表成功！"));
         }
         return null;
     }
@@ -223,7 +223,7 @@ public class LawyerController extends BaseController{
     public String getReplyTopics(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
         try {
             if(pager == null || pager.getCurrentPage() == null){
-                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为null！"));
                 return null;
             }
 
@@ -231,12 +231,12 @@ public class LawyerController extends BaseController{
             List<ReplyVo> replyVoList = lawyerService.getReplyTopics(pager,lawyer.getId());
             modelMap.put(DATA,replyVoList);
             modelMap.put("lawyer",lawyer);
-            resultModelMap(1,"获取我回应的话题列表成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取我回应的话题列表成功！",modelMap);
 
             return "lawyer/getReplyTopics";
         } catch (Exception e) {
             logger.error("获取我回应的话题列表失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取我回应的话题列表失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取我回应的话题列表失败！"));
         }
         return null;
     }
@@ -250,19 +250,19 @@ public class LawyerController extends BaseController{
     public String getAttetionTopics(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
         try {
             if(pager == null || pager.getCurrentPage() == null){
-                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为null！"));
                 return null;
             }
 
             Lawyer lawyer = getLawyer(request);
             List<TopicVo> topicVoList = lawyerService.getAttetionTopics(pager, lawyer.getId());
             modelMap.put(DATA,topicVoList);
-            resultModelMap(1,"获取我关注的话题列表成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取我关注的话题列表成功！",modelMap);
 
             return "lawyer/getReportTopics";
         } catch (Exception e) {
             logger.error("获取我关注的话题列表失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取我关注的话题列表失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取我关注的话题列表失败！"));
         }
         return null;
     }
@@ -276,7 +276,7 @@ public class LawyerController extends BaseController{
     public String praiseTopicReplyList(Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
         try {
             if(pager == null || pager.getCurrentPage() == null){
-                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为null！"));
                 return null;
             }
 
@@ -284,12 +284,12 @@ public class LawyerController extends BaseController{
             List<ReplyVo> replyVoList = lawyerService.praiseTopicReplyList(pager, lawyer.getId());
             modelMap.put(DATA,replyVoList);
             modelMap.put("lawyer",lawyer);
-            resultModelMap(1,"获取我赞过的话题回应列表成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取我赞过的话题回应列表成功！",modelMap);
 
             return "lawyer/praiseTopicReplyList";
         } catch (Exception e) {
             logger.error("获取我赞过的话题回应列表失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取我赞过的话题回应列表失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取我赞过的话题回应列表失败！"));
         }
         return null;
     }
