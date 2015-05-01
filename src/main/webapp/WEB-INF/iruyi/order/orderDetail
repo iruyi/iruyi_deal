@@ -4,8 +4,8 @@
     "data":{
         "lawyerRelate":{
                 "fansCount":${(data.fansCount)!0},
-                "issueCount":${(data.issueCount)!0}",
+                "issueCount":${(data.issueCount)!0},
                 "interestCountMy":${(data.interestCountMy)!0}
-    }
+        }
     }
 }

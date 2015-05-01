@@ -42,19 +42,19 @@ public class PositionController extends BaseController {
         try {
             // 参数校验
             if(pager == null || pager.getCurrentPage() == null) {
-                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为null！"));
                 return null;
             }
 
             List<PositionVo> list = positionService.getPositionList(pager);
 
             modelMap.put(DATA, list);
-            resultModelMap(1,"获取招聘列表成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取招聘列表成功！",modelMap);
 
             return "position/getPositionList";
         }catch (Exception e){
             logger.error("获取招聘列表失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取招聘列表失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取招聘列表失败！"));
         }
         return null;
     }
@@ -68,19 +68,19 @@ public class PositionController extends BaseController {
         try {
             // 参数校验
             if(positionId == null) {
-                ServletUtils.responseJson(response, new Result(0, "职位ID为空！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "职位ID为空！"));
                 return null;
             }
 
             PositionVo positionVo = positionService.positionDetail(positionId,getLawyerId(request));
 
             modelMap.put(DATA, positionVo);
-            resultModelMap(0,"获取招聘详情成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取招聘详情成功！",modelMap);
 
             return "position/positionDetail";
         }catch (Exception e){
             logger.error("获取招聘详情失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取招聘详情失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取招聘详情失败！"));
         }
         return null;
     }
@@ -97,16 +97,16 @@ public class PositionController extends BaseController {
         try {
             // 参数校验
             if(positionId == null) {
-                ServletUtils.responseJson(response, new Result(0, "职位ID为空！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "职位ID为空！"));
                 return null;
             }
 
             positionService.positionStore(positionId, getLawyerId(request));
 
-            ServletUtils.responseJson(response, new Result(1, "职位收藏成功！"));
+            ServletUtils.responseJson(response, new Result(RESULTSUCCESS, "职位收藏成功！"));
         }catch (Exception e){
             logger.error("职位收藏失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "职位收藏失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "职位收藏失败！"));
         }
         return null;
     }
@@ -121,18 +121,18 @@ public class PositionController extends BaseController {
         try {
             // 参数校验
             if(pager == null || pager.getCurrentPage() == null) {
-                ServletUtils.responseJson(response, new Result(0, "当前页为null！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为null！"));
                 return null;
             }
 
             List<PositionVo> list = positionService.getPositionList(pager);
             modelMap.put(DATA, list);
-            resultModelMap(1,"获取职位收藏列表成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取职位收藏列表成功！",modelMap);
 
             return "position/getStoreList";
         }catch (Exception e){
             logger.error("获取招聘列表失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取招聘列表失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取招聘列表失败！"));
         }
         return null;
     }

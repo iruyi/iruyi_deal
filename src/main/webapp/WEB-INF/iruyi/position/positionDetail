@@ -2,19 +2,19 @@
     "errcode":${errcode},
     "errmessage":"${errmessage}",
     "data":{
-        "id":${data.id},
-        "salary":"${data.salary!0}",
-        "createDate":"${data.createDate?datetime}",
-        "officeName":"${data.officeName!!}",
-        "cityName":"${data.cityName}",
-        "title":"${data.title}",
-        "content":"${data.content}",
-        "type":${data.type},
-        "education":"${data.education}",
-        "experience":"${data.experience}",
-        "keywords":"${data.keywords}",
-        "officeIntroduction":"${data.officeIntroduction!!}",
-        "officeKeywords":"${data.officeKeywords!!}",
-        "isCollection":${data.isCollection!0}
+        "position_id":${data.id},
+        "position_salary":"${data.salary!0}",
+        "position_createDate":"${data.createDate?datetime}",
+        "position_officeName":"${data.officeName!!}",
+        "position_cityName":"${data.cityName}",
+        "position_title":"${data.title}",
+        "position_content":"${data.content}",
+        "position_type":${data.type},
+        "position_education":"${data.education}",
+        "position_experience":"${data.experience}",
+        "position_keywords":"${data.keywords}",
+        "office_introduction":"${data.officeIntroduction!!}",
+        "office_keywords":"${data.officeKeywords!!}",
+        "position_isCollection":${data.isCollection!0}
     }
 }

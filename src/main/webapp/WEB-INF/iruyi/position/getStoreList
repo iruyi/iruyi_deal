@@ -1,22 +1,24 @@
 {
     "errcode":${errcode},
     "errmessage":"${errmessage}",
-    [#if data?? && data?size>0]
-        "data":[
-            [#list data as a]
-                {
-                  "id":${a.id},
-                  "createDate":"${a.createDate?datetime}",
-                  "officeName":"${a.officeName}",
-                  "cityName":"${a.cityName}",
-                  "salary":"${a.salary!0}",
-                  "type":${a.type}
-                }
-                [#if a_has_next],[/#if]
-            [/#list]
-               ]
-    [#else]
-        "data":[]
-    [/#if]
+    "data":{
+        [#if data?? && data?size>0]
+            "storeList":[
+                [#list data as a]
+                    {
+                      "position_id":${a.id},
+                      "position_createDate":"${a.createDate?datetime}",
+                      "position_officeName":"${a.officeName}",
+                      "position_cityName":"${a.cityName}",
+                      "position_salary":"${a.salary!0}",
+                      "position_type":${a.type}
+                    }
+                    [#if a_has_next],[/#if]
+                [/#list]
+                   ]
+        [#else]
+            "storeList":[]
+        [/#if]
+    }
 }
 

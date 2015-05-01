@@ -6,13 +6,13 @@
             "positionList":[
                 [#list data as a]
                     {
-                      "id":${a.id},
-                      "createDate":"${a.createDate?datetime}",
-                      "officeName":"${a.officeName!!}",
-                      "type":${a.type!0},
-                      "cityName":"${a.cityName}",
-                      "salary":"${a.salary!0}",
-                      "photo":"${a.photo!!}"
+                      "position_id":${a.id},
+                      "position_createDate":"${a.createDate?datetime}",
+                      "position_officeName":"${a.officeName!!}",
+                      "position_type":${a.type!0},
+                      "position_cityName":"${a.cityName}",
+                      "position_salary":"${a.salary!0}",
+                      "position_officePhoto":"${a.photo!!}"
                     }
                     [#if a_has_next],[/#if]
                 [/#list]
