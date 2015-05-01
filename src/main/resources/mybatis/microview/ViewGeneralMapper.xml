@@ -22,6 +22,7 @@
     from microview_discuss d
     inner join lawyer l on l.id = d.lawyer_id
     where d.interview_id = #{microViewId}
+    limit #{startCount},#{pageSize}
   </select>
 
   <select id="selectViewVoOne" parameterType="map" resultType="com.faxintong.iruyi.model.mybatis.vo.ViewVo">

@@ -21,9 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
-import static com.faxintong.iruyi.utils.Constants.DATA;
-import static com.faxintong.iruyi.utils.Constants.ERRCODE;
-import static com.faxintong.iruyi.utils.Constants.ERRMESSAGE;
+import static com.faxintong.iruyi.utils.Constants.*;
 
 /**
  * Created by admin on 15-4-18.
@@ -50,19 +48,19 @@ public class ViewController extends BaseController{
         try {
             // 参数校验
             if(pager == null || pager.getCurrentPage() == null) {
-                ServletUtils.responseJson(response, new Result(0, "当前页为空！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为空！"));
                 return null;
             }
 
             List<ViewVo> viewList = viewService.getViewList(pager,getLawyerId(request));
 
             modelMap.put(DATA,viewList);
-            resultModelMap(1,"获取微访谈列表成功！",modelMap);
+            resultModelMap(RESULTSUCCESS,"获取微访谈列表成功！",modelMap);
 
             return "view/getViewList";
         }catch (Exception e){
             logger.error("获取微访谈列表失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "获取微访谈列表失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取微访谈列表失败！"));
         }
         return null;
     }
@@ -73,23 +71,23 @@ public class ViewController extends BaseController{
      * @return
      */
     @RequestMapping(value = "viewDetail")
-    public String viewDetail(Long microViewId,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
+    public String viewDetail(Long microViewId,Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
         try {
             // 参数校验
             if(microViewId == null) {
-                ServletUtils.responseJson(response, new Result(0, "微访谈ID为空！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "微访谈ID为空！"));
                 return null;
             }
 
-            ViewVo viewVo = viewService.viewDetail(microViewId, getLawyerId(request));
+            ViewVo viewVo = viewService.viewDetail(microViewId, getLawyerId(request),pager);
 
             modelMap.put(DATA, viewVo);
-            resultModelMap(1, "查看微访谈详情成功！", modelMap);
+            resultModelMap(RESULTSUCCESS, "查看微访谈详情成功！", modelMap);
 
             return "view/viewDetail";
         }catch (Exception e){
             logger.error("查看微访谈详情失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "查看微访谈详情失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "查看微访谈详情失败！"));
         }
         return null;
     }
@@ -104,17 +102,17 @@ public class ViewController extends BaseController{
         try {
             // 参数校验
             if(microViewId == null) {
-                ServletUtils.responseJson(response, new Result(0, "微访谈ID为空！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "微访谈ID为空！"));
                 return null;
             }
 
             viewService.viewAttention(microViewId,getLawyerId(request));
 
-            ServletUtils.responseJson(response, new Result(0, "关注微访谈成功！"));
+            ServletUtils.responseJson(response, new Result(RESULTSUCCESS, "关注微访谈成功！"));
 
         }catch (Exception e){
             logger.error("关注微访谈失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "关注微访谈失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "关注微访谈失败！"));
         }
         return null;
     }
@@ -131,15 +129,15 @@ public class ViewController extends BaseController{
         try {
             // 参数校验
             if(microViewId == null || StringUtils.isEmpty(content) ) {
-                ServletUtils.responseJson(response, new Result(0, "微访谈ID或者讨论内容为空！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "微访谈ID或者讨论内容为空！"));
                 return null;
             }
 
             viewService.viewDiscuss(getLawyer(request), microViewId, content, 0);
-            ServletUtils.responseJson(response, new Result(0, "微访谈讨论成功！"));
+            ServletUtils.responseJson(response, new Result(RESULTSUCCESS, "微访谈讨论成功！"));
         }catch (Exception e){
             logger.error("微访谈讨论失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "微访谈讨论失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "微访谈讨论失败！"));
         }
         return null;
     }
@@ -154,16 +152,16 @@ public class ViewController extends BaseController{
         try {
             // 参数校验
             if(discussId == null) {
-                ServletUtils.responseJson(response, new Result(0, "讨论ID为空！"));
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "讨论ID为空！"));
                 return null;
             }
 
             viewService.discussPraise(discussId,getLawyerId(request));
 
-            ServletUtils.responseJson(response, new Result(0, "访谈讨论点赞成功！"));
+            ServletUtils.responseJson(response, new Result(RESULTSUCCESS, "访谈讨论点赞成功！"));
         }catch (Exception e){
             logger.error("访谈讨论点赞失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(0, "访谈讨论点赞失败！"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "访谈讨论点赞失败！"));
         }
         return null;
     }

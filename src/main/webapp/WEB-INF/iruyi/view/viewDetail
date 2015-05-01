@@ -3,23 +3,23 @@
     "errmessage":"${errmessage}",
     "data":{
         "viewDetail":{
-                "introduction":"${data.introduction!!}",
-                "fansCount":${(data.fansCount)!0},
-                "isAtten":${(data.isAtten)!0}
+                "lawyer_introduction":"${data.introduction!!}",
+                "lawyer_fansCount":${(data.fansCount)!0},
+                "view_isAtten":${(data.isAtten)!0}
             },
             [#if data.viewDiscussVoList?? && data.viewDiscussVoList?size>0]
-                "viewDisscusses":[
+                "viewDiscusses":[
                     [#list data.viewDiscussVoList as a]
                         {
-                          "id":${a.id},
-                          "type":"${a.type}",
-                          "content":"${a.content}",
-                          "createDate":"${a.createDate?datetime}",
-                          "lawyerId":${a.lawyerId},
-                          "lawyerName":"${a.lawyerName!!}",
-                          "photoUrl":"${a.photoUrl!!}",
-                          "praiseCount":${(a.praiseCount)!0},
-                          "isParise":${(a.isParise)!0}
+                          "discuss_id":${a.id},
+                          "discuss_type":"${a.type}",
+                          "discuss_content":"${a.content}",
+                          "discuss_createDate":"${a.createDate?datetime}",
+                          "discuss_lawyerId":${a.lawyerId},
+                          "discuss_lawyerName":"${a.lawyerName!!}",
+                          "discuss_lawyerPhotoUrl":"${a.photoUrl!!}",
+                          "discuss_praiseCount":${(a.praiseCount)!0},
+                          "discuss_isPraise":${(a.isPraise)!0}
                         }
                         [#if a_has_next],[/#if]
                     [/#list]

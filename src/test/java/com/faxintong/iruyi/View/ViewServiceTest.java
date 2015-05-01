@@ -31,7 +31,7 @@ public class ViewServiceTest extends BaseTest {
     @Test
     public void testViewDetail() {
         try {
-            ViewVo viewVo = viewService.viewDetail(1L,28L);
+            ViewVo viewVo = viewService.viewDetail(1L,28L,pager);
             System.out.println("律师简介：" + viewVo.getIntroduction() + ",粉丝数" + viewVo.getFansCount());
             for(ViewDiscussVo viewDiscussVo : viewVo.getViewDiscussVoList()) {
                 System.out.println(viewDiscussVo.getContent()+","+viewDiscussVo.getPraiseCount());

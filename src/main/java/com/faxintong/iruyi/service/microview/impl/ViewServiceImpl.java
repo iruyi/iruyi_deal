@@ -31,9 +31,9 @@ public class ViewServiceImpl implements ViewService{
 
     @Override
     //TODO 以后要加分页
-    public ViewVo viewDetail(Long microViewId,Long lawyerId) {
+    public ViewVo viewDetail(Long microViewId,Long lawyerId,Pager pager) {
         ViewVo viewVo = viewGeneralMapper.selectViewVoOne(microViewId,lawyerId);
-        List<ViewDiscussVo> viewDiscussList = viewGeneralMapper.selectViewDiscussVo(microViewId,lawyerId);
+        List<ViewDiscussVo> viewDiscussList = viewGeneralMapper.selectViewDiscussVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),microViewId,lawyerId);
         viewVo.setViewDiscussVoList(viewDiscussList);
         return viewVo;
     }

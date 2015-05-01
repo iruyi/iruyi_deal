@@ -6,17 +6,17 @@
             "viewList":[
                 [#list data as a]
                     {
-                      "id":${a.id},
-                      "title":"${a.title!!}",
-                      "content":"${a.content}",
-                      "createDate":"${a.createDate?datetime}",
-                      "isLive": ${(a.isLive)!0},
-                      "lawyerId":${a.lawyerId},
-                      "lawyerName":"${a.lawyerName!!}",
-                      "photoUrl":"${a.photoUrl!!}",
-                      "isAtten":${(a.isAtten)!0},
-                      "viewTime":"${a.viewTime?datetime}",
-                      "endTime":"${a.endTime?datetime}"
+                      "view_id":${a.id},
+                      "view_title":"${a.title!!}",
+                      "view_content":"${a.content}",
+                      "view_createDate":"${a.createDate?datetime}",
+                      "view_isLive": ${(a.isLive)!0},
+                      "view_lawyerId":${a.lawyerId},
+                      "view_lawyerName":"${a.lawyerName!!}",
+                      "view_lawyerPhotoUrl":"${a.photoUrl!!}",
+                      "view_isAtten":${(a.isAtten)!0},
+                      "view_viewTime":"${a.viewTime?datetime}",
+                      "view_endTime":"${a.endTime?datetime}"
                     }
                     [#if a_has_next],[/#if]
                 [/#list]

@@ -26,7 +26,7 @@ public interface ViewService {
      * @param microViewId
      * @return
      */
-    public ViewVo viewDetail(Long microViewId,Long lawyerId) throws Exception;
+    public ViewVo viewDetail(Long microViewId,Long lawyerId,Pager pager) throws Exception;
 
     /**
      * 关注微访谈

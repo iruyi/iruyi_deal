@@ -27,5 +27,5 @@ public interface ViewGeneralMapper {
 
     ViewVo selectViewVoOne(@Param("microViewId")Long microViewId,@Param("lawyerId")Long lawyerId);
 
-    List<ViewDiscussVo> selectViewDiscussVo(@Param("microViewId")Long microViewId,@Param("lawyerId")Long lawyerId);
+    List<ViewDiscussVo> selectViewDiscussVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize,@Param("microViewId")Long microViewId,@Param("lawyerId")Long lawyerId);
 }
