@@ -52,7 +52,7 @@ public class LawyerController extends BaseController{
                 return null;
             }
 
-            if(pager.getCurrentPage() ==RESULTSUCCESS ){
+            if(pager.getCurrentPage() == 1 ){
                 LawyerVo lawyerVo = lawyerService.getMaterialt(lawyerId);
                 modelMap.put("lawyerInfo", lawyerVo);
             }
