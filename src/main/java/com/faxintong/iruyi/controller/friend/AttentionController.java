@@ -66,10 +66,10 @@ public class AttentionController extends BaseController{
 
             attentionService.delAtten(getLawyerId(request), attenId);
 
-            ServletUtils.responseJson(response,new Result(RESULTSUCCESS,"关注成功！"));
+            ServletUtils.responseJson(response,new Result(RESULTSUCCESS,"删除成功！"));
         }catch (Exception e){
             logger.error("关注失败:" + e.getMessage());
-            ServletUtils.responseJson(response, new Result(RESULTFAIL, "关注失败!"));
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "删除失败!"));
         }
         return null;
     }

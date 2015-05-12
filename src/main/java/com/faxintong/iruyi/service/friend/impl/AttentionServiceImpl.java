@@ -29,7 +29,9 @@ public class AttentionServiceImpl implements AttentionService {
         // add 20150510 如果相互关注，则添加环信好友；两者都成功才成功
         // 环信加好友都是双向的
         int n = attentionGeneralMapper.selectIsAttent(attenId,lawyerId);
-        hxService.makeHxFriend(lawyerId.toString(), attenId.toString());
+        if(n>0) {
+            hxService.makeHxFriend(lawyerId.toString(), attenId.toString());
+        }
     }
 
     @Override
