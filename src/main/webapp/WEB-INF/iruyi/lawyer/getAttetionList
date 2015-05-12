@@ -8,7 +8,8 @@
                     {
                       "lawyer_id":${a.id},
                       "lawyer_name":"${a.name!!}",
-                      "lawyer_photoUrl":"${a.photoUrl!!}"
+                      "lawyer_photoUrl":"${a.photoUrl!!}",
+                      "lawyer_isAttenEachOther":${a.isAttenEachOther!0}
                     }
                     [#if a_has_next],[/#if]
                 [/#list]

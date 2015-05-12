@@ -18,6 +18,8 @@ public class LawyerVo {
     private Integer attentionCount;
     private Integer fansCount;
 
+    private Integer isAttenEachOther;
+
     private List<TopicVo> topicVoList;
 
     public Long getId() {
@@ -90,5 +92,13 @@ public class LawyerVo {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+
+    public Integer getIsAttenEachOther() {
+        return isAttenEachOther;
+    }
+
+    public void setIsAttenEachOther(Integer isAttenEachOther) {
+        this.isAttenEachOther = isAttenEachOther;
     }
 }

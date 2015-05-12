@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.faxintong.iruyi.dao.general.GroupGeneralMapper" >
+  <insert id="insertLawyerGroup" parameterType="com.faxintong.iruyi.model.mybatis.vo.GroupVo">
+    insert into lawyer_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        groupid,
+      </if>
+      <if test="groupName != null" >
+        groupname,
+      </if>
+      <if test="desc != null" >
+        `desc`,
+      </if>
+      <if test="isPublic != null" >
+        public,
+      </if>
+      <if test="isApproval != null" >
+        approval,
+      </if>
+      <if test="password != null" >
+        `password`,
+      </if>
+      <if test="maxUsers != null" >
+        maxusers,
+      </if>
+      <if test="affiliationsCount != null" >
+        affiliations_count,
+      </if>
+      <if test="ownerId != null" >
+        ownerid,
+      </if>
+        create_time,
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null" >
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="desc != null" >
+        #{desc,jdbcType=VARCHAR},
+      </if>
+      <if test="isPublic != null" >
+        #{isPublic,jdbcType=BIGINT},
+      </if>
+      <if test="isApproval != null" >
+        #{isApproval,jdbcType=BIGINT},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="maxUsers != null" >
+        #{maxUsers,jdbcType=BIGINT},
+      </if>
+      <if test="affiliationsCount != null" >
+        #{affiliationsCount,jdbcType=BIGINT},
+      </if>
+      <if test="ownerId != null" >
+        #{ownerId,jdbcType=BIGINT},
+      </if>
+      now()
+    </trim>
+  </insert>
+
+  <insert id="insertLawyerGroupMem" parameterType="map">
+    insert into lawyer_group_member(lawyer_id,group_id,create_time)
+    values
+    <trim suffix="" suffixOverrides=",">
+      <foreach collection="lawyerIds" item="item" separator="," >
+        (#{item},#{groupId},now())
+      </foreach>
+    </trim>
+  </insert>
+</mapper>

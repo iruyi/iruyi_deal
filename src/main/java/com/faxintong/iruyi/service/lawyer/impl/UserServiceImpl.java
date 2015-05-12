@@ -3,9 +3,11 @@ package com.faxintong.iruyi.service.lawyer.impl;
 import com.faxintong.iruyi.dao.mybatis.lawyer.LawyerMapper;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.lawyer.LawyerExample;
+import com.faxintong.iruyi.service.im.HxService;
 import com.faxintong.iruyi.service.lawyer.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -16,10 +18,17 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private LawyerMapper lawyerMapper;
+    @Autowired
+    private HxService hxService;
 
     @Override
+    @Transactional
     public void registerLawyer(Lawyer lawyer) throws Exception {
+        // 修改插入mapper ，返回插入值的id
         lawyerMapper.insertSelective(lawyer);
+        // add 20150510 添加用户时，添加环信用户；两者都成功才成功
+        Lawyer lawyer1 = getLawyer(lawyer.getPhone());
+        hxService.registerHxUser(lawyer1.getId().toString(), String.valueOf(lawyer1.getPassword().hashCode()));
     }
 
     @Override

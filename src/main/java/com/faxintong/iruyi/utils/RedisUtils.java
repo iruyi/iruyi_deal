@@ -102,6 +102,21 @@ public class RedisUtils {
         }
     }
 
+    public static void set(String key,String value,int expireTime) {
+        Jedis jedis = getJedis();
+        try {
+            jedis.set(key, value);
+            jedis.expire(key, expireTime);
+            logger.info("向缓存中写入数据,key="+key+",value="+value);
+        } catch (Exception e) {
+            e.printStackTrace();
+            RedisUtils.closeJedis(jedis);
+            logger.info("将对象放入缓存时发生异常,key=" + key + ",value=" + value + ",e=" + e.getMessage());
+        } finally {
+            RedisUtils.closeJedis(jedis);
+        }
+    }
+
     /**
      * Jedis get 方法
      * @param key

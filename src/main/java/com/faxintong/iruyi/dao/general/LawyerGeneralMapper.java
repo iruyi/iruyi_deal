@@ -27,6 +27,7 @@ public interface LawyerGeneralMapper {
 
     @ResultType(LawyerVo.class)
     @Select("select l.id,name,l.photo_url photoUrl" +
+            " ,(select count(*) from lawyer_attention la1 where la1.lawyer_id = la.other_lawyer_id and la1.other_lawyer_id = #{lawyerId}) isAttenEachOther" +
             " from lawyer_attention la" +
             " inner join lawyer l on l.id = la.other_lawyer_id" +
             " where la.lawyer_id = #{lawyerId}" +

@@ -1,5 +1,23 @@
 package com.faxintong.iruyi.utils;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by hehj on 15-1-3.
  */
@@ -89,4 +107,29 @@ public class Constants {
 
     /*************************文章类型*********************/
     public static final Integer PAPER = 1; //文章
+
+
+    /***************************环信*********************/
+    // API_HTTP_SCHEMA
+    public static String API_HTTP_SCHEMA = "https";
+    // API_SERVER_HOST
+    public static String API_SERVER_HOST = PropertiesUtils.getHxValue("API_SERVER_HOST");
+    // APPKEY
+    public static String APPKEY = PropertiesUtils.getHxValue("APPKEY");
+    // APP_CLIENT_ID
+    public static String APP_CLIENT_ID = PropertiesUtils.getHxValue("APP_CLIENT_ID");
+    // APP_CLIENT_SECRET
+    public static String APP_CLIENT_SECRET = PropertiesUtils.getHxValue("APP_CLIENT_SECRET");
+
+    // ROLE_ADMIN
+    public static String USER_ROLE_APPADMIN = "appAdmin";
+
+    // URL
+    public static final URL TOKEN_APP_URL = HxUtils.getURL(APPKEY.replace("#", "/") + "/token");
+    public static final URL USERS_URL = HxUtils.getURL(APPKEY.replace("#", "/") + "/users");
+    public static final URL CHATGROUPS_URL = HxUtils.getURL(APPKEY.replace("#", "/") + "/chatgroups");
+
+
+    // GROUPMAXUSERS
+    public static final Integer GROUP_MAXUSERS = 9999;
 }

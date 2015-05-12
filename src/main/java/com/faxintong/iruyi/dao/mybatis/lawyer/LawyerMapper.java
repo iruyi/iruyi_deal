@@ -16,7 +16,7 @@ public interface LawyerMapper {
 
     int insert(Lawyer record);
 
-    int insertSelective(Lawyer record);
+    Long insertSelective(Lawyer record);
 
     List<Lawyer> selectByExample(LawyerExample example);
 
