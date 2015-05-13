@@ -49,6 +49,15 @@ public class ActiveServiceImpl implements ActiveService {
                 Integer count = activePraiseMapper.countByExample(example);
                 ActiveVo activeVo = new ActiveVo();
                 activeVo.setPraiseCount(count);
+
+                ActiveStoreExample storeExample = new ActiveStoreExample();
+                example.createCriteria().andActiveIdEqualTo(active.getId());
+                Integer storeCount = activeStoreMapper.countByExample(storeExample);
+                if(storeCount != null && storeCount.intValue() > 0){
+                    activeVo.setIsCollect(1);//已关注
+                }else{
+                    activeVo.setIsCollect(0);//未关注
+                }
                 PropertyUtils.copyProperties(activeVo, active);
                 activeVoList.add(activeVo);
             }

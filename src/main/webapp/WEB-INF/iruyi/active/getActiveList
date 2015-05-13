@@ -5,10 +5,11 @@
         "data":{"activeList":[
             [#list data as a]
                 {
-                  "title":${a.title},
+                  "title":"${a.title}",
                   "photoUrl":"${a.photoUrl}",
                   "activeTime":"${a.activeTime?datetime}",
-                  "praiseCount":${a.praiseCount}
+                  "praiseCount":${a.praiseCount},
+                  "isCollect":${a.isCollect}
                 }
                 [#if a_has_next],[/#if]
             [/#list]

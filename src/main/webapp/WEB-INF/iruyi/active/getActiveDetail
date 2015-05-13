@@ -3,8 +3,8 @@
     "errmessage":"${errmessage}",
     [#if data??]
         "data":{
-              "title":${data.title},
-              "content":${data.content},
+              "title":"${data.title}",
+              "content":"${data.content}",
               "photoUrl":"${data.photoUrl}",
               "activeTime":"${data.activeTime?datetime}",
               "isCollect":${data.isCollect},
@@ -12,7 +12,7 @@
                 "attentionPhotos":[
                     [#list data.attentionPhotos as a]
                         {
-                          "photoUrl":${a}
+                          "photoUrl":"${a}"
                         }
                         [#if a_has_next],[/#if]
                     [/#list]
