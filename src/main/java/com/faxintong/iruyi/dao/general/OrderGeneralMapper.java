@@ -54,5 +54,5 @@ public interface OrderGeneralMapper {
             " from `order` o" +
             " inner join lawyer l on l.id = o.lawyer_id" +
             " where o.id = #{orderId}")
-    OrderVo selectOrderVo(@Param("orderId")Long orderId);
+    OrderVo selectOrderVoOne(@Param("orderId")Long orderId);
 }

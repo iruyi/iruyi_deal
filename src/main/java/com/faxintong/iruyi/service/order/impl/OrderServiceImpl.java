@@ -56,7 +56,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderVo orderDetail(Long orderId,Long lawyerId) throws Exception {
-        OrderVo vo = orderGeneralMapper.selectOrderVo(orderId);
+        OrderVo vo = orderGeneralMapper.selectOrderVoOne(orderId);
         int fansNum =lawyerGeneralMapper.countFansByLawyerId(lawyerId);
         int issueNum =orderGeneralMapper.countIssueByLawyerId(lawyerId);
         int interestCount = orderGeneralMapper.countIssueOfmyInterest(lawyerId);

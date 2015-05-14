@@ -41,7 +41,7 @@ public class GroupServiceImpl implements GroupService{
 
     @Override
     public GroupVo getLawyerGroup(String groupId) throws Exception {
-        return groupGeneralMapper.selectLawyerGroup(groupId);
+        return groupGeneralMapper.selectLawyerGroupOne(groupId);
     }
 
     @Override

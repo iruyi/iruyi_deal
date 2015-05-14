@@ -44,5 +44,5 @@ public interface GroupGeneralMapper {
             " ,lg.photo_url photoUrl" +
             " from lawyer_group lg" +
             " where lg.groupid = #{groupId}")
-    GroupVo selectLawyerGroup(@Param("groupId")String groupId);
+    GroupVo selectLawyerGroupOne(@Param("groupId")String groupId);
 }
