@@ -5,16 +5,16 @@ import com.faxintong.iruyi.dao.mybatis.article.AppArticleMapper;
 import com.faxintong.iruyi.dao.mybatis.article.ArticleCommentMapper;
 import com.faxintong.iruyi.dao.mybatis.article.ArticlePraiseMapper;
 import com.faxintong.iruyi.dao.mybatis.article.ArticleStoreMapper;
-import com.faxintong.iruyi.model.mybatis.article.AppArticle;
-import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
-import com.faxintong.iruyi.model.mybatis.article.ArticlePraise;
-import com.faxintong.iruyi.model.mybatis.article.ArticleStore;
+import com.faxintong.iruyi.model.mybatis.article.*;
+import com.faxintong.iruyi.model.mybatis.vo.AppArticleVo;
 import com.faxintong.iruyi.service.article.ArticleService;
 import com.faxintong.iruyi.utils.Pager;
 import com.faxintong.iruyi.utils.PaperUtil;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -51,14 +51,31 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<AppArticle> articleList(Pager pager) throws Exception {
+    public List<AppArticleVo> articleList(Pager pager, Long lawyerId) throws Exception {
         List<AppArticle> list = articleGeneralMapper.getAppArticleList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize());
-        /*if(list != null && list.size() > 0){
-            for (AppArticle appArticle : list){
-                appArticle.setAcro(PaperUtil.getPaperAcro(appArticle.getUrl()));
+        List<AppArticleVo> articleVoList = new ArrayList<AppArticleVo>();
+        for(AppArticle article : list){
+            AppArticleVo appArticleVo = new AppArticleVo();
+            ArticleCommentExample commentExample = new ArticleCommentExample();
+            commentExample.createCriteria().andArticleIdEqualTo(article.getId());
+            Integer commontCount = articleCommentMapper.countByExample(commentExample);
+            appArticleVo.setCommentCount(commontCount);
+            ArticlePraiseExample praiseExample = new ArticlePraiseExample();
+            praiseExample.createCriteria().andArticleIdEqualTo(article.getId());
+            Integer praiseCount = articlePraiseMapper.countByExample(praiseExample);
+            appArticleVo.setPraiseCount(praiseCount);
+            ArticlePraiseExample example = new ArticlePraiseExample();
+            example.createCriteria().andArticleIdEqualTo(article.getId()).andLawyerIdEqualTo(lawyerId);
+            Integer isPaise = articlePraiseMapper.countByExample(example);
+            if(isPaise != null && isPaise.intValue() > 0){
+                appArticleVo.setIsPraise(1);//已点赞
+            }else{
+                appArticleVo.setIsPraise(0);//未点赞
             }
-        }*/
-        return list;
+            BeanUtils.copyProperties(article, appArticleVo);
+            articleVoList.add(appArticleVo);
+        }
+        return articleVoList;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.faxintong.iruyi.service.article;
 
 import com.faxintong.iruyi.model.mybatis.article.AppArticle;
+import com.faxintong.iruyi.model.mybatis.vo.AppArticleVo;
 import com.faxintong.iruyi.utils.Pager;
 
 import java.util.List;
@@ -25,7 +26,7 @@ public interface ArticleService {
      * @return
      * @throws Exception
      */
-    public List<AppArticle> articleList(Pager pager) throws Exception;
+    public List<AppArticleVo> articleList(Pager pager, Long lawyerId) throws Exception;
 
     /**
      * 获取文章详情

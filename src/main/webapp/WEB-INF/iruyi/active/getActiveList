@@ -5,6 +5,7 @@
         "data":{"activeList":[
             [#list data as a]
                 {
+                  "activeId":"${a.id}"
                   "title":"${a.title}",
                   "photoUrl":"${a.photoUrl}",
                   "activeTime":"${a.activeTime?datetime}",

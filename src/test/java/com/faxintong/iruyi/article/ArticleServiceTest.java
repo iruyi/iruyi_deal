@@ -2,6 +2,7 @@ package com.faxintong.iruyi.article;
 
 import com.faxintong.iruyi.base.BaseTest;
 import com.faxintong.iruyi.model.mybatis.article.AppArticle;
+import com.faxintong.iruyi.model.mybatis.vo.AppArticleVo;
 import com.faxintong.iruyi.service.article.ArticleService;
 import com.faxintong.iruyi.service.lawyer.LawyerService;
 import com.faxintong.iruyi.utils.Pager;
@@ -35,10 +36,12 @@ public class ArticleServiceTest extends BaseTest {
         try {
             Pager pager = new Pager();
             pager.setCurrentPage(1);
-            List<AppArticle> list = articleService.articleList(pager);
-            for(AppArticle appArticle : list){
-                System.out.println("=========" + appArticle.getUrl());
-                System.out.println("=========" + appArticle.getAcro());
+            List<AppArticleVo> list = articleService.articleList(pager, 44l);
+            for(AppArticleVo appArticle : list){
+                System.out.print("=========" + appArticle.getUrl());
+                System.out.print("=========" + appArticle.getCommentCount());
+                System.out.print("=========" + appArticle.getIsPraise());
+                System.out.println("=========" + appArticle.getPraiseCount());
             }
         } catch (Exception e) {
             e.printStackTrace();

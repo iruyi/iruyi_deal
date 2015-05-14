@@ -3,7 +3,8 @@
     "errmessage":"${errmessage}",
     [#if data??]
         "data":{
-              "type":${data.type},
+                "articleId":${data.id},
+                "type":${data.type},
                 "comment":"${data.comment}",
                 "url":"${data.url}",
                 "acro":"${data.acro}"

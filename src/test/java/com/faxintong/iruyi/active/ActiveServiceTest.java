@@ -9,7 +9,9 @@ import com.faxintong.iruyi.utils.Pager;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by admin on 15-4-19.
@@ -89,4 +91,19 @@ public class ActiveServiceTest extends BaseTest {
         }
     }
 
+    @Test
+    public void test(){
+        /*String[] levels = {"3","2","1"};
+        List<String> levelList = Arrays.asList(levels);
+        String max = Collections.max(levelList);
+        System.out.println("=========" + max);*/
+        /*for(String s : levelList){
+            System.out.println("=========" + s);
+        }*/
+
+        Map<Integer, Integer> ratiosMap = new HashMap<Integer, Integer>();
+        ratiosMap.put(1,1);
+        ratiosMap.put(2,2);
+        System.out.println("==================="+ratiosMap.size());
+    }
 }

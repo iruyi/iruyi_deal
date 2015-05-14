@@ -8,6 +8,7 @@ import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.model.mybatis.article.ArticleCommentExample;
 import com.faxintong.iruyi.model.mybatis.article.ArticlePraiseExample;
 import com.faxintong.iruyi.model.mybatis.article.ArticleStoreExample;
+import com.faxintong.iruyi.model.mybatis.vo.AppArticleVo;
 import com.faxintong.iruyi.service.article.ArticleService;
 import com.faxintong.iruyi.utils.Pager;
 import org.slf4j.Logger;
@@ -73,13 +74,13 @@ public class ArticleController extends BaseController{
      * @return
      */
     @RequestMapping(value = "articleList")
-    public String articleList(Pager pager, ModelMap modelMap){
+    public String articleList(HttpServletRequest request, Pager pager, ModelMap modelMap){
         modelMap.put(ERRCODE, RESULTFAIL);
         try {
             if(pager == null || pager.getCurrentPage() == null){
                 modelMap.put(ERRMESSAGE, "当前页为null");
             }else{
-                List<AppArticle> list = articleService.articleList(pager);
+                List<AppArticleVo> list = articleService.articleList(pager, getLawyerId(request));
                 modelMap.put(ERRCODE, RESULTSUCCESS);
                 modelMap.put(ERRMESSAGE, "获取文章列表！");
                 modelMap.put(DATA, list);

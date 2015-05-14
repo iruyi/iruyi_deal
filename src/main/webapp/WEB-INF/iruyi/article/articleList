@@ -5,10 +5,14 @@
         "data":{"articleList":[
             [#list data as a]
                 {
+                  "articleId":${a.id},
                   "type":${a.type},
                   "comment":"${a.comment}",
                   "url":"${a.url}",
-                  "acro":"${a.acro}"
+                  "acro":"${a.acro}",
+                  "commentCount":${a.commentCount},
+                  "praiseCount":${a.praiseCount},
+                  "isPraise":${a.isPraise}
                 }
                 [#if a_has_next],[/#if]
             [/#list]
