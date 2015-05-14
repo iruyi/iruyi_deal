@@ -13,4 +13,5 @@ public interface HxService {
     void delHxGroup(String groupId) throws Exception;
     void addHxMe2Group(String[] usernames,String groupId) throws Exception;
     void delHxMefGroup(String username,String groupId) throws Exception;
+    void updateHxGroup(String groupid,String groupname,String description,Integer maxusers);
 }

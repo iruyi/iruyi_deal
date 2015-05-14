@@ -41,18 +41,6 @@ public class OrderController extends BaseController{
      * @param order
      * @return
      *
-     * @note
-     *  发布商机
-     *   必须登录
-     *    需要参数 类型、标题、内容、城市、
-     *
-     *    //TODO 没有黑白名单表
-     *       order 表 缺少city相关字段 已加
-     *
-     *       这个黑白名单的设计  跟商机列表怎么处理
-     *       是不是没登陆的话 就能查看全部的 不含黑白名单的商机列表
-     *        如果登录的话，不仅能查看全部的不含黑白名单的商机列表，而且能查看被指定的白名单列表,且不能查看黑名单列表
-     *
      */
     @RequestMapping(value = "reportOrder")
     public String reportOrder(OrderVo order,HttpServletRequest request,HttpServletResponse response) {

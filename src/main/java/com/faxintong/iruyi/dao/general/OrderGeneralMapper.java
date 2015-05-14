@@ -48,4 +48,11 @@ public interface OrderGeneralMapper {
     List<OrderReceiveVo> selectMyOrderReceiveVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize,@Param("lawyerId")Long lawyerId);
 
     List<OrderReceiveVo> selectReceiveMyOrder(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize,@Param("lawyerId")Long lawyerId);
+
+    @ResultType(OrderVo.class)
+    @Select("select l.id lawyerId,l.name lawyerName,l.photo_url lawyerPhotoUrl" +
+            " from `order` o" +
+            " inner join lawyer l on l.id = o.lawyer_id" +
+            " where o.id = #{orderId}")
+    OrderVo selectOrderVo(@Param("orderId")Long orderId);
 }

@@ -3,6 +3,9 @@
     "errmessage":"${errmessage}",
     "data":{
         "lawyerRelate":{
+                "lawyer_id":${data.lawyerId},
+                "lawyer_name":"${data.lawyerName!!}",
+                "lawyer_photoUrl":"${data.lawyerPhotoUrl!!}",
                 "fansCount":${(data.fansCount)!0},
                 "issueCount":${(data.issueCount)!0},
                 "interestCountMy":${(data.interestCountMy)!0}

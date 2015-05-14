@@ -26,6 +26,7 @@ public class OrderVo {
     private String whiteList;
     private Long lawyerId;
     private String lawyerName;
+    private String lawyerPhotoUrl;
     private Long cityId;
 
     public Long getId() {
@@ -170,5 +171,13 @@ public class OrderVo {
 
     public void setCityId(Long cityId) {
         this.cityId = cityId;
+    }
+
+    public String getLawyerPhotoUrl() {
+        return lawyerPhotoUrl;
+    }
+
+    public void setLawyerPhotoUrl(String lawyerPhotoUrl) {
+        this.lawyerPhotoUrl = lawyerPhotoUrl;
     }
 }

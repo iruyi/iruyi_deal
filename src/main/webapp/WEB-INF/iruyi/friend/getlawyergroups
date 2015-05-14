@@ -1,0 +1,22 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    "data":{
+        [#if data?? && data?size>0]
+            "groupList":[
+                [#list data as a]
+                    {
+                        "group_id":"${a.groupId}",
+                        "group_name":"${a.groupName}",
+                        "group_photoUrl":"${a.photoUrl!!}",
+                        "group_affiliationsCount":${a.affiliationsCount},
+                        "group_friendNum":${a.friendNum!0}
+                    }
+                    [#if a_has_next],[/#if]
+                [/#list]
+                   ]
+        [#else]
+            "lawyerList":[]
+        [/#if]
+    }
+}

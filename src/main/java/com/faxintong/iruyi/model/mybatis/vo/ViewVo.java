@@ -30,6 +30,7 @@ public class ViewVo {
     private String introduction;
 
     // 没有大图
+    private String imgUrl;
 
     private Integer fansCount;
 
@@ -148,5 +149,13 @@ public class ViewVo {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

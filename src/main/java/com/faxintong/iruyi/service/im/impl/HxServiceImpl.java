@@ -170,5 +170,28 @@ public class HxServiceImpl implements HxService {
         }
     }
 
+    @Override
+    public void updateHxGroup(String groupid,String groupname, String description, Integer maxusers) {
+        ObjectNode groupNode = JsonNodeFactory.instance.objectNode();
+        groupNode.put("groupname", groupname);
+        groupNode.put("description", description);
+        groupNode.put("maxusers", maxusers);
+
+        ObjectNode objectNode ;
+        try {
+            URL updateChatGroupsUrl = HxUtils.getURL(Constants.APPKEY.replace("#", "/") + "/chatgroups/"
+                    + groupid);
+            objectNode = HxUtils.sendHTTPRequest(updateChatGroupsUrl, groupNode,
+                    "PUT");
+        } catch (Exception e) {
+            logger.error("更新环信群聊失败：" + e.getMessage());
+            throw new RuntimeException("更新环信群聊失败！");
+        }
+
+        if(objectNode == null || (objectNode.has("statusCode") && !objectNode.get("statusCode").toString().equals("200"))) {
+            throw new RuntimeException("更新环信群聊失败！");
+        }
+    }
+
 
 }

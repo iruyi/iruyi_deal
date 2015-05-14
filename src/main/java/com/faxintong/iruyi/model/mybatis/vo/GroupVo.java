@@ -17,6 +17,10 @@ public class GroupVo {
     private Integer affiliationsCount;// 当前群成员数
     private Long ownerId;// 群主
     private Date createTime;// 创建时间
+    private String photoUrl;// 群照片
+
+
+    private Integer friendNum;// 好友个数
 
     public Long getId() {
         return id;
@@ -104,5 +108,21 @@ public class GroupVo {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
+
+    public Integer getFriendNum() {
+        return friendNum;
+    }
+
+    public void setFriendNum(Integer friendNum) {
+        this.friendNum = friendNum;
     }
 }

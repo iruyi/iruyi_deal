@@ -36,4 +36,17 @@ public interface LawyerGeneralMapper {
 
     @Select("select count(*) from lawyer_attention where lawyer_id = #{lawyerId}")
     int countFansByLawyerId(@Param("lawyerId")Long lawyerId);
+
+    /**
+     * 查看群组里的成员信息
+     * @param groupId
+     * @return
+     */
+    @Select("select l.id id,l.name name,l.photo_url photoUrl" +
+            " from lawyer_group_member lgm" +
+            " inner join lawyer l on l.id = lgm.lawyer_id" +
+            " where lgm.group_id = #{groupId}" +
+            " order by lgm.id" +
+            " limit #{startCount},#{pageSize}")
+    List<LawyerVo> selectGroupLaywer(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize,@Param("groupId")String groupId);
 }

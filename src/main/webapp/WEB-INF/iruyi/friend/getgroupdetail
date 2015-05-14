@@ -1,0 +1,16 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    "data":{
+            "group_id":"${data.groupId}",
+            "group_name":"${data.groupName}",
+            "group_photoUrl":"${data.photoUrl!!}",
+            "group_isPublic":${data.isPublic},
+            "group_isApproval":${data.isApproval},
+            "group_password":"${data.password}",
+            "group_maxUsers":${data.maxUsers},
+            "group_affiliationsCount":${data.affiliationsCount},
+            "group_ownerId":${data.ownerId},
+            "group_createTime":"${data.createTime?datetime}"
+    }
+}
