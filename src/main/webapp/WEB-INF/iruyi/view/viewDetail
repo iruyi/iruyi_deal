@@ -3,6 +3,10 @@
     "errmessage":"${errmessage}",
     "data":{
         "viewDetail":{
+                "view_imgUrl":"${data.imgUrl!!}",
+                "view_content":"${data.content!!}",
+                "lawyer_id":${data.lawyerId},
+                "lawyer_name":"${data.lawyerName}",
                 "lawyer_introduction":"${data.introduction!!}",
                 "lawyer_fansCount":${(data.fansCount)!0},
                 "view_isAtten":${(data.isAtten)!0}

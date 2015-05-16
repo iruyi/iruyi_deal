@@ -16,8 +16,7 @@
                       "view_lawyerPhotoUrl":"${a.photoUrl!!}",
                       "view_isAtten":${(a.isAtten)!0},
                       "view_viewTime":"${a.viewTime?datetime}",
-                      "view_endTime":"${a.endTime?datetime}",
-                      "view_imgUrl":"${a.imgUrl!!}"
+                      "view_endTime":"${a.endTime?datetime}"
                     }
                     [#if a_has_next],[/#if]
                 [/#list]

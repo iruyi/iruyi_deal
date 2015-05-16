@@ -74,8 +74,8 @@ public class ViewController extends BaseController{
     public String viewDetail(Long microViewId,Pager pager,ModelMap modelMap,HttpServletRequest request,HttpServletResponse response){
         try {
             // 参数校验
-            if(microViewId == null) {
-                ServletUtils.responseJson(response, new Result(RESULTFAIL, "微访谈ID为空！"));
+            if(microViewId == null || pager == null) {
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页或微访谈ID为空！"));
                 return null;
             }
 
@@ -86,6 +86,7 @@ public class ViewController extends BaseController{
 
             return "view/viewDetail";
         }catch (Exception e){
+            e.printStackTrace();
             logger.error("查看微访谈详情失败:" + e.getMessage());
             ServletUtils.responseJson(response, new Result(RESULTFAIL, "查看微访谈详情失败！"));
         }
