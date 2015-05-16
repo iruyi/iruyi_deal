@@ -2,6 +2,7 @@ package com.faxintong.iruyi.service.lawyer;
 
 import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
+import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.vo.*;
 import com.faxintong.iruyi.utils.Pager;
 import org.springframework.stereotype.Service;
@@ -130,4 +131,11 @@ public interface LawyerService {
      * @return
      */
     public List<ActiveVo> getStoreActives(Pager pager, Long lawyerId) throws Exception;
+
+    /**
+     * 获取推荐人列表
+     * @param pager
+     * @return
+     */
+    public List<Lawyer> findHotLawyers(Pager pager) throws Exception;
 }

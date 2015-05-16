@@ -1,0 +1,18 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    [#if data?? && data?size>0]
+        "data":{"lawyerList":[
+            [#list data as a]
+                {
+                  "lawyerId":${a.id},
+                  "name":"${a.name}",
+                  "introduction":"${a.introduction}"
+                }
+                [#if a_has_next],[/#if]
+            [/#list]
+               ]}
+    [#else]
+        "data":{"lawyerList":[]}
+    [/#if]
+}

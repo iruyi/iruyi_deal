@@ -6,6 +6,7 @@ import com.faxintong.iruyi.model.mybatis.active.Active;
 import com.faxintong.iruyi.model.mybatis.active.ActivePraiseExample;
 import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
+import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.vo.*;
 import com.faxintong.iruyi.service.lawyer.LawyerService;
 import com.faxintong.iruyi.utils.Pager;
@@ -118,6 +119,11 @@ public class LawyerServiceImpl implements LawyerService {
             }
         }
         return activeVoList;
+    }
+
+    @Override
+    public List<Lawyer> findHotLawyers(Pager pager) throws Exception {
+        return lawyerGeneralMapper.selectHotLawyers(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize());
     }
 
 }

@@ -389,4 +389,30 @@ public class LawyerController extends BaseController{
         }
         return "active/getActiveList";
     }
+
+    /**
+     * 获取推荐人列表
+     * @param request
+     * @param pager
+     * @param modelMap
+     * @return
+     */
+    @RequestMapping(value = "findHotLawyers")
+    public String findHotLawyers(HttpServletRequest request, Pager pager, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                modelMap.put(ERRMESSAGE, "当前页为null");
+            }else{
+                List<Lawyer> list = lawyerService.findHotLawyers(pager);
+                modelMap.put(ERRCODE, RESULTSUCCESS);
+                modelMap.put(ERRMESSAGE, "获取推荐人列表成功！");
+                modelMap.put(DATA, list);
+            }
+        }catch (Exception e){
+            logger.error("获取推荐人列表失败:" + e.getMessage());
+            modelMap.put(ERRMESSAGE, "获取推荐人列表失败!");
+        }
+        return "lawyer/getHotLawyers";
+    }
 }

@@ -2,14 +2,12 @@ package com.faxintong.iruyi.service.topic;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.topic.Topic;
-import com.faxintong.iruyi.model.mybatis.topic.TopicGroup;
 import com.faxintong.iruyi.model.mybatis.vo.TopicAllVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicGroupVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.utils.Pager;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by admin on 15-4-18.
@@ -91,4 +89,11 @@ public interface TopicService {
      * 获取话题的动态
      */
     List<TopicAllVo> topicAll(Pager pager,Long targetLawyerId,Long lawyerId,Long groupId);
+
+    /**
+     * 获取推荐话题
+     * @param pager
+     * @return
+     */
+    List<Topic> findHotTopics(Pager pager);
 }

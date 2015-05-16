@@ -13,6 +13,7 @@ import com.faxintong.iruyi.utils.PaperUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,7 +40,7 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleStoreMapper articleStoreMapper;
 
-    @Override
+    @Transactional
     public void reportArticle(String comment, String url, Long lawyerId) throws Exception {
         AppArticle appArticle = new AppArticle();
         appArticle.setLawyerId(lawyerId);
@@ -83,7 +84,7 @@ public class ArticleServiceImpl implements ArticleService {
         return appArticleMapper.selectByPrimaryKey(articleId);
     }
 
-    @Override
+    @Transactional
     public void articleComment(Long articleId, String comment, Long lawyerId) throws Exception {
         ArticleComment articleComment = new ArticleComment();
         articleComment.setArticleId(articleId);
@@ -93,7 +94,7 @@ public class ArticleServiceImpl implements ArticleService {
         articleCommentMapper.insert(articleComment);
     }
 
-    @Override
+    @Transactional
     public void articlePraise(Long articleId, Long lawyerId) throws Exception {
         ArticlePraise articlePraise = new ArticlePraise();
         articlePraise.setLawyerId(lawyerId);
@@ -101,7 +102,7 @@ public class ArticleServiceImpl implements ArticleService {
         articlePraiseMapper.insert(articlePraise);
     }
 
-    @Override
+    @Transactional
     public void articleStore(Long articleId, Long lawyerId) throws Exception {
         ArticleStore articleStore = new ArticleStore();
         articleStore.setArticleId(articleId);

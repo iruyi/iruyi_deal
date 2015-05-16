@@ -2,15 +2,13 @@ package com.faxintong.iruyi.controller.topic;
 
 import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
-import com.faxintong.iruyi.model.mybatis.topic.TopicGroup;
+import com.faxintong.iruyi.model.mybatis.topic.Topic;
 import com.faxintong.iruyi.model.mybatis.vo.TopicGroupVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.service.topic.TopicService;
 import com.faxintong.iruyi.utils.Pager;
-import com.faxintong.iruyi.utils.RedisUtils;
 import com.faxintong.iruyi.utils.Result;
 import com.faxintong.iruyi.utils.ServletUtils;
-import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -276,4 +274,22 @@ public class TopicController extends BaseController{
         return null;
     }
 
+    @RequestMapping(value = "findHotTopics")
+    public String findHotTopics(HttpServletRequest request, Pager pager, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
+        try{
+            if(pager == null || pager.getCurrentPage() == null){
+                modelMap.put(ERRMESSAGE, "当前页为null");
+            }else{
+                List<Topic> list = topicService.findHotTopics(pager);
+                modelMap.put(ERRCODE, RESULTSUCCESS);
+                modelMap.put(ERRMESSAGE, "获取推荐话题列表！");
+                modelMap.put(DATA, list);
+            }
+        }catch (Exception e){
+            logger.error("获取推荐话题失败:" + e.getMessage());
+            modelMap.put(ERRMESSAGE, "获取推荐话题失败!");
+        }
+        return "topic/getHotTopics";
+    }
 }
