@@ -1,7 +1,9 @@
 package com.faxintong.iruyi.service.topic;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
+import com.faxintong.iruyi.model.mybatis.topic.AdColumn;
 import com.faxintong.iruyi.model.mybatis.topic.Topic;
+import com.faxintong.iruyi.model.mybatis.topic.TopicGroupTitle;
 import com.faxintong.iruyi.model.mybatis.vo.TopicAllVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicGroupVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
@@ -96,4 +98,16 @@ public interface TopicService {
      * @return
      */
     List<Topic> findHotTopics(Pager pager);
+
+    /**
+     * 获取热门话题组
+     * @return
+     */
+    List<TopicGroupTitle> findHotTopicGroup();
+
+    /**
+     * 获取广告位
+     * @return
+     */
+    List<AdColumn> findAdColumn();
 }

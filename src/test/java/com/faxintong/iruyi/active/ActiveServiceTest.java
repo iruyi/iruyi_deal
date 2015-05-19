@@ -1,8 +1,8 @@
 package com.faxintong.iruyi.active;
 
 import com.faxintong.iruyi.base.BaseTest;
-import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.model.mybatis.vo.ActiveVo;
+import com.faxintong.iruyi.model.mybatis.vo.AppArticleVo;
 import com.faxintong.iruyi.service.active.ActiveService;
 import com.faxintong.iruyi.service.lawyer.LawyerService;
 import com.faxintong.iruyi.utils.Pager;
@@ -67,7 +67,7 @@ public class ActiveServiceTest extends BaseTest {
         try {
             Pager pager = new Pager();
             pager.setCurrentPage(1);
-            List<AppArticle> list = lawyerService.getReportArticles(pager, 1l);
+            List<AppArticleVo> list = lawyerService.getReportArticles(pager, 1l);
             System.out.println("=======list size=" + list.size());
         } catch (Exception e) {
             e.printStackTrace();

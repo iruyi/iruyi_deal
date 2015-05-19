@@ -6,13 +6,16 @@
             [#list data as a]
                 {
                   "articleId":${a.id},
-                  "type":${a.type},
-                  "comment":"${a.comment}",
-                  "url":"${a.url}",
+                  "title":"${a.title}",
+                  "lawyerId":${a.lawyerId},
+                  "lawyerName":"${a.lawyerName}",
                   "acro":"${a.acro}",
-                  "commentCount":${a.commentCount},
-                  "praiseCount":${a.praiseCount},
-                  "isPraise":${a.isPraise}
+                  "content":"${a.content}",
+                  "url":"${a.url}",
+                  "createDate":"${a.createDate?datetime}",
+                  "storeCount":${a.storeCount},
+                  "isStore":${a.isStore},
+                  "commentCount":${a.commentCount}
                 }
                 [#if a_has_next],[/#if]
             [/#list]

@@ -401,13 +401,25 @@
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
         </table>-->
 
-        <table tableName="app_article" domainObjectName="AppArticle">
+        <!--<table tableName="app_article" domainObjectName="AppArticle">
             <columnOverride column="id" javaType="Long" ></columnOverride>
-            <columnOverride column="type" javaType="Integer" jdbcType="TINYINT" ></columnOverride>
+            <columnOverride column="title" javaType="String" ></columnOverride>
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
-            <columnOverride column="url" javaType="String" ></columnOverride>
-            <columnOverride column="comment" javaType="String" ></columnOverride>
+            <columnOverride column="lawyer_name" javaType="String" ></columnOverride>
             <columnOverride column="acro" javaType="String" ></columnOverride>
+            <columnOverride column="content" javaType="String" ></columnOverride>
+            <columnOverride column="url" javaType="String" ></columnOverride>
+            <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
+        </table>-->
+
+        <table tableName="article_comment_praise" domainObjectName="ArcCommentPraise">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="title" javaType="String" ></columnOverride>
+            <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+            <columnOverride column="lawyer_name" javaType="String" ></columnOverride>
+            <columnOverride column="acro" javaType="String" ></columnOverride>
+            <columnOverride column="content" javaType="String" ></columnOverride>
+            <columnOverride column="url" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
         </table>
 
@@ -433,6 +445,18 @@
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="active_id" javaType="Long" ></columnOverride>
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="topic_group_title" domainObjectName="TopicGroupTitle">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="group_id" javaType="Long" ></columnOverride>
+            <columnOverride column="title" javaType="String" ></columnOverride>
+        </table>-->
+
+        <!--<table tableName="ad_column" domainObjectName="AdColumn">
+            <columnOverride column="id" javaType="Long" ></columnOverride>
+            <columnOverride column="photo_url" javaType="String" ></columnOverride>
+            <columnOverride column="ad_url" javaType="String" ></columnOverride>
         </table>-->
 
     </context>

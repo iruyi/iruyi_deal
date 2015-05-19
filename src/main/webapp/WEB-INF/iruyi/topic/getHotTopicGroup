@@ -1,0 +1,19 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    "data":{
+        [#if data?? && data?size>0]
+            "hotTopicGroups":[
+                [#list data as a]
+                    {
+                      "groupId":${a.groupId},
+                      "title":"${a.title}"
+                    }
+                    [#if a_has_next],[/#if]
+                [/#list]
+                   ]
+        [#else]
+            "groupList":[]
+        [/#if]
+    }
+}

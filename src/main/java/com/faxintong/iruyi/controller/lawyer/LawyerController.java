@@ -306,7 +306,7 @@ public class LawyerController extends BaseController{
             if(pager == null || pager.getCurrentPage() == null){
                 modelMap.put(ERRMESSAGE, "当前页为null");
             }else{
-                List<AppArticle> list = lawyerService.getReportArticles(pager, getLawyerId(request));
+                List<AppArticleVo> list = lawyerService.getReportArticles(pager, getLawyerId(request));
                 modelMap.put(ERRCODE, RESULTSUCCESS);
                 modelMap.put(ERRMESSAGE, "获取文章列表成功！");
                 modelMap.put(DATA, list);

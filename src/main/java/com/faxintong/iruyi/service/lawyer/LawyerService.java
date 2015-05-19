@@ -107,7 +107,7 @@ public interface LawyerService {
      * @return
      * @throws Exception
      */
-    public List<AppArticle> getReportArticles(Pager pager, Long lawyerId) throws Exception;
+    public List<AppArticleVo> getReportArticles(Pager pager, Long lawyerId) throws Exception;
 
     /**
      * 我收藏的文章列表

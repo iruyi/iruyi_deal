@@ -19,7 +19,13 @@
                       "order_keyWords":"${a.keyWords}",
                       "order_price":${(a.price?double)!0.00},
                       "order_interestCount": ${(a.interestCount)!0},
-                      "order_isInterest":${(a.isInterest)!0}
+                      "order_isInterest":${(a.isInterest)!0},
+                      [#if a.lawyerPhotoUrl?? ]
+                      "lawyer_photoUrl":"${a.lawyerPhotoUrl}",
+                      [#else]
+                      "lawyer_photoUrl":"",
+                      [/#if]
+                      "lawyer_name":"${(a.lawyerName)}"
                     }
                     [#if a_has_next],[/#if]
                 [/#list]

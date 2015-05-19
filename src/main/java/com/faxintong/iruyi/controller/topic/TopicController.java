@@ -2,7 +2,9 @@ package com.faxintong.iruyi.controller.topic;
 
 import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
+import com.faxintong.iruyi.model.mybatis.topic.AdColumn;
 import com.faxintong.iruyi.model.mybatis.topic.Topic;
+import com.faxintong.iruyi.model.mybatis.topic.TopicGroupTitle;
 import com.faxintong.iruyi.model.mybatis.vo.TopicGroupVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.service.topic.TopicService;
@@ -291,5 +293,35 @@ public class TopicController extends BaseController{
             modelMap.put(ERRMESSAGE, "获取推荐话题失败!");
         }
         return "topic/getHotTopics";
+    }
+
+    @RequestMapping(value = "findHotTopicGroup")
+    public String findHotTopicGroup(ModelMap modelMap) {
+        modelMap.put(ERRCODE, RESULTFAIL);
+        try{
+            List<TopicGroupTitle> list = topicService.findHotTopicGroup();
+            modelMap.put(ERRCODE, RESULTSUCCESS);
+            modelMap.put(ERRMESSAGE, "获取热热门话题组！");
+            modelMap.put(DATA, list);
+        }catch (Exception e){
+            logger.error("获取热热门话题组失败:" + e.getMessage());
+            modelMap.put(ERRMESSAGE, "获取热热门话题组失败!");
+        }
+        return "topic/getHotTopicGroup";
+    }
+
+    @RequestMapping(value = "findAdColumn")
+    public String findAdColumn(ModelMap modelMap) {
+        modelMap.put(ERRCODE, RESULTFAIL);
+        try{
+            List<AdColumn> list = topicService.findAdColumn();
+            modelMap.put(ERRCODE, RESULTSUCCESS);
+            modelMap.put(ERRMESSAGE, "获取广告位！");
+            modelMap.put(DATA, list);
+        }catch (Exception e){
+            logger.error("获取广告位失败:" + e.getMessage());
+            modelMap.put(ERRMESSAGE, "获取广告位失败!");
+        }
+        return "topic/getAdColumn";
     }
 }

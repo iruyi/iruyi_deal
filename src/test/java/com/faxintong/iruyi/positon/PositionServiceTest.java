@@ -2,7 +2,7 @@ package com.faxintong.iruyi.positon;
 
 import com.faxintong.iruyi.base.BaseTest;
 import com.faxintong.iruyi.model.mybatis.vo.PositionVo;
-import com.faxintong.iruyi.service.Position.PositionService;
+import com.faxintong.iruyi.service.position.PositionService;
 import com.faxintong.iruyi.utils.Pager;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;

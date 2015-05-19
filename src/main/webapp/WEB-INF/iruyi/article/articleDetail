@@ -1,15 +1,29 @@
 {
-    "errcode":${errcode},
-    "errmessage":"${errmessage}",
-    [#if data??]
-        "data":{
-                "articleId":${data.id},
-                "type":${data.type},
-                "comment":"${data.comment}",
-                "url":"${data.url}",
-                "acro":"${data.acro}"
-        }
-    [#else]
-        "data":""
-    [/#if]
-}
+     "errcode":${errcode},
+     "errmessage":"${errmessage}",
+     [#if data??]
+         "data":{
+                 "articleId":${data.id},
+                 "content":"${data.content}",
+                  [#if data.articleCommentVos?? && data.articleCommentVos?size>0]
+                          "commentList":[
+                                [#list data.articleCommentVos as a]
+                                    {
+                                      "lawyerId":${a.lawyerId},
+                                      "lawyerName":${a.lawyerName},
+                                      "createTime":${a.createTime?datetime},
+                                      "comment":"${a.comment}",
+                                      "isPraise":"${a.isPraise}",
+                                      "praiseCount":"${a.praiseCount}"
+                                    }
+                                    [#if a_has_next],[/#if]
+                                [/#list]
+                           ]
+                      [#else]
+                          "commentList":[]
+                      [/#if]
+         }
+     [#else]
+         "data":""
+     [/#if]
+ }
