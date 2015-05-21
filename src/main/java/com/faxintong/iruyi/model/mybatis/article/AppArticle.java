@@ -5,15 +5,17 @@ import java.util.Date;
 public class AppArticle {
     private Long id;
 
-    private Integer type;
+    private String title;
 
     private Long lawyerId;
 
-    private String url;
-
-    private String comment;
+    private String lawyerName;
 
     private String acro;
+
+    private String content;
+
+    private String url;
 
     private Date createDate;
 
@@ -25,12 +27,12 @@ public class AppArticle {
         this.id = id;
     }
 
-    public Integer getType() {
-        return type;
+    public String getTitle() {
+        return title;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Long getLawyerId() {
@@ -41,20 +43,12 @@ public class AppArticle {
         this.lawyerId = lawyerId;
     }
 
-    public String getUrl() {
-        return url;
+    public String getLawyerName() {
+        return lawyerName;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setLawyerName(String lawyerName) {
+        this.lawyerName = lawyerName;
     }
 
     public String getAcro() {
@@ -63,6 +57,22 @@ public class AppArticle {
 
     public void setAcro(String acro) {
         this.acro = acro;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Date getCreateDate() {

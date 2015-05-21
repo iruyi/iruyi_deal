@@ -1,9 +1,11 @@
 package com.faxintong.iruyi.service.topic.impl;
 
 import com.faxintong.iruyi.dao.general.TopicGeneralMapper;
+import com.faxintong.iruyi.dao.mybatis.topic.TopicGroupTitleMapper;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
+import com.faxintong.iruyi.model.mybatis.topic.AdColumn;
 import com.faxintong.iruyi.model.mybatis.topic.Topic;
-import com.faxintong.iruyi.model.mybatis.topic.TopicGroup;
+import com.faxintong.iruyi.model.mybatis.topic.TopicGroupTitle;
 import com.faxintong.iruyi.model.mybatis.vo.ReplyVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicAllVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicGroupVo;
@@ -15,7 +17,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by admin on 15-4-18.
@@ -24,6 +25,9 @@ import java.util.Map;
 public class TopicServiceImpl implements TopicService {
     @Autowired
     private TopicGeneralMapper topicGeneralMapper;
+
+    @Autowired
+    private TopicGroupTitleMapper topicGroupTitleMapper;
 
     @Override
     public void reportTopic(Long groupId, String content, Lawyer lawyer) throws Exception {
@@ -96,5 +100,20 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public List<TopicAllVo> topicAll(Pager pager,Long targetLawyerId, Long lawyerId, Long groupId) {
         return topicGeneralMapper.selectTopicAllVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),targetLawyerId,lawyerId,groupId);
+    }
+
+    @Override
+    public List<Topic> findHotTopics(Pager pager) {
+        return topicGeneralMapper.selectHotTopics(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize());
+    }
+
+    @Override
+    public List<TopicGroupTitle> findHotTopicGroup() {
+        return topicGeneralMapper.selectHotTopicGroup();
+    }
+
+    @Override
+    public List<AdColumn> findAdColumn() {
+        return topicGeneralMapper.selectAdColumn();
     }
 }

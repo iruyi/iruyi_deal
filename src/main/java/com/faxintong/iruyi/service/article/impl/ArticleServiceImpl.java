@@ -1,18 +1,16 @@
 package com.faxintong.iruyi.service.article.impl;
 
 import com.faxintong.iruyi.dao.general.ArticleGeneralMapper;
-import com.faxintong.iruyi.dao.mybatis.article.AppArticleMapper;
-import com.faxintong.iruyi.dao.mybatis.article.ArticleCommentMapper;
-import com.faxintong.iruyi.dao.mybatis.article.ArticlePraiseMapper;
-import com.faxintong.iruyi.dao.mybatis.article.ArticleStoreMapper;
+import com.faxintong.iruyi.dao.mybatis.article.*;
 import com.faxintong.iruyi.model.mybatis.article.*;
 import com.faxintong.iruyi.model.mybatis.vo.AppArticleVo;
+import com.faxintong.iruyi.model.mybatis.vo.ArticleCommentVo;
 import com.faxintong.iruyi.service.article.ArticleService;
 import com.faxintong.iruyi.utils.Pager;
-import com.faxintong.iruyi.utils.PaperUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,7 +37,11 @@ public class ArticleServiceImpl implements ArticleService {
     @Autowired
     private ArticleStoreMapper articleStoreMapper;
 
-    @Override
+    @Autowired
+    private ArcCommentPraiseMapper arcCommentPraiseMapper;
+
+
+    /*@Transactional
     public void reportArticle(String comment, String url, Long lawyerId) throws Exception {
         AppArticle appArticle = new AppArticle();
         appArticle.setLawyerId(lawyerId);
@@ -48,19 +50,32 @@ public class ArticleServiceImpl implements ArticleService {
         appArticle.setCreateDate(new Date());
         appArticle.setAcro(PaperUtil.getPaperAcro(url));
         appArticleMapper.insertSelective(appArticle);
-    }
+    }*/
 
     @Override
     public List<AppArticleVo> articleList(Pager pager, Long lawyerId) throws Exception {
-        List<AppArticle> list = articleGeneralMapper.getAppArticleList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize());
+        List<AppArticle> list = articleGeneralMapper.getAppArticleList(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize());
         List<AppArticleVo> articleVoList = new ArrayList<AppArticleVo>();
         for(AppArticle article : list){
             AppArticleVo appArticleVo = new AppArticleVo();
-            ArticleCommentExample commentExample = new ArticleCommentExample();
-            commentExample.createCriteria().andArticleIdEqualTo(article.getId());
-            Integer commontCount = articleCommentMapper.countByExample(commentExample);
-            appArticleVo.setCommentCount(commontCount);
-            ArticlePraiseExample praiseExample = new ArticlePraiseExample();
+            ArticleCommentExample commentExample1 = new ArticleCommentExample();
+            commentExample1.createCriteria().andArticleIdEqualTo(article.getId());
+            Integer commentCount = articleCommentMapper.countByExample(commentExample1);//评论数
+            appArticleVo.setCommentCount(commentCount);
+            ArticleStoreExample storeExample1 = new ArticleStoreExample();
+            storeExample1.createCriteria().andArticleIdEqualTo(article.getId());
+            Integer storeCount = articleStoreMapper.countByExample(storeExample1);//收藏数
+            appArticleVo.setStoreCount(storeCount);
+            ArticleStoreExample storeExample2 = new ArticleStoreExample();
+            storeExample2.createCriteria().andArticleIdEqualTo(article.getId()).andLawyerIdEqualTo(lawyerId);
+            Integer isStore = articleStoreMapper.countByExample(storeExample2);
+            if(isStore != null && isStore.intValue() > 0){
+                appArticleVo.setIsStore(1);//已收藏
+            }else{
+                appArticleVo.setIsStore(0);//未收藏
+            }
+
+            /*ArticlePraiseExample praiseExample = new ArticlePraiseExample();
             praiseExample.createCriteria().andArticleIdEqualTo(article.getId());
             Integer praiseCount = articlePraiseMapper.countByExample(praiseExample);
             appArticleVo.setPraiseCount(praiseCount);
@@ -71,19 +86,39 @@ public class ArticleServiceImpl implements ArticleService {
                 appArticleVo.setIsPraise(1);//已点赞
             }else{
                 appArticleVo.setIsPraise(0);//未点赞
-            }
+            }*/
             BeanUtils.copyProperties(article, appArticleVo);
             articleVoList.add(appArticleVo);
         }
         return articleVoList;
+    } 
+    @Override
+    public AppArticleVo articleDetail(Long articleId, Pager pager, Long lawyerId) throws Exception {
+        AppArticle appArticle = appArticleMapper.selectByPrimaryKey(articleId);
+        AppArticleVo appArticleVo = new AppArticleVo();
+        BeanUtils.copyProperties(appArticle, appArticleVo);
+        List<ArticleComment> articleCommentList = articleGeneralMapper.getCommentList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize(), articleId);
+        List<ArticleCommentVo> articleCommentVos = new ArrayList<ArticleCommentVo>();
+        if(articleCommentList != null && articleCommentList.size() > 0){
+            for(ArticleComment articleComment : articleCommentList){
+                ArticleCommentVo articleCommentVo = new ArticleCommentVo();
+                BeanUtils.copyProperties(articleComment, articleCommentVo);
+                ArcCommentPraiseExample example1 = new ArcCommentPraiseExample();
+                example1.createCriteria().andCommentIdEqualTo(articleComment.getId());
+                Integer commentCount = arcCommentPraiseMapper.countByExample(example1);
+                articleCommentVo.setPraiseCount(commentCount);
+                ArcCommentPraiseExample example2 = new ArcCommentPraiseExample();
+                example2.createCriteria().andCommentIdEqualTo(articleComment.getId()).andLawyerIdEqualTo(lawyerId);
+                Integer isPraise = arcCommentPraiseMapper.countByExample(example2);
+                articleCommentVo.setIsPraise(isPraise);
+                articleCommentVos.add(articleCommentVo);
+            }
+        }
+        appArticleVo.setArticleCommentVos(articleCommentVos);
+        return appArticleVo;
     }
 
-    @Override
-    public AppArticle articleDetail(Long articleId) throws Exception {
-        return appArticleMapper.selectByPrimaryKey(articleId);
-    }
-
-    @Override
+    @Transactional
     public void articleComment(Long articleId, String comment, Long lawyerId) throws Exception {
         ArticleComment articleComment = new ArticleComment();
         articleComment.setArticleId(articleId);
@@ -93,7 +128,7 @@ public class ArticleServiceImpl implements ArticleService {
         articleCommentMapper.insert(articleComment);
     }
 
-    @Override
+    @Transactional
     public void articlePraise(Long articleId, Long lawyerId) throws Exception {
         ArticlePraise articlePraise = new ArticlePraise();
         articlePraise.setLawyerId(lawyerId);
@@ -101,7 +136,7 @@ public class ArticleServiceImpl implements ArticleService {
         articlePraiseMapper.insert(articlePraise);
     }
 
-    @Override
+    @Transactional
     public void articleStore(Long articleId, Long lawyerId) throws Exception {
         ArticleStore articleStore = new ArticleStore();
         articleStore.setArticleId(articleId);

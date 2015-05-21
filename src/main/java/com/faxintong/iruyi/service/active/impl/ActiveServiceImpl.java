@@ -15,6 +15,7 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,7 +84,7 @@ public class ActiveServiceImpl implements ActiveService {
         return activeVo;
     }
 
-    @Override
+    @Transactional
     public void activeStore(Long activeId, Long lawyerId) throws Exception {
         ActiveStore activeStore = new ActiveStore();
         activeStore.setLawyerId(lawyerId);

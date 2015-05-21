@@ -73,13 +73,14 @@
         </trim>
     </insert>
     <select id="selectOrderVo" parameterType="map" resultType="com.faxintong.iruyi.model.mybatis.vo.OrderVo">
-        select o.id,o.type,o.title,o.content,o.city_name cityName,o.deadline_date deadDate,o.keywords keyWords,o.price
+        select o.id,o.type,o.title,o.content,o.city_name cityName,o.deadline_date deadDate,o.keywords keyWords,o.price,l.photo_url as lawyerPhotoUrl,
+        l.name as lawyerName,l.id as lawyerId
         ,(select count(*) from order_receive orc where orc.order_id = o.id) interestCount
         <if test="lawyerId != null">
         ,(select count(*) from order_receive orc1 where orc1.order_id = o.id and orc1.lawyer_id = #{lawyerId}) isInterest
         </if>
-        from `order` o
-        where (not EXISTS (select 1 from order_blacklist ob where ob.order_id = o.id)
+        from `order` o, lawyer l
+        where o.lawyer_id=l.id and (not EXISTS (select 1 from order_blacklist ob where ob.order_id = o.id)
             and not EXISTS (select 1 from order_whitelist ow where ow.order_id = o.id))
         <if test="lawyerId != null">
             or (o.id in (select ow1.order_id from order_whitelist ow1 where ow1.lawyer_id = #{lawyerId} )

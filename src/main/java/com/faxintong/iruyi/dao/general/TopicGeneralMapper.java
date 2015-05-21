@@ -1,7 +1,9 @@
 package com.faxintong.iruyi.dao.general;
 
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
-import com.faxintong.iruyi.model.mybatis.topic.TopicGroup;
+import com.faxintong.iruyi.model.mybatis.topic.AdColumn;
+import com.faxintong.iruyi.model.mybatis.topic.Topic;
+import com.faxintong.iruyi.model.mybatis.topic.TopicGroupTitle;
 import com.faxintong.iruyi.model.mybatis.vo.ReplyVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicAllVo;
 import com.faxintong.iruyi.model.mybatis.vo.TopicGroupVo;
@@ -61,6 +63,15 @@ public interface TopicGeneralMapper {
 
     @Insert("insert into topic_reply_praise (reply_id,lawyer_id) values (#{replyId},#{lawyerId})")
     int insertReplyPraise(@Param("replyId")Long replyId, @Param("lawyerId")Long lawyerId);
+
+    @Select("select t.id,t.title,t.content from topic t, topic_store s where t.id=s.topic_id GROUP BY s.topic_id ORDER BY count(s.topic_id) DESC LIMIT #{startCount},#{pageSize}")
+    List<Topic> selectHotTopics(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize);
+
+    @Select("select id,group_id as groupId,title from topic_group_title")
+    List<TopicGroupTitle> selectHotTopicGroup();
+
+    @Select("select id,photo_url as photoUrl,ad_url as adUrl from ad_column")
+    List<AdColumn> selectAdColumn();
 
     /**
      * 如果type

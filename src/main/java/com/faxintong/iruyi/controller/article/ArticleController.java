@@ -4,7 +4,6 @@ import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.dao.mybatis.article.ArticleCommentMapper;
 import com.faxintong.iruyi.dao.mybatis.article.ArticlePraiseMapper;
 import com.faxintong.iruyi.dao.mybatis.article.ArticleStoreMapper;
-import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.model.mybatis.article.ArticleCommentExample;
 import com.faxintong.iruyi.model.mybatis.article.ArticlePraiseExample;
 import com.faxintong.iruyi.model.mybatis.article.ArticleStoreExample;
@@ -49,7 +48,7 @@ public class ArticleController extends BaseController{
      * @param url
      * @return
      */
-    @RequestMapping(value = "reportArticle")
+    /*@RequestMapping(value = "reportArticle")
     public String reportArticle(HttpServletRequest request, String comment, String url, ModelMap modelMap){
         modelMap.put(ERRCODE, RESULTFAIL);
         try {
@@ -67,7 +66,7 @@ public class ArticleController extends BaseController{
             modelMap.put(ERRMESSAGE, "发布文章失败!");
         }
         return "lawyer/common";
-    }
+    }*/
 
     /**
      * 获取文章列表（分页）
@@ -98,13 +97,13 @@ public class ArticleController extends BaseController{
      * @return
      */
     @RequestMapping(value = "articleDetail")
-    public String articleDetail(Long articleId, ModelMap modelMap){
+    public String articleDetail(HttpServletRequest request, Long articleId, Pager pager, ModelMap modelMap){
         modelMap.put(ERRCODE, RESULTFAIL);
         try {
             if(articleId == null){
                 modelMap.put(ERRMESSAGE, "文章id为null");
             }else{
-                AppArticle appArticle = articleService.articleDetail(articleId);
+                AppArticleVo appArticle = articleService.articleDetail(articleId, pager, getLawyerId(request));
                 modelMap.put(ERRCODE, RESULTSUCCESS);
                 modelMap.put(ERRMESSAGE, "获取文章详情成功！");
                 modelMap.put(DATA, appArticle);

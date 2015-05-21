@@ -1,5 +1,6 @@
 package com.faxintong.iruyi.dao.general;
 
+import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.vo.CityVo;
 import com.faxintong.iruyi.model.mybatis.vo.LawyerVo;
 import com.faxintong.iruyi.operate.OperateMyBatis;
@@ -49,4 +50,7 @@ public interface LawyerGeneralMapper {
             " order by lgm.id" +
             " limit #{startCount},#{pageSize}")
     List<LawyerVo> selectGroupLaywer(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize,@Param("groupId")String groupId);
+
+    @Select("select l.id,l.`name`,l.introduction from lawyer l, lawyer_attention a where l.id=a.other_lawyer_id GROUP BY a.other_lawyer_id ORDER BY count(a.other_lawyer_id) DESC limit #{startCount},#{pageSize}")
+    List<Lawyer> selectHotLawyers(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize);
 }

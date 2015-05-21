@@ -2,8 +2,6 @@ package com.faxintong.iruyi.order;
 
 import com.faxintong.iruyi.base.BaseTest;
 import com.faxintong.iruyi.model.mybatis.vo.OrderVo;
-import com.faxintong.iruyi.model.mybatis.vo.PositionVo;
-import com.faxintong.iruyi.service.Position.PositionService;
 import com.faxintong.iruyi.service.order.OrderService;
 import com.faxintong.iruyi.utils.Pager;
 import org.junit.Test;

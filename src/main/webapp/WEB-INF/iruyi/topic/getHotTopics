@@ -1,0 +1,18 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    [#if data?? && data?size>0]
+        "data":{"topicList":[
+            [#list data as a]
+                {
+                  "articleId":${a.id},
+                  "title":"${a.title}",
+                  "content":"${a.content}"
+                }
+                [#if a_has_next],[/#if]
+            [/#list]
+               ]}
+    [#else]
+        "data":{"topicList":[]}
+    [/#if]
+}
