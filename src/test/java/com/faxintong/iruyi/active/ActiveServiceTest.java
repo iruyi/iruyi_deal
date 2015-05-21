@@ -9,9 +9,8 @@ import com.faxintong.iruyi.utils.Pager;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.HashMap;
+import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by admin on 15-4-19.
@@ -101,9 +100,26 @@ public class ActiveServiceTest extends BaseTest {
             System.out.println("=========" + s);
         }*/
 
-        Map<Integer, Integer> ratiosMap = new HashMap<Integer, Integer>();
+        /*Map<Integer, Integer> ratiosMap = new HashMap<Integer, Integer>();
         ratiosMap.put(1,1);
         ratiosMap.put(2,2);
-        System.out.println("==================="+ratiosMap.size());
+        System.out.println("==================="+ratiosMap.size());*/
+
+        BigDecimal money = new BigDecimal(0);
+        for(int i=0;i<5;i++){
+            BigDecimal add1 = new BigDecimal(i*100);
+            money = money.add(add1);
+            System.out.println("add"+i+"============"+money.toString());
+        }
+
+        /*BigDecimal add1 = new BigDecimal(100);
+        BigDecimal add2 = new BigDecimal(200);
+        BigDecimal add3 = new BigDecimal(100);
+        money = money.add(add1);
+        System.out.println("add1============"+money.toString());
+        money = money.add(add2);
+        System.out.println("add2============"+money.toString());
+        money = money.add(add3);
+        System.out.println("add3============"+money.toString());*/
     }
 }
