@@ -8,6 +8,7 @@
                   "articleId":${a.id},
                   "title":"${a.title}",
                   "content":"${a.content}"
+                  "photoUrl":"${a.photoUrl}"
                 }
                 [#if a_has_next],[/#if]
             [/#list]

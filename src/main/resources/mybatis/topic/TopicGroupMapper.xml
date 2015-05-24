@@ -5,6 +5,8 @@
     <id column="id" property="id" jdbcType="BIGINT" />
     <result column="group_name" property="groupName" jdbcType="VARCHAR" />
     <result column="access_count" property="accessCount" jdbcType="INTEGER" />
+    <result column="big_image" property="bigImage" jdbcType="VARCHAR" />
+    <result column="small_image" property="smallImage" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, group_name, access_count
+    id, group_name, access_count, big_image, small_image
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.faxintong.iruyi.model.mybatis.topic.TopicGroupExample" >
     select
@@ -98,10 +100,10 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.faxintong.iruyi.model.mybatis.topic.TopicGroup" >
-    insert into topic_group (id, group_name, access_count
-      )
-    values (#{id,jdbcType=BIGINT}, #{groupName,jdbcType=VARCHAR}, #{accessCount,jdbcType=INTEGER}
-      )
+    insert into topic_group (id, group_name, access_count, 
+      big_image, small_image)
+    values (#{id,jdbcType=BIGINT}, #{groupName,jdbcType=VARCHAR}, #{accessCount,jdbcType=INTEGER}, 
+      #{bigImage,jdbcType=VARCHAR}, #{smallImage,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.faxintong.iruyi.model.mybatis.topic.TopicGroup" >
     insert into topic_group
@@ -115,6 +117,12 @@
       <if test="accessCount != null" >
         access_count,
       </if>
+      <if test="bigImage != null" >
+        big_image,
+      </if>
+      <if test="smallImage != null" >
+        small_image,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -125,6 +133,12 @@
       </if>
       <if test="accessCount != null" >
         #{accessCount,jdbcType=INTEGER},
+      </if>
+      <if test="bigImage != null" >
+        #{bigImage,jdbcType=VARCHAR},
+      </if>
+      <if test="smallImage != null" >
+        #{smallImage,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -146,6 +160,12 @@
       <if test="record.accessCount != null" >
         access_count = #{record.accessCount,jdbcType=INTEGER},
       </if>
+      <if test="record.bigImage != null" >
+        big_image = #{record.bigImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smallImage != null" >
+        small_image = #{record.smallImage,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -155,7 +175,9 @@
     update topic_group
     set id = #{record.id,jdbcType=BIGINT},
       group_name = #{record.groupName,jdbcType=VARCHAR},
-      access_count = #{record.accessCount,jdbcType=INTEGER}
+      access_count = #{record.accessCount,jdbcType=INTEGER},
+      big_image = #{record.bigImage,jdbcType=VARCHAR},
+      small_image = #{record.smallImage,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -169,13 +191,21 @@
       <if test="accessCount != null" >
         access_count = #{accessCount,jdbcType=INTEGER},
       </if>
+      <if test="bigImage != null" >
+        big_image = #{bigImage,jdbcType=VARCHAR},
+      </if>
+      <if test="smallImage != null" >
+        small_image = #{smallImage,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.faxintong.iruyi.model.mybatis.topic.TopicGroup" >
     update topic_group
     set group_name = #{groupName,jdbcType=VARCHAR},
-      access_count = #{accessCount,jdbcType=INTEGER}
+      access_count = #{accessCount,jdbcType=INTEGER},
+      big_image = #{bigImage,jdbcType=VARCHAR},
+      small_image = #{smallImage,jdbcType=VARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

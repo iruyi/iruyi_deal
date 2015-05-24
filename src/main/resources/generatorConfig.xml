@@ -32,20 +32,20 @@
         </javaTypeResolver>
 
         <!-- generate Model -->
-        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.article"
+        <javaModelGenerator targetPackage="com.faxintong.iruyi.model.mybatis.topic"
                             targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="false"/>
         </javaModelGenerator>
 
         <!-- generate xml -->
-        <sqlMapGenerator targetPackage="mybatis.article"
+        <sqlMapGenerator targetPackage="mybatis.topic"
                          targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- generate Mapper -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.article"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.faxintong.iruyi.dao.mybatis.topic"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -324,18 +324,21 @@
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="group_name" javaType="String" ></columnOverride>
             <columnOverride column="access_count" javaType="Integer" ></columnOverride>
+            <columnOverride column="big_image" javaType="String" ></columnOverride>
+            <columnOverride column="small_image" javaType="String" ></columnOverride>
         </table>-->
 
-        <!--<table tableName="topic" domainObjectName="Topic">
+        <table tableName="topic" domainObjectName="Topic">
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="group_id" javaType="Long" ></columnOverride>
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
             <columnOverride column="lawyer_name" javaType="String" ></columnOverride>
             <columnOverride column="title" javaType="String" ></columnOverride>
             <columnOverride column="content" javaType="String" ></columnOverride>
+            <columnOverride column="photoUrl" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
             <columnOverride column="update_date" javaType="java.util.Date" ></columnOverride>
-        </table>-->
+        </table>
 
         <!--<table tableName="microview" domainObjectName="Microview">
             <columnOverride column="id" javaType="Long" ></columnOverride>
@@ -412,7 +415,7 @@
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
         </table>-->
 
-        <table tableName="article_comment_praise" domainObjectName="ArcCommentPraise">
+        <!--<table tableName="article_comment_praise" domainObjectName="ArcCommentPraise">
             <columnOverride column="id" javaType="Long" ></columnOverride>
             <columnOverride column="title" javaType="String" ></columnOverride>
             <columnOverride column="lawyer_id" javaType="Long" ></columnOverride>
@@ -421,7 +424,7 @@
             <columnOverride column="content" javaType="String" ></columnOverride>
             <columnOverride column="url" javaType="String" ></columnOverride>
             <columnOverride column="create_date" javaType="java.util.Date" ></columnOverride>
-        </table>
+        </table>-->
 
         <!--<table tableName="active_store" domainObjectName="ActiveStore">
             <columnOverride column="id" javaType="Long" ></columnOverride>
