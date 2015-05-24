@@ -1,8 +1,6 @@
 package com.faxintong.iruyi.service.discuss;
 
-import com.faxintong.iruyi.model.mybatis.topic.Topic;
 import com.faxintong.iruyi.model.mybatis.vo.TopicAllVo;
-import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.utils.Pager;
 
 import java.util.List;

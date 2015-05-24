@@ -1,9 +1,7 @@
 package com.faxintong.iruyi.service.discuss.impl;
 
 import com.faxintong.iruyi.dao.general.TopicGeneralMapper;
-import com.faxintong.iruyi.model.mybatis.topic.Topic;
 import com.faxintong.iruyi.model.mybatis.vo.TopicAllVo;
-import com.faxintong.iruyi.model.mybatis.vo.TopicVo;
 import com.faxintong.iruyi.service.discuss.DiscussService;
 import com.faxintong.iruyi.utils.Pager;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -41,7 +41,7 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public TopicGroupVo getGroupDetail(Long groupId, Pager pager ,Long lawyerId) throws Exception {
-        TopicGroupVo topicGroupVo = new TopicGroupVo();
+        TopicGroupVo topicGroupVo = topicGeneralMapper.getTopicGroupById(groupId);
         // 只有第一页的时候才获取话题组相关统计数据
         if (pager.getCurrentPage() == 1) {
             int topicNum = topicGeneralMapper.countTopicNumByGroupId(groupId);

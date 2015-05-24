@@ -293,6 +293,146 @@ public class TopicGroupExample {
             addCriterion("access_count not between", value1, value2, "accessCount");
             return (Criteria) this;
         }
+
+        public Criteria andBigImageIsNull() {
+            addCriterion("big_image is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigImageIsNotNull() {
+            addCriterion("big_image is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigImageEqualTo(String value) {
+            addCriterion("big_image =", value, "bigImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigImageNotEqualTo(String value) {
+            addCriterion("big_image <>", value, "bigImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigImageGreaterThan(String value) {
+            addCriterion("big_image >", value, "bigImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigImageGreaterThanOrEqualTo(String value) {
+            addCriterion("big_image >=", value, "bigImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigImageLessThan(String value) {
+            addCriterion("big_image <", value, "bigImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigImageLessThanOrEqualTo(String value) {
+            addCriterion("big_image <=", value, "bigImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigImageLike(String value) {
+            addCriterion("big_image like", value, "bigImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigImageNotLike(String value) {
+            addCriterion("big_image not like", value, "bigImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigImageIn(List<String> values) {
+            addCriterion("big_image in", values, "bigImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigImageNotIn(List<String> values) {
+            addCriterion("big_image not in", values, "bigImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigImageBetween(String value1, String value2) {
+            addCriterion("big_image between", value1, value2, "bigImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andBigImageNotBetween(String value1, String value2) {
+            addCriterion("big_image not between", value1, value2, "bigImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallImageIsNull() {
+            addCriterion("small_image is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallImageIsNotNull() {
+            addCriterion("small_image is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallImageEqualTo(String value) {
+            addCriterion("small_image =", value, "smallImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallImageNotEqualTo(String value) {
+            addCriterion("small_image <>", value, "smallImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallImageGreaterThan(String value) {
+            addCriterion("small_image >", value, "smallImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallImageGreaterThanOrEqualTo(String value) {
+            addCriterion("small_image >=", value, "smallImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallImageLessThan(String value) {
+            addCriterion("small_image <", value, "smallImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallImageLessThanOrEqualTo(String value) {
+            addCriterion("small_image <=", value, "smallImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallImageLike(String value) {
+            addCriterion("small_image like", value, "smallImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallImageNotLike(String value) {
+            addCriterion("small_image not like", value, "smallImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallImageIn(List<String> values) {
+            addCriterion("small_image in", values, "smallImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallImageNotIn(List<String> values) {
+            addCriterion("small_image not in", values, "smallImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallImageBetween(String value1, String value2) {
+            addCriterion("small_image between", value1, value2, "smallImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andSmallImageNotBetween(String value1, String value2) {
+            addCriterion("small_image not between", value1, value2, "smallImage");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

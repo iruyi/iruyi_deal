@@ -37,6 +37,9 @@ public interface TopicGeneralMapper {
     @Select("select count(id) from topic_group_atten where category_id = #{groupId} and lawyer_id = #{lawyerId}")
     int countFansNumByGroupIdMy(@Param("groupId")Long groupId,@Param("lawyerId")Long lawyerId);
 
+    @Select("select big_image as bigImage,small_image as smallImage from topic_group where id = #{groupId}")
+    TopicGroupVo getTopicGroupById(@Param("groupId")Long groupId);
+
     /**
      * groupId 不为空的时候，根据groupId查询话题
      * 否则根据mo值
@@ -64,7 +67,7 @@ public interface TopicGeneralMapper {
     @Insert("insert into topic_reply_praise (reply_id,lawyer_id) values (#{replyId},#{lawyerId})")
     int insertReplyPraise(@Param("replyId")Long replyId, @Param("lawyerId")Long lawyerId);
 
-    @Select("select t.id,t.title,t.content from topic t, topic_store s where t.id=s.topic_id GROUP BY s.topic_id ORDER BY count(s.topic_id) DESC LIMIT #{startCount},#{pageSize}")
+    @Select("select t.id,t.title,t.content,t.photo_url as photoUrl from topic t, topic_store s where t.id=s.topic_id GROUP BY s.topic_id ORDER BY count(s.topic_id) DESC LIMIT #{startCount},#{pageSize}")
     List<Topic> selectHotTopics(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize);
 
     @Select("select id,group_id as groupId,title from topic_group_title")

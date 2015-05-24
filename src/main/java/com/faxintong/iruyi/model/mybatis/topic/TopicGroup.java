@@ -7,6 +7,10 @@ public class TopicGroup {
 
     private Integer accessCount;
 
+    private String bigImage;
+
+    private String smallImage;
+
     public Long getId() {
         return id;
     }
@@ -29,5 +33,21 @@ public class TopicGroup {
 
     public void setAccessCount(Integer accessCount) {
         this.accessCount = accessCount;
+    }
+
+    public String getBigImage() {
+        return bigImage;
+    }
+
+    public void setBigImage(String bigImage) {
+        this.bigImage = bigImage;
+    }
+
+    public String getSmallImage() {
+        return smallImage;
+    }
+
+    public void setSmallImage(String smallImage) {
+        this.smallImage = smallImage;
     }
 }
