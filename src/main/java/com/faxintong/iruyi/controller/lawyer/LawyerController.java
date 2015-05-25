@@ -1,7 +1,6 @@
 package com.faxintong.iruyi.controller.lawyer;
 
 import com.faxintong.iruyi.controller.BaseController;
-import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.vo.*;
@@ -330,7 +329,7 @@ public class LawyerController extends BaseController{
             if(pager == null || pager.getCurrentPage() == null){
                 modelMap.put(ERRMESSAGE, "当前页为null");
             }else{
-                List<AppArticle> list = lawyerService.getStoreArticles(pager, getLawyerId(request));
+                List<AppArticleVo> list = lawyerService.getStoreArticles(pager, getLawyerId(request));
                 modelMap.put(ERRCODE, RESULTSUCCESS);
                 modelMap.put(ERRMESSAGE, "获取收藏文章列表成功！");
                 modelMap.put(DATA, list);

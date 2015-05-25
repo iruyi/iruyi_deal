@@ -2,4 +2,5 @@
     "errcode":${errcode},
     "errmessage":"${errmessage}",
     "sessionId":"${sessionId}"
+    "lawyerId":${lawyerId}
 }

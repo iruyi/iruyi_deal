@@ -19,6 +19,9 @@ public class TopicGroupVo {
     private Integer isAtten;
     private List<TopicAllVo> topicAllVoList;
 
+    private String bigImage;
+    private String smallImage;
+
     public Long getId() {
         return id;
     }
@@ -73,5 +76,21 @@ public class TopicGroupVo {
 
     public void setTopicAllVoList(List<TopicAllVo> topicAllVoList) {
         this.topicAllVoList = topicAllVoList;
+    }
+
+    public String getBigImage() {
+        return bigImage;
+    }
+
+    public void setBigImage(String bigImage) {
+        this.bigImage = bigImage;
+    }
+
+    public String getSmallImage() {
+        return smallImage;
+    }
+
+    public void setSmallImage(String smallImage) {
+        this.smallImage = smallImage;
     }
 }

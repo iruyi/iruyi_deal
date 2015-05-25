@@ -15,6 +15,8 @@ public class Topic {
 
     private String content;
 
+    private String photoUrl;
+
     private Date createDate;
 
     private Date updateDate;
@@ -65,6 +67,14 @@ public class Topic {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 
     public Date getCreateDate() {

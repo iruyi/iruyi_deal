@@ -93,26 +93,31 @@ public class UserController extends BaseController {
         if(StringUtils.isEmpty(phone)) {
             modelMap.put(ERRMESSAGE, "帐号不能为空");
             modelMap.put("sessionId", "");
+            modelMap.put("lawyerId", "");
         }else if(StringUtils.isEmpty(password)){
             modelMap.put(ERRMESSAGE, "密码不能为空");
             modelMap.put("sessionId", "");
+            modelMap.put("lawyerId", "");
         }else {
             try {
                 password = MD5.newinstance().getMD5ofStr(password);
                 if (!userService.loginValidate(phone, password)){
                     modelMap.put(ERRMESSAGE, "帐号密码不匹配");
                     modelMap.put("sessionId", "");
+                    modelMap.put("lawyerId", "");
                 } else {
                     String sessionId = SessionUtil.getSessionId();
                     modelMap.put("sessionId", sessionId);
                     Lawyer lawyer = userService.getLawyer(phone);
                     RedisUtils.set(SESSION_PREFIX + sessionId, "" + lawyer.getId());
+                    modelMap.put("lawyerId", lawyer.getId());
                     modelMap.put(ERRCODE, RESULTSUCCESS);
                     modelMap.put(ERRMESSAGE, "登录成功");
                 }
             } catch (Exception e) {
                 modelMap.put(ERRMESSAGE, "登录出错");
                 modelMap.put("sessionId", "");
+                modelMap.put("lawyerId", "");
                 logger.error("登录出错:" + e.getMessage());
             }
         }

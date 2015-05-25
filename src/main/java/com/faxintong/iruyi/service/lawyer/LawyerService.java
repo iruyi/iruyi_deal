@@ -1,6 +1,5 @@
 package com.faxintong.iruyi.service.lawyer;
 
-import com.faxintong.iruyi.model.mybatis.article.AppArticle;
 import com.faxintong.iruyi.model.mybatis.article.ArticleComment;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.vo.*;
@@ -116,7 +115,7 @@ public interface LawyerService {
      * @return
      * @throws Exception
      */
-    public List<AppArticle> getStoreArticles(Pager pager, Long lawyerId) throws Exception;
+    public List<AppArticleVo> getStoreArticles(Pager pager, Long lawyerId) throws Exception;
 
     /**
      * 获取赞过的文章评论列表(缺文章评论点攒表)

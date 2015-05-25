@@ -13,7 +13,7 @@
         select p.id,p.salary,p.create_date createDate,p.type
         ,lo.name officeName,c.name cityName,lo.introduction officeIntroduction,lo.keywords officeKeywords
         ,p.title,p.content,p.type,p.education,p.experience,p.keywords
-        ,(select count(*) from position_store ps where ps.position_id = #{positionId}) isCollection
+        ,(select count(*) from position_store ps where ps.position_id = #{positionId} and lawyer_id=#{lawyerId}) isCollection
         from position p
         inner join law_office lo on lo.id = p.office_id
         inner join city c on c.id = p.city_id

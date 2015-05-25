@@ -133,8 +133,32 @@ public class LawyerServiceImpl implements LawyerService {
     }
 
     @Override
-    public List<AppArticle> getStoreArticles(Pager pager, Long lawyerId) throws Exception {
-        return articleGeneralMapper.getStoreArticleList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(), lawyerId);
+    public List<AppArticleVo> getStoreArticles(Pager pager, Long lawyerId) throws Exception {
+        List<AppArticle> list = articleGeneralMapper.getStoreArticleList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(), lawyerId);
+        List<AppArticleVo> articleVoList = new ArrayList<AppArticleVo>();
+        for(AppArticle article : list){
+            AppArticleVo appArticleVo = new AppArticleVo();
+            ArticleCommentExample commentExample1 = new ArticleCommentExample();
+            commentExample1.createCriteria().andArticleIdEqualTo(article.getId());
+            Integer commentCount = articleCommentMapper.countByExample(commentExample1);//评论数
+            appArticleVo.setCommentCount(commentCount);
+            ArticleStoreExample storeExample1 = new ArticleStoreExample();
+            storeExample1.createCriteria().andArticleIdEqualTo(article.getId());
+            Integer storeCount = articleStoreMapper.countByExample(storeExample1);//收藏数
+            appArticleVo.setStoreCount(storeCount);
+            ArticleStoreExample storeExample2 = new ArticleStoreExample();
+            storeExample2.createCriteria().andArticleIdEqualTo(article.getId()).andLawyerIdEqualTo(lawyerId);
+            Integer isStore = articleStoreMapper.countByExample(storeExample2);
+            if(isStore != null && isStore.intValue() > 0){
+                appArticleVo.setIsStore(1);//已收藏
+            }else{
+                appArticleVo.setIsStore(0);//未收藏
+            }
+
+            BeanUtils.copyProperties(article, appArticleVo);
+            articleVoList.add(appArticleVo);
+        }
+        return articleVoList;
     }
 
     @Override

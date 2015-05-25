@@ -25,7 +25,7 @@ public interface ArticleGeneralMapper {
     @Select("select " + VIEW + " from app_article where lawyer_id=#{lawyerId} limit #{startCount},#{pagerSize}")
     public List<AppArticle> getOwnArticleList(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize,@Param("lawyerId") Long lawyerId );
 
-    @Select("select a.id,a.type,a.lawyer_id as lawyerId,a.lawyer_name as lawyerName,a.url,a.content,a.acro,a.create_date as createDate " +
+    @Select("select a.id,a.title,a.lawyer_id as lawyerId,a.lawyer_name as lawyerName,a.url,a.content,a.acro,a.create_date as createDate " +
             "from app_article a,article_store s where a.id=s.article_id and s.lawyer_id=#{lawyerId} limit #{startCount},#{pagerSize}")
     public List<AppArticle> getStoreArticleList(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize,@Param("lawyerId") Long lawyerId );
 

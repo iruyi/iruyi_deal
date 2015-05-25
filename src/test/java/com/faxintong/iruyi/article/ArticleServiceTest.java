@@ -90,7 +90,7 @@ public class ArticleServiceTest extends BaseTest {
         try {
             Pager pager = new Pager();
             pager.setCurrentPage(1);
-            List<AppArticle> list = lawyerService.getStoreArticles(pager, 1l);
+            List<AppArticleVo> list = lawyerService.getStoreArticles(pager, 1l);
             System.out.println("===============" + list.size());
         } catch (Exception e) {
             e.printStackTrace();
@@ -117,7 +117,7 @@ public class ArticleServiceTest extends BaseTest {
         try {
             Pager pager = new Pager();
             pager.setCurrentPage(1);
-            List<AppArticle> list = lawyerService.getStoreArticles(pager, 1l);
+            List<AppArticleVo> list = lawyerService.getStoreArticles(pager, 1l);
             for(AppArticle appArticle : list){
                 System.out.println("=========" + appArticle.getUrl());
                 System.out.println("=========" + appArticle.getAcro());
