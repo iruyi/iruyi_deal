@@ -1,6 +1,6 @@
 {
     "errcode":${errcode},
     "errmessage":"${errmessage}",
-    "sessionId":"${sessionId}"
+    "sessionId":"${sessionId}",
     "lawyerId":${lawyerId}
 }
