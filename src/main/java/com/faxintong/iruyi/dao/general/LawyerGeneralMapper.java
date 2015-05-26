@@ -3,6 +3,7 @@ package com.faxintong.iruyi.dao.general;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.vo.CityVo;
 import com.faxintong.iruyi.model.mybatis.vo.LawyerVo;
+import com.faxintong.iruyi.model.mybatis.vo.OwnOrderVo;
 import com.faxintong.iruyi.operate.OperateMyBatis;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultType;
@@ -53,4 +54,8 @@ public interface LawyerGeneralMapper {
 
     @Select("select l.id,l.`name`,l.introduction from lawyer l, lawyer_attention a where l.id=a.other_lawyer_id GROUP BY a.other_lawyer_id ORDER BY count(a.other_lawyer_id) DESC limit #{startCount},#{pageSize}")
     List<Lawyer> selectHotLawyers(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize);
+
+    @Select("SELECT l.id,l.`name`,l.photo_url as photoUrl,r.content as receiveContent,o.title,o.content as orderContent FROM `order` o,order_receive r,lawyer l where o.lawyer_id=#{lawyerId} and o.id=r.order_id and r.lawyer_id=l.id " +
+            " limit #{startCount},#{pageSize}")
+    List<OwnOrderVo> replyOwnOrders(@Param("lawyerId")Long lawyerId, @Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize);
 }

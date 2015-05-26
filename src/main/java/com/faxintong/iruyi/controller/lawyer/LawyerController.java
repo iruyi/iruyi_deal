@@ -414,4 +414,23 @@ public class LawyerController extends BaseController{
         }
         return "lawyer/getHotLawyers";
     }
+
+    @RequestMapping(value = "replyOwnOrders")
+    public String replyOwnOrders(HttpServletRequest request, Pager pager, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                modelMap.put(ERRMESSAGE, "当前页为null");
+            }else{
+                List<OwnOrderVo> list = lawyerService.replyOwnOrders(getLawyerId(request), pager);
+                modelMap.put(ERRCODE, RESULTSUCCESS);
+                modelMap.put(ERRMESSAGE, "获取回应我的商机列表成功！");
+                modelMap.put(DATA, list);
+            }
+        }catch (Exception e){
+            logger.error("获取回应我的商机列表失败:" + e.getMessage());
+            modelMap.put(ERRMESSAGE, "获取回应我的商机列表失败!");
+        }
+        return "lawyer/ownOrders";
+    }
 }

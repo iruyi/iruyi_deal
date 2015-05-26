@@ -213,4 +213,9 @@ public class LawyerServiceImpl implements LawyerService {
         return lawyerGeneralMapper.selectHotLawyers(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize());
     }
 
+    @Override
+    public List<OwnOrderVo> replyOwnOrders(Long lawyerId, Pager pager) throws Exception {
+        return lawyerGeneralMapper.replyOwnOrders(lawyerId, pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize());
+    }
+
 }

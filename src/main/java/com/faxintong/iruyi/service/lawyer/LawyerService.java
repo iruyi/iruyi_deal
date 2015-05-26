@@ -137,4 +137,12 @@ public interface LawyerService {
      * @return
      */
     public List<Lawyer> findHotLawyers(Pager pager) throws Exception;
+
+    /**
+     * 我的商机中的回应我的接口
+     * @param pager
+     * @return
+     * @throws Exception
+     */
+    public List<OwnOrderVo> replyOwnOrders(Long lawyerId, Pager pager) throws Exception;
 }

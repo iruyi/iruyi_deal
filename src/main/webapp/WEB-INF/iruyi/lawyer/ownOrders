@@ -1,0 +1,21 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    [#if data?? && data?size>0]
+        "data":[
+            [#list data as a]
+                {
+                  "lawyerId":${a.id},
+                  "lawyerName":"${a.name}",
+                  "photoUrl":"${a.photoUrl!!}",
+                  "orderTitle": "${a.title}",
+                  "orderContent":"${a.orderContent}",
+                  "replyContent":"${a.receiveContent!!}"
+                }
+                [#if a_has_next],[/#if]
+            [/#list]
+               ]
+    [#else]
+        "data":[]
+    [/#if]
+}
