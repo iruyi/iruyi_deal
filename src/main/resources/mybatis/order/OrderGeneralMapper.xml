@@ -90,6 +90,33 @@
         order by o.create_date
         limit #{startCount},#{pageSize}
     </select>
+
+    <select id="searchOrderVo" parameterType="map" resultType="com.faxintong.iruyi.model.mybatis.vo.OrderVo">
+        select o.id,o.type,o.title,o.content,o.city_name cityName,o.deadline_date deadDate,o.keywords keyWords,o.price,l.photo_url as lawyerPhotoUrl,
+        l.name as lawyerName,l.id as lawyerId
+        ,(select count(*) from order_receive orc where orc.order_id = o.id) interestCount
+        <if test="lawyerId != null">
+            ,(select count(*) from order_receive orc1 where orc1.order_id = o.id and orc1.lawyer_id = #{lawyerId}) isInterest
+        </if>
+        from `order` o, lawyer l
+        where o.lawyer_id=l.id
+        <if test="title != null">
+            and o.title like CONCAT('%',#{title},'%' )
+        </if>
+        <if test="content != null">
+            and o.content like  CONCAT('%',#{content},'%' )
+        </if>
+        and (not EXISTS (select 1 from order_blacklist ob where ob.order_id = o.id)
+        and not EXISTS (select 1 from order_whitelist ow where ow.order_id = o.id))
+        <if test="lawyerId != null">
+            or (o.id in (select ow1.order_id from order_whitelist ow1 where ow1.lawyer_id = #{lawyerId} )
+            and not exists (select ob1.order_id from order_blacklist ob1 where ob1.lawyer_id = #{lawyerId} and ob1.order_id = o.id)
+            )
+        </if>
+        order by o.create_date
+        limit #{startCount},#{pageSize}
+    </select>
+
     <resultMap id="OrderReceiveVo" type="com.faxintong.iruyi.model.mybatis.vo.OrderReceiveVo" >
         <id column="id" property="id" jdbcType="BIGINT" />
         <result column="content" property="content" jdbcType="VARCHAR" />

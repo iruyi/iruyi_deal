@@ -2,8 +2,6 @@ package com.faxintong.iruyi.service.order.impl;
 
 import com.faxintong.iruyi.dao.general.LawyerGeneralMapper;
 import com.faxintong.iruyi.dao.general.OrderGeneralMapper;
-import com.faxintong.iruyi.dao.mybatis.order.OrderMapper;
-import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.model.mybatis.vo.OrderVo;
 import com.faxintong.iruyi.service.order.OrderService;
 import com.faxintong.iruyi.utils.Pager;
@@ -13,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by admin on 15-4-18.
@@ -52,6 +49,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderVo> getOrderList(Pager pager,Long lawyerId) throws Exception {
         return orderGeneralMapper.selectOrderVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId);
+    }
+
+    @Override
+    public List<OrderVo> searchOrders(Pager pager, Long lawyerId, String title, String content) throws Exception {
+        return orderGeneralMapper.searchOrderVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId,title,content);
     }
 
     @Override

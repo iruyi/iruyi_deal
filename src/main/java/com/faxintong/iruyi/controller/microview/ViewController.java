@@ -6,7 +6,6 @@ import com.faxintong.iruyi.service.microview.ViewService;
 import com.faxintong.iruyi.utils.Pager;
 import com.faxintong.iruyi.utils.Result;
 import com.faxintong.iruyi.utils.ServletUtils;
-import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,11 +14,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.Servlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
-import java.util.Map;
 
 import static com.faxintong.iruyi.utils.Constants.*;
 
@@ -126,7 +123,7 @@ public class ViewController extends BaseController{
      * @return
      */
     @RequestMapping(value = "viewDiscuss")
-    public String viewDiscuss(HttpServletRequest request,Long microViewId, String content, HttpServletResponse response){
+    public String viewDiscuss(HttpServletRequest request,Long microViewId, Integer type, String content, HttpServletResponse response){
         try {
             // 参数校验
             if(microViewId == null || StringUtils.isEmpty(content) ) {
@@ -134,7 +131,12 @@ public class ViewController extends BaseController{
                 return null;
             }
 
-            viewService.viewDiscuss(getLawyer(request), microViewId, content, 0);
+            if(type == null) {
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "微访谈提问回答类型为空！"));
+                return null;
+            }
+
+            viewService.viewDiscuss(getLawyer(request), microViewId, content, type);
             ServletUtils.responseJson(response, new Result(RESULTSUCCESS, "微访谈讨论成功！"));
         }catch (Exception e){
             logger.error("微访谈讨论失败:" + e.getMessage());

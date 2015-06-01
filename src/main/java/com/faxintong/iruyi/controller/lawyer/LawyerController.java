@@ -128,7 +128,7 @@ public class LawyerController extends BaseController{
 
             LawyerVo lawyerVo = lawyerService.getMaterialt(getLawyerId(request));
             modelMap.put(DATA, lawyerVo);
-            resultModelMap(RESULTSUCCESS,"获取个人资料成功！",modelMap);
+            resultModelMap(RESULTSUCCESS, "获取个人资料成功！", modelMap);
             return "lawyer/getMaterialt";
         } catch (Exception e) {
             logger.error("获取个人资料失败:" + e.getMessage());
@@ -151,7 +151,7 @@ public class LawyerController extends BaseController{
             }
 
             List<OrderVo> orderList = lawyerService.getOrderList(pager, getLawyerId(request));
-            modelMap.put(DATA,orderList);
+            modelMap.put(DATA, orderList);
             resultModelMap(RESULTSUCCESS,"获取我发表的商机列表成功！",modelMap);
 
             return "order/getOrderList";
@@ -228,7 +228,7 @@ public class LawyerController extends BaseController{
 
             Lawyer lawyer = getLawyer(request);
             List<ReplyVo> replyVoList = lawyerService.getReplyTopics(pager,lawyer.getId());
-            modelMap.put(DATA,replyVoList);
+            modelMap.put(DATA, replyVoList);
             modelMap.put("lawyer",lawyer);
             resultModelMap(RESULTSUCCESS,"获取我回应的话题列表成功！",modelMap);
 
@@ -432,5 +432,27 @@ public class LawyerController extends BaseController{
             modelMap.put(ERRMESSAGE, "获取回应我的商机列表失败!");
         }
         return "lawyer/ownOrders";
+    }
+
+    @RequestMapping(value = "editLawyer")
+    public String editLawyer(HttpServletRequest request, Lawyer lawyer, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
+        try {
+            if(lawyer == null){
+                modelMap.put(ERRMESSAGE, "修改的律师内容不存在");
+            }else{
+                boolean bool = lawyerService.editLawyer(lawyer);
+                if(bool){
+                    modelMap.put(ERRCODE, RESULTSUCCESS);
+                    modelMap.put(ERRMESSAGE, "修改的律师内容成功！");
+                }else{
+                    modelMap.put(ERRMESSAGE, "修改的律师内容失败！");
+                }
+            }
+        }catch (Exception e){
+            logger.error("修改的律师内容失败:" + e.getMessage());
+            modelMap.put(ERRMESSAGE, "修改的律师内容失败!");
+        }
+        return "lawyer/common";
     }
 }

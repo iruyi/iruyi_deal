@@ -1,11 +1,9 @@
 package com.faxintong.iruyi.service.order;
 
-import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.model.mybatis.vo.OrderVo;
 import com.faxintong.iruyi.utils.Pager;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by admin on 15-4-18.
@@ -25,6 +23,17 @@ public interface OrderService {
      * @throws Exception
      */
     public List<OrderVo> getOrderList(Pager pager,Long lawyerId) throws Exception;
+
+    /**
+     * 搜索商机
+     * @param pager
+     * @param title
+     * @param content
+     * @return
+     * @throws Exception
+     */
+    public List<OrderVo> searchOrders(Pager pager,Long lawyerId, String title, String content) throws Exception;
+
 
     /**
      * 获取单子详情

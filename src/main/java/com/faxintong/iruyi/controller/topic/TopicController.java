@@ -295,6 +295,25 @@ public class TopicController extends BaseController{
         return "topic/getHotTopics";
     }
 
+    @RequestMapping(value = "attenHotTopics")
+    public String attenHotTopics(List<Long> topicIds, HttpServletRequest request,HttpServletResponse response){
+        try {
+            // 参数校验
+            if(topicIds == null || topicIds.size() == 0) {
+                ServletUtils.responseJson(response,new Result(RESULTFAIL,"批量话题ID为空！"));
+                return null;
+            }
+
+            topicService.attenHotTopics(topicIds, getLawyerId(request));
+
+            ServletUtils.responseJson(response, new Result(RESULTSUCCESS, "批量关注话题成功！"));
+        }catch (Exception e){
+            logger.error("批量关注话题失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "批量关注话题失败！"));
+        }
+        return null;
+    }
+
     @RequestMapping(value = "findHotTopicGroup")
     public String findHotTopicGroup(ModelMap modelMap) {
         modelMap.put(ERRCODE, RESULTFAIL);

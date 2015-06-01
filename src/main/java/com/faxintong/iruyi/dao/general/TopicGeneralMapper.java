@@ -83,5 +83,6 @@ public interface TopicGeneralMapper {
      */
     List<ReplyVo> selectMyReplyVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize, @Param("lawyerId")Long lawyerId,@Param("type")Integer type);
 
-    List<TopicAllVo> selectTopicAllVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize, @Param("targetLawyerId")Long targetLawyerId,@Param("lawyerId")Long lawyerId,@Param("groupId")Long groupId);
+    List<TopicAllVo> selectTopicAllVo(@Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize, @Param("targetLawyerId")Long targetLawyerId,@Param("lawyerId")Long lawyerId,@Param("groupId")Long groupId
+    ,@Param("title")String title,@Param("content")String content);
 }

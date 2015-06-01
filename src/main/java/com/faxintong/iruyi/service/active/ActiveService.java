@@ -18,6 +18,16 @@ public interface ActiveService {
     public List<ActiveVo> getActiveList(Pager pager) throws Exception;
 
     /**
+     * 搜索活动
+     * @param pager
+     * @param title
+     * @param content
+     * @return
+     * @throws Exception
+     */
+    public List<ActiveVo> searchActive(Pager pager, String title, String content) throws Exception;
+
+    /**
      * 获取活动详情
      * @param activeId
      * @return

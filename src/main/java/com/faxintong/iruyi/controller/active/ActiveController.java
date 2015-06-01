@@ -58,6 +58,30 @@ public class ActiveController extends BaseController {
     }
 
     /**
+     * 搜索活动
+     * @param pager
+     * @return
+     */
+    @RequestMapping(value = "searchActive")
+    public String searchActive(Pager pager,String title, String content, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                modelMap.put(ERRMESSAGE, "当前页为null");
+            }else{
+                List<ActiveVo> list = activeService.searchActive(pager, title, content);
+                modelMap.put(ERRCODE, RESULTSUCCESS);
+                modelMap.put(ERRMESSAGE, "获取活动列表成功！");
+                modelMap.put(DATA, list);
+            }
+        }catch (Exception e){
+            logger.error("获取活动列表失败:" + e.getMessage());
+            modelMap.put(ERRMESSAGE, "获取活动列表失败!");
+        }
+        return "active/getActiveList";
+    }
+
+    /**
      * 获取活动详情
      * @param activeId
      * @return

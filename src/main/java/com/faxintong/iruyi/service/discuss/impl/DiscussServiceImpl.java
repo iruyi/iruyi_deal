@@ -17,8 +17,8 @@ public class DiscussServiceImpl implements DiscussService {
     @Autowired
     TopicGeneralMapper topicGeneralMapper;
     @Override
-    public List<TopicAllVo> getDiscussList(Pager pager,Long lawyerId) throws Exception {
-        return topicGeneralMapper.selectTopicAllVo(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), null, lawyerId, null);
+    public List<TopicAllVo> getDiscussList(Pager pager,Long lawyerId,String title,String content) throws Exception {
+        return topicGeneralMapper.selectTopicAllVo(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), null, lawyerId, null, title, content);
     }
 
 }

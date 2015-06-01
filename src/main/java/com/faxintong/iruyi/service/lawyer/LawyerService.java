@@ -145,4 +145,11 @@ public interface LawyerService {
      * @throws Exception
      */
     public List<OwnOrderVo> replyOwnOrders(Long lawyerId, Pager pager) throws Exception;
+
+    /**
+     * 编辑律师信息
+     * @param lawyer
+     * @throws Exception
+     */
+    public boolean editLawyer(Lawyer lawyer) throws Exception;
 }

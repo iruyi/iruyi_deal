@@ -2,13 +2,11 @@ package com.faxintong.iruyi.controller.order;
 
 import com.faxintong.iruyi.controller.BaseController;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
-import com.faxintong.iruyi.model.mybatis.order.Order;
 import com.faxintong.iruyi.model.mybatis.vo.OrderVo;
 import com.faxintong.iruyi.service.order.OrderService;
 import com.faxintong.iruyi.utils.Pager;
 import com.faxintong.iruyi.utils.Result;
 import com.faxintong.iruyi.utils.ServletUtils;
-import com.google.common.collect.Maps;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
-import static com.faxintong.iruyi.utils.Constants.DATA;
-import static com.faxintong.iruyi.utils.Constants.RESULTFAIL;
-import static com.faxintong.iruyi.utils.Constants.RESULTSUCCESS;
+import static com.faxintong.iruyi.utils.Constants.*;
 
 /**
  * Created by hehongju on 2015/2/11.
@@ -87,6 +83,29 @@ public class OrderController extends BaseController{
             modelMap.put(DATA,orderVoList);
             resultModelMap(RESULTSUCCESS,"获取商机列表成功！",modelMap);
 
+            return "order/getOrderList";
+        }catch (Exception e){
+            logger.error("获取商机列表失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "获取商机列表失败！"));
+        }
+        return null;
+    }
+
+    /**
+     * 搜索商机
+     * @param pager
+     * @return
+     */
+    @RequestMapping(value = "searchOrders")
+    public String searchOrders(Pager pager, String title, String content, ModelMap modelMap,HttpServletRequest request,HttpServletResponse response) {
+        try {
+            if(pager == null || pager.getCurrentPage() == null) {
+                ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为空！"));
+                return null;
+            }
+            List<OrderVo> orderVoList = orderService.searchOrders(pager, getLawyerId(request), title, content);
+            modelMap.put(DATA,orderVoList);
+            resultModelMap(RESULTSUCCESS,"获取商机列表成功！",modelMap);
             return "order/getOrderList";
         }catch (Exception e){
             logger.error("获取商机列表失败:" + e.getMessage());

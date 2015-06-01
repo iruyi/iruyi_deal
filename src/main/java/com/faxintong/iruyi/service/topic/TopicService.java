@@ -75,6 +75,8 @@ public interface TopicService {
      */
     public void attentionTopic(Long topicId, Long lawyerId) throws Exception;
 
+    public void attenHotTopics(List<Long> topicIds, Long lawyerId) throws Exception;
+
     void topicPraise(Long topicId,Long lawyerId) throws Exception;
 
     /**

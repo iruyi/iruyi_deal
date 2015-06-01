@@ -16,6 +16,6 @@ public interface DiscussService {
      * @return
      * @throws Exception
      */
-    public List<TopicAllVo> getDiscussList(Pager pager,Long lawyerId) throws Exception;
+    public List<TopicAllVo> getDiscussList(Pager pager,Long lawyerId,String title,String content) throws Exception;
 
 }

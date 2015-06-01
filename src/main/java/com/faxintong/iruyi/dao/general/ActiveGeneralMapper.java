@@ -18,6 +18,15 @@ public interface ActiveGeneralMapper {
     @Select("select " + VIEW + " from active a limit #{startCount},#{pagerSize}")
     public List<Active> getActiveList(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize);
 
+    @Select("select " + VIEW + " from active a where a.title like CONCAT('%',#{title},'%' ) limit #{startCount},#{pagerSize}")
+    public List<Active> titleActive(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize, @Param("title") String title);
+
+    @Select("select " + VIEW + " from active a where a.content like CONCAT('%',#{content},'%' ) limit #{startCount},#{pagerSize}")
+    public List<Active> contentActive(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize, @Param("content") String content);
+
+    @Select("select " + VIEW + " from active a where a.title like CONCAT('%',#{title},'%' ) and a.content like CONCAT('%',#{content},'%' ) limit #{startCount},#{pagerSize}")
+    public List<Active> allActive(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize, @Param("title") String title, @Param("content") String content);
+
     @Select("select " + VIEW + " from active_store s,active a where s.lawyer_id=#{lawyerId} and s.active_id=a.id limit #{startCount},#{pagerSize}")
     public List<Active> getStoreActiveList(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize, @Param("lawyerId") Long lawyerId);
 

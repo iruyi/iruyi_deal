@@ -47,7 +47,12 @@ public class UserServiceImpl implements UserService {
     public boolean containsPhone(String phone) throws Exception {
         LawyerExample lawyerExample = new LawyerExample();
         lawyerExample.createCriteria().andPhoneEqualTo(phone);
-        return lawyerMapper.selectByExample(lawyerExample).size() == 1;
+        Integer count = lawyerMapper.countByExample(lawyerExample);
+        if(count != null && count.intValue() > 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override

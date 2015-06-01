@@ -10,11 +10,11 @@
                                 [#list data.articleCommentVos as a]
                                     {
                                       "lawyerId":${a.lawyerId},
-                                      "lawyerName":${a.lawyerName},
-                                      "createTime":${a.createTime?datetime},
+                                      "lawyerName":"${a.lawyerName}",
+                                      "createTime":"${a.createTime?datetime}",
                                       "comment":"${a.comment}",
-                                      "isPraise":"${a.isPraise}",
-                                      "praiseCount":"${a.praiseCount}"
+                                      "isPraise":${a.isPraise},
+                                      "praiseCount":${a.praiseCount}
                                     }
                                     [#if a_has_next],[/#if]
                                 [/#list]

@@ -19,6 +19,15 @@ public interface ArticleGeneralMapper {
     @Select("select " + VIEW + " from app_article limit #{startCount},#{pagerSize}")
     public List<AppArticle> getAppArticleList(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize);
 
+    @Select("select " + VIEW + " from app_article where title like CONCAT('%',#{title},'%' ) limit #{startCount},#{pagerSize}")
+    public List<AppArticle> titleAppArticle(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize, @Param("title") String title);
+
+    @Select("select " + VIEW + " from app_article where content like CONCAT('%',#{content},'%' ) limit #{startCount},#{pagerSize}")
+    public List<AppArticle> contentAppArticle(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize, @Param("content") String content);
+
+    @Select("select " + VIEW + " from app_article where title like CONCAT('%',#{title},'%' ) and content like CONCAT('%',#{content},'%' ) limit #{startCount},#{pagerSize}")
+    public List<AppArticle> allAppArticle(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize, @Param("title") String title, @Param("content") String content);
+
     @Select("select id,article_id as articleId,lawyer_id as lawyerId,lawyer_name as lawyerName,`comment`,create_time as createTime from article_comment where article_id=#{articleId} limit #{startCount},#{pagerSize}")
     public List<ArticleComment> getCommentList(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize,@Param("articleId") Long articleId);
 

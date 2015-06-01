@@ -54,7 +54,7 @@ public class TopicServiceImpl implements TopicService {
             topicGroupVo.setIsAtten(isAttenNum);
         }
 
-        List<TopicAllVo> topicAllVoList = topicGeneralMapper.selectTopicAllVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize(),null,lawyerId,groupId);
+        List<TopicAllVo> topicAllVoList = topicGeneralMapper.selectTopicAllVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()), pager.getPageSize(),null,lawyerId,groupId, null, null);
         topicGroupVo.setTopicAllVoList(topicAllVoList);
         return topicGroupVo;
     }
@@ -86,6 +86,15 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
+    public void attenHotTopics(List<Long> topicIds, Long lawyerId) throws Exception {
+        if(topicIds != null && topicIds.size() > 0){
+            for(Long topicId : topicIds){
+                topicGeneralMapper.insertTopicStore(topicId,lawyerId);
+            }
+        }
+    }
+
+    @Override
     @Transactional
     public void topicPraise(Long topicId, Long lawyerId) throws Exception {
         topicGeneralMapper.insertTopicPraise(topicId,lawyerId);
@@ -99,7 +108,7 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public List<TopicAllVo> topicAll(Pager pager,Long targetLawyerId, Long lawyerId, Long groupId) {
-        return topicGeneralMapper.selectTopicAllVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),targetLawyerId,lawyerId,groupId);
+        return topicGeneralMapper.selectTopicAllVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),targetLawyerId,lawyerId,groupId, null, null);
     }
 
     @Override

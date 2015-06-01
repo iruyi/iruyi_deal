@@ -28,6 +28,16 @@ public interface ArticleService {
     public List<AppArticleVo> articleList(Pager pager, Long lawyerId) throws Exception;
 
     /**
+     * 搜索文章
+      * @param pager
+     * @param lawyerId
+     * @param title
+     * @param content
+     * @return
+     * @throws Exception
+     */
+    public List<AppArticleVo> searchArticle(Pager pager, Long lawyerId, String title, String content) throws Exception;
+    /**
      * 获取文章详情
      * @param articleId
      * @return

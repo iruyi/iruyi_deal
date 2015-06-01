@@ -79,6 +79,12 @@
             <if test="targetLawyerId != null">
                 and t.lawyer_id = #{targetLawyerId}
             </if>
+            <if test="title != null">
+                and t.title = #{title}
+            </if>
+            <if test="content != null">
+                and t.content = #{content}
+            </if>
         </where>
         union
         select t.id,t.title,t.content,tr.create_date createDate
@@ -97,6 +103,12 @@
             <if test="targetLawyerId != null">
                 and tr.lawyer_id = #{targetLawyerId}
             </if>
+            <if test="title != null">
+                and t.title = #{title}
+            </if>
+            <if test="content != null">
+                and t.content = #{content}
+            </if>
         </where>
         union
         select t.id,t.title,t.content,ts.create_date createDate
@@ -114,6 +126,12 @@
             </if>
             <if test="targetLawyerId != null">
                 and ts.lawyer_id = #{targetLawyerId}
+            </if>
+            <if test="title != null">
+                and t.title = #{title}
+            </if>
+            <if test="content != null">
+                and t.content = #{content}
             </if>
         </where>
         ) tmp

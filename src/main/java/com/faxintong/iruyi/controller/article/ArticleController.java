@@ -92,6 +92,29 @@ public class ArticleController extends BaseController{
     }
 
     /**
+     * 搜索文章
+     * @return
+     */
+    @RequestMapping(value = "searchArticle")
+    public String searchArticle(HttpServletRequest request, Pager pager, String title, String content, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
+        try {
+            if(pager == null || pager.getCurrentPage() == null){
+                modelMap.put(ERRMESSAGE, "当前页为null");
+            }else{
+                List<AppArticleVo> list = articleService.articleList(pager, getLawyerId(request));
+                modelMap.put(ERRCODE, RESULTSUCCESS);
+                modelMap.put(ERRMESSAGE, "获取文章列表！");
+                modelMap.put(DATA, list);
+            }
+        }catch (Exception e){
+            logger.error("获取文章列表失败:" + e.getMessage());
+            modelMap.put(ERRMESSAGE, "获取文章列表失败!");
+        }
+        return "article/articleList";
+    }
+
+    /**
      * 获取文章详情
      * @param articleId
      * @return

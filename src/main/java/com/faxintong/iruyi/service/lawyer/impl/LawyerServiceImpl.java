@@ -5,6 +5,7 @@ import com.faxintong.iruyi.dao.mybatis.active.ActivePraiseMapper;
 import com.faxintong.iruyi.dao.mybatis.active.ActiveStoreMapper;
 import com.faxintong.iruyi.dao.mybatis.article.ArticleCommentMapper;
 import com.faxintong.iruyi.dao.mybatis.article.ArticleStoreMapper;
+import com.faxintong.iruyi.dao.mybatis.lawyer.LawyerMapper;
 import com.faxintong.iruyi.model.mybatis.active.Active;
 import com.faxintong.iruyi.model.mybatis.active.ActivePraiseExample;
 import com.faxintong.iruyi.model.mybatis.active.ActiveStoreExample;
@@ -54,6 +55,9 @@ public class LawyerServiceImpl implements LawyerService {
     @Autowired
     private ActiveStoreMapper activeStoreMapper;
 
+    @Autowired
+    private LawyerMapper lawyerMapper;
+
     @Override
     public List<LawyerVo> getAttetionList(Pager pager,Long lawyerId) throws Exception {
         return lawyerGeneralMapper.selectLawyerVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId);
@@ -61,7 +65,7 @@ public class LawyerServiceImpl implements LawyerService {
 
     @Override
     public List<CityVo> getCityList(Pager pager) {
-        return lawyerGeneralMapper.selectCityVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize());
+        return lawyerGeneralMapper.selectCityVo(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize());
     }
 
     @Override
@@ -76,32 +80,32 @@ public class LawyerServiceImpl implements LawyerService {
 
     @Override
     public List<OrderVo> getOrderList(Pager pager, Long lawyerId) throws Exception {
-        return orderGeneralMapper.selectMyOrderVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId);
+        return orderGeneralMapper.selectMyOrderVo(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), lawyerId);
     }
 
     @Override
     public List<OrderReceiveVo> getReceiveOrders(Pager pager, Long lawyerId) throws Exception {
-        return orderGeneralMapper.selectMyOrderReceiveVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId);
+        return orderGeneralMapper.selectMyOrderReceiveVo(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), lawyerId);
     }
 
     @Override
     public List<TopicVo> getReportTopics(Pager pager, Long lawyerId) throws Exception {
-        return topicGeneralMapper.selectTopicVo(null,pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId,1);
+        return topicGeneralMapper.selectTopicVo(null, pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), lawyerId, 1);
     }
 
     @Override
     public List<ReplyVo> getReplyTopics(Pager pager, Long lawyerId) throws Exception {
-        return topicGeneralMapper.selectMyReplyVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId,0);
+        return topicGeneralMapper.selectMyReplyVo(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), lawyerId, 0);
     }
 
     @Override
     public List<TopicVo> getAttetionTopics(Pager pager, Long lawyerId) throws Exception {
-        return topicGeneralMapper.selectTopicVo(null,pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId,0);
+        return topicGeneralMapper.selectTopicVo(null, pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), lawyerId, 0);
     }
 
     @Override
     public List<ReplyVo> praiseTopicReplyList(Pager pager, Long lawyerId) throws Exception {
-        return topicGeneralMapper.selectMyReplyVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId,1);
+        return topicGeneralMapper.selectMyReplyVo(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), lawyerId, 1);
     }
 
     @Override
@@ -134,7 +138,7 @@ public class LawyerServiceImpl implements LawyerService {
 
     @Override
     public List<AppArticleVo> getStoreArticles(Pager pager, Long lawyerId) throws Exception {
-        List<AppArticle> list = articleGeneralMapper.getStoreArticleList(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(), lawyerId);
+        List<AppArticle> list = articleGeneralMapper.getStoreArticleList(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), lawyerId);
         List<AppArticleVo> articleVoList = new ArrayList<AppArticleVo>();
         for(AppArticle article : list){
             AppArticleVo appArticleVo = new AppArticleVo();
@@ -215,7 +219,17 @@ public class LawyerServiceImpl implements LawyerService {
 
     @Override
     public List<OwnOrderVo> replyOwnOrders(Long lawyerId, Pager pager) throws Exception {
-        return lawyerGeneralMapper.replyOwnOrders(lawyerId, pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize());
+        return lawyerGeneralMapper.replyOwnOrders(lawyerId, pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize());
+    }
+
+    @Override
+    public boolean editLawyer(Lawyer lawyer) throws Exception {
+        Integer count = lawyerMapper.updateByPrimaryKeySelective(lawyer);
+        if(count != null && count.intValue() > 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }
