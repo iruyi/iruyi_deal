@@ -2,7 +2,6 @@ package com.faxintong.iruyi.service.friend.impl;
 
 import com.faxintong.iruyi.dao.general.GroupGeneralMapper;
 import com.faxintong.iruyi.dao.general.LawyerGeneralMapper;
-import com.faxintong.iruyi.dao.mybatis.lawyer.LawyerMapper;
 import com.faxintong.iruyi.model.mybatis.vo.GroupVo;
 import com.faxintong.iruyi.model.mybatis.vo.LawyerVo;
 import com.faxintong.iruyi.service.friend.GroupService;
@@ -91,6 +90,11 @@ public class GroupServiceImpl implements GroupService{
         groupGeneralMapper.updateLawyerGroup(groupVo);
         // 修改环信群聊
         hxService.updateHxGroup(groupVo.getGroupId(),groupVo.getGroupName(),groupVo.getDesc(),groupVo.getMaxUsers());
+    }
+
+    @Override
+    public Integer countGroupByName(String name) throws Exception {
+        return groupGeneralMapper.countGroupByName(name);
     }
 
 

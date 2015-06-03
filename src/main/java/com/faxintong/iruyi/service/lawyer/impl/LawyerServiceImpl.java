@@ -15,6 +15,7 @@ import com.faxintong.iruyi.model.mybatis.article.ArticleCommentExample;
 import com.faxintong.iruyi.model.mybatis.article.ArticleStoreExample;
 import com.faxintong.iruyi.model.mybatis.lawyer.Lawyer;
 import com.faxintong.iruyi.model.mybatis.vo.*;
+import com.faxintong.iruyi.service.friend.AttentionService;
 import com.faxintong.iruyi.service.lawyer.LawyerService;
 import com.faxintong.iruyi.utils.Pager;
 import org.apache.commons.beanutils.PropertyUtils;
@@ -57,6 +58,9 @@ public class LawyerServiceImpl implements LawyerService {
 
     @Autowired
     private LawyerMapper lawyerMapper;
+
+    @Autowired
+    private AttentionService attentionService;
 
     @Override
     public List<LawyerVo> getAttetionList(Pager pager,Long lawyerId) throws Exception {
@@ -230,6 +234,20 @@ public class LawyerServiceImpl implements LawyerService {
         }else{
             return false;
         }
+    }
+
+    @Override
+    public void attenHotLawyers(Long lawyerId, List<Long> attenIds) throws Exception {
+        if(attenIds != null && attenIds.size() > 0){
+            for(Long attenId : attenIds){
+                attentionService.makeAtten(lawyerId, attenId);
+            }
+        }
+    }
+
+    @Override
+    public List<GroupVo> getGroupList() throws Exception {
+        return lawyerGeneralMapper.getGroupList();
     }
 
 }

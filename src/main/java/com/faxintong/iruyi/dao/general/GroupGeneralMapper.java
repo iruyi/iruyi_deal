@@ -2,7 +2,10 @@ package com.faxintong.iruyi.dao.general;
 
 import com.faxintong.iruyi.model.mybatis.vo.GroupVo;
 import com.faxintong.iruyi.operate.OperateMyBatis;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.ResultType;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -45,4 +48,7 @@ public interface GroupGeneralMapper {
             " from lawyer_group lg" +
             " where lg.groupid = #{groupId}")
     GroupVo selectLawyerGroupOne(@Param("groupId")String groupId);
+
+    @Select("select count(1) from lawyer_group where groupname = #{name}")
+    Integer countGroupByName(@Param("name")String name);
 }

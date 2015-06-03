@@ -127,6 +127,12 @@ public class GroupController extends BaseController{
                 return null;
             }
 
+            Integer count = groupService.countGroupByName(groupVo.getGroupName());
+            if(count != null && count.intValue() > 0){
+                ServletUtils.responseJson(response,new Result(RESULTSUCCESS,"该群已存在！"));
+                return null;
+            }
+
             groupVo.setOwnerId(getLawyerId(request));
             groupService.createGroup(groupVo);
 

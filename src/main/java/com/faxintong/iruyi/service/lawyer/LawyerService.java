@@ -152,4 +152,19 @@ public interface LawyerService {
      * @throws Exception
      */
     public boolean editLawyer(Lawyer lawyer) throws Exception;
+
+    /**
+     * 批量关注律师
+     * @param lawyerId
+     * @param attenIds
+     * @throws Exception
+     */
+    public void attenHotLawyers(Long lawyerId,List<Long> attenIds) throws Exception;
+
+    /**
+     *
+     * @return
+     * @throws Exception
+     */
+    public List<GroupVo> getGroupList() throws Exception;
 }

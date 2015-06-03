@@ -415,6 +415,23 @@ public class LawyerController extends BaseController{
         return "lawyer/getHotLawyers";
     }
 
+    @RequestMapping(value = "attenHotLawyers")
+    public String attenHotLawyers(List<Long> lawyerIds, HttpServletRequest request,HttpServletResponse response){
+        try {
+            // 参数校验
+            if(lawyerIds == null || lawyerIds.size() == 0) {
+                ServletUtils.responseJson(response,new Result(RESULTFAIL,"批量律师ID为空！"));
+                return null;
+            }
+            lawyerService.attenHotLawyers(getLawyerId(request), lawyerIds);
+            ServletUtils.responseJson(response, new Result(RESULTSUCCESS, "批量关注律师成功！"));
+        }catch (Exception e){
+            logger.error("批量关注律师失败:" + e.getMessage());
+            ServletUtils.responseJson(response, new Result(RESULTFAIL, "批量关注律师失败！"));
+        }
+        return null;
+    }
+
     @RequestMapping(value = "replyOwnOrders")
     public String replyOwnOrders(HttpServletRequest request, Pager pager, ModelMap modelMap){
         modelMap.put(ERRCODE, RESULTFAIL);
@@ -454,5 +471,20 @@ public class LawyerController extends BaseController{
             modelMap.put(ERRMESSAGE, "修改的律师内容失败!");
         }
         return "lawyer/common";
+    }
+
+    @RequestMapping(value = "getGroupList")
+    public String getGroupList(HttpServletRequest request, ModelMap modelMap){
+        modelMap.put(ERRCODE, RESULTFAIL);
+        try {
+            List<GroupVo> list = lawyerService.getGroupList();
+            modelMap.put(ERRCODE, RESULTSUCCESS);
+            modelMap.put(ERRMESSAGE, "获取群列表成功！");
+            modelMap.put(DATA, list);
+        }catch (Exception e){
+            logger.error("获取群列表失败:" + e.getMessage());
+            modelMap.put(ERRMESSAGE, "获取群列表失败!");
+        }
+        return "lawyer/getGroupList";
     }
 }

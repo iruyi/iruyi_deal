@@ -20,4 +20,6 @@ public interface GroupService {
     void delGroup(String groupId) throws Exception;
 
     void updateGroup(GroupVo groupVo) throws Exception;
+
+    Integer countGroupByName(String name) throws Exception;
 }

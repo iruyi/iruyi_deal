@@ -1,0 +1,21 @@
+{
+    "errcode":${errcode},
+    "errmessage":"${errmessage}",
+    "data":{
+        [#if data?? && data?size>0]
+            "groupList":[
+                [#list data as a]
+                    {
+                      "groupId":${a.groupId},
+                      "groupName":"${a.groupName}",
+                      "photoUrl":"${a.photoUrl}",
+                      "desc":${a.desc}
+                    }
+                    [#if a_has_next],[/#if]
+                [/#list]
+                   ]
+        [#else]
+            "groupList":[]
+        [/#if]
+    }
+}
