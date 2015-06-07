@@ -135,7 +135,7 @@ public class CodeController {
             SMSUtils.sendMandao(mobile, content);
             modelMap.put(ERRCODE, RESULTSUCCESS);
             modelMap.put(ERRMESSAGE, "发送验证码成功！");
-            modelMap.put("code", content);
+            modelMap.put("code", i);
         }else{
             modelMap.put(ERRMESSAGE, "发送验证码失败！");
             modelMap.put("code", "");
