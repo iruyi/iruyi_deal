@@ -140,7 +140,7 @@ public class CodeController {
             modelMap.put(ERRMESSAGE, "发送验证码失败！");
             modelMap.put("code", "");
         }
-        return "lawyer/common";
+        return "lawyer/code";
     }
 
 }
