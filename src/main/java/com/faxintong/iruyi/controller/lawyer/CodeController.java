@@ -1,7 +1,13 @@
 package com.faxintong.iruyi.controller.lawyer;
 
+import com.faxintong.iruyi.utils.SMSUtils;
+import com.google.common.collect.ImmutableMap;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.velocity.app.VelocityEngine;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.ModelMap;
+import org.springframework.ui.velocity.VelocityEngineUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,28 +22,13 @@ import java.io.IOException;
 import java.util.Random;
 import java.util.regex.Pattern;
 
-import com.faxintong.iruyi.utils.*;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Sets;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.velocity.app.VelocityEngine;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.velocity.VelocityEngineUtils;
-import redis.clients.jedis.Jedis;
-
-import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.regex.Pattern;
-
+import static com.faxintong.iruyi.utils.Constants.*;
 
 /**
  * Created by ron on 2015/1/9.
  */
 @RestController
+@RequestMapping("code")
 public class CodeController {
 
     @Autowired
@@ -118,11 +109,12 @@ public class CodeController {
     /**
      * bizType:业务类型【0-注册，1-找回密码】
      */
-    public Map<String, Object> captcha(String mobile, Integer bizType) {
-
+    public String captcha(String mobile, Integer bizType, ModelMap modelMap) {
+        modelMap.put(ERRCODE, RESULTFAIL);
         Pattern pattern = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
         if (StringUtils.isEmpty(mobile) || !pattern.matcher(mobile).matches()) {
-            return ImmutableMap.of(RESULT, false, ERR_MSG, "请填写正确的手机号码");
+            modelMap.put(ERRMESSAGE, "请填写正确的手机号码");
+            modelMap.put("code", "");
         }
 
         final String i = RandomStringUtils.randomNumeric(6);
@@ -130,20 +122,25 @@ public class CodeController {
         switch (bizType) {
             case 0:
                 content = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "template/captcha.vm", ENCODING,
-                        ImmutableMap.of("captcha", i));
+                        ImmutableMap.<String, Object>of("captcha", i));
                 break;
             case 1:
                 content = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, "template/findPass.vm", ENCODING,
-                        ImmutableMap.of("captcha", i));
+                        ImmutableMap.<String, Object>of("captcha", i));
                 break;
             default:
                 break;
         }
         if (StringUtils.isNotEmpty(content)) {
-            result = SMSUtils.sendMandao(mobile, content);
+            SMSUtils.sendMandao(mobile, content);
+            modelMap.put(ERRCODE, RESULTSUCCESS);
+            modelMap.put(ERRMESSAGE, "发送验证码成功！");
+            modelMap.put("code", content);
+        }else{
+            modelMap.put(ERRMESSAGE, "发送验证码失败！");
+            modelMap.put("code", "");
         }
-
-        return ImmutableMap.of(RESULT, result);
+        return "lawyer/common";
     }
 
 }
