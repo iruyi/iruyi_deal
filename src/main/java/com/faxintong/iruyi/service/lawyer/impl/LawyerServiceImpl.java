@@ -84,7 +84,8 @@ public class LawyerServiceImpl implements LawyerService {
 
     @Override
     public List<OrderVo> getOrderList(Pager pager, Long lawyerId) throws Exception {
-        return orderGeneralMapper.selectMyOrderVo(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), lawyerId);
+        //return orderGeneralMapper.selectMyOrderVo(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), lawyerId);
+        return orderGeneralMapper.selectOrderVo(pager.getStartCount(pager.getPageSize(),pager.getCurrentPage()),pager.getPageSize(),lawyerId);
     }
 
     @Override
