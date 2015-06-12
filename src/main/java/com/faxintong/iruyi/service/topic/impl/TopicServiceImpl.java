@@ -86,10 +86,10 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public void attenHotTopics(List<Long> topicIds, Long lawyerId) throws Exception {
-        if(topicIds != null && topicIds.size() > 0){
-            for(Long topicId : topicIds){
-                topicGeneralMapper.insertTopicStore(topicId,lawyerId);
+    public void attenHotTopics(String[] topicIds, Long lawyerId) throws Exception {
+        if(topicIds != null && topicIds.length > 0){
+            for(String topicId : topicIds){
+                topicGeneralMapper.insertTopicStore(Long.parseLong(topicId),lawyerId);
             }
         }
     }

@@ -20,6 +20,8 @@ public class LawyerVo {
 
     private Integer isAttenEachOther;
 
+    private String phone;
+
     private List<TopicVo> topicVoList;
 
     public Long getId() {
@@ -100,5 +102,13 @@ public class LawyerVo {
 
     public void setIsAttenEachOther(Integer isAttenEachOther) {
         this.isAttenEachOther = isAttenEachOther;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }

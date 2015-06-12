@@ -18,7 +18,7 @@ import java.util.List;
 @OperateMyBatis
 public interface LawyerGeneralMapper {
     @ResultType(LawyerVo.class)
-    @Select("select l.id,l.name,l.city_name cityName,l.photo_url photoUrl,l.law_office lawOffice,l.introduction" +
+    @Select("select l.id,l.name,l.city_name cityName,l.photo_url photoUrl,l.law_office lawOffice,l.introduction,l.phone" +
             ",(select count(*) from lawyer_attention la where la.lawyer_id = #{lawyerId}) attentionCount" +
             ",(select count(*) from lawyer_attention la1 where la1.other_lawyer_id = #{lawyerId}) fansCount" +
             " from lawyer l" +
@@ -60,6 +60,6 @@ public interface LawyerGeneralMapper {
             " limit #{startCount},#{pageSize}")
     List<OwnOrderVo> replyOwnOrders(@Param("lawyerId")Long lawyerId, @Param("startCount")Integer startCount, @Param("pageSize")Integer pageSize);
 
-    @Select("select groupid as groupId,groupname as groupName,photo_url as photoUrl,desc from lawyer_group")
+    @Select("select groupid as groupId,groupname as groupName,photo_url as photoUrl,`desc` from lawyer_group")
     List<GroupVo> getGroupList();
 }

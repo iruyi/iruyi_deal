@@ -50,6 +50,13 @@ public class ViewController extends BaseController{
             }
 
             List<ViewVo> viewList = viewService.getViewList(pager,getLawyerId(request));
+            if(viewList != null && viewList.size() > 0){
+                for (ViewVo viewVo : viewList){
+                    if(viewVo.getIsAtten() > 0){
+                        viewVo.setIsAtten(1);
+                    }
+                }
+            }
 
             modelMap.put(DATA,viewList);
             resultModelMap(RESULTSUCCESS,"获取微访谈列表成功！",modelMap);

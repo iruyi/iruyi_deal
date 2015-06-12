@@ -11,6 +11,7 @@
         "lawyer_attentionCount":${lawyerInfo.attentionCount!0},
         "lawyer_fansCount":${lawyerInfo.fansCount!0},
         "lawyer_introduction":"${lawyerInfo.introduction!!}",
+        "phone":"${lawyerInfo.phone!!}",
         [/#if]
         [#if data?? && data?size>0]
                  "topicList":[

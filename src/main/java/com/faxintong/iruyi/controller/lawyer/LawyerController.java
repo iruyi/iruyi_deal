@@ -416,10 +416,10 @@ public class LawyerController extends BaseController{
     }
 
     @RequestMapping(value = "attenHotLawyers")
-    public String attenHotLawyers(List<Long> lawyerIds, HttpServletRequest request,HttpServletResponse response){
+    public String attenHotLawyers(String[] lawyerIds, HttpServletRequest request,HttpServletResponse response){
         try {
             // 参数校验
-            if(lawyerIds == null || lawyerIds.size() == 0) {
+            if(lawyerIds == null || lawyerIds.length == 0) {
                 ServletUtils.responseJson(response,new Result(RESULTFAIL,"批量律师ID为空！"));
                 return null;
             }

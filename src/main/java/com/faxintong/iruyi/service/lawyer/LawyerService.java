@@ -159,7 +159,7 @@ public interface LawyerService {
      * @param attenIds
      * @throws Exception
      */
-    public void attenHotLawyers(Long lawyerId,List<Long> attenIds) throws Exception;
+    public void attenHotLawyers(Long lawyerId,String[] attenIds) throws Exception;
 
     /**
      *

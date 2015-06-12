@@ -70,6 +70,8 @@
         ,0 type,0 id2,"" content2,0 lawyerId2,"" lawyerName2,"" photoUrl2
         ,(select count(*) from topic_praise tp where tp.topic_id = t.id) praiseCount
         ,(select count(*) from topic_praise tp1 where tp1.topic_id = t.id and tp1.lawyer_id = #{lawyerId}) isPraise
+        ,(select count(*) from topic_store tp where tp.topic_id = t.id) storeCount
+        ,(select count(*) from topic_store tp1 where tp1.topic_id = t.id and tp1.lawyer_id = #{lawyerId}) isStore
         from topic t
         INNER JOIN lawyer l on l.id = t.lawyer_id
         <where>
@@ -92,6 +94,8 @@
         ,1 type,tr.id id2,tr.content content2,l1.id lawyerId2,l1.`name` lawyerName2,l1.photo_url photoUrl2
         ,(select count(*) from topic_reply_praise trp where trp.reply_id = tr.id) praiseCount
         ,(select count(*) from topic_reply_praise trp1 where trp1.reply_id = tr.id and trp1.lawyer_id = #{lawyerId}) isPraise
+        ,(select count(*) from topic_store tp where tp.topic_id = tr.topic_id) storeCount
+        ,(select count(*) from topic_store tp1 where tp1.topic_id = tr.topic_id and tp1.lawyer_id = #{lawyerId}) isStore
         from topic_reply tr
         INNER JOIN topic t on t.id = tr.topic_id
         INNER JOIN lawyer l on l.id = t.lawyer_id
@@ -110,7 +114,7 @@
                 and t.content = #{content}
             </if>
         </where>
-        union
+        <!--union
         select t.id,t.title,t.content,ts.create_date createDate
         ,l.id lawyerId,l.`name` lawyerName,l.photo_url photoUrl
         ,2 type,ts.id id2,"" content2,l1.id lawyerId2,l1.`name` lawyerName2,l1.photo_url photoUrl2
@@ -133,7 +137,7 @@
             <if test="content != null">
                 and t.content = #{content}
             </if>
-        </where>
+        </where>-->
         ) tmp
         order by tmp.createDate desc
         limit #{startCount},#{pageSize}

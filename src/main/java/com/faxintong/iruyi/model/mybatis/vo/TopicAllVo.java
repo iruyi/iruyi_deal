@@ -25,6 +25,9 @@ public class TopicAllVo {
     private Integer praiseCount;//话题或回复点赞总数，
     private Integer isPraise;//话题或回复是否点赞
 
+    private Integer storeCount;//关注数
+    private Integer isStore;//是否关注
+
     public Long getLawyerId2() {
         return lawyerId2;
     }
@@ -143,5 +146,21 @@ public class TopicAllVo {
 
     public void setIsPraise(Integer isPraise) {
         this.isPraise = isPraise;
+    }
+
+    public Integer getStoreCount() {
+        return storeCount;
+    }
+
+    public void setStoreCount(Integer storeCount) {
+        this.storeCount = storeCount;
+    }
+
+    public Integer getIsStore() {
+        return isStore;
+    }
+
+    public void setIsStore(Integer isStore) {
+        this.isStore = isStore;
     }
 }

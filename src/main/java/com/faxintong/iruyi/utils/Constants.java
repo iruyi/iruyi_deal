@@ -116,4 +116,5 @@ public class Constants {
 
     // GROUPMAXUSERS
     public static final Integer GROUP_MAXUSERS = 9999;
+
 }

@@ -296,10 +296,10 @@ public class TopicController extends BaseController{
     }
 
     @RequestMapping(value = "attenHotTopics")
-    public String attenHotTopics(List<Long> topicIds, HttpServletRequest request,HttpServletResponse response){
+    public String attenHotTopics(String[] topicIds, HttpServletRequest request,HttpServletResponse response){
         try {
             // 参数校验
-            if(topicIds == null || topicIds.size() == 0) {
+            if(topicIds == null || topicIds.length == 0) {
                 ServletUtils.responseJson(response,new Result(RESULTFAIL,"批量话题ID为空！"));
                 return null;
             }

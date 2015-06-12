@@ -238,10 +238,10 @@ public class LawyerServiceImpl implements LawyerService {
     }
 
     @Override
-    public void attenHotLawyers(Long lawyerId, List<Long> attenIds) throws Exception {
-        if(attenIds != null && attenIds.size() > 0){
-            for(Long attenId : attenIds){
-                attentionService.makeAtten(lawyerId, attenId);
+    public void attenHotLawyers(Long lawyerId, String[] attenIds) throws Exception {
+        if(attenIds != null && attenIds.length > 0){
+            for(String attenId : attenIds){
+                attentionService.makeAtten(lawyerId, Long.parseLong(attenId));
             }
         }
     }
