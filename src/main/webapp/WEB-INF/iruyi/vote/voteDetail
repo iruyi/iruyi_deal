@@ -6,7 +6,8 @@
         [#if data.optionNumMap??]
             "vote_result":{
                 [#list data.optionNumMap?keys as key]
-                    "${key}":${data.optionNumMap[key?string]}
+                    "optionId":"${key}",
+                    "votesCount":${data.optionNumMap[key?string]}
                 [#if key_has_next],[/#if]
                 [/#list]
                    }
