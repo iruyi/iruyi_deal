@@ -93,18 +93,18 @@ public class UserController extends BaseController {
         if(StringUtils.isEmpty(phone)) {
             modelMap.put(ERRMESSAGE, "帐号不能为空");
             modelMap.put("sessionId", "");
-            modelMap.put("lawyerId", "");
+            modelMap.put("lawyerId", "-1");
         }else if(StringUtils.isEmpty(password)){
             modelMap.put(ERRMESSAGE, "密码不能为空");
             modelMap.put("sessionId", "");
-            modelMap.put("lawyerId", "");
+            modelMap.put("lawyerId", "-1");
         }else {
             try {
                 password = MD5.newinstance().getMD5ofStr(password);
                 if (!userService.loginValidate(phone, password)){
                     modelMap.put(ERRMESSAGE, "帐号密码不匹配");
                     modelMap.put("sessionId", "");
-                    modelMap.put("lawyerId", "");
+                    modelMap.put("lawyerId", "-1");
                 } else {
                     String sessionId = SessionUtil.getSessionId();
                     modelMap.put("sessionId", sessionId);
@@ -117,7 +117,7 @@ public class UserController extends BaseController {
             } catch (Exception e) {
                 modelMap.put(ERRMESSAGE, "登录出错");
                 modelMap.put("sessionId", "");
-                modelMap.put("lawyerId", "");
+                modelMap.put("lawyerId", "-1");
                 logger.error("登录出错:" + e.getMessage());
             }
         }
