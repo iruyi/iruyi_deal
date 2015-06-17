@@ -25,7 +25,7 @@ public interface ArticleGeneralMapper {
     @Select("select " + VIEW + " from app_article where content like CONCAT('%',#{content},'%' ) limit #{startCount},#{pagerSize}")
     public List<AppArticle> contentAppArticle(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize, @Param("content") String content);
 
-    @Select("select " + VIEW + " from app_article where title like CONCAT('%',#{title},'%' ) and content like CONCAT('%',#{content},'%' ) limit #{startCount},#{pagerSize}")
+    @Select("select " + VIEW + " from app_article where title like CONCAT('%',#{title},'%' ) or content like CONCAT('%',#{content},'%' ) limit #{startCount},#{pagerSize}")
     public List<AppArticle> allAppArticle(@Param("startCount") Integer startCount, @Param("pagerSize") Integer pagerSize, @Param("title") String title, @Param("content") String content);
 
     @Select("select id,article_id as articleId,lawyer_id as lawyerId,lawyer_name as lawyerName,`comment`,create_time as createTime from article_comment where article_id=#{articleId} limit #{startCount},#{pagerSize}")

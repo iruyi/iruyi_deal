@@ -23,6 +23,9 @@ public class TopicVo {
 
     private Integer isPraise;
 
+    private Integer storeCount;//关注数
+    private Integer isStore;//是否关注
+
     private List<ReplyVo> replyVoList;
 
     public Long getId() {
@@ -98,4 +101,19 @@ public class TopicVo {
     }
 
 
+    public Integer getStoreCount() {
+        return storeCount;
+    }
+
+    public void setStoreCount(Integer storeCount) {
+        this.storeCount = storeCount;
+    }
+
+    public Integer getIsStore() {
+        return isStore;
+    }
+
+    public void setIsStore(Integer isStore) {
+        this.isStore = isStore;
+    }
 }

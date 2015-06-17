@@ -102,7 +102,7 @@ public class ArticleController extends BaseController{
             if(pager == null || pager.getCurrentPage() == null){
                 modelMap.put(ERRMESSAGE, "当前页为null");
             }else{
-                List<AppArticleVo> list = articleService.articleList(pager, getLawyerId(request));
+                List<AppArticleVo> list = articleService.searchArticle(pager, getLawyerId(request), title, content);
                 modelMap.put(ERRCODE, RESULTSUCCESS);
                 modelMap.put(ERRMESSAGE, "获取文章列表！");
                 modelMap.put(DATA, list);

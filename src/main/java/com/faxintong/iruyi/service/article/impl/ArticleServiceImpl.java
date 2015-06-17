@@ -86,34 +86,30 @@ public class ArticleServiceImpl implements ArticleService {
         List<AppArticle> list = null;
         if(!StringUtils.isEmpty(title) && !StringUtils.isEmpty(content)){
             list = articleGeneralMapper.allAppArticle(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), title, content);
-        }else if(!StringUtils.isEmpty(title) && StringUtils.isEmpty(content)){
-            list = articleGeneralMapper.titleAppArticle(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), title);
-        }else if(StringUtils.isEmpty(title) && !StringUtils.isEmpty(content)){
-            list = articleGeneralMapper.contentAppArticle(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize(), content);
-        }else{
-            list = articleGeneralMapper.getAppArticleList(pager.getStartCount(pager.getPageSize(), pager.getCurrentPage()), pager.getPageSize());
         }
         List<AppArticleVo> articleVoList = new ArrayList<AppArticleVo>();
-        for(AppArticle article : list){
-            AppArticleVo appArticleVo = new AppArticleVo();
-            ArticleCommentExample commentExample1 = new ArticleCommentExample();
-            commentExample1.createCriteria().andArticleIdEqualTo(article.getId());
-            Integer commentCount = articleCommentMapper.countByExample(commentExample1);//评论数
-            appArticleVo.setCommentCount(commentCount);
-            ArticleStoreExample storeExample1 = new ArticleStoreExample();
-            storeExample1.createCriteria().andArticleIdEqualTo(article.getId());
-            Integer storeCount = articleStoreMapper.countByExample(storeExample1);//收藏数
-            appArticleVo.setStoreCount(storeCount);
-            ArticleStoreExample storeExample2 = new ArticleStoreExample();
-            storeExample2.createCriteria().andArticleIdEqualTo(article.getId()).andLawyerIdEqualTo(lawyerId);
-            Integer isStore = articleStoreMapper.countByExample(storeExample2);
-            if(isStore != null && isStore.intValue() > 0){
-                appArticleVo.setIsStore(1);//已收藏
-            }else{
-                appArticleVo.setIsStore(0);//未收藏
+        if(list != null && list.size() > 0){
+            for(AppArticle article : list){
+                AppArticleVo appArticleVo = new AppArticleVo();
+                ArticleCommentExample commentExample1 = new ArticleCommentExample();
+                commentExample1.createCriteria().andArticleIdEqualTo(article.getId());
+                Integer commentCount = articleCommentMapper.countByExample(commentExample1);//评论数
+                appArticleVo.setCommentCount(commentCount);
+                ArticleStoreExample storeExample1 = new ArticleStoreExample();
+                storeExample1.createCriteria().andArticleIdEqualTo(article.getId());
+                Integer storeCount = articleStoreMapper.countByExample(storeExample1);//收藏数
+                appArticleVo.setStoreCount(storeCount);
+                ArticleStoreExample storeExample2 = new ArticleStoreExample();
+                storeExample2.createCriteria().andArticleIdEqualTo(article.getId()).andLawyerIdEqualTo(lawyerId);
+                Integer isStore = articleStoreMapper.countByExample(storeExample2);
+                if(isStore != null && isStore.intValue() > 0){
+                    appArticleVo.setIsStore(1);//已收藏
+                }else{
+                    appArticleVo.setIsStore(0);//未收藏
+                }
+                BeanUtils.copyProperties(article, appArticleVo);
+                articleVoList.add(appArticleVo);
             }
-            BeanUtils.copyProperties(article, appArticleVo);
-            articleVoList.add(appArticleVo);
         }
         return articleVoList;
     }

@@ -13,7 +13,9 @@
                       "topic_lawyerName":"${a.lawyerName!!}",
                       "topic_lawyerPhotoUrl":"${a.photoUrl!!}",
                       "topic_praiseCount":${a.praiseCount},
-                      "topic_isPraise":${a.isPraise}
+                      "topic_isPraise":${a.isPraise},
+                      "storeCount":${a.storeCount},
+                      "isStore":${a.isStore}
                     }
                     [#if a_has_next],[/#if]
                 [/#list]

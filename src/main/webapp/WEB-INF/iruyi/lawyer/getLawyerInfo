@@ -31,7 +31,9 @@
                           "operate_content":"${a.content2}",
                           "operate_createDate":"${a.createDate?datetime}",
                           "topic_praiseCount":${a.praiseCount},
-                          "topic_isPraise":${a.isPraise}
+                          "topic_isPraise":${a.isPraise},
+                          "storeCount":${a.storeCount},
+                          "isStore":${a.isStore}
                          }
                          [#if a_has_next],[/#if]
                      [/#list]
