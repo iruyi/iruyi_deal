@@ -73,6 +73,9 @@ public class PositionController extends BaseController {
             }
 
             PositionVo positionVo = positionService.positionDetail(positionId,getLawyerId(request));
+            if(positionVo != null && positionVo.getIsCollection() > 0){
+                positionVo.setIsCollection(1);
+            }
 
             modelMap.put(DATA, positionVo);
             resultModelMap(RESULTSUCCESS,"获取招聘详情成功！",modelMap);
