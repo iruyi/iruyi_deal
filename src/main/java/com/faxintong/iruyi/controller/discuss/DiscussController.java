@@ -69,6 +69,7 @@ public class DiscussController extends BaseController{
                 ServletUtils.responseJson(response, new Result(RESULTFAIL, "当前页为null"));
                 return null;
             }
+            //List<TopicAllVo> topicAllVoList = discussService.getDiscussList(pager,getLawyerId(request), URLDecoder.decode(URLDecoder.decode(title == null ? "" : title , "UTF-8"),"UTF-8"), URLDecoder.decode(URLDecoder.decode(content == null ? "" : content, "UTF-8"),"UTF-8"));
             List<TopicAllVo> topicAllVoList = discussService.getDiscussList(pager,getLawyerId(request), title, content);
             modelMap.put(DATA, topicAllVoList);
             resultModelMap(RESULTSUCCESS,"搜索讨论列表成功！",modelMap);
